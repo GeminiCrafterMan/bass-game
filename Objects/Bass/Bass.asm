@@ -47,14 +47,14 @@ ptr_Sonic_Hurt:		offsetTableEntry.w Sonic_Hurt		; 4
 ptr_Sonic_Death:	offsetTableEntry.w Sonic_Death		; 6
 ptr_Sonic_Restart:	offsetTableEntry.w Sonic_Restart	; 8
 					offsetTableEntry.w loc_12590		; A
-ptr_Sonic_Drown:	offsetTableEntry.w Sonic_Drown	; C
+ptr_Sonic_Drown:	offsetTableEntry.w Sonic_Drown		; C
 ; ---------------------------------------------------------------------------
 
 Sonic_Init:	; Routine 0
 		addq.b	#2,routine(a0)				; => Obj01_Control
 	; todo: make bass's hitbox thinner
-		move.w	#bytes_to_word(38/2,18/2),y_radius(a0)	; set y_radius and x_radius	; this sets Sonic's collision height (2*pixels)
-		move.w	#bytes_to_word(38/2,18/2),default_y_radius(a0)	; set default_y_radius and default_x_radius
+		move.w	#bytes_to_word(38/2,14/2),y_radius(a0)	; set y_radius and x_radius	; this sets Sonic's collision height (2*pixels)
+		move.w	#bytes_to_word(38/2,14/2),default_y_radius(a0)	; set default_y_radius and default_x_radius
 		move.l	#Map_Bass,mappings(a0)
 		move.w	#$100,priority(a0)
 		move.w	#bytes_to_word(48/2,48/2),height_pixels(a0)		; set height and width
@@ -495,11 +495,11 @@ loc_11350:
 		bmi.s	locret_113CE
 
 loc_11370:
-		move.b	#$40,d1
-		tst.w	ground_vel(a0)
-		beq.s	locret_113CE
-		bmi.s	loc_1137E
-		neg.w	d1
+		move.b	#$40,d1			; i actually have no clue what this is, changing it to $30 makes him able to walk through 1 all-solid row of blocks
+		tst.w	ground_vel(a0)	; is velocity = 0?
+		beq.s	locret_113CE	; if so, return
+		bmi.s	loc_1137E		; if negative, skip the flip
+		neg.w	d1				; flip tested velocity
 
 loc_1137E:
 		move.b	angle(a0),d0
@@ -509,18 +509,16 @@ loc_1137E:
 		move.w	(sp)+,d0
 		tst.w	d1
 		bpl.s	locret_113CE
-		asl.w	#8,d1
+		asl.w	#8,d1			; the speed at which you get pushed out of a wall if you're stuck
 		addi.b	#$20,d0
 		andi.b	#$C0,d0
-		beq.s	loc_113F0
+		beq.s	loc_113F0		; add d1 to y-vel, then return
 		cmpi.b	#$40,d0
-		beq.s	loc_113D6
+		beq.s	loc_113D6		; sub d1 from x-vel, then clear ground-vel
 		cmpi.b	#$80,d0
-		beq.s	loc_113D0
+		beq.s	loc_113D0		; sub d1 from y-vel, then return
 		add.w	d1,x_vel(a0)
 		clr.w	ground_vel(a0)
-;		btst	#Status_Facing,status(a0)
-;		bne.s	locret_113CE
 
 locret_113CE:
 		rts
@@ -534,8 +532,6 @@ loc_113D0:
 loc_113D6:
 		sub.w	d1,x_vel(a0)
 		clr.w	ground_vel(a0)
-		btst	#Status_Facing,status(a0)
-		beq.s	locret_113CE
 		rts
 ; ---------------------------------------------------------------------------
 
@@ -565,7 +561,7 @@ loc_11412:
 		bgt.s	loc_11424
 		add.w	d5,d0
 		cmp.w	d1,d0
-		ble.s		loc_11424
+		ble.s	loc_11424
 		move.w	d1,d0
 
 loc_11424:
@@ -586,10 +582,10 @@ loc_11438:
 		andi.b	#$C0,d1
 		bne.s	locret_11480
 		cmpi.w	#$400,d0
-		blt.s		locret_11480
+		blt.s	locret_11480
 		tst.b	flip_type(a0)
 		bmi.s	locret_11480
-		sfx	sfx_Skid
+		sfx		sfx_Skid
 		move.b	#id_Stop,anim(a0)
 		bclr	#Status_Facing,status(a0)
 		cmpi.b	#12,air_left(a0)
@@ -612,7 +608,7 @@ sub_11482:
 loc_1149C:
 		add.w	d5,d0
 		cmp.w	d6,d0
-		blt.s		loc_114AA
+		blt.s	loc_114AA
 		sub.w	d5,d0
 		cmp.w	d6,d0
 		bge.s	loc_114AA
@@ -639,7 +635,7 @@ loc_114BE:
 		bgt.s	locret_11506
 		tst.b	flip_type(a0)
 		bmi.s	locret_11506
-		sfx	sfx_Skid
+		sfx		sfx_Skid
 		move.b	#id_Stop,anim(a0)
 		bset	#Status_Facing,status(a0)
 		cmpi.b	#12,air_left(a0)
@@ -972,7 +968,7 @@ loc_1182E:
 		move.b	default_x_radius(a0),x_radius(a0)
 		btst	#Status_Roll,status(a0)
 		bne.s	locret_118B2
-		move.w	#bytes_to_word(28/2,14/2),y_radius(a0)	; set y_radius and x_radius
+;		move.w	#bytes_to_word(28/2,14/2),y_radius(a0)	; set y_radius and x_radius
 		move.b	#id_Roll,anim(a0)
 		bset	#Status_Roll,status(a0)
 		move.b	y_radius(a0),d0
@@ -1001,9 +997,9 @@ Sonic_JumpHeight:
 
 loc_118D2:
 		cmp.w	y_vel(a0),d1							; is y speed greater than 4? (2 if underwater)
-		ble.w	Sonic_InstaAndShieldMoves			; if not, branch
+		ble.s	locret_118E8							; if not, branch
 		move.b	(Ctrl_1_logical).w,d0
-		andi.b	#btnA+btnB+btnC,d0					; are buttons A, B or C being pressed?
+		andi.b	#btnA+btnB+btnC,d0						; are buttons A, B or C being pressed?
 		bne.s	locret_118E8							; if yes, branch
 		move.w	d1,y_vel(a0)							; cap jump height
 
@@ -1019,68 +1015,6 @@ Sonic_UpVelCap:
 		move.w	#-$FC0,y_vel(a0)						; cap upward speed
 
 locret_118FE:
-		rts
-; ---------------------------------------------------------------------------
-
-Sonic_InstaAndShieldMoves:
-		tst.b	double_jump_flag(a0)						; is Sonic currently performing a double jump?
-		bne.s	locret_118FE							; if yes, branch
-		move.b	(Ctrl_1_pressed_logical).w,d0
-		andi.b	#btnA+btnB+btnC,d0					; are buttons A, B, or C being pressed?
-		beq.s	locret_118FE							; if not, branch
-		bclr	#Status_RollJump,status(a0)
-
-Sonic_FireShield:
-		btst	#Status_Invincible,status_secondary(a0)		; first, does Sonic have invincibility?
-		bne.s	locret_118FE							; if yes, branch
-		btst	#Status_FireShield,status_secondary(a0)		; does Sonic have a Fire Shield?
-		beq.s	Sonic_LightningShield					; if not, branch
-		move.b	#1,(v_Shield+anim).w
-		move.b	#1,double_jump_flag(a0)
-		move.w	#$800,d0
-		btst	#Status_Facing,status(a0)					; is Sonic facing left?
-		beq.s	loc_11958							; if not, branch
-		neg.w	d0									; reverse speed value, moving Sonic left
-
-loc_11958:
-		move.w	d0,x_vel(a0)							; apply velocity...
-		move.w	d0,ground_vel(a0)					; ...both ground and air
-		clr.w	y_vel(a0)							; kill y-velocity
-		move.w	#$2000,(H_scroll_frame_offset).w
-		bsr.w	Reset_Player_Position_Array
-		sfx	sfx_FireAttack,1							; play Fire Shield attack sound
-; ---------------------------------------------------------------------------
-
-Sonic_LightningShield:
-		btst	#Status_LtngShield,status_secondary(a0)		; does Sonic have a Lightning Shield?
-		beq.s	Sonic_BubbleShield					; if not, branch
-		move.b	#1,(v_Shield+anim).w
-		move.b	#1,double_jump_flag(a0)
-		move.w	#-$580,y_vel(a0)						; bounce Sonic up, creating the double jump effect
-		clr.b	jumping(a0)
-		sfx	sfx_ElectricAttack,1						; play Lightning Shield attack sound
-; ---------------------------------------------------------------------------
-
-Sonic_BubbleShield:
-		btst	#Status_BublShield,status_secondary(a0)		; does Sonic have a Bubble Shield
-		beq.s	Sonic_InstaShield						; if not, branch
-		move.b	#1,(v_Shield+anim).w
-		move.b	#1,double_jump_flag(a0)
-		clr.w	x_vel(a0)							; halt horizontal speed...
-		clr.w	ground_vel(a0)						; ...both ground and air
-		move.w	#$800,y_vel(a0)						; force Sonic down
-		sfx	sfx_BubbleAttack,1						; play Bubble Shield attack sound
-; ---------------------------------------------------------------------------
-
-Sonic_InstaShield:
-		btst	#Status_Shield,status_secondary(a0)		; does Sonic have an S2 shield (The Elementals were already filtered out at this point)?
-		bne.s	locret_11A14							; if yes, branch
-		move.b	#1,(v_Shield+anim).w
-		move.b	#1,double_jump_flag(a0)
-		sfx	sfx_InstaAttack,1							; play Insta-Shield sound
-; ---------------------------------------------------------------------------
-
-locret_11A14:
 		rts
 
 ; ---------------------------------------------------------------------------

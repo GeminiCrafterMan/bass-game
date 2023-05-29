@@ -799,6 +799,7 @@ CalcRoomInFront:
 		add.l	d1,d2
 		swap	d2
 		swap	d3
+	; move d0 (angle) to primary/secondary angle ram addresses
 		move.b	d0,(Primary_Angle).w
 		move.b	d0,(Secondary_Angle).w
 		move.b	d0,d1
@@ -1141,7 +1142,11 @@ CheckRightWallDist:
 		move.w	x_pos(a0),d3
 
 CheckRightWallDist_Part2:
-		addi.w	#$A,d3
+		move.w	d2,-(sp)
+		move.b	x_radius(a0),d2
+		ext.w	d2
+		add.w	d2,d3	; changed from $A
+		move.w	(sp)+,d2
 		lea	(Primary_Angle).w,a4
 		movea.w	#$10,a3
 		moveq	#0,d6
@@ -1422,7 +1427,11 @@ CheckLeftWallDist:
 		move.w	x_pos(a0),d3
 
 CheckLeftWallDist_Part2:
-		subi.w	#$A,d3
+		move.w	d2,-(sp)
+		move.b	x_radius(a0),d2
+		ext.w	d2
+		sub.w	d2,d3	; changed from $A
+		move.w	(sp)+,d2
 		eori.w	#$F,d3
 		lea	(Primary_Angle).w,a4
 		movea.w	#-$10,a3
