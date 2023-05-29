@@ -27,6 +27,26 @@
                 "label": ""
             },
             "uuid": "6ed0f213-b203-4ea2-a0ab-c5cdf2406ea0"
+        },
+        {
+            "format": "Sonic 1.js",
+            "name": "Treble",
+            "palettes": [],
+            "art": {
+                "path": "",
+                "compression": "Uncompressed",
+                "offset": 0
+            },
+            "mappings": {
+                "path": "",
+                "label": ""
+            },
+            "dplcs": {
+                "enabled": false,
+                "path": "",
+                "label": ""
+            },
+            "uuid": "d0f213b2-03de-42a0-abc5-cdf2406ea05a"
         }
     ]
 }
