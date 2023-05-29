@@ -1,62 +1,62 @@
 ; ---------------------------------------------------------------------------
-; DEZ events
+; Test events
 ; ---------------------------------------------------------------------------
 
 ; =============== S U B R O U T I N E =======================================
 
-DEZ1_ScreenInit:
+Test1_ScreenInit:
 		jsr	(Reset_TileOffsetPositionActual).w
 		jmp	(Refresh_PlaneFull).w
 
 ; =============== S U B R O U T I N E =======================================
 
-DEZ1_ScreenEvent:
+Test1_ScreenEvent:
 		tst.b (Screen_event_flag).w
-		bne.s	DEZ1_ScreenEvent_RefreshPlane
+		bne.s	Test1_ScreenEvent_RefreshPlane
 		move.w	(Screen_shaking_flag+2).w,d0
 		add.w	d0,(Camera_Y_pos_copy).w
 		jmp	(DrawTilesAsYouMove).w
 ; ---------------------------------------------------------------------------
 
-DEZ1_ScreenEvent_RefreshPlane:
+Test1_ScreenEvent_RefreshPlane:
 		clr.b	(Screen_event_flag).w
 		jmp	(Refresh_PlaneScreenDirect).w
 
 ; =============== S U B R O U T I N E =======================================
 
-DEZ1_BackgroundInit:
-		bsr.s	DEZ1_Deform
+Test1_BackgroundInit:
+		bsr.s	Test1_Deform
 		jsr	(Reset_TileOffsetPositionEff).w
 		jsr	(Refresh_PlaneFull).w
-		bra.s	DEZ1_BackgroundEvent.deform
+		bra.s	Test1_BackgroundEvent.deform
 
 ; =============== S U B R O U T I N E =======================================
 
-DEZ1_BackgroundEvent:
+Test1_BackgroundEvent:
 		tst.b (Background_event_flag).w
-		bne.s	DEZ1_Transition
-		bsr.s	DEZ1_Deform
+		bne.s	Test1_Transition
+		bsr.s	Test1_Deform
 
 .deform:
-		lea	DEZ1_BGDeformArray(pc),a4
+		lea	Test1_BGDeformArray(pc),a4
 		lea	(H_scroll_table).w,a5
 		jsr	(ApplyDeformation).w
 		jmp	(ShakeScreen_Setup).w
 ; ---------------------------------------------------------------------------
 
-DEZ1_Transition:
+Test1_Transition:
 		clr.b	(Background_event_flag).w
 		rts
 ; ---------------------------------------------------------------------------
 
-DEZ1_BGDeformArray:
+Test1_BGDeformArray:
 	rept 15
 		dc.w 16
 	endr
 		dc.w $7FFF
 ; ---------------------------------------------------------------------------
 
-DEZ1_Deform:
+Test1_Deform:
 		lea	(H_scroll_table).w,a1
 		move.l	(Camera_X_pos_copy).w,d0
 		neg.l	d0

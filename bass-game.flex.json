@@ -10,6 +10,10 @@
                 {
                     "path": "Objects/Bass/Palettes/Bass.bin",
                     "length": 1
+                },
+                {
+                    "path": "Objects/Bass/Palettes/Treble Boost.bin",
+                    "length": 1
                 }
             ],
             "art": {
@@ -31,7 +35,12 @@
         {
             "format": "Sonic 1.js",
             "name": "Treble",
-            "palettes": [],
+            "palettes": [
+                {
+                    "path": "Objects/Bass/Palettes/Treble Boost.bin",
+                    "length": 1
+                }
+            ],
             "art": {
                 "path": "",
                 "compression": "Uncompressed",

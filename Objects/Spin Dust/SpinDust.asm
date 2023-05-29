@@ -159,7 +159,7 @@ loc_18CE4:
 		neg.w	d1
 +		add.w	d1,y_pos(a1)
 		clr.b	status(a1)
-		move.b	#id_Roll2,anim(a1)
+		move.b	#3,anim(a1)	; this isn't a character, so id_Roll2 really should not apply
 		addq.b	#2,routine(a1)
 		move.l	mappings(a0),mappings(a1)
 		move.b	render_flags(a0),render_flags(a1)

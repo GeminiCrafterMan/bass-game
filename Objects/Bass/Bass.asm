@@ -21,8 +21,7 @@ Obj_Sonic:
 		beq.s	+
 		clr.w	(Debug_placement_mode).w	; Leave debug mode
 +		addq.b	#1,mapping_frame(a0)		; Next frame
-;		cmpi.b	#frB_End,mapping_frame(a0)	; Have we reached the end of Sonic's frames?
-		cmpi.b	#$D9,mapping_frame(a0)	; Have we reached the end of Sonic's frames?
+		cmpi.b	#frB_Last,mapping_frame(a0)	; Have we reached the end of Sonic's frames?
 		blo.s		+
 		clr.b	mapping_frame(a0)	; If so, reset to Sonic's first frame
 +		bsr.w	Sonic_Load_PLC
@@ -322,11 +321,9 @@ loc_10F22:
 ; =============== S U B R O U T I N E =======================================
 
 Sonic_MdNormal:
-		bsr.w	SonicKnux_Spindash
 		bsr.w	Sonic_Jump
 		bsr.w	Player_SlopeResist
 		bsr.w	Sonic_Move
-		bsr.w	SonicKnux_Roll
 		bsr.w	Player_LevelBound
 		jsr	(MoveSprite2_TestGravity).w
 		bsr.s	Call_Player_AnglePos
@@ -472,13 +469,12 @@ Sonic_NotRight:
 		bne.w	loc_112EA					; if yes, branch
 		tst.w	d1
 		bne.w	loc_112EA
-		bclr	#Status_Push,status(a0)
 		move.b	#id_Wait,anim(a0)			; use standing animation
 		btst	#Status_OnObj,status(a0)
 		beq.w	Sonic_Balance
 		movea.w	interact(a0),a1				; load interacting object's RAM space
 		tst.b	status(a1)						; is status bit 7 set? (Balance anim off)
-		bmi.w	loc_11276					; if so, branch
+		bmi.w	loc_112EA					; if so, branch
 
 		; Calculations to determine where on the object Sonic is, and make him balance accordingly
 		moveq	#0,d1						; Clear d1
@@ -492,7 +488,7 @@ Sonic_NotRight:
 		blt.s		Sonic_BalanceOnObjLeft		; if so, branch
 		cmp.w	d2,d1
 		bge.s	Sonic_BalanceOnObjRight		; if Sonic is within two units of object's right edge, branch (Realistically, it checks this, and BEYOND the right edge of the object)
-		bra.w	loc_11276					; if Sonic is more than 2 units from both edges, branch
+		bra.w	loc_112EA					; if Sonic is more than 2 units from both edges, branch
 ; ---------------------------------------------------------------------------
 ; balancing checks for when you're on the right edge of an object
 
@@ -542,7 +538,7 @@ Sonic_Balance:
 		move.w	x_pos(a0),d3
 		bsr.w	ChooseChkFloorEdge
 		cmpi.w	#$C,d1
-		blt.w	loc_11276
+		blt.w	loc_112EA
 		cmpi.b	#3,next_tilt(a0)
 		bne.s	loc_111F6
 		btst	#Status_Facing,status(a0)
@@ -573,7 +569,7 @@ loc_111CE:	; +
 
 loc_111F6:
 		cmpi.b	#3,tilt(a0)
-		bne.s	loc_11276
+		bne.s	loc_112EA
 		btst	#Status_Facing,status(a0)
 		beq.s	loc_11228
 		move.b	#id_Balance,anim(a0)
@@ -598,55 +594,7 @@ loc_11228:
 		bra.w	loc_112EA
 ; ---------------------------------------------------------------------------
 
-loc_11276:
-		tst.w	(HScroll_Shift).w
-		bne.s	loc_112B0
-		btst	#button_down,(Ctrl_1_logical).w
-		beq.s	loc_112B0
-		move.b	#id_Duck,anim(a0)
-		addq.b	#1,scroll_delay_counter(a0)
-		cmpi.b	#2*60,scroll_delay_counter(a0)
-		bcs.s	loc_112F0
-		move.b	#2*60,scroll_delay_counter(a0)
-		tst.b	(Reverse_gravity_flag).w
-		bne.s	loc_112A6
-		cmpi.w	#8,(a5)
-		beq.s	loc_112FC
-		subq.w	#2,(a5)
-		bra.s	loc_112FC
-; ---------------------------------------------------------------------------
-
-loc_112A6:
-		cmpi.w	#$D8,(a5)
-		beq.s	loc_112FC
-		addq.w	#2,(a5)
-		bra.s	loc_112FC
-; ---------------------------------------------------------------------------
-
-loc_112B0:
-		btst	#button_up,(Ctrl_1_logical).w
-		beq.s	loc_112EA
-		move.b	#id_LookUp,anim(a0)
-		addq.b	#1,scroll_delay_counter(a0)
-		cmpi.b	#2*60,scroll_delay_counter(a0)
-		bcs.s	loc_112F0
-		move.b	#2*60,scroll_delay_counter(a0)
-		tst.b	(Reverse_gravity_flag).w
-		bne.s	loc_112E0
-		cmpi.w	#$C8,(a5)
-		beq.s	loc_112FC
-		addq.w	#2,(a5)
-		bra.s	loc_112FC
-; ---------------------------------------------------------------------------
-
-loc_112E0:
-		cmpi.w	#$18,(a5)
-		beq.s	loc_112FC
-		subq.w	#2,(a5)
-		bra.s	loc_112FC
-; ---------------------------------------------------------------------------
-
-loc_112EA:
+loc_112EA:	; mlep
 		clr.b	scroll_delay_counter(a0)
 
 loc_112F0:
@@ -727,9 +675,8 @@ loc_1137E:
 		beq.s	loc_113D0
 		add.w	d1,x_vel(a0)
 		clr.w	ground_vel(a0)
-		btst	#Status_Facing,status(a0)
-		bne.s	locret_113CE
-		bset	#Status_Push,status(a0)
+;		btst	#Status_Facing,status(a0)
+;		bne.s	locret_113CE
 
 locret_113CE:
 		rts
@@ -745,7 +692,6 @@ loc_113D6:
 		clr.w	ground_vel(a0)
 		btst	#Status_Facing,status(a0)
 		beq.s	locret_113CE
-		bset	#Status_Push,status(a0)
 		rts
 ; ---------------------------------------------------------------------------
 
@@ -765,8 +711,7 @@ loc_113FE:
 		bne.s	loc_11412
 		bset	#Status_Facing,status(a0)
 		bne.s	loc_11412
-		bclr	#Status_Push,status(a0)
-		move.b	#id_Run,prev_anim(a0)
+		jsr		ManageWalkAnim
 
 loc_11412:
 		sub.w	d5,d0
@@ -781,7 +726,7 @@ loc_11412:
 
 loc_11424:
 		move.w	d0,ground_vel(a0)
-		clr.b	anim(a0)	; id_Walk
+		jsr		ManageWalkAnim
 		rts
 ; ---------------------------------------------------------------------------
 
@@ -818,8 +763,7 @@ sub_11482:
 		bmi.s	loc_114B6
 		bclr	#Status_Facing,status(a0)
 		beq.s	loc_1149C
-		bclr	#Status_Push,status(a0)
-		move.b	#id_Run,prev_anim(a0)
+		jsr		ManageWalkAnim
 
 loc_1149C:
 		add.w	d5,d0
@@ -832,7 +776,7 @@ loc_1149C:
 
 loc_114AA:
 		move.w	d0,ground_vel(a0)
-		clr.b	anim(a0)	; id_Walk
+		jsr		ManageWalkAnim
 		rts
 ; ---------------------------------------------------------------------------
 
@@ -1134,63 +1078,6 @@ loc_11732:
 		clr.w	ground_vel(a0)
 		bra.s	Player_Boundary_CheckBottom
 
-; =============== S U B R O U T I N E =======================================
-
-SonicKnux_Roll:
-		tst.b	status_secondary(a0)
-		bmi.s	locret_1177E
-		tst.w	(HScroll_Shift).w
-		bne.s	locret_1177E
-		move.b	(Ctrl_1_logical).w,d0
-		andi.b	#btnL+btnR,d0
-		bne.s	locret_1177E
-		btst	#button_down,(Ctrl_1_logical).w
-		beq.s	loc_11780
-		move.w	ground_vel(a0),d0
-		bpl.s	loc_1176A
-		neg.w	d0
-
-loc_1176A:
-		cmpi.w	#$100,d0
-		bcc.s	loc_11790
-		btst	#Status_OnObj,status(a0)
-		bne.s	locret_1177E
-		move.b	#id_Duck,anim(a0)
-
-locret_1177E:
-		rts
-; ---------------------------------------------------------------------------
-
-loc_11780:
-		cmpi.b	#id_Duck,anim(a0)
-		bne.s	locret_1177E
-		clr.b	anim(a0)	; id_Walk
-		rts
-; ---------------------------------------------------------------------------
-
-loc_11790:
-		btst	#Status_Roll,status(a0)
-		beq.s	loc_1179A
-		rts
-; ---------------------------------------------------------------------------
-
-loc_1179A:
-		bset	#Status_Roll,status(a0)
-		move.w	#bytes_to_word(28/2,14/2),y_radius(a0)	; set y_radius and x_radius
-		move.b	#id_Roll,anim(a0)
-		addq.w	#5,y_pos(a0)
-		tst.b	(Reverse_gravity_flag).w
-		beq.s	loc_117C2
-		subi.w	#$A,y_pos(a0)
-
-loc_117C2:
-		sfx	sfx_Roll
-		tst.w	ground_vel(a0)
-		bne.s	locret_117D8
-		move.w	#$200,ground_vel(a0)
-
-locret_117D8:
-		rts
 ; ---------------------------------------------------------------------------
 ; Subroutine allowing Sonic to jump
 ; ---------------------------------------------------------------------------
@@ -1200,7 +1087,7 @@ locret_117D8:
 Sonic_Jump:
 		move.b	(Ctrl_1_pressed_logical).w,d0
 		andi.b	#btnA+btnB+btnC,d0
-		beq.s	locret_117D8
+		beq.w	locret_118B2
 		moveq	#0,d0
 		move.b	angle(a0),d0
 		tst.b	(Reverse_gravity_flag).w
@@ -1215,7 +1102,7 @@ loc_117FC:
 		bsr.w	CalcRoomOverHead
 		movem.l	(sp)+,a4-a6
 		cmpi.w	#6,d1
-		blt.s		locret_117D8
+		blt.w	locret_118B2
 		move.w	#$680,d2
 		btst	#Status_Underwater,status(a0)	; Test if underwater
 		beq.s	loc_1182E
@@ -1233,7 +1120,6 @@ loc_1182E:
 		asr.l	#8,d0
 		add.w	d0,y_vel(a0)
 		bset	#Status_InAir,status(a0)
-		bclr	#Status_Push,status(a0)
 		addq.l	#4,sp
 		move.b	#1,jumping(a0)
 		clr.b	stick_to_convex(a0)
@@ -1352,131 +1238,6 @@ Sonic_InstaShield:
 
 locret_11A14:
 		rts
-
-; =============== S U B R O U T I N E =======================================
-
-SonicKnux_Spindash:
-		tst.b	spin_dash_flag(a0)
-		bne.s	loc_11C5E
-		cmpi.b	#id_Duck,anim(a0)
-		bne.s	locret_11A14
-		move.b	(Ctrl_1_pressed_logical).w,d0
-		andi.b	#btnA+btnB+btnC,d0
-		beq.s	locret_11A14
-		move.b	#id_SpinDash,anim(a0)
-		sfx	sfx_SpinDash
-		addq.l	#4,sp
-		move.b	#1,spin_dash_flag(a0)
-		clr.w	spin_dash_counter(a0)
-		cmpi.b	#12,air_left(a0)
-		bcs.s	loc_11C24
-		move.b	#2,anim(a6)		; v_Dust
-
-loc_11C24:
-		bsr.w	Player_LevelBound
-		bra.w	Call_Player_AnglePos
-; ---------------------------------------------------------------------------
-
-loc_11C5E:
-		btst	#button_down,(Ctrl_1_logical).w
-		bne.w	loc_11D16
-		move.w	#bytes_to_word(28/2,14/2),y_radius(a0)	; set y_radius and x_radius
-		move.b	#id_Roll,anim(a0)
-		addq.w	#5,y_pos(a0)
-		tst.b	(Reverse_gravity_flag).w
-		beq.s	loc_11C8C
-		subi.w	#$A,y_pos(a0)
-
-loc_11C8C:
-		moveq	#0,d0
-		move.b	d0,spin_dash_flag(a0)
-		move.b	spin_dash_counter(a0),d0
-		add.w	d0,d0
-		move.w	word_11CF2(pc,d0.w),ground_vel(a0)
-		move.w	ground_vel(a0),d0
-		subi.w	#$800,d0
-		add.w	d0,d0
-		andi.w	#$1F00,d0
-		neg.w	d0
-		addi.w	#$2000,d0
-		lea	(H_scroll_frame_offset).w,a1
-		move.w	d0,(a1)
-		btst	#Status_Facing,status(a0)
-		beq.s	loc_11CDC
-		neg.w	ground_vel(a0)
-
-loc_11CDC:
-		bset	#Status_Roll,status(a0)
-		clr.b	anim(a6)		; v_Dust
-		sfx	sfx_Dash
-		bra.s	loc_11D5E
-; ---------------------------------------------------------------------------
-
-word_11CF2:
-		dc.w $800
-		dc.w $880
-		dc.w $900
-		dc.w $980
-		dc.w $A00
-		dc.w $A80
-		dc.w $B00
-		dc.w $B80
-		dc.w $C00
-word_11D04:
-		dc.w $B00
-		dc.w $B80
-		dc.w $C00
-		dc.w $C80
-		dc.w $D00
-		dc.w $D80
-		dc.w $E00
-		dc.w $E80
-		dc.w $F00
-; ---------------------------------------------------------------------------
-
-loc_11D16:
-		tst.w	spin_dash_counter(a0)
-		beq.s	loc_11D2E
-		move.w	spin_dash_counter(a0),d0
-		lsr.w	#5,d0
-		sub.w	d0,spin_dash_counter(a0)
-		bcc.s	loc_11D2E
-		clr.w	spin_dash_counter(a0)
-
-loc_11D2E:
-		move.b	(Ctrl_1_pressed_logical).w,d0
-		andi.b	#btnA+btnB+btnC,d0
-		beq.w	loc_11D5E
-		move.w	#bytes_to_word(id_SpinDash,id_Walk),anim(a0)
-		sfx	sfx_SpinDash
-		addi.w	#$200,spin_dash_counter(a0)
-		cmpi.w	#$800,spin_dash_counter(a0)
-		bcs.s	loc_11D5E
-		move.w	#$800,spin_dash_counter(a0)
-
-loc_11D5E:
-	if	ExtendedCamera
-		moveq	#0,d0
-		move.b	spin_dash_counter(a0),d0
-		add.w	d0,d0
-		move.w	word_11CF2(pc,d0.w),ground_vel(a0)
-		btst	#Status_Facing,status(a0)
-		beq.s	+
-		neg.w	ground_vel(a0)
-+
-	endif
-		addq.l	#4,sp
-		cmpi.w	#$60,(a5)
-		beq.s	loc_11D6C
-		bcc.s	loc_11D6A
-		addq.w	#4,(a5)
-
-loc_11D6A:
-		subq.w	#2,(a5)
-
-loc_11D6C:
-		bsr.w	Player_LevelBound
-		bra.w	Call_Player_AnglePos
 
 ; ---------------------------------------------------------------------------
 ; Subroutine to slow Sonic walking up a slope
@@ -1958,7 +1719,7 @@ loc_12158:
 Player_TouchFloor_Check_Spindash:
 		tst.b	spin_dash_flag(a0)
 		bne.s	loc_121D8
-		clr.b	anim(a0)	; id_Walk
+		jsr		ManageWalkAnim
 
 Sonic_ResetOnFloor:
 		move.b	y_radius(a0),d0
@@ -1967,7 +1728,7 @@ Sonic_ResetOnFloor:
 		btst	#Status_Roll,status(a0)
 		beq.s	loc_121D8
 		bclr	#Status_Roll,status(a0)
-		clr.b	anim(a0)	; id_Walk
+		jsr		ManageWalkAnim
 		sub.b	default_y_radius(a0),d0
 		ext.w	d0
 		tst.b	(Reverse_gravity_flag).w
@@ -1987,7 +1748,6 @@ loc_121D2:
 
 loc_121D8:
 		bclr	#Status_InAir,status(a0)
-		bclr	#Status_Push,status(a0)
 		bclr	#Status_RollJump,status(a0)
 		moveq	#0,d0
 		move.b	d0,jumping(a0)
@@ -2032,7 +1792,6 @@ BubbleShield_Bounce:
 		add.w	d0,y_vel(a0)
 		movem.l	(sp)+,d1-d2
 		bset	#Status_InAir,status(a0)
-		bclr	#Status_Push,status(a0)
 		move.b	#1,jumping(a0)
 		clr.b	stick_to_convex(a0)
 		move.w	#bytes_to_word(28/2,14/2),y_radius(a0)	; set y_radius and x_radius
@@ -2110,7 +1869,7 @@ loc_12344:
 		move.w	d0,x_vel(a0)
 		move.w	d0,ground_vel(a0)
 		move.b	d0,object_control(a0)
-		clr.b	anim(a0)	; id_Walk
+		jsr		ManageWalkAnim
 		move.w	#$100,priority(a0)
 		move.b	#id_SonicControl,routine(a0)
 		move.b	#2*60,invulnerability_timer(a0)
@@ -2225,7 +1984,7 @@ sub_125E0:
 ; =============== S U B R O U T I N E =======================================
 
 Animate_Sonic:
-		lea	AniSonic(pc),a1
+		lea	Ani_Bass(pc),a1
 		moveq	#0,d0
 		move.b	anim(a0),d0
 		cmp.b	prev_anim(a0),d0
@@ -2233,13 +1992,11 @@ Animate_Sonic:
 		move.b	d0,prev_anim(a0)
 		clr.b	anim_frame(a0)
 		clr.b	anim_frame_timer(a0)
-		bclr	#Status_Push,status(a0)
 
 SAnim_Do:
 		add.w	d0,d0
 		adda.w	(a1,d0.w),a1
 		move.b	(a1),d0
-		bmi.s	SAnim_WalkRun
 		move.b	status(a0),d1
 		andi.b	#1,d1
 		andi.b	#-4,render_flags(a0)
@@ -2287,86 +2044,6 @@ SAnim_End_FD:
 		move.b	2(a1,d1.w),anim(a0)
 
 SAnim_End:
-		rts
-; ---------------------------------------------------------------------------
-
-SAnim_WalkRun:
-		addq.b	#1,d0
-		bne.w	loc_12A2A
-		moveq	#0,d0
-		tst.b	flip_type(a0)
-		bmi.w	loc_127C0
-		move.b	flip_angle(a0),d0
-		bne.w	loc_127C0
-		moveq	#0,d1
-		move.b	angle(a0),d0
-		bmi.s	loc_126C8
-		beq.s	loc_126C8
-		subq.b	#1,d0
-
-loc_126C8:
-		move.b	status(a0),d2
-		andi.b	#1,d2
-		bne.s	loc_126D4
-		not.b	d0
-
-loc_126D4:
-		addi.b	#$10,d0
-		bpl.s	loc_126DC
-		moveq	#3,d1
-
-loc_126DC:
-		andi.b	#-4,render_flags(a0)
-		eor.b	d1,d2
-		or.b	d2,render_flags(a0)
-		btst	#Status_Push,status(a0)
-		bne.w	SAnim_Push
-		lsr.b	#4,d0
-		andi.b	#6,d0
-		move.w	ground_vel(a0),d2
-		bpl.s	loc_12700
-		neg.w	d2
-
-loc_12700:
-		add.w	(HScroll_Shift).w,d2
-		tst.b	status_secondary(a0)
-		bpl.w	loc_1270A
-		add.w	d2,d2
-
-loc_1270A:
-		lea	SonAni_Run(pc),a1 	; use running	animation
-		cmpi.w	#$600,d2
-		bcc.s	loc_12724
-		lea	SonAni_Walk(pc),a1 	; use walking animation
-		add.b	d0,d0
-
-loc_12724:
-		add.b	d0,d0
-		move.b	d0,d3
-		moveq	#0,d1
-		move.b	anim_frame(a0),d1
-		move.b	1(a1,d1.w),d0
-		cmpi.b	#-1,d0
-		bne.s	loc_12742
-		clr.b	anim_frame(a0)
-		move.b	1(a1),d0
-
-loc_12742:
-		move.b	d0,mapping_frame(a0)
-		add.b	d3,mapping_frame(a0)
-		subq.b	#1,anim_frame_timer(a0)
-		bpl.s	locret_12764
-		neg.w	d2
-		addi.w	#$800,d2
-		bpl.s	loc_1275A
-		moveq	#0,d2
-
-loc_1275A:
-		lsr.w	#8,d2
-		move.b	d2,anim_frame_timer(a0)
-		addq.b	#1,anim_frame(a0)
-
-locret_12764:
 		rts
 ; ---------------------------------------------------------------------------
 
@@ -2586,9 +2263,6 @@ loc_12A2A:
 
 loc_12A4C:
 		add.w	(HScroll_Shift).w,d2
-		lea	SonAni_Roll2(pc),a1
-		cmpi.w	#$600,d2
-		bcc.s	loc_12A5E
 		lea	SonAni_Roll(pc),a1
 
 loc_12A5E:
@@ -2600,25 +2274,6 @@ loc_12A5E:
 loc_12A68:
 		lsr.w	#8,d2
 		move.b	d2,anim_frame_timer(a0)
-		bra.w	SAnim_Do2
-; ---------------------------------------------------------------------------
-
-SAnim_Push:
-		subq.b	#1,anim_frame_timer(a0)
-		bpl.w	SAnim_Delay
-		move.w	ground_vel(a0),d2
-		bmi.s	loc_12A82
-		neg.w	d2
-
-loc_12A82:
-		addi.w	#$800,d2
-		bpl.s	loc_12A8A
-		moveq	#0,d2
-
-loc_12A8A:
-		lsr.w	#6,d2
-		move.b	d2,anim_frame_timer(a0)
-		lea	SonAni_Push(pc),a1
 		bra.w	SAnim_Do2
 
 ; =============== S U B R O U T I N E =======================================
@@ -2655,6 +2310,14 @@ Sonic_Load_PLC2:
 		jsr	(Add_To_DMA_Queue).w
 		dbf	d5,-
 +		rts
+
+ManageWalkAnim:
+		cmpi.b	#id_Run,anim(a0)
+		ble.s	.alreadyGoing
+;		move.w	#bytes_to_word(id_Walk,id_Walk),anim(a0)	; also goes to prev_anim
+		move.b	#id_Walk,anim(a0)
+	.alreadyGoing:
+		rts
 
 ; ---------------------------------------------------------------------------
 ; Object Data

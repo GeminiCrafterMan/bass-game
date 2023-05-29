@@ -4,10 +4,10 @@
 
 		;		1st 8x8 data		1st 16x16 data		1st 128x128 data	palette
 LevelLoadBlock:
-		levartptrs DEZ_8x8_KosM, DEZ_16x16_Unc, DEZ_128x128_Kos, palid_DEZ		; DEZ1
-		levartptrs DEZ_8x8_KosM, DEZ_16x16_Unc, DEZ_128x128_Kos, palid_DEZ		; DEZ2
-		levartptrs DEZ_8x8_KosM, DEZ_16x16_Unc, DEZ_128x128_Kos, palid_DEZ		; DEZ3
-		levartptrs DEZ_8x8_KosM, DEZ_16x16_Unc, DEZ_128x128_Kos, palid_DEZ		; DEZ4
+		levartptrs Test_8x8_KosM, Test_16x16_Unc, Test_128x128_Kos, palid_Test		; Test1
+		levartptrs Test_8x8_KosM, Test_16x16_Unc, Test_128x128_Kos, palid_Test		; Test2
+		levartptrs Test_8x8_KosM, Test_16x16_Unc, Test_128x128_Kos, palid_Test		; Test3
+		levartptrs Test_8x8_KosM, Test_16x16_Unc, Test_128x128_Kos, palid_Test		; Test4
 
 		zonewarning LevelLoadBlock,(12*4)
 
@@ -17,25 +17,25 @@ LevelLoadBlock:
 
 LevelLoadPointer:
 
-; DEZ1
-		dc.l AnPal_DEZ, LevelPointer_Null, LevelPointer_Null, LevelPointer_Null					; Animate Palette, Resize, WaterResize, AfterBoss
-		dc.l DEZ1_ScreenInit, DEZ1_BackgroundInit, DEZ1_ScreenEvent, DEZ1_BackgroundEvent	; ScreenInit, BackgroundInit, ScreenEvent, BackgroundEvent
-		dc.l AnimateTiles_DoAniPLC, AniPLC_DEZ											; Animate tiles main code, Animate tiles PLC scripts
+; Test1
+		dc.l LevelPointer_Null, LevelPointer_Null, LevelPointer_Null, LevelPointer_Null					; Animate Palette, Resize, WaterResize, AfterBoss
+		dc.l Test1_ScreenInit, Test1_BackgroundInit, Test1_ScreenEvent, Test1_BackgroundEvent	; ScreenInit, BackgroundInit, ScreenEvent, BackgroundEvent
+		dc.l LevelPointer_Null, LevelPointer_Null											; Animate tiles main code, Animate tiles PLC scripts
 
-; DEZ2
-		dc.l AnPal_DEZ, LevelPointer_Null, LevelPointer_Null, LevelPointer_Null
-		dc.l DEZ1_ScreenInit, DEZ1_BackgroundInit, DEZ1_ScreenEvent, DEZ1_BackgroundEvent
-		dc.l AnimateTiles_DoAniPLC, AniPLC_DEZ
+; Test2
+		dc.l LevelPointer_Null, LevelPointer_Null, LevelPointer_Null, LevelPointer_Null
+		dc.l Test1_ScreenInit, Test1_BackgroundInit, Test1_ScreenEvent, Test1_BackgroundEvent
+		dc.l LevelPointer_Null, LevelPointer_Null
 
-; DEZ3
-		dc.l AnPal_DEZ, LevelPointer_Null, LevelPointer_Null, LevelPointer_Null
-		dc.l DEZ1_ScreenInit, DEZ1_BackgroundInit, DEZ1_ScreenEvent, DEZ1_BackgroundEvent
-		dc.l AnimateTiles_DoAniPLC, AniPLC_DEZ
+; Test3
+		dc.l LevelPointer_Null, LevelPointer_Null, LevelPointer_Null, LevelPointer_Null
+		dc.l Test1_ScreenInit, Test1_BackgroundInit, Test1_ScreenEvent, Test1_BackgroundEvent
+		dc.l LevelPointer_Null, LevelPointer_Null
 
-; DEZ4
-		dc.l AnPal_DEZ, LevelPointer_Null, LevelPointer_Null, LevelPointer_Null
-		dc.l DEZ1_ScreenInit, DEZ1_BackgroundInit, DEZ1_ScreenEvent, DEZ1_BackgroundEvent
-		dc.l AnimateTiles_DoAniPLC, AniPLC_DEZ
+; Test4
+		dc.l LevelPointer_Null, LevelPointer_Null, LevelPointer_Null, LevelPointer_Null
+		dc.l Test1_ScreenInit, Test1_BackgroundInit, Test1_ScreenEvent, Test1_BackgroundEvent
+		dc.l LevelPointer_Null, LevelPointer_Null
 
 		zonewarning LevelLoadPointer,(40*4)
 
@@ -44,10 +44,10 @@ LevelLoadPointer:
 ; ===========================================================================
 
 SolidIndexes:
-		dc.l DEZ1_Solid		; DEZ1
-		dc.l DEZ1_Solid		; DEZ2
-		dc.l DEZ1_Solid		; DEZ3
-		dc.l DEZ1_Solid		; DEZ4
+		dc.l Test1_Solid		; Test1
+		dc.l Test1_Solid		; Test2
+		dc.l Test1_Solid		; Test3
+		dc.l Test1_Solid		; Test4
 
 		zonewarning SolidIndexes,(4*4)
 
@@ -56,10 +56,10 @@ SolidIndexes:
 ; ===========================================================================
 
 LevelPtrs:
-		dc.l DEZ1_Layout		; DEZ1
-		dc.l DEZ1_Layout		; DEZ2
-		dc.l DEZ1_Layout		; DEZ3
-		dc.l DEZ1_Layout		; DEZ4
+		dc.l Test1_Layout		; Test1
+		dc.l Test1_Layout		; Test2
+		dc.l Test1_Layout		; Test3
+		dc.l Test1_Layout		; Test4
 
 		zonewarning LevelPtrs,(4*4)
 
@@ -68,10 +68,10 @@ LevelPtrs:
 ; ===========================================================================
 
 SpriteLocPtrs:
-		dc.l DEZ1_Sprites		; DEZ1
-		dc.l DEZ1_Sprites		; DEZ2
-		dc.l DEZ1_Sprites		; DEZ3
-		dc.l DEZ1_Sprites		; DEZ4
+		dc.l Test1_Sprites		; Test1
+		dc.l Test1_Sprites		; Test2
+		dc.l Test1_Sprites		; Test3
+		dc.l Test1_Sprites		; Test4
 
 		zonewarning SpriteLocPtrs,(4*4)
 
@@ -80,10 +80,10 @@ SpriteLocPtrs:
 ; ===========================================================================
 
 RingLocPtrs:
-		dc.l DEZ1_Rings		; DEZ1
-		dc.l DEZ1_Rings		; DEZ2
-		dc.l DEZ1_Rings		; DEZ3
-		dc.l DEZ1_Rings		; DEZ4
+		dc.l Test1_Rings		; Test1
+		dc.l Test1_Rings		; Test2
+		dc.l Test1_Rings		; Test3
+		dc.l Test1_Rings		; Test4
 
 		zonewarning RingLocPtrs,(4*4)
 
@@ -91,11 +91,11 @@ RingLocPtrs:
 ; Compressed level graphics - tile, primary patterns and block mappings
 ; ===========================================================================
 
-DEZ_8x8_KosM:		binclude "Levels/DEZ/Tiles/Primary.bin"
+Test_8x8_KosM:		binclude "Levels/Test/Tiles/Primary.bin"
 	even
-DEZ_16x16_Unc:		binclude "Levels/DEZ/Blocks/Primary.bin"
+Test_16x16_Unc:		binclude "Levels/Test/Blocks/Primary.bin"
 	even
-DEZ_128x128_Kos:	binclude "Levels/DEZ/Chunks/Primary.bin"
+Test_128x128_Kos:	binclude "Levels/Test/Chunks/Primary.bin"
 	even
 
 ; ===========================================================================
@@ -113,7 +113,7 @@ HeightMapsRot:		binclude "Misc Data/Height Maps Rotated.bin"
 ; Level collision data
 ; ===========================================================================
 
-DEZ1_Solid:			binclude "Levels/DEZ/Collision/1.bin"
+Test1_Solid:			binclude "Levels/Test/Collision/1.bin"
 	even
 
 ; ===========================================================================
@@ -122,7 +122,7 @@ DEZ1_Solid:			binclude "Levels/DEZ/Collision/1.bin"
 
 		align $8000
 
-DEZ1_Layout:		binclude "Levels/DEZ/Layout/1.bin"
+Test1_Layout:		binclude "Levels/Test/Layout/1.bin"
 	even
 
 ; ===========================================================================
@@ -130,7 +130,7 @@ DEZ1_Layout:		binclude "Levels/DEZ/Layout/1.bin"
 ; ===========================================================================
 
 	ObjectLayoutBoundary
-DEZ1_Sprites:		binclude "Levels/DEZ/Object Pos/1.bin"
+Test1_Sprites:		binclude "Levels/Test/Object Pos/1.bin"
 	ObjectLayoutBoundary
 	even
 
@@ -139,6 +139,6 @@ DEZ1_Sprites:		binclude "Levels/DEZ/Object Pos/1.bin"
 ; ===========================================================================
 
 	RingLayoutBoundary
-DEZ1_Rings:			binclude "Levels/DEZ/Ring Pos/1.bin"
+Test1_Rings:			binclude "Levels/Test/Ring Pos/1.bin"
 	RingLayoutBoundary
 	even
