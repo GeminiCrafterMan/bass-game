@@ -53,8 +53,8 @@ ptr_Sonic_Drown:	offsetTableEntry.w Sonic_Drown		; C
 Sonic_Init:	; Routine 0
 		addq.b	#2,routine(a0)				; => Obj01_Control
 	; todo: make bass's hitbox thinner
-		move.w	#bytes_to_word(38/2,14/2),y_radius(a0)	; set y_radius and x_radius	; this sets Sonic's collision height (2*pixels)
-		move.w	#bytes_to_word(38/2,14/2),default_y_radius(a0)	; set default_y_radius and default_x_radius
+		move.w	#bytes_to_word(30/2,14/2),y_radius(a0)	; set y_radius and x_radius	; this sets Sonic's collision height (2*pixels)
+		move.w	#bytes_to_word(30/2,14/2),default_y_radius(a0)	; set default_y_radius and default_x_radius
 		move.l	#Map_Bass,mappings(a0)
 		move.w	#$100,priority(a0)
 		move.w	#bytes_to_word(48/2,48/2),height_pixels(a0)		; set height and width
