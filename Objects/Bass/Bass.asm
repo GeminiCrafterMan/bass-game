@@ -1563,7 +1563,7 @@ loc_12158:
 Player_TouchFloor_Check_Spindash:
 		tst.b	spin_dash_flag(a0)
 		bne.s	loc_121D8
-		jsr		ManageWalkAnim
+		move.b	#id_Run,anim(a0)
 
 Sonic_ResetOnFloor:
 		move.b	y_radius(a0),d0
@@ -1572,7 +1572,7 @@ Sonic_ResetOnFloor:
 		btst	#Status_Roll,status(a0)
 		beq.s	loc_121D8
 		bclr	#Status_Roll,status(a0)
-		jsr		ManageWalkAnim
+		move.b	#id_Run,anim(a0)
 		sub.b	default_y_radius(a0),d0
 		ext.w	d0
 		tst.b	(Reverse_gravity_flag).w
@@ -2054,33 +2054,6 @@ loc_12A12:
 		move.b	d0,mapping_frame(a0)
 		clr.b	anim_frame_timer(a0)
 		rts
-; ---------------------------------------------------------------------------
-
-loc_12A2A:
-		move.b	status(a0),d1
-		andi.b	#1,d1
-		andi.b	#-4,render_flags(a0)
-		or.b	d1,render_flags(a0)
-		subq.b	#1,anim_frame_timer(a0)
-		bpl.w	SAnim_Delay
-		move.w	ground_vel(a0),d2
-		bpl.s	loc_12A4C
-		neg.w	d2
-
-loc_12A4C:
-		add.w	(HScroll_Shift).w,d2
-		lea	SonAni_Roll(pc),a1
-
-loc_12A5E:
-		neg.w	d2
-		addi.w	#$400,d2
-		bpl.s	loc_12A68
-		moveq	#0,d2
-
-loc_12A68:
-		lsr.w	#8,d2
-		move.b	d2,anim_frame_timer(a0)
-		bra.w	SAnim_Do2
 
 ; =============== S U B R O U T I N E =======================================
 

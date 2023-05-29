@@ -21,7 +21,7 @@ Ani_Bass: offsetTable
 
 SonAni_Step:		dc.b  6, frB_Step,  afChange,  id_Run
 SonAni_Walk:		dc.b  6, frB_Walk1, frB_Walk2, frB_Walk3, frB_Walk4, frB_Walk5, frB_Walk6, afEnd
-SonAni_Roll:		dc.b  $FE, $96,	$97, $96, $98, $96, $99, $96, $9A, afEnd
+SonAni_Roll:		dc.b  $77, frB_Jump, afEnd
 SonAni_Wait:		dc.b  4
 					rept 16
 						dc.b	frB_Idle1
@@ -91,6 +91,7 @@ frB_Tele6:	ds.b 1
 frB_Tele7:	ds.b 1
 frB_Tele8:	ds.b 1
 frB_Tele9:	ds.b 1
+frB_Jump:	ds.b 1
 frB_Last:	ds.b 0
 	even
 	dephase
