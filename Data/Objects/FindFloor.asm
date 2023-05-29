@@ -923,7 +923,11 @@ CheckFloorDist:
 		move.w	x_pos(a0),d3
 
 CheckFloorDist_Part2:
-		addi.w	#$A,d2
+		move.w	d3,-(sp)
+		move.b	x_radius(a0),d3
+		ext.w	d3
+		add.w	d3,d2	; changed from $A
+		move.w	(sp)+,d3
 		lea	(Primary_Angle).w,a4
 		movea.w	#$10,a3
 		moveq	#0,d6
@@ -1254,7 +1258,11 @@ CheckCeilingDist:
 		move.w	x_pos(a0),d3
 
 CheckCeilingDist_Part2:
-		subi.w	#$A,d2
+		move.w	d3,-(sp)
+		move.b	x_radius(a0),d3
+		ext.w	d3
+		sub.w	d3,d2	; changed from $A
+		move.w	(sp)+,d3
 		eori.w	#$F,d2
 		lea	(Primary_Angle).w,a4
 		movea.w	#-$10,a3
