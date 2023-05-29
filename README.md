@@ -1,2 +1,4 @@
 # bass-game
-from-scratch MD game starring Bass
+SCE-based MD game starring Bass
+
+# i lied it's not from scratch. it's based on sonic clean engine, i just gutted most of it.
