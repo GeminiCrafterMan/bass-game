@@ -5,8 +5,8 @@
 Obj_Index:
 		dc.l Obj_Ring							; $00
 		dc.l Obj_Monitor						; $01
-		dc.l Obj_PathSwap					; $02
-		dc.l DeleteObject						; $03
+		dc.l Obj_PathSwap						; $02
+		dc.l Obj_Pickups						; $03
 		dc.l DeleteObject						; $04
 		dc.l DeleteObject						; $05
 		dc.l DeleteObject						; $06
@@ -131,8 +131,8 @@ Obj_Index:
 		dc.l DeleteObject						; $7D
 		dc.l DeleteObject						; $7E
 		dc.l DeleteObject						; $7F
-		dc.l Obj_HiddenMonitor				; $80
-		dc.l Obj_EggCapsule					; $81
+		dc.l Obj_HiddenMonitor					; $80
+		dc.l DeleteObject						; $81
 		dc.l DeleteObject						; $82
 		dc.l DeleteObject						; $83
 		dc.l DeleteObject						; $84

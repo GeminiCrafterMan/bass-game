@@ -44,6 +44,7 @@ ptr_snd5C:	SMPS_SFX_METADATA	Sound5C, $70, 0
 ptr_snd5D:	SMPS_SFX_METADATA	Sound5D, $70, 0
 ptr_snd5E:	SMPS_SFX_METADATA	Sound5E, $70, 0	; Buster shot
 ptr_snd5F:	SMPS_SFX_METADATA	Sound5F, $70, 0	; Jump land
+ptr_snd60:	SMPS_SFX_METADATA	Sound60, $70, 0	; 1-up
 
 ptr_sndend
 ; ---------------------------------------------------------------------------
@@ -113,4 +114,6 @@ Sound5D:	include	"Sound/SFX/Snd - Register.asm"
 Sound5E:	include	"Sound/SFX/Snd - Buster Shot.asm"
 	even
 Sound5F:	include	"Sound/SFX/Snd - Jump Land.asm"
+	even
+Sound60:	include	"Sound/SFX/Snd - 1up.asm"
 	even

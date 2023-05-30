@@ -3,7 +3,7 @@
 ; ---------------------------------------------------------------------------
 MusicIndex:
 ; Levels
-ptr_mus_dez1:		SMPS_MUSIC_METADATA	Music_DEZ1, s3TempotoS1($FF), 0			; DEZ 1
+ptr_mus_wt3:		SMPS_MUSIC_METADATA	Music_WT3, s3TempotoS1($FF), 0			; Wily Tower stage 3
 
 ; Boss
 ptr_mus_boss:		SMPS_MUSIC_METADATA	Music_Boss, s3TempotoS1($FF), 0			; Boss
@@ -20,7 +20,7 @@ ptr_musend
 ; Music data ($01-$3F)
 ; ---------------------------------------------------------------------------
 
-Music_DEZ1:			include "Sound/Music/Mus - DEZ1.asm"
+Music_WT3:			include "Sound/Music/Mus - WT Stage 3.asm"
 	even
 Music_Boss:			include "Sound/Music/Mus - Miniboss.asm"
 	even

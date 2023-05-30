@@ -30,9 +30,10 @@ PLC_Main_end
 ; ===========================================================================
 
 PLC_Main2: plrlistheader
-		plreq $47E, ArtKosM_GrayButton					; Button
+		plreq $47E, ArtKosM_GrayButton						; Button
 		plreq ArtTile_SpikesSprings, ArtKosM_SpikesSprings	; Spikes and normal spring
 		plreq ArtTile_Monitors, ArtKosM_Monitors			; Monitors
+		plreq $580, ArtKosM_Pickups							; Items
 		plreq $5A0, ArtKosM_Explosion						; Explosion
 PLC_Main2_end
 

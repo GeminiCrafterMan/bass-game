@@ -8,9 +8,9 @@ ArtKosM_Hud:					binclude "Objects/HUD/KosinskiM Art/HUD.bin"
 	even
 ArtKosM_Monitors:				binclude "Objects/Monitor/KosinskiM Art/Monitors.bin"
 	even
-ArtKosM_SpikesSprings:			binclude "Objects/Spikes/KosinskiM Art/SpikesSprings.bin"
+ArtKosM_Pickups:				binclude "Objects/Pickups/KosinskiM Art/Pickups.bin"
 	even
-ArtKosM_RobotnikShip:			binclude "Objects/Robotnik/KosinskiM Art/Robotnik Ship.bin"
+ArtKosM_SpikesSprings:			binclude "Objects/Spikes/KosinskiM Art/SpikesSprings.bin"
 	even
 ArtKosM_BossExplosion:			binclude "Objects/Explosion/KosinskiM Art/Boss Explosion.bin"
 	even
@@ -25,20 +25,6 @@ ArtKosM_DiagonalSpring:			binclude "Objects/Spring/KosinskiM Art/Diagonal Spring
 ArtKosM_Bubbles:				binclude "Objects/Bubbler/KosinskiM Art/Bubbles.bin"
 	even
 ArtKosM_WaterWave:				binclude "Objects/Water Wave/KosinskiM Art/Water Wave.bin"
-	even
-ArtKosM_EggCapsule:				binclude "Objects/Egg Capsule/KosinskiM Art/Egg Capsule.bin"
-	even
-ArtKosM_Seal:					binclude "Objects/Animals/KosinskiM Art/Seal.bin"
-	even
-ArtKosM_BlueFlicky:				binclude "Objects/Animals/KosinskiM Art/Blue Flicky.bin"
-	even
-ArtKosM_Chicken:				binclude "Objects/Animals/KosinskiM Art/Chicken.bin"
-	even
-ArtKosM_Penguin:				binclude "Objects/Animals/KosinskiM Art/Penguin.bin"
-	even
-ArtKosM_Squirrel:				binclude "Objects/Animals/KosinskiM Art/Squirrel.bin"
-	even
-ArtKosM_Rabbit:					binclude "Objects/Animals/KosinskiM Art/Rabbit.bin"
 	even
 ArtKosM_SignpostStub:			binclude "Objects/Signpost/KosinskiM Art/Stub.bin"
 	even

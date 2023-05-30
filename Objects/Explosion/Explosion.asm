@@ -22,10 +22,9 @@ loc_1E5F6:
 		addq.b	#2,routine(a0)
 		jsr	(Create_New_Sprite).w
 		bne.s	loc_1E61A
-		move.l	#Obj_Animal,address(a1)
+		move.l	#Obj_Pickups,address(a1)
 		move.w	x_pos(a0),x_pos(a1)
 		move.w	y_pos(a0),y_pos(a1)
-		move.w	objoff_3E(a0),objoff_3E(a1)
 
 loc_1E61A:
 		sfx	sfx_Break

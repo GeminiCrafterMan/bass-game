@@ -4,6 +4,7 @@
 
 		include "Objects/Rings/Rings.asm"
 		include "Objects/PathSwap/PathSwap.asm"
+		include	"Objects/Pickups/Pickups.asm"
 		include "Objects/Monitor/Monitor.asm"
 		include "Objects/Hidden Monitor/Hidden Monitor.asm"
 		include "Objects/Spring/Spring.asm"
@@ -21,8 +22,6 @@
 		include "Objects/Water Wave/Water Wave.asm"
 		include "Objects/StarPost/StarPost.asm"
 		include "Objects/Button/Button.asm"
-		include "Objects/Animals/Animals.asm"
-		include "Objects/Egg Capsule/EggCapsule.asm"
 		include "Objects/Smooth Palette/Smooth Palette.asm"
 
 ; ===========================================================================
@@ -34,5 +33,3 @@
 ; ===========================================================================
 ; Bosses objects data
 ; ===========================================================================
-
-		include "Objects/Robotnik/Robotnik.asm"
