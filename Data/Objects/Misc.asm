@@ -119,39 +119,39 @@ Obj_VelocityIndex:
 		dc.w -$100, -$100		; 0
 		dc.w $100, -$100		; 4
 		dc.w -$200, -$200	; 8
-		dc.w $200, -$200		; Ñ
+		dc.w $200, -$200		; ï¿½
 		dc.w -$300, -$200	; 10
 		dc.w $300, -$200		; 14
 		dc.w -$200, -$200	; 18
-		dc.w 0, -$200		; 1Ñ
+		dc.w 0, -$200		; 1ï¿½
 		dc.w -$400, -$300	; 20
 		dc.w $400, -$300		; 24
 		dc.w $300, -$300		; 28
-		dc.w -$400, -$300	; 2Ñ
+		dc.w -$400, -$300	; 2ï¿½
 		dc.w $400, -$300		; 30
 		dc.w -$200, -$200	; 34
 		dc.w $200, -$200		; 38
-		dc.w 0, -$100			; 3Ñ
+		dc.w 0, -$100			; 3ï¿½
 		dc.w -$40, -$700		; 40
 		dc.w -$80, -$700		; 44
 		dc.w -$180, -$700		; 48
-		dc.w -$100, -$700		; 4Ñ
+		dc.w -$100, -$700		; 4ï¿½
 		dc.w -$200, -$700	; 50
 		dc.w -$280, -$700	; 54
 		dc.w -$300, -$700	; 58
-		dc.w 0, -$100			; 5Ñ
+		dc.w 0, -$100			; 5ï¿½
 		dc.w -$100, -$100		; 60
 		dc.w $100, -$100		; 64
 		dc.w -$200, -$100		; 68
-		dc.w $200, -$100		; 6Ñ
+		dc.w $200, -$100		; 6ï¿½
 		dc.w -$200, -$200	; 70
 		dc.w $200, -$200		; 74
 		dc.w -$300, -$200	; 78
-		dc.w $300, -$200		; 7Ñ
+		dc.w $300, -$200		; 7ï¿½
 		dc.w -$300, -$300	; 80
 		dc.w $300, -$300		; 84
 		dc.w -$400, -$300	; 88
-		dc.w $400, -$300		; 8Ñ
+		dc.w $400, -$300		; 8ï¿½
 		dc.w -$200, -$300	; 90
 		dc.w $200, -$300		; 94
 
@@ -162,11 +162,10 @@ Displace_PlayerOffObject:
 		andi.b	#$18,d0
 		beq.s	Displace_PlayerOffObject_Return
 		bclr	#Status_OnObj,status(a0)
-		beq.s	+
+		beq.s	Displace_PlayerOffObject_Return
 		lea	(Player_1).w,a1
 		bclr	#Status_OnObj,status(a1)
 		bset	#Status_InAir,status(a1)
-+		bclr	#Status_RollJump,status(a0)
 
 Displace_PlayerOffObject_Return:
 		rts
@@ -324,38 +323,6 @@ HurtCharacter_WithoutDamage:
 
 ; =============== S U B R O U T I N E =======================================
 
-Check_PlayerAttack:
-		lea	(Player_1).w,a1
-		btst	#Status_Invincible,status_secondary(a1)
-		bne.s	loc_85822
-		cmpi.b	#id_SpinDash,anim(a1)
-		beq.s	loc_85822
-		cmpi.b	#id_Roll,anim(a1)
-		beq.s	loc_85822
-		moveq	#0,d0
-		move.b	character_id(a1),d0
-		add.w	d0,d0
-		move.w	off_857EA(pc,d0.w),d0
-		jmp	off_857EA(pc,d0.w)
-; ---------------------------------------------------------------------------
-
-off_857EA: offsetTable
-		offsetTableEntry.w Check_SonicAttack	; 0 - Sonic
-		offsetTableEntry.w Check_SonicAttack	; 1 - Tails
-		offsetTableEntry.w Check_SonicAttack	; 2 - Knuckles
-; ---------------------------------------------------------------------------
-
-Check_SonicAttack:
-		moveq	#0,d0
-		rts
-; ---------------------------------------------------------------------------
-
-loc_85822:
-		moveq	#1,d0
-		rts
-
-; =============== S U B R O U T I N E =======================================
-
 Check_PlayerCollision:
 		move.b	collision_property(a0),d0
 		beq.s	+
@@ -396,7 +363,7 @@ Load_LevelResults:
 
 Set_PlayerEndingPose:
 		move.b	#$81,object_control(a1)
-		move.b	#id_Landing,anim(a1)
+		move.b	#id_Victory,anim(a1)
 		clr.b	spin_dash_flag(a1)
 		clr.l	x_vel(a1)
 		clr.w	ground_vel(a1)

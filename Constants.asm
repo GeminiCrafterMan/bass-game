@@ -258,8 +258,8 @@ air_left =				$2C ; byte
 flip_type =				$2D ; byte ; bit 7 set means flipping is inverted, lower bits control flipping type
 object_control =			$2E ; byte ; bit 0 set means character can jump out, bit 7 set means he can't
 double_jump_flag =		$2F ; byte ; meaning depends on current character, see SCHG for details
-flips_remaining =			$30 ; byte
-flip_speed =				$31 ; byte
+shoottimer =			$30 ; byte
+dashtimer =				$31 ; byte
 move_lock =				$32 ; word ; horizontal control lock, counts down to 0
 invulnerability_timer =	$34 ; byte ; decremented every frame
 invincibility_timer =		$35 ; byte ; decremented every 8 frames
@@ -414,12 +414,12 @@ touch_top_mask			= p1_touch_top|p2_touch_top
 ; ---------------------------------------------------------------------------
 
 Status_Facing			= 0
-Status_InAir				= 1
-Status_Roll				= 2
+Status_InAir			= 1
+Status_Dash				= 2
 Status_OnObj			= 3
-Status_RollJump			= 4
 Status_Push				= 5
 Status_Underwater		= 6
+Status_Shooting			= 7
 
 ; ---------------------------------------------------------------------------
 ; Player status secondary variables

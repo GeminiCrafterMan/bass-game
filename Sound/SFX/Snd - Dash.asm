@@ -1,44 +1,39 @@
-Sound_B6_Header:
-	smpsHeaderStartSong 3
-	smpsHeaderVoice     Sound_B6_Voices
+Snd_Slide_Header:
+	smpsHeaderStartSong 1
+	smpsHeaderVoice     Snd_Slide_Voices
 	smpsHeaderTempoSFX  $01
-	smpsHeaderChanSFX   $02
+	smpsHeaderChanSFX   $01
 
-	smpsHeaderSFXChannel cFM5, Sound_B6_FM5,	$00, $02
-	smpsHeaderSFXChannel cPSG3, Sound_B6_PSG3,	$00, $00
+	smpsHeaderSFXChannel cFM4, Snd_Slide_FM4,	$00, $00
 
-; FM5 Data
-Sound_B6_FM5:
+; FM4 Data
+Snd_Slide_FM4:
 	smpsSetvoice        $00
-	smpsModSet          $01, $01, $C5, $1A
-	dc.b	nE6, $0F
+	dc.b	nG6, $02
+
+Snd_Slide_Loop00:
+	dc.b	smpsNoAttack, $01
+	smpsAlterVol        $01
+	smpsLoop            $00, $22, Snd_Slide_Loop00
+	dc.b	nRst, $01
 	smpsStop
 
-; PSG3 Data
-Sound_B6_PSG3:
-	smpsPSGvoice        sTone_1D
-	dc.b	nRst, $06
-	smpsModSet          $01, $02, $05, $FF
-	smpsPSGform         $E7
-	dc.b	nE6, $4F
-	smpsStop
-
-Sound_B6_Voices:
+Snd_Slide_Voices:
 ;	Voice $00
-;	$3D
-;	$09, $03, $00, $00, 	$1F, $1F, $1F, $1F, 	$10, $0C, $0C, $0C
-;	$0B, $1F, $10, $05, 	$1F, $2F, $4F, $2F, 	$09, $84, $92, $8E
-	smpsVcAlgorithm     $05
+;	$38
+;	$0F, $0F, $0F, $0F, 	$1F, $1F, $1F, $0E, 	$00, $00, $00, $00
+;	$00, $00, $00, $00, 	$0F, $0F, $0F, $1F, 	$00, $00, $00, $80
+	smpsVcAlgorithm     $00
 	smpsVcFeedback      $07
 	smpsVcUnusedBits    $00
 	smpsVcDetune        $00, $00, $00, $00
-	smpsVcCoarseFreq    $00, $00, $03, $09
+	smpsVcCoarseFreq    $0F, $0F, $0F, $0F
 	smpsVcRateScale     $00, $00, $00, $00
-	smpsVcAttackRate    $1F, $1F, $1F, $1F
+	smpsVcAttackRate    $0E, $1F, $1F, $1F
 	smpsVcAmpMod        $00, $00, $00, $00
-	smpsVcDecayRate1    $0C, $0C, $0C, $10
-	smpsVcDecayRate2    $05, $10, $1F, $0B
-	smpsVcDecayLevel    $02, $04, $02, $01
+	smpsVcDecayRate1    $00, $00, $00, $00
+	smpsVcDecayRate2    $00, $00, $00, $00
+	smpsVcDecayLevel    $01, $00, $00, $00
 	smpsVcReleaseRate   $0F, $0F, $0F, $0F
-	smpsVcTotalLevel    $0E, $12, $04, $09
+	smpsVcTotalLevel    $00, $00, $00, $00
 

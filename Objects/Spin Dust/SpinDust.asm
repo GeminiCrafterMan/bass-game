@@ -126,7 +126,7 @@ loc_18CB2:
 loc_18CB6:
 		lea	(Player_1).w,a2
 		moveq	#$10,d1
-		cmpi.b	#id_Stop,anim(a2)
+		cmpi.b	#id_Null,anim(a2)
 		beq.s	loc_18CE4
 		cmpi.b	#2,character_id(a2)
 		bne.s	loc_18CD6

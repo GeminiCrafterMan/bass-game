@@ -52,9 +52,8 @@ ptr_Sonic_Drown:	offsetTableEntry.w Sonic_Drown		; C
 
 Sonic_Init:	; Routine 0
 		addq.b	#2,routine(a0)				; => Obj01_Control
-	; todo: make bass's hitbox thinner
-		move.w	#bytes_to_word(30/2,14/2),y_radius(a0)	; set y_radius and x_radius	; this sets Sonic's collision height (2*pixels)
-		move.w	#bytes_to_word(30/2,14/2),default_y_radius(a0)	; set default_y_radius and default_x_radius
+		move.w	#bytes_to_word(28/2,14/2),y_radius(a0)	; set y_radius and x_radius	; this sets Sonic's collision height (2*pixels)
+		move.w	#bytes_to_word(28/2,14/2),default_y_radius(a0)	; set default_y_radius and default_x_radius
 		move.l	#Map_Bass,mappings(a0)
 		move.w	#$100,priority(a0)
 		move.w	#bytes_to_word(48/2,48/2),height_pixels(a0)		; set height and width
@@ -77,8 +76,6 @@ Sonic_Init:	; Routine 0
 		move.w	top_solid_bit(a0),(Saved_solid_bits).w
 
 Sonic_Init_Continued:
-		clr.b	flips_remaining(a0)
-		move.b	#4,flip_speed(a0)
 		move.b	#30,air_left(a0)
 		subi.w	#$20,x_pos(a0)
 		addi.w	#4,y_pos(a0)
@@ -165,14 +162,24 @@ loc_10C26:
 ; secondary states under state Sonic_Control
 
 Sonic_Modes: offsetTable
-		offsetTableEntry.w Sonic_MdNormal		; 0
-		offsetTableEntry.w Sonic_MdAir			; 2
+		offsetTableEntry.w Sonic_MdNormal	; 0
+		offsetTableEntry.w Sonic_MdAir		; 2
 		offsetTableEntry.w Sonic_MdRoll		; 4
-		offsetTableEntry.w Sonic_MdJump		; 6
+		offsetTableEntry.w Sonic_MdAir		; 6
 
 ; =============== S U B R O U T I N E =======================================
 
 Sonic_Display:
+		tst.b	shoottimer(a0)
+		beq.s	.noDecShoot
+		subq.b	#1,shoottimer(a0)
+		bne.s	.noDecShoot
+		bclr	#Status_Shooting,status(a0)
+	.noDecShoot:
+		tst.b	dashtimer(a0)
+		beq.s	.noDecDash
+		subq.b	#1,dashtimer(a0)
+	.noDecDash:
 		move.b	invulnerability_timer(a0),d0
 		beq.s	loc_10CA6
 		subq.b	#1,invulnerability_timer(a0)
@@ -322,6 +329,7 @@ loc_10F22:
 ; =============== S U B R O U T I N E =======================================
 
 Sonic_MdNormal:
+		bsr.w	Bass_Dash
 		bsr.w	Sonic_Jump
 		bsr.w	Player_SlopeResist
 		bsr.w	Sonic_Move
@@ -352,6 +360,9 @@ Call_Player_AnglePos:
 ; Called if Sonic is airborne, but not in a ball (thus, probably not jumping)
 ; Sonic_Stand_Freespace:
 Sonic_MdAir:
+		move.b	#id_Roll,anim(a0)	; change this to a proper way to handle the jump/air animation later
+		clr.b	dashtimer(a0)
+		bclr	#Status_Dash,status(a0)
 		bsr.w	Sonic_JumpHeight
 		bsr.w	Sonic_ChgJumpDir
 		bsr.w	Player_LevelBound
@@ -368,11 +379,8 @@ loc_10FD6:
 ; Called if Sonic is in a ball, but not airborne (thus, probably rolling)
 ; Sonic_Spin_Path:
 Sonic_MdRoll:
-		tst.b	spin_dash_flag(a0)
-		bne.s	loc_10FEA
 		bsr.w	Sonic_Jump
-
-loc_10FEA:
+		bsr.w	Bass_KeepDashing	; dash timer test
 		bsr.w	Player_RollRepel
 		bsr.w	Sonic_RollSpeed
 		bsr.w	Player_LevelBound
@@ -586,7 +594,7 @@ loc_11438:
 		tst.b	flip_type(a0)
 		bmi.s	locret_11480
 		sfx		sfx_Skid
-		move.b	#id_Stop,anim(a0)
+		move.b	#id_Null,anim(a0)
 		bclr	#Status_Facing,status(a0)
 		cmpi.b	#12,air_left(a0)
 		bcs.s	locret_11480
@@ -636,7 +644,7 @@ loc_114BE:
 		tst.b	flip_type(a0)
 		bmi.s	locret_11506
 		sfx		sfx_Skid
-		move.b	#id_Stop,anim(a0)
+		move.b	#id_Null,anim(a0)
 		bset	#Status_Facing,status(a0)
 		cmpi.b	#12,air_left(a0)
 		bcs.s	locret_11506
@@ -700,7 +708,6 @@ loc_11578:
 		bcc.s	loc_115C6
 		tst.b	spin_dash_flag(a0)
 		bne.s	loc_115B4
-		bclr	#Status_Roll,status(a0)
 		move.b	y_radius(a0),d0
 		move.b	default_y_radius(a0),y_radius(a0)
 		move.b	default_x_radius(a0),x_radius(a0)
@@ -761,7 +768,7 @@ sub_11608:
 
 loc_11610:
 		bset	#Status_Facing,status(a0)
-		move.b	#id_Roll,anim(a0)
+		move.b	#id_Dash,anim(a0)
 		rts
 ; ---------------------------------------------------------------------------
 
@@ -780,7 +787,7 @@ sub_1162C:
 		move.w	ground_vel(a0),d0
 		bmi.s	loc_11640
 		bclr	#Status_Facing,status(a0)
-		move.b	#id_Roll,anim(a0)
+		move.b	#id_Dash,anim(a0)
 		rts
 ; ---------------------------------------------------------------------------
 
@@ -802,8 +809,6 @@ Sonic_ChgJumpDir:
 		move.w	Sonic_Knux_top_speed-Sonic_Knux_top_speed(a4),d6
 		move.w	Sonic_Knux_acceleration-Sonic_Knux_top_speed(a4),d5
 		asl.w	#1,d5
-		btst	#Status_RollJump,status(a0)
-		bne.s	loc_116A2
 		move.w	x_vel(a0),d0
 		btst	#button_left,(Ctrl_1_logical).w
 		beq.s	loc_11682
@@ -919,6 +924,53 @@ loc_11732:
 		bra.s	Player_Boundary_CheckBottom
 
 ; ---------------------------------------------------------------------------
+; Subroutine allowing Bass to dash
+; ---------------------------------------------------------------------------
+
+; =============== S U B R O U T I N E =======================================
+
+Bass_Dash:
+		bra.s	.canMove
+	.cantMove:
+		rts
+	.canMove:
+		tst.w	move_lock(a0)
+		bne.s	.cantMove
+		btst	#Status_Dash,status(a0)
+		bne.s	Bass_KeepDashing	; keep dashing
+		tst.b	dashtimer(a0)		; cooldown
+		bne.s	.cantMove			; on cooldown
+		btst	#bitA,(Ctrl_1_pressed_logical).w	; A button dash
+		beq.s	.cantMove
+	; was gonna add down+jump dash as well but kind of unnecessary
+Bass_KeepDashing:
+		btst	#Status_Dash,status(a0)	; is Bass already dashing?
+		beq.s	Bass_StartDash			; if not, start dashing
+		tst.b	dashtimer(a0)			; is there time left on your dash?
+		beq.w	Bass_StartDash.stopDashing	; if not, stop dashing
+		rts
+Bass_StartDash:
+		bset	#Status_Dash,status(a0)
+		moveq	#0,d0
+		move.w	#$500,d0
+		btst	#Status_Facing,status(a0)
+		beq.s	.noFlip
+		neg.w	d0
+	.noFlip:
+		move.w	d0,ground_vel(a0)	; set ground vel
+		move.b	#id_Dash,anim(a0)
+		move.b	#30,dashtimer(a0)
+		sfx		sfx_Dash,1
+	.stopDashing:
+		clr.w	ground_vel(a0)
+		jsr		ManageWalkAnim
+		subq.w	#1,y_pos(a0)
+		move.w	default_y_radius(a0),y_radius(a0)
+		bclr	#Status_Dash,status(a0)
+		move.b	#5,dashtimer(a0)
+		rts
+
+; ---------------------------------------------------------------------------
 ; Subroutine allowing Sonic to jump
 ; ---------------------------------------------------------------------------
 
@@ -926,7 +978,7 @@ loc_11732:
 
 Sonic_Jump:	; Remove all traces of rolling later
 		move.b	(Ctrl_1_pressed_logical).w,d0
-		andi.b	#btnA+btnB+btnC,d0
+		andi.b	#btnC,d0
 		beq.w	locret_118B2
 		moveq	#0,d0
 		move.b	angle(a0),d0
@@ -964,13 +1016,8 @@ loc_1182E:
 		move.b	#1,jumping(a0)
 		clr.b	stick_to_convex(a0)
 		sfx	sfx_Jump
-		move.b	default_y_radius(a0),y_radius(a0)
-		move.b	default_x_radius(a0),x_radius(a0)
-		btst	#Status_Roll,status(a0)
-		bne.s	locret_118B2
-;		move.w	#bytes_to_word(28/2,14/2),y_radius(a0)	; set y_radius and x_radius
+		move.w	default_y_radius(a0),y_radius(a0)
 		move.b	#id_Roll,anim(a0)
-		bset	#Status_Roll,status(a0)
 		move.b	y_radius(a0),d0
 		sub.b	default_y_radius(a0),d0
 		ext.w	d0
@@ -1155,7 +1202,7 @@ loc_11E86:
 
 Player_JumpAngle:
 		move.b	angle(a0),d0	; get Sonic's angle
-		beq.s	Player_JumpFlip	; if already 0, branch
+		beq.s	locret_11EEA	; if already 0, branch
 		bpl.s	loc_11E9C	; if higher than 0, branch
 		addq.b	#2,d0		; increase angle
 		bcc.s	loc_11E9A
@@ -1172,47 +1219,6 @@ loc_11E9C:
 
 Player_JumpAngleSet:
 		move.b	d0,angle(a0)
-		; continue straight to Player_JumpFlip
-
-; ---------------------------------------------------------------------------
-; Updates Sonic's secondary angle if he's tumbling
-; ---------------------------------------------------------------------------
-
-; =============== S U B R O U T I N E =======================================
-
-Player_JumpFlip:
-		move.b	flip_angle(a0),d0
-		beq.s	locret_11EEA
-		tst.w	ground_vel(a0)
-		bmi.s	Player_JumpLeftFlip
-
-Player_JumpRightFlip:
-		move.b	flip_speed(a0),d1
-		add.b	d1,d0
-		bcc.s	loc_11EC8
-		subq.b	#1,flips_remaining(a0)
-		bcc.s	loc_11EC8
-		moveq	#0,d0
-		move.b	d0,flips_remaining(a0)
-
-loc_11EC8:
-		bra.s	Player_JumpFlipSet
-; ---------------------------------------------------------------------------
-
-Player_JumpLeftFlip:
-		tst.b	flip_type(a0)
-		bmi.s	Player_JumpRightFlip
-		move.b	flip_speed(a0),d1
-		sub.b	d1,d0
-		bcc.s	Player_JumpFlipSet
-		subq.b	#1,flips_remaining(a0)
-		bcc.s	Player_JumpFlipSet
-		moveq	#0,d0
-		move.b	d0,flips_remaining(a0)
-
-Player_JumpFlipSet:
-		move.b	d0,flip_angle(a0)
-
 locret_11EEA:
 		rts
 
@@ -1503,9 +1509,6 @@ Sonic_ResetOnFloor:
 		move.b	y_radius(a0),d0
 		move.b	default_y_radius(a0),y_radius(a0)
 		move.b	default_x_radius(a0),x_radius(a0)
-		btst	#Status_Roll,status(a0)
-		beq.s	loc_121D8
-		bclr	#Status_Roll,status(a0)
 		move.b	#id_Run,anim(a0)
 		sub.b	default_y_radius(a0),d0
 		ext.w	d0
@@ -1526,13 +1529,12 @@ loc_121D2:
 
 loc_121D8:
 		bclr	#Status_InAir,status(a0)
-		bclr	#Status_RollJump,status(a0)
 		moveq	#0,d0
 		move.b	d0,jumping(a0)
 		move.w	d0,(Chain_bonus_counter).w
+		sfx		sfx_JumpLand
 		move.b	d0,flip_angle(a0)
 		move.b	d0,flip_type(a0)
-		move.b	d0,flips_remaining(a0)
 		move.b	d0,scroll_delay_counter(a0)
 		tst.b	double_jump_flag(a0)
 		beq.s	locret_12230
@@ -1637,36 +1639,28 @@ Sonic_Death:
 +
 	endif
 		bsr.s	sub_123C2
-		jsr	(MoveSprite_TestGravity).w
+;		jsr	(MoveSprite_TestGravity).w
 		bsr.w	Sonic_RecordPos
-		bsr.w	sub_125E0
-		jmp	(Draw_Sprite).w
+		jmp		sub_125E0
+;		jmp	(Draw_Sprite).w
 
 ; =============== S U B R O U T I N E =======================================
 
+GameOver:
 sub_123C2:
-		move.w	(Camera_Y_pos).w,d0
+		cmpi.b	#id_Death,anim(a0)
+		bne.s	.ret
+		cmpi.b	#(7*6)+1,anim_frame(a0)
+		blt.s	.ret
+
 		st	(Scroll_lock).w
 		clr.b	spin_dash_flag(a0)
-		tst.b	(Reverse_gravity_flag).w
-		beq.s	loc_123FA
-		subi.w	#$10,d0
-		cmp.w	y_pos(a0),d0
-		bge.s	loc_12410
-		rts
-; ---------------------------------------------------------------------------
 
-loc_123FA:
-		addi.w	#$100,d0
-		cmp.w	y_pos(a0),d0
-		bge.s	locret_124C6
-
-loc_12410:
 		move.b	#id_SonicRestart,routine(a0)
 		move.w	#1*60,restart_timer(a0)
 		clr.b	(Respawn_table_keep).w
 
-locret_124C6:
+	.ret:
 		rts
 
 ; =============== S U B R O U T I N E =======================================
@@ -2031,6 +2025,15 @@ ManageWalkAnim:
 		move.b	#id_Walk,anim(a0)
 	.alreadyGoing:
 		rts
+
+Obj_DeathOrbs:
+		move.l	#Map_Bass,mappings(a0)
+		move.w	#$100,priority(a0)
+        move.w	#make_art_tile(ArtTile_Sonic,0,0),art_tile(a0)
+		move.b	#4,render_flags(a0)
+        jsr     SpeedToPos
+		move.b	(Player_1+mapping_frame).w,mapping_frame(a0)
+        jmp     DisplaySprite
 
 ; ---------------------------------------------------------------------------
 ; Object Data

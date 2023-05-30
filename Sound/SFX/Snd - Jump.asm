@@ -1,18 +1,25 @@
-Sound_62_Header:
-	smpsHeaderStartSong 3
-	smpsHeaderVoice     Sound_62_Voices
+SndA0_Jump_Header:
+	smpsHeaderStartSong 1
+	smpsHeaderVoice     SndA0_Jump_Voices
 	smpsHeaderTempoSFX  $01
 	smpsHeaderChanSFX   $01
 
-	smpsHeaderSFXChannel cPSG1, Sound_62_PSG1,	$00, $00
+	smpsHeaderSFXChannel cPSG3, SndA0_Jump_PSG3,	$00, $00
 
-; PSG1 Data
-Sound_62_PSG1:
-	smpsPSGvoice        sTone_0D
-	dc.b	nF2, $05
-	smpsModSet          $02, $01, $F8, $65
-	dc.b	nBb2, $15
+; PSG3 Data
+SndA0_Jump_PSG3:
+	smpsModSet          $01, $01, $F0, $08
+	smpsPSGform         $E7
+	dc.b	nF6, $02
+;	dc.b	smpsNoAttack, $01
+	dc.b	nE6, $01
+	dc.b	nEb6, $04
+;
+;SndA0_Jump_Loop00:
+;	dc.b	nG6, $01
+;	smpsPSGAlterVol     $01
+;	smpsLoop            $00, $0C, SndA0_Jump_Loop00
 	smpsStop
 
 ; Song seems to not use any FM voices
-Sound_62_Voices:
+SndA0_Jump_Voices:

@@ -117,31 +117,13 @@ sub_22F98:
 		bclr	#Status_OnObj,status(a1)
 		clr.b	jumping(a1)
 		clr.b	spin_dash_flag(a1)
-		move.b	#id_Spring,anim(a1)
+		move.b	#id_Roll,anim(a1)
 		move.b	#id_SonicControl,routine(a1)
 		move.b	subtype(a0),d0
 		bpl.s	loc_22FE0
 		clr.w	x_vel(a1)
 
 loc_22FE0:
-		btst	#0,d0
-		beq.s	loc_23020
-		move.w	#1,ground_vel(a1)
-		move.b	#1,flip_angle(a1)
-		clr.b	anim(a1)		; id_Walk
-		clr.b	flips_remaining(a1)
-		move.b	#4,flip_speed(a1)
-		btst	#1,d0
-		bne.s	loc_23010
-		move.b	#1,flips_remaining(a1)
-
-loc_23010:
-		btst	#Status_Facing,status(a1)
-		beq.s	loc_23020
-		neg.b	flip_angle(a1)
-		neg.w	ground_vel(a1)
-
-loc_23020:
 		andi.b	#$C,d0
 		cmpi.b	#4,d0
 		bne.s	loc_23036
@@ -204,7 +186,7 @@ sub_23190:
 loc_231BE:
 		move.w	#$F,move_lock(a1)
 		move.w	x_vel(a1),ground_vel(a1)
-		btst	#Status_Roll,status(a1)
+		btst	#Status_Dash,status(a1)
 		bne.s	loc_231D8
 		clr.b	anim(a1)		; id_Walk
 
@@ -214,24 +196,6 @@ loc_231D8:
 		clr.w	y_vel(a1)
 
 loc_231E4:
-		btst	#0,d0
-		beq.s	loc_23224
-		move.w	#1,ground_vel(a1)
-		move.b	#1,flip_angle(a1)
-		clr.b	anim(a1)		; id_Walk
-		move.b	#1,flips_remaining(a1)
-		move.b	#8,flip_speed(a1)
-		btst	#1,d0
-		bne.s	loc_23214
-		move.b	#3,flips_remaining(a1)
-
-loc_23214:
-		btst	#Status_Facing,status(a1)
-		beq.s	loc_23224
-		neg.b	flip_angle(a1)
-		neg.w	ground_vel(a1)
-
-loc_23224:
 		andi.b	#$C,d0
 		cmpi.b	#4,d0
 		bne.s	loc_2323A
@@ -334,24 +298,6 @@ loc_233F8:
 		clr.w	x_vel(a1)
 
 loc_23404:
-		btst	#0,d0
-		beq.s	loc_23444
-		move.w	#1,ground_vel(a1)
-		move.b	#1,flip_angle(a1)
-		clr.b	anim(a1)		; id_Walk
-		clr.b	flips_remaining(a1)
-		move.b	#4,flip_speed(a1)
-		btst	#1,d0
-		bne.s	loc_23434
-		move.b	#1,flips_remaining(a1)
-
-loc_23434:
-		btst	#Status_Facing,status(a1)
-		beq.s	loc_23444
-		neg.b	flip_angle(a1)
-		neg.w	ground_vel(a1)
-
-loc_23444:
 		andi.b	#$C,d0
 		cmpi.b	#4,d0
 		bne.s	loc_2345A
@@ -429,27 +375,9 @@ loc_23542:
 		bset	#Status_InAir,status(a1)
 		bclr	#Status_OnObj,status(a1)
 		clr.b	jumping(a1)
-		move.b	#id_Spring,anim(a1)
+		move.b	#id_Dash,anim(a1)
 		move.b	#id_SonicControl,routine(a1)
 		move.b	subtype(a0),d0
-		btst	#0,d0
-		beq.s	loc_235A2
-		move.w	#1,ground_vel(a1)
-		move.b	#1,flip_angle(a1)
-		clr.b	anim(a1)		; id_Walk
-		move.b	#1,flips_remaining(a1)
-		move.b	#8,flip_speed(a1)
-		btst	#1,d0
-		bne.s	loc_23592
-		move.b	#3,flips_remaining(a1)
-
-loc_23592:
-		btst	#Status_Facing,status(a1)
-		beq.s	loc_235A2
-		neg.b	flip_angle(a1)
-		neg.w	ground_vel(a1)
-
-loc_235A2:
 		andi.b	#$C,d0
 		cmpi.b	#4,d0
 		bne.s	loc_235B8
@@ -507,24 +435,6 @@ loc_23660:
 		clr.b	jumping(a1)
 		move.b	#id_SonicControl,routine(a1)
 		move.b	subtype(a0),d0
-		btst	#0,d0
-		beq.s	loc_236BA
-		move.w	#1,ground_vel(a1)
-		move.b	#1,flip_angle(a1)
-		clr.b	anim(a1)		; id_Walk
-		move.b	#1,flips_remaining(a1)
-		move.b	#8,flip_speed(a1)
-		btst	#1,d0
-		bne.s	loc_236AA
-		move.b	#3,flips_remaining(a1)
-
-loc_236AA:
-		btst	#Status_Facing,status(a1)
-		beq.s	loc_236BA
-		neg.b	flip_angle(a1)
-		neg.w	ground_vel(a1)
-
-loc_236BA:
 		andi.b	#$C,d0
 		cmpi.b	#4,d0
 		bne.s	loc_236D0

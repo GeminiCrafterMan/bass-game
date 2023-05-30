@@ -255,34 +255,7 @@ Touch_Monitor:
 Touch_Enemy:
 		btst	#Status_Invincible,status_secondary(a0)		; does Sonic have invincibility?
 		bne.s	.checkhurtenemy						; if yes, branch
-		cmpi.b	#id_SpinDash,anim(a0)				; is Sonic Spin Dashing?
-		beq.s	.checkhurtenemy						; if yes, branch
-		cmpi.b	#id_Roll,anim(a0)						; is Sonic rolling/jumping?
-		beq.s	.checkhurtenemy						; if not, branch
-		cmpi.b	#2,character_id(a0)					; is player Knuckles?
-		bne.s	.notknuckles							; if not, branch
-		cmpi.b	#1,double_jump_flag(a0)				; is Knuckles gliding?
-		beq.s	.checkhurtenemy						; if so, branch
-		cmpi.b	#3,double_jump_flag(a0)				; is Knuckles sliding across the ground after gliding?
-		beq.s	.checkhurtenemy						; if so, branch
 		bra.w	Touch_ChkHurt
-; ---------------------------------------------------------------------------
-
-.notknuckles:
-		cmpi.b	#1,character_id(a0)					; is player Tails
-		bne.w	Touch_ChkHurt						; if not, branch
-		tst.b	double_jump_flag(a0)						; is Tails flying ("gravity-affected")
-		beq.w	Touch_ChkHurt						; if not, branch
-		btst	#Status_Underwater,status(a0)				; is Tails underwater
-		bne.w	Touch_ChkHurt						; if not, branch
-		move.w	x_pos(a0),d1
-		move.w	y_pos(a0),d2
-		sub.w	x_pos(a1),d1
-		sub.w	y_pos(a1),d2
-		bsr.w	GetArcTan
-		subi.b	#$20,d0
-		cmpi.b	#$40,d0
-		bhs.w	Touch_ChkHurt
 
 .checkhurtenemy:
 		; Boss related? Could be special enemies in general
@@ -425,7 +398,7 @@ HurtCharacter:
 		tst.b	status_tertiary(a0)
 		bmi.s	.bounce
 		tst.w	d0									; does Sonic have any rings?
-		beq.w	.norings								; if not, branch
+		beq.w	KillSonic								; if not, branch
 		bsr.w	Create_New_Sprite
 		bne.s	.hasshield
 		move.l	#Obj_Bouncing_Ring,address(a1)		; load bouncing multi rings object
@@ -470,38 +443,60 @@ HurtCharacter:
 		rts
 ; ---------------------------------------------------------------------------
 
-.norings:
-		moveq	#signextendB(sfx_Death),d0			; load normal damage sound
-		cmpi.l	#Obj_Spikes,address(a2)				; was damage caused by spikes?
-		blo.s		loc_10364							; if not, branch
-		cmpi.l	#sub_24280,address(a2)
-		bhs.s	loc_10364
-		moveq	#signextendB(sfx_SpikeHit),d0			; load spikes damage sound
-
-loc_10364:
-		bra.s	loc_1036E
-; ---------------------------------------------------------------------------
+DeathOrbs_VelTbl:	; okay this kind of makes no sense but it also works to help visualize the orbs
+		dc.w	-$140, -$140,	0, -$180,	$140, -$140
+		dc.w	-$180, 0,						$180, 0
+		dc.w	-$140, $140,	0, $180,	$140, $140
+	even
 
 KillSonic:
 Kill_Character:
 		tst.w	(Debug_placement_mode).w			; is debug mode active?
-		bne.s	loc_1036E.dontdie						; if yes, branch
-		moveq	#signextendB(sfx_Death),d0			; play normal death sound
+		bne.w	.dontdie						; if yes, branch
+		clr.l	(v_Shield).w						; remove shield
+		clr.l	(v_Invincibility_stars).w
+		moveq	#8-1,d1						; 8 total, counting the first
+		lea		(DeathOrbs_VelTbl).l,a3
 
-loc_1036E:
+	.spawnOrbs:
+		jsr		FindFreeObj	; uses a1
+		move.l	#Obj_DeathOrbs,address(a1)
+		move.w	(Player_1+x_pos).w,x_pos(a1)
+		move.w	(Player_1+y_pos).w,y_pos(a1)
+		move.w	(a3)+,x_vel(a1)
+		move.w	(a3)+,y_vel(a1)
+		dbf		d1,.spawnOrbs
+
+	.doneSpawning:
 		clr.b	status_secondary(a0)
 		clr.b	status_tertiary(a0)
 		move.b	#id_SonicDeath,routine(a0)
-		move.w	d0,-(sp)
-		bsr.w	Sonic_ResetOnFloor
-		move.w	(sp)+,d0
+		move.w	(a3)+,x_vel(a0)
+		move.w	(a3)+,y_vel(a0)
+;		move.w	d0,-(sp)
+;		bsr.w	Sonic_ResetOnFloor
+;		move.w	(sp)+,d0
 		bset	#Status_InAir,status(a0)
-		move.w	#-$700,y_vel(a0)
+;		move.w	#-$700,y_vel(a0)
 		clr.w	x_vel(a0)
 		clr.w	ground_vel(a0)
 		move.b	#id_Death,anim(a0)
 		move.w	art_tile(a0),(Saved_art_tile).w
 		bset	#7,art_tile(a0)
+
+	.sound:
+		music	mus_Stop
+		st		(Game_paused).w
+		move.w  #32,d0
+
+	.wait:
+;		move.b	#$C,(V_int_routine).w
+		move.b	#VintID_Main,(V_int_routine).w
+		jsr		Wait_VSync
+		dbf		d0,.wait
+		clr.b	(Game_paused).w
+
+		move.w	#sfx_Death,d0	; play normal death sound
 		jsr	(SMPS_QueueSound2).w
 
 .dontdie:

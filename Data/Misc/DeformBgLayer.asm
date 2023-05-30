@@ -170,17 +170,6 @@ MoveCameraY:
 		and.w	(Screen_Y_wrap_value).w,d0
 
 .notwrap
-		btst	#Status_Roll,status(a0)
-		beq.s	.notroll
-		moveq	#5,d1		; fix camera pos
-		tst.b	(Reverse_gravity_flag).w
-		beq.s	.notgravity
-		neg.w	d1
-
-.notgravity
-		sub.w	d1,d0
-
-.notroll
 		move.w	d3,d1
 		btst	#Status_InAir,status(a0)
 		beq.s	loc_1C164

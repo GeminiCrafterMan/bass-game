@@ -5,9 +5,6 @@
 ; =============== S U B R O U T I N E =======================================
 
 ChangeRingFrame:
-		cmpi.b	#id_SonicDeath,(Player_1+routine).w		; has Sonic just died?
-		bhs.s	.syncend									; if yes, branch
-
 ; Used for rings and giant rings
 .syncrings
 		subq.b	#1,(Rings_frame_timer).w
@@ -84,8 +81,6 @@ Osc_Data_End
 ; Oscillate values
 
 OscillateNumDo:
-		cmpi.b	#id_SonicDeath,(Player_1+routine).w	; has Sonic just died?
-		bhs.s	OscillateNumDo_Return				; if yes, branch
 		lea	Osc_Data2(pc),a2
 		lea	(Oscillating_Numbers).w,a1
 		move.w	(a1)+,d3								; get oscillation direction bitfield

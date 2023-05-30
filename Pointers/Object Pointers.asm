@@ -41,7 +41,7 @@ Obj_Index:
 		dc.l DeleteObject						; $23
 		dc.l DeleteObject						; $24
 		dc.l DeleteObject						; $25
-		dc.l Obj_AutoSpin						; $26
+		dc.l DeleteObject						; $26
 		dc.l DeleteObject						; $27
 		dc.l Obj_Invisible_SolidBlock			; $28
 		dc.l DeleteObject						; $29

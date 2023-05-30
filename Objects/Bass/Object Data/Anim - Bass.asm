@@ -7,12 +7,8 @@ Ani_Bass: offsetTable
 		offsetTableEntry.w SonAni_Walk
 		offsetTableEntry.w SonAni_Roll
 		offsetTableEntry.w SonAni_Wait
-		offsetTableEntry.w SonAni_Balance
-		offsetTableEntry.w SonAni_Spin_Dash
-		offsetTableEntry.w SonAni_Balance2
-		offsetTableEntry.w SonAni_Stop
-		offsetTableEntry.w SonAni_Spring
-		offsetTableEntry.w SonAni_Landing
+		offsetTableEntry.w SonAni_Dash
+		offsetTableEntry.w SonAni_Victory
 		offsetTableEntry.w SonAni_Bubble
 		offsetTableEntry.w SonAni_Death
 		offsetTableEntry.w SonAni_Drown
@@ -30,17 +26,17 @@ SonAni_Wait:		dc.b  4
 						dc.b	frB_Idle2
 					endr
 						dc.b	afEnd
-SonAni_Balance:		dc.b	7, $A4,	$A5, $A6, afEnd
-SonAni_Spin_Dash:	dc.b	0, $86,	$87, $86, $88, $86, $89, $86, $8A, $86,	$8B, afEnd
-SonAni_Balance2:		dc.b	5, $A1,	$A2, $A3, afEnd
-SonAni_Stop:			dc.b	3, $9D,	$9E, $9F, $A0, afChange,   id_Walk
-SonAni_Spring:		dc.b  $2F, $8E,	afChange,   id_Walk
-SonAni_Landing:		dc.b	7, $B0,	$B2, $B2, $B2, $B2, $B2, $B2, $B1, $B2,	$B3, $B2, afBack,	 4
-SonAni_Bubble:		dc.b   $B, $AC,	$AC,   3,   4, afChange,   id_Walk
-SonAni_Death:		dc.b  $20, $A8,	afEnd
+SonAni_Dash:		dc.b  $77, frB_Dash, afEnd
+SonAni_Victory:		dc.b  3, frB_Victory1, frB_Victory2, afEnd
+SonAni_Bubble:		dc.b  $B, $AC,	$AC,   3,   4, afChange,   id_Walk
+SonAni_Death:		dc.b  1
+					rept  6
+						dc.b	frB_Death1, frB_Death2, frB_Death2, frB_Death3, frB_Death4, frB_Death4, frB_Death5
+					endr
+					dc.b  frB_Null, frB_Null, frB_Null, afEnd
 SonAni_Drown:		dc.b  $20, $A7,	afEnd
-SonAni_Hurt:		dc.b 9, $8C, $8D, afEnd
-SonAni_Blank:		dc.b $77,   frB_Null,	afEnd
+SonAni_Hurt:		dc.b  $77, frB_Hurt, afEnd
+SonAni_Blank:		dc.b  $77, frB_Null, afEnd
 	even
 
 ; Animation IDs
@@ -49,15 +45,11 @@ id_Walk:	ds.b 1
 id_Run:		ds.b 1
 id_Roll:	ds.b 1
 id_Wait:	ds.b 1
-id_Balance:	ds.b 1
-id_SpinDash:ds.b 1
-id_Balance2:ds.b 1
-id_Stop:	ds.b 1
-id_Spring:	ds.b 1
-id_Landing:	ds.b 1
+id_Dash:	ds.b 1
+id_Victory:	ds.b 1
 id_GetAir:	ds.b 1
-id_Drown:	ds.b 1
 id_Death:	ds.b 1
+id_Drown:	ds.b 1
 id_Hurt:	ds.b 1
 id_Null:	ds.b 1
 	even
@@ -92,6 +84,15 @@ frB_Tele7:	ds.b 1
 frB_Tele8:	ds.b 1
 frB_Tele9:	ds.b 1
 frB_Jump:	ds.b 1
+frB_Hurt:	ds.b 1
+frB_Victory1:	ds.b 1
+frB_Victory2:	ds.b 1
+frB_Death1:	ds.b 1
+frB_Death2:	ds.b 1
+frB_Death3:	ds.b 1
+frB_Death4:	ds.b 1
+frB_Death5:	ds.b 1
+frB_Dash:	ds.b 1
 frB_Last:	ds.b 0
 	even
 	dephase

@@ -58,6 +58,8 @@ sfx_Explode =		SMPS_id(ptr_snd5A)
 sfx_Signpost =		SMPS_id(ptr_snd5B)
 sfx_Switch =			SMPS_id(ptr_snd5C)
 sfx_Register =		SMPS_id(ptr_snd5D)
+sfx_BusterShot =	SMPS_id(ptr_snd5E)
+sfx_JumpLand =		SMPS_id(ptr_snd5F)
 
 sfx__Last =			SMPS_id(ptr_sndend)-1
 

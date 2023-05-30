@@ -6,8 +6,6 @@
 
 Process_Sprites:
 		lea	(Object_RAM).w,a0
-		cmpi.b	#id_SonicDeath,routine(a0)	; has Sonic just died?
-		bhs.s	Process_Sprites_FreezeObject	; if yes, branch
 
 Process_Sprites_Skip:
 		moveq	#((Object_RAM_end-Object_RAM)/object_size)-1,d7

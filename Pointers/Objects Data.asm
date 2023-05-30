@@ -8,7 +8,6 @@
 		include "Objects/Hidden Monitor/Hidden Monitor.asm"
 		include "Objects/Spring/Spring.asm"
 		include "Objects/Spikes/Spikes.asm"
-		include "Objects/AutoSpin/AutoSpin.asm"
 		include "Objects/Invisible Blocks/Invisible Block(Solid).asm"
 		include "Objects/Invisible Blocks/Invisible Block(Hurt).asm"
 		include "Objects/Invisible Blocks/Invisible Block(Kill).asm"
