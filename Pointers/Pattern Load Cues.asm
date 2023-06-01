@@ -6,12 +6,12 @@ Offs_PLC: offsetTable
 
 		offsetTableEntry.w PLC1_Test1_Misc
 		offsetTableEntry.w PLC2_Test1_Enemy
-		offsetTableEntry.w PLC1_Test2_Misc
-		offsetTableEntry.w PLC2_Test2_Enemy
-		offsetTableEntry.w PLC1_Test3_Misc
-		offsetTableEntry.w PLC2_Test3_Enemy
-		offsetTableEntry.w PLC1_Test4_Misc
-		offsetTableEntry.w PLC2_Test4_Enemy
+		offsetTableEntry.w PLC1_Test1_Misc
+		offsetTableEntry.w PLC2_Test1_Enemy
+		offsetTableEntry.w PLC1_Test1_Misc
+		offsetTableEntry.w PLC2_Test1_Enemy
+		offsetTableEntry.w PLC1_Test1_Misc
+		offsetTableEntry.w PLC2_Test1_Enemy
 
 		zonewarning Offs_PLC,(4*4)
 
@@ -49,50 +49,4 @@ PLC1_Test1_Misc_end
 ; ===========================================================================
 
 PLC2_Test1_Enemy: plrlistheader
-		plreq $100, ArtKosM_Spikebonker					; Spikebonker badnik
 PLC2_Test1_Enemy_end
-
-; ===========================================================================
-; Pattern load cues - Death Egg (Misc)
-; ===========================================================================
-
-PLC1_Test2_Misc: plrlistheader
-PLC1_Test2_Misc_end
-
-; ===========================================================================
-; Pattern load cues - Death Egg (Enemy)
-; ===========================================================================
-
-PLC2_Test2_Enemy: plrlistheader
-		plreq $100, ArtKosM_Spikebonker					; Spikebonker badnik
-PLC2_Test2_Enemy_end
-
-; ===========================================================================
-; Pattern load cues - Death Egg (Misc)
-; ===========================================================================
-
-PLC1_Test3_Misc: plrlistheader
-PLC1_Test3_Misc_end
-
-; ===========================================================================
-; Pattern load cues - Death Egg (Enemy)
-; ===========================================================================
-
-PLC2_Test3_Enemy: plrlistheader
-		plreq $100, ArtKosM_Spikebonker					; Spikebonker badnik
-PLC2_Test3_Enemy_end
-
-; ===========================================================================
-; Pattern load cues - Death Egg (Misc)
-; ===========================================================================
-
-PLC1_Test4_Misc: plrlistheader
-PLC1_Test4_Misc_end
-
-; ===========================================================================
-; Pattern load cues - Death Egg (Enemy)
-; ===========================================================================
-
-PLC2_Test4_Enemy: plrlistheader
-		plreq $100, ArtKosM_Spikebonker					; Spikebonker badnik
-PLC2_Test4_Enemy_end

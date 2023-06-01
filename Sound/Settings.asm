@@ -1,6 +1,6 @@
 ; ========SONIC 1 GIT EQUATES========
 
-Size_of_Mega_PCM_guess = $436
+Size_of_Mega_PCM_guess = $438
 
 ; ---FLAGS---
 SMPS_GloopSFXBehaviour	= 0

@@ -61,6 +61,3 @@ ArtKosM_DEZTitleCard:			binclude "Objects/Title Card/KosinskiM Art/Levels/DEZ - 
 ; ===========================================================================
 ; Kosinski Module compressed Test graphics
 ; ===========================================================================
-
-ArtKosM_Spikebonker:			binclude "Objects/Spikebonker/KosinskiM Art/Spikebonker.bin"
-	even

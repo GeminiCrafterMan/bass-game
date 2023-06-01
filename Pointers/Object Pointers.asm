@@ -6,12 +6,12 @@ Obj_Index:
 		dc.l Obj_Ring							; $00
 		dc.l Obj_Monitor						; $01
 		dc.l Obj_PathSwap						; $02
-		dc.l Obj_Pickups						; $03
-		dc.l DeleteObject						; $04
+		dc.l Obj_GravSwap						; $03
+		dc.l Obj_Pickups						; $04
 		dc.l DeleteObject						; $05
 		dc.l DeleteObject						; $06
-		dc.l Obj_Spring						; $07
-		dc.l Obj_Spikes						; $08
+		dc.l Obj_Spring							; $07
+		dc.l Obj_Spikes							; $08
 		dc.l DeleteObject						; $09
 		dc.l DeleteObject						; $0A
 		dc.l DeleteObject						; $0B
@@ -54,7 +54,7 @@ Obj_Index:
 		dc.l DeleteObject						; $30
 		dc.l DeleteObject						; $31
 		dc.l DeleteObject						; $32
-		dc.l Obj_Button						; $33
+		dc.l Obj_Button							; $33
 		dc.l Obj_StarPost						; $34
 		dc.l DeleteObject						; $35
 		dc.l DeleteObject						; $36
@@ -110,7 +110,7 @@ Obj_Index:
 		dc.l DeleteObject						; $68
 		dc.l DeleteObject						; $69
 		dc.l Obj_Invisible_HurtBlock			; $6A
-		dc.l Obj_Invisible_KillBlock				; $6B
+		dc.l Obj_Invisible_KillBlock			; $6B
 		dc.l DeleteObject						; $6C
 		dc.l Obj_Invisible_ShockBlock			; $6D
 		dc.l Obj_Invisible_LavaBlock			; $6E
@@ -131,7 +131,7 @@ Obj_Index:
 		dc.l DeleteObject						; $7D
 		dc.l DeleteObject						; $7E
 		dc.l DeleteObject						; $7F
-		dc.l Obj_HiddenMonitor					; $80
+		dc.l DeleteObject						; $80
 		dc.l DeleteObject						; $81
 		dc.l DeleteObject						; $82
 		dc.l DeleteObject						; $83

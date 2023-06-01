@@ -113,7 +113,7 @@ loc_10BF0:
 	endif
 		tst.b	(Ctrl_1_locked).w					; are controls locked?
 		bne.s	loc_10BFC					; if yes, branch
-		move.w	(Ctrl_1).w,(Ctrl_1_logical).w	; copy new held buttons, to enable joypad control
+		move.l	(Ctrl_1).w,(Ctrl_1_logical).w	; copy new held buttons, to enable joypad control
 
 loc_10BFC:
 		btst	#0,object_control(a0)				; is Sonic interacting with another object that holds him in place or controls his movement somehow?
@@ -329,6 +329,7 @@ loc_10F22:
 ; =============== S U B R O U T I N E =======================================
 
 Sonic_MdNormal:
+		bsr.w	Bass_WeaponSwitch
 		bsr.w	Bass_Dash
 		bsr.w	Sonic_Jump
 		bsr.w	Player_SlopeResist
@@ -360,6 +361,7 @@ Call_Player_AnglePos:
 ; Called if Sonic is airborne, but not in a ball (thus, probably not jumping)
 ; Sonic_Stand_Freespace:
 Sonic_MdAir:
+		bsr.w	Bass_WeaponSwitch
 		move.b	#id_Roll,anim(a0)	; change this to a proper way to handle the jump/air animation later
 		clr.b	dashtimer(a0)
 		bclr	#Status_Dash,status(a0)
@@ -379,6 +381,7 @@ loc_10FD6:
 ; Called if Sonic is in a ball, but not airborne (thus, probably rolling)
 ; Sonic_Spin_Path:
 Sonic_MdRoll:
+		bsr.w	Bass_WeaponSwitch
 		bsr.w	Sonic_Jump
 		bsr.w	Bass_KeepDashing	; dash timer test
 		bsr.w	Player_RollRepel
@@ -387,24 +390,6 @@ Sonic_MdRoll:
 		jsr	(MoveSprite2_TestGravity).w
 		bsr.w	Call_Player_AnglePos
 		bra.w	Player_SlopeRepel
-; ---------------------------------------------------------------------------
-; Start of subroutine Sonic_MdJump
-; Called if Sonic is in a ball and airborne (he could be jumping but not necessarily)
-; Notes: This is identical to Sonic_MdAir, at least at this outer level.
-; Why they gave it a separate copy of the code, I don't know.
-; Sonic_Spin_Freespace:
-Sonic_MdJump:
-		bsr.w	Sonic_JumpHeight
-		bsr.w	Sonic_ChgJumpDir
-		bsr.w	Player_LevelBound
-		jsr	(MoveSprite_TestGravity).w
-		btst	#Status_Underwater,status(a0)		; is Sonic underwater?
-		beq.s	loc_11056					; if not, branch
-		subi.w	#$28,y_vel(a0)				; reduce gravity by $28 ($38-$28=$10)
-
-loc_11056:
-		bsr.w	Player_JumpAngle
-		bra.w	Player_DoLevelCollision
 
 ; ---------------------------------------------------------------------------
 ; Subroutine to make Sonic walk/run
@@ -924,6 +909,52 @@ loc_11732:
 		bra.s	Player_Boundary_CheckBottom
 
 ; ---------------------------------------------------------------------------
+; Subroutine allowing Bass to switch weapons
+; ---------------------------------------------------------------------------
+
+; =============== S U B R O U T I N E =======================================
+
+Bass_WeaponSwitch:
+		tst.b	(v_bulletsonscreen).w
+		bne.s	.ret
+		move.b	(Ctrl_1_pressed_logical_6btn).w,d2
+		btst	#button_X,d2	; X check
+		bne.s	.upWep
+		btst	#button_Y,d2	; Y check
+		bne.s	.resetWep
+		btst	#button_Z,d2	; Z check
+		bne.s	.downWep
+	.ret:
+		rts
+	.upWep:
+		subq.b	#1,(v_weapon).w	; subtract 1
+		tst.b	(v_weapon).w	; if above 0
+		bge.s	.loadWepPal			; return
+		move.b	#9,(v_weapon).w	; wrap back around if above
+		bra.s	.loadWepPal
+	.downWep:
+		addq.b	#1,(v_weapon).w	; add 1
+		cmpi.b	#10,(v_weapon).w	; if below 9
+		blt.s	.loadWepPal			; return
+	.resetWep:
+		clr.b	(v_weapon).w	; wrap back around if above
+	; continue into .loadWepPal
+	.loadWepPal:
+;		bclr	#4,obStatus(a0)
+		clr.b	(v_charge).w	; clear charge
+		clr.b	(v_chargecyctimer).w	; clear charge
+		clr.b	(v_chargecycnum).w	; clear charge
+
+	; this needs to be changed if we add more characters, but i think for bass it'll be fine
+		moveq	#0,d0
+		move.b	(v_weapon).w,d0
+		ext.w	d0	; sign extend
+		move.w	d0,d1
+		jsr	(LoadPalette).w
+		move.w	d1,d0
+		jmp	(LoadPalette_Immediate).w
+
+; ---------------------------------------------------------------------------
 ; Subroutine allowing Bass to dash
 ; ---------------------------------------------------------------------------
 
@@ -995,10 +1026,10 @@ loc_117FC:
 		movem.l	(sp)+,a4-a6
 		cmpi.w	#6,d1
 		blt.w	locret_118B2
-		move.w	#$680,d2
+		move.w	#$500,d2
 		btst	#Status_Underwater,status(a0)	; Test if underwater
 		beq.s	loc_1182E
-		move.w	#$380,d2
+		move.w	#$300,d2
 
 loc_1182E:
 		moveq	#0,d0
@@ -1037,16 +1068,16 @@ Sonic_JumpHeight:
 		tst.b	jumping(a0)	; is Sonic jumping?
 		beq.s	Sonic_UpVelCap						; if not, branch
 
-		move.w	#-$400,d1
+		move.w	#-$240,d1
 		btst	#Status_Underwater,status(a0)				; is Sonic underwater?
 		beq.s	loc_118D2							; if not, branch
-		move.w	#-$200,d1							; Underwater-specific
+		move.w	#-$40,d1							; Underwater-specific
 
 loc_118D2:
 		cmp.w	y_vel(a0),d1							; is y speed greater than 4? (2 if underwater)
 		ble.s	locret_118E8							; if not, branch
 		move.b	(Ctrl_1_logical).w,d0
-		andi.b	#btnA+btnB+btnC,d0						; are buttons A, B or C being pressed?
+		andi.b	#btnC,d0								; is button C pressed?
 		bne.s	locret_118E8							; if yes, branch
 		move.w	d1,y_vel(a0)							; cap jump height
 

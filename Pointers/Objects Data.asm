@@ -4,9 +4,9 @@
 
 		include "Objects/Rings/Rings.asm"
 		include "Objects/PathSwap/PathSwap.asm"
+		include "Objects/PathSwap/GravSwap.asm"
 		include	"Objects/Pickups/Pickups.asm"
 		include "Objects/Monitor/Monitor.asm"
-		include "Objects/Hidden Monitor/Hidden Monitor.asm"
 		include "Objects/Spring/Spring.asm"
 		include "Objects/Spikes/Spikes.asm"
 		include "Objects/Invisible Blocks/Invisible Block(Solid).asm"
@@ -27,8 +27,6 @@
 ; ===========================================================================
 ; Levels objects data
 ; ===========================================================================
-
-		include "Objects/Spikebonker/Spikebonker.asm"
 
 ; ===========================================================================
 ; Bosses objects data
