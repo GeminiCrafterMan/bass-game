@@ -233,20 +233,20 @@ status =					$2A ; bitfield ; refer to SCHG for details
 ; ---------------------------------------------------------------------------
 
 x_pixel =				x_pos ; word ; x-coordinate for objects using screen positioning
-y_pixel =					y_pos ; word ; y-coordinate for objects using screen positioning
-collision_flags =			$28 ; byte ; TT SSSSSS ; TT = collision type, SSSSSS = size
-collision_property =		$29 ; byte ; usage varies, bosses use it as a hit counter
-shield_reaction =			$2B ; byte ; bit 3 = bounces off shield, bit 4 = negated by fire shield, bit 5 = negated by lightning shield, bit 6 = negated by bubble shield
+y_pixel =				y_pos ; word ; y-coordinate for objects using screen positioning
+collision_flags =		$28 ; byte ; TT SSSSSS ; TT = collision type, SSSSSS = size	; todo: make a projectile collision type
+collision_property =	$29 ; byte ; usage varies, bosses use it as a hit counter, projectiles use it to mark what their properties are
+damage =				$2B ; byte ; can be damage to player or damage to enemies, doesn't matter. bosses get their own damage tables, ignoring this.
 subtype =				$2C ; byte
 wait =					$2E ; word
-aniraw =					$30 ; long
+aniraw =				$30 ; long
 jump =					$34 ; long
 count =					$39 ; byte
-ros_bit =					$3B ; byte ; the bit to be cleared when an object is destroyed if the ROS flag is set
+ros_bit =				$3B ; byte ; the bit to be cleared when an object is destroyed if the ROS flag is set
 ros_addr =				$3C ; word ; the RAM address whose bit to clear when an object is destroyed if the ROS flag is set
 routine_secondary =		$3C ; byte ; used by monitors for this purpose at least
-vram_art =   				$40 ; word ; address of art in VRAM (same as art_tile * $20)
-parent =					$42 ; word ; address of the object that owns or spawned this one, if applicable
+vram_art =   			$40 ; word ; address of art in VRAM (same as art_tile * $20)
+parent =				$42 ; word ; address of the object that owns or spawned this one, if applicable
 child_dx = 				$42 ; byte ; X offset of child relative to parent
 child_dy = 				$43 ; byte ; Y offset of child relative to parent
 parent4 = 				$44 ; word

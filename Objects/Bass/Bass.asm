@@ -68,6 +68,17 @@ Sonic_Init:	; Routine 0
 		; only happens when not starting at a checkpoint:
 		move.w	#make_art_tile(ArtTile_Sonic,0,0),art_tile(a0)
 		move.w	#bytes_to_word($C,$D),top_solid_bit(a0)
+	.setWeaponEnergy:
+		move.b	#32,(v_health).w		; this isn't used yet, but i'd like it to be here just in case.
+		move.w	#bytes_to_word(32,32),(v_weapon1energy).w	; Weapon 1
+		move.w	#bytes_to_word(32,32),(v_weapon2energy).w	; Weapon 2
+		move.w	#bytes_to_word(32,32),(v_weapon3energy).w	; Weapon 3
+		move.w	#bytes_to_word(32,32),(v_weapon4energy).w	; Weapon 4
+		move.w	#bytes_to_word(32,32),(v_weapon5energy).w	; Weapon 5
+		move.w	#bytes_to_word(32,32),(v_weapon6energy).w	; Weapon 6
+		move.w	#bytes_to_word(32,32),(v_weapon7energy).w	; Weapon 7
+		move.w	#bytes_to_word(32,32),(v_weapon8energy).w	; Weapon 8
+		move.w	#bytes_to_word(32,32),(v_utility1energy).w; Treble Boost
 
 		; only happens when not starting at a Special Stage ring:
 		move.w	x_pos(a0),(Saved_X_pos).w
@@ -330,6 +341,7 @@ loc_10F22:
 
 Sonic_MdNormal:
 		bsr.w	Bass_WeaponSwitch
+		bsr.w	Bass_Shoot
 		bsr.w	Bass_Dash
 		bsr.w	Sonic_Jump
 		bsr.w	Player_SlopeResist
@@ -362,7 +374,7 @@ Call_Player_AnglePos:
 ; Sonic_Stand_Freespace:
 Sonic_MdAir:
 		bsr.w	Bass_WeaponSwitch
-		move.b	#id_Roll,anim(a0)	; change this to a proper way to handle the jump/air animation later
+		bsr.w	Bass_Shoot
 		clr.b	dashtimer(a0)
 		bclr	#Status_Dash,status(a0)
 		bsr.w	Sonic_JumpHeight
@@ -993,13 +1005,73 @@ Bass_StartDash:
 		move.b	#30,dashtimer(a0)
 		sfx		sfx_Dash,1
 	.stopDashing:
+		move.b	(Ctrl_1_held_logical).w,d0
+		andi.w	#btnDir,d0
+		bne.s	.held
 		clr.w	ground_vel(a0)
+	.held:
 		jsr		ManageWalkAnim
 		subq.w	#1,y_pos(a0)
 		move.w	default_y_radius(a0),y_radius(a0)
 		bclr	#Status_Dash,status(a0)
 		move.b	#5,dashtimer(a0)
 		rts
+
+; ---------------------------------------------------------------------------
+; Subroutine allowing Bass to shoot
+; ---------------------------------------------------------------------------
+
+; =============== S U B R O U T I N E =======================================
+
+Bass_Shoot:
+		moveq	#0,d0
+		move.b	(v_weapon).w,d0
+		add.w	d0,d0
+		add.w	d0,d0
+		movea.l	.weaponLUT(pc,d0.w),a1
+		jmp		(a1)
+	.weaponLUT:
+		dc.l	Weapon_BassBuster
+		dc.l	Weapon_Test	; Master Wep 1 - Chill Spike, at the moment
+		dc.l	Weapon_Test	; Master Wep 2 - Solar Blaze, at the moment
+		dc.l	Weapon_Test	; Master Wep 3 - Triple Blade, at the moment
+		dc.l	Weapon_Test	; Master Wep 4
+		dc.l	Weapon_Test	; Master Wep 5
+		dc.l	Weapon_Test	; Master Wep 6
+		dc.l	Weapon_Test	; Master Wep 7
+		dc.l	Weapon_Test	; Master Wep 8
+		dc.l	Weapon_Test	; Treble Boost
+
+FireWeapon:
+		moveq	#0,d0
+		move.b	(v_shottype).w,d0
+		add.w	d0,d0
+		add.w	d0,d0
+		movea.l	.typesLUT(pc,d0.w),a2
+		jmp		(a2)
+	.typesLUT:
+		dc.l	WepType_Normal			; 2 of 8 cardinal directions, Mega Buster
+;		dc.l	WepType_SemiCardinal	; 7 of 8 cardinal directions, Bass Buster
+;		dc.l	WepType_Cardinal		; 8 of 8 cardinal directions, Metal Blade
+	
+WepType_Normal:
+		move.w	x_pos(a0),x_pos(a1)
+		move.w	y_pos(a0),y_pos(a1)
+		btst	#Status_Facing,status(a0)
+		beq.s	.notFlipped
+		bset	#Status_Facing,status(a1)
+		subi.w	#17,x_pos(a1)
+		neg.w	ground_vel(a1)
+		bra.s	.doneFlip
+	.notFlipped:
+		bclr	#Status_Facing,status(a1)
+		addi.w	#17,x_pos(a1)
+	.doneFlip:
+		move.w	ground_vel(a1),x_vel(a1)	; actually make it go
+		rts
+
+		include	"Objects/Bass/Weapons/Bass Buster.asm"
+		include	"Objects/Bass/Weapons/Test.asm"
 
 ; ---------------------------------------------------------------------------
 ; Subroutine allowing Sonic to jump
@@ -2052,6 +2124,11 @@ Sonic_Load_PLC2:
 ManageWalkAnim:
 		cmpi.b	#id_Run,anim(a0)
 		ble.s	.alreadyGoing
+		cmpi.b	#id_Dash,prev_anim(a0)
+		bne.s	.toWalk
+		move.b	#id_Run,anim(a0)
+		rts
+	.toWalk:
 ;		move.w	#bytes_to_word(id_Walk,id_Walk),anim(a0)	; also goes to prev_anim
 		move.b	#id_Walk,anim(a0)
 	.alreadyGoing:

@@ -4,6 +4,145 @@
     "node": "6ed0f213-b203-4ea2-a0ab-c5cdf2406ea0",
     "objects": [
         {
+            "name": "Player",
+            "children": [
+                {
+                    "format": "Sonic 3&K Player.js",
+                    "name": "Bass",
+                    "palettes": [
+                        {
+                            "path": "Objects/Bass/Palettes/Bass.bin",
+                            "length": 1
+                        },
+                        {
+                            "path": "Objects/Bass/Palettes/Chill Spike.bin",
+                            "length": 1
+                        },
+                        {
+                            "path": "Objects/Bass/Palettes/Solar Blaze.bin",
+                            "length": 1
+                        },
+                        {
+                            "path": "Objects/Bass/Palettes/Triple Blade.bin",
+                            "length": 1
+                        }
+                    ],
+                    "art": {
+                        "path": "Objects/Bass/Uncompressed Art/Bass.bin",
+                        "compression": "Uncompressed",
+                        "offset": 0
+                    },
+                    "mappings": {
+                        "path": "Objects/Bass/Object Data/Map - Bass.bin",
+                        "label": ""
+                    },
+                    "dplcs": {
+                        "enabled": true,
+                        "path": "Objects/Bass/Object Data/PLC - Bass.bin",
+                        "label": ""
+                    },
+                    "uuid": "6ed0f213-b203-4ea2-a0ab-c5cdf2406ea0"
+                },
+                {
+                    "name": "Weapons",
+                    "children": [
+                        {
+                            "format": "Sonic 3&K Object.js",
+                            "name": "Buster Shots",
+                            "palettes": [],
+                            "art": {
+                                "path": "Objects/Player Projectiles/KosinskiM Art/Buster Shots.bin",
+                                "compression": "Kosinski-M",
+                                "offset": 0
+                            },
+                            "mappings": {
+                                "path": "Objects/Player Projectiles/Object Data/Map - Buster Shots.bin",
+                                "label": ""
+                            },
+                            "dplcs": {
+                                "enabled": false,
+                                "path": "",
+                                "label": ""
+                            },
+                            "uuid": "e76e2935-5dea-44d0-a0c2-ddb862f636f8",
+                            "expanded": true
+                        },
+                        {
+                            "format": "Sonic 3&K Object.js",
+                            "name": "Triple Blade",
+                            "palettes": [],
+                            "art": {
+                                "path": "Objects/Player Projectiles/KosinskiM Art/Triple Blade.bin",
+                                "compression": "Kosinski-M",
+                                "offset": 0
+                            },
+                            "mappings": {
+                                "path": "Objects/Player Projectiles/Object Data/Map - Triple Blade.bin",
+                                "label": ""
+                            },
+                            "dplcs": {
+                                "enabled": false,
+                                "path": "",
+                                "label": ""
+                            },
+                            "uuid": "d3eeb972-0216-40c5-8830-fd89b96be491"
+                        },
+                        {
+                            "format": "Sonic 1.js",
+                            "name": "Chill Spike",
+                            "palettes": [],
+                            "art": {
+                                "path": "",
+                                "compression": "Uncompressed",
+                                "offset": 0
+                            },
+                            "mappings": {
+                                "path": "",
+                                "label": ""
+                            },
+                            "dplcs": {
+                                "enabled": false,
+                                "path": "",
+                                "label": ""
+                            },
+                            "uuid": "eeb97202-1650-4588-b0fd-89b96be49168"
+                        }
+                    ],
+                    "isDirectory": true,
+                    "expanded": true
+                },
+                {
+                    "format": "Sonic 1.js",
+                    "name": "Treble",
+                    "palettes": [
+                        {
+                            "path": "Objects/Bass/Palettes/Treble Boost.bin",
+                            "length": 1
+                        }
+                    ],
+                    "art": {
+                        "path": "",
+                        "compression": "Uncompressed",
+                        "offset": 0
+                    },
+                    "mappings": {
+                        "path": "",
+                        "label": ""
+                    },
+                    "dplcs": {
+                        "enabled": false,
+                        "path": "",
+                        "label": ""
+                    },
+                    "uuid": "d0f213b2-03de-42a0-abc5-cdf2406ea05a",
+                    "expanded": true
+                }
+            ],
+            "isDirectory": true,
+            "expanded": true,
+            "uuid": "45b50c3a-3115-4dcb-9d4a-9df9fcaadb21"
+        },
+        {
             "format": "Sonic 3&K Object.js",
             "name": "Mega Man",
             "palettes": [
@@ -56,68 +195,6 @@
                 "label": ""
             },
             "uuid": "2c4aed46-f2e9-4da3-95bf-0b053b2f579c"
-        },
-        {
-            "format": "Sonic 3&K Player.js",
-            "name": "Bass",
-            "palettes": [
-                {
-                    "path": "Objects/Bass/Palettes/Bass.bin",
-                    "length": 1
-                },
-                {
-                    "path": "Objects/Bass/Palettes/Chill Spike.bin",
-                    "length": 1
-                },
-                {
-                    "path": "Objects/Bass/Palettes/Solar Blaze.bin",
-                    "length": 1
-                },
-                {
-                    "path": "Objects/Bass/Palettes/Triple Blade.bin",
-                    "length": 1
-                }
-            ],
-            "art": {
-                "path": "Objects/Bass/Uncompressed Art/Bass.bin",
-                "compression": "Uncompressed",
-                "offset": 0
-            },
-            "mappings": {
-                "path": "Objects/Bass/Object Data/Map - Bass.bin",
-                "label": ""
-            },
-            "dplcs": {
-                "enabled": true,
-                "path": "Objects/Bass/Object Data/PLC - Bass.bin",
-                "label": ""
-            },
-            "uuid": "6ed0f213-b203-4ea2-a0ab-c5cdf2406ea0"
-        },
-        {
-            "format": "Sonic 1.js",
-            "name": "Treble",
-            "palettes": [
-                {
-                    "path": "Objects/Bass/Palettes/Treble Boost.bin",
-                    "length": 1
-                }
-            ],
-            "art": {
-                "path": "",
-                "compression": "Uncompressed",
-                "offset": 0
-            },
-            "mappings": {
-                "path": "",
-                "label": ""
-            },
-            "dplcs": {
-                "enabled": false,
-                "path": "",
-                "label": ""
-            },
-            "uuid": "d0f213b2-03de-42a0-abc5-cdf2406ea05a"
         }
     ]
 }

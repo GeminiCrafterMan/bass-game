@@ -1,26 +1,7 @@
 ; ---------------------------------------------------------------------------
-; Invisible horizontal shock block (Object)
+; Invisible horizontal hurt block (Object)
 ; Set no flipX to Up/Down hurt
 ; Set flipX to Left/Right hurt
-; ---------------------------------------------------------------------------
-
-; =============== S U B R O U T I N E =======================================
-
-Obj_Invisible_ShockBlock:
-		bset	#Status_LtngShield,shield_reaction(a0)
-		bra.s	Obj_Invisible_HurtBlock
-
-; ---------------------------------------------------------------------------
-; Invisible horizontal lava block (Object)
-; ---------------------------------------------------------------------------
-
-; =============== S U B R O U T I N E =======================================
-
-Obj_Invisible_LavaBlock:
-		bset	#Status_FireShield,shield_reaction(a0)
-
-; ---------------------------------------------------------------------------
-; Invisible horizontal hurt block (Object)
 ; ---------------------------------------------------------------------------
 
 ; =============== S U B R O U T I N E =======================================
@@ -75,7 +56,7 @@ loc_1F45E:
 		andi.b	#8,d0
 		beq.s	loc_1F4A2
 		lea	(Player_1).w,a1
-		bsr.w	sub_1F58C
+		bsr.w	sub_24280
 
 loc_1F4A2:
 		out_of_xrange.w	loc_1EBAA
@@ -100,7 +81,7 @@ loc_1F4C4:
 		andi.b	#1,d0
 		beq.s	loc_1F506
 		lea	(Player_1).w,a1
-		bsr.s	sub_1F58C
+		bsr.w	sub_24280
 
 loc_1F506:
 		out_of_xrange.w	loc_1EBAA
@@ -125,22 +106,13 @@ loc_1F528:
 		andi.b	#4,d0
 		beq.s	loc_1F56A
 		lea	(Player_1).w,a1
-		bsr.s	sub_1F58C
+		bsr.w	sub_24280
 
 loc_1F56A:
 		out_of_xrange.w	loc_1EBAA
 		tst.w	(Debug_placement_mode).w
 		beq.s	locret_1F59E
 		jmp	(Draw_Sprite).w
-
-; =============== S U B R O U T I N E =======================================
-
-sub_1F58C:
-		move.b	shield_reaction(a0),d0
-		andi.b	#$73,d0
-		and.b	status_secondary(a1),d0
-		bne.s	locret_1F59E
-		bsr.w	sub_24280
 
 locret_1F59E:
 		rts

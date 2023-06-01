@@ -298,7 +298,7 @@ EndOfHeader:
 
 		include "Objects/Bass/Bass.asm"
 		include "Objects/Spin Dust/SpinDust.asm"
-		include "Objects/Shields/Shields.asm"
+		include "Objects/Player Projectiles/Projectiles.asm"
 
 ; ---------------------------------------------------------------------------
 ; Subroutine to load a objects

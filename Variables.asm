@@ -429,7 +429,7 @@ Saved_dynamic_resize:				ds.l 1
 Saved_water_full_screen_flag:		ds.b 1
 Saved_status_secondary:				ds.b 1
 Saved_last_star_post_hit:			ds.b 1
-									ds.b 1					; even
+v_shottype:							ds.b 1	; weapon shot type
 
 Oscillating_variables:				= *
 Oscillating_Numbers:				= *
@@ -452,28 +452,28 @@ v_charge:							ds.b 1					; weapon charge -- not used for bass (yet)
 v_chargecyctimer:					ds.b 1					; charge cycle timer -- not used for bass (yet)
 v_chargecycnum:						ds.b 1					; charge cycle number -- not used for bass (yet)
 v_health:							ds.b 1					; player health, usually 32
+
 v_weapon1energy:					ds.b 1					; weapon 1 energy
+v_weapon1max:						ds.b 1					; weapon 1 max
 v_weapon2energy:					ds.b 1					; weapon 2 energy
+v_weapon2max:						ds.b 1					; weapon 2 max
 v_weapon3energy:					ds.b 1					; weapon 3 energy
+v_weapon3max:						ds.b 1					; weapon 3 max
 v_weapon4energy:					ds.b 1					; weapon 4 energy
+v_weapon4max:						ds.b 1					; weapon 4 max
 v_weapon5energy:					ds.b 1					; weapon 5 energy
+v_weapon5max:						ds.b 1					; weapon 5 max
 v_weapon6energy:					ds.b 1					; weapon 6 energy
+v_weapon6max:						ds.b 1					; weapon 6 max
 v_weapon7energy:					ds.b 1					; weapon 7 energy
+v_weapon7max:						ds.b 1					; weapon 7 max
 v_weapon8energy:					ds.b 1					; weapon 8 energy
+v_weapon8max:						ds.b 1					; weapon 8 max
 v_utility1energy:					ds.b 1					; utility 1 energy -- usually treble boost, but not necessarily always
+v_utility1max:						ds.b 1					; utility 1 max -- usually treble boost, but not necessarily always
 
 v_weaponsowned:						ds.b 1					; bitfield, used to show what weapons are owned
 v_itemsowned:						ds.b 1					; bitfield, used to show what items are owned
-
-v_weapon1max:						ds.b 1					; weapon 1 max
-v_weapon2max:						ds.b 1					; weapon 2 max
-v_weapon3max:						ds.b 1					; weapon 3 max
-v_weapon4max:						ds.b 1					; weapon 4 max
-v_weapon5max:						ds.b 1					; weapon 5 max
-v_weapon6max:						ds.b 1					; weapon 6 max
-v_weapon7max:						ds.b 1					; weapon 7 max
-v_weapon8max:						ds.b 1					; weapon 8 max
-v_utility1max:						ds.b 1					; utility 1 max -- usually treble boost, but not necessarily always
 
 System_stack_size					ds.b $100				; ~$100 bytes ; this is the top of the stack, it grows downwards
 System_stack:						= *

@@ -221,8 +221,6 @@ sub_2FBA8:
 		addi.w	#$10,d1
 		cmp.w	d0,d1
 		blo.s		locret_2FC7C
-		btst	#Status_BublShield,shield_reaction(a1)
-		bne.s	locret_2FC7C
 		bsr.w	Player_ResetAirTimer
 		sfx	sfx_Bubble
 		clr.l	x_vel(a1)

@@ -4,7 +4,7 @@
 
 Obj_Index:
 		dc.l Obj_Ring							; $00
-		dc.l Obj_Monitor						; $01
+		dc.l DeleteObject						; $01
 		dc.l Obj_PathSwap						; $02
 		dc.l Obj_GravSwap						; $03
 		dc.l Obj_Pickups						; $04
@@ -112,8 +112,8 @@ Obj_Index:
 		dc.l Obj_Invisible_HurtBlock			; $6A
 		dc.l Obj_Invisible_KillBlock			; $6B
 		dc.l DeleteObject						; $6C
-		dc.l Obj_Invisible_ShockBlock			; $6D
-		dc.l Obj_Invisible_LavaBlock			; $6E
+		dc.l DeleteObject						; $6D
+		dc.l DeleteObject						; $6E
 		dc.l DeleteObject						; $6F
 		dc.l DeleteObject						; $70
 		dc.l DeleteObject						; $71

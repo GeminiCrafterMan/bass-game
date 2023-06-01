@@ -6,8 +6,6 @@ ArtKosM_Ring_Sparks:			binclude "Objects/Rings/KosinskiM Art/Sparks.bin"
 	even
 ArtKosM_Hud:					binclude "Objects/HUD/KosinskiM Art/HUD.bin"
 	even
-ArtKosM_Monitors:				binclude "Objects/Monitor/KosinskiM Art/Monitors.bin"
-	even
 ArtKosM_Pickups:				binclude "Objects/Pickups/KosinskiM Art/Pickups.bin"
 	even
 ArtKosM_SpikesSprings:			binclude "Objects/Spikes/KosinskiM Art/SpikesSprings.bin"
@@ -49,6 +47,13 @@ ArtKosM_StarPostStars2:			binclude "Objects/StarPost/KosinskiM Art/StarPost Star
 ArtKosM_StarPostStars3:			binclude "Objects/StarPost/KosinskiM Art/StarPost Stars 3.bin"
 	even
 ArtKosM_LevelSelectText:			binclude "Data/Screens/Level Select/KosinskiM Art/Text.bin"
+	even
+
+; ===========================================================================
+; Kosinski Module compressed weapon graphics
+; ===========================================================================
+
+ArtKosM_BusterShots:			binclude "Objects/Player Projectiles/KosinskiM Art/Buster Shots.bin"
 	even
 
 ; ===========================================================================

@@ -6,22 +6,6 @@ using SonicRetro.SonLVL.API;
 
 namespace S3KObjectDefinitions.Common
 {
-	class InvisibleShockBlock : InvisibleBlock
-	{
-		public override string Name
-		{
-			get { return "Invisible Shock Block"; }
-		}
-	}
-
-	class InvisibleLavaBlock : InvisibleBlock
-	{
-		public override string Name
-		{
-			get { return "Invisible Lava Block"; }
-		}
-	}
-
 	class InvisibleHurtBlock : InvisibleBlock
 	{
 		public override string Name

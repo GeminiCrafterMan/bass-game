@@ -182,7 +182,6 @@ SpawnLevelMainSprites:
 		move.l	#Obj_ResetCollisionResponseList,(Reserved_object_3).w
 		move.l	#Obj_Sonic,(Player_1).w
 		move.l	#Obj_DashDust,(v_Dust).w
-		move.l	#Obj_Insta_Shield,(v_Shield).w
 		rts
 
 ; =============== S U B R O U T I N E =======================================

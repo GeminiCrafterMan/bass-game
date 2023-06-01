@@ -14,6 +14,16 @@ Ani_Bass: offsetTable
 		offsetTableEntry.w SonAni_Drown
 		offsetTableEntry.w SonAni_Hurt
 		offsetTableEntry.w SonAni_Blank
+		offsetTableEntry.w SonAni_FireStanding
+		offsetTableEntry.w SonAni_FireWalking
+		offsetTableEntry.w SonAni_FireJumpingUp
+		offsetTableEntry.w SonAni_FireJumpingDiagUp
+		offsetTableEntry.w SonAni_FireJumpingStraight
+		offsetTableEntry.w SonAni_FireJumpingDiagDown
+		offsetTableEntry.w SonAni_FireSteadyUp
+		offsetTableEntry.w SonAni_FireSteadyDiagUp
+		offsetTableEntry.w SonAni_FireSteadyStraight
+		offsetTableEntry.w SonAni_FireSteadyDiagDown
 
 SonAni_Step:		dc.b  6, frB_Step,  afChange,  id_Run
 SonAni_Walk:		dc.b  6, frB_Walk1, frB_Walk2, frB_Walk3, frB_Walk4, frB_Walk5, frB_Walk6, afEnd
@@ -37,21 +47,41 @@ SonAni_Death:		dc.b  1
 SonAni_Drown:		dc.b  $20, $A7,	afEnd
 SonAni_Hurt:		dc.b  $77, frB_Hurt, afEnd
 SonAni_Blank:		dc.b  $77, frB_Null, afEnd
+SonAni_FireStanding:dc.b  $77, frB_Fire, afEnd
+SonAni_FireWalking:	dc.b  6, frB_Walk1F, frB_Walk2F, frB_Walk3F, frB_Walk4F, frB_Walk5F, frB_Walk6F, afEnd
+SonAni_FireJumpingUp:	dc.b $77, frB_FireJUp, afEnd
+SonAni_FireJumpingDiagUp:	dc.b $77, frB_FireJDiagUp, afEnd
+SonAni_FireJumpingStraight:	dc.b $77, frB_FireJStraight, afEnd
+SonAni_FireJumpingDiagDown:	dc.b $77, frB_FireJDiagDown, afEnd
+SonAni_FireSteadyUp:		dc.b $77, frB_FireSUp, afEnd
+SonAni_FireSteadyDiagUp:	dc.b $77, frB_FireSDiagUp, afEnd
+SonAni_FireSteadyStraight:	dc.b $77, frB_FireSStraight, afEnd
+SonAni_FireSteadyDiagDown:	dc.b $77, frB_FireSDiagDown, afEnd
 	even
 
 ; Animation IDs
 	phase 0 ; Reset ds.b value to 0
-id_Walk:	ds.b 1
-id_Run:		ds.b 1
-id_Roll:	ds.b 1
-id_Wait:	ds.b 1
-id_Dash:	ds.b 1
-id_Victory:	ds.b 1
-id_GetAir:	ds.b 1
-id_Death:	ds.b 1
-id_Drown:	ds.b 1
-id_Hurt:	ds.b 1
-id_Null:	ds.b 1
+id_Walk:				ds.b 1
+id_Run:					ds.b 1
+id_Roll:				ds.b 1
+id_Wait:				ds.b 1
+id_Dash:				ds.b 1
+id_Victory:				ds.b 1
+id_GetAir:				ds.b 1
+id_Death:				ds.b 1
+id_Drown:				ds.b 1
+id_Hurt:				ds.b 1
+id_Null:				ds.b 1
+id_FireStanding:		ds.b 1
+id_FireWalking:			ds.b 1
+id_FireJumpingUp:		ds.b 1
+id_FireJumpingDiagUp:	ds.b 1
+id_FireJumpingStraight:	ds.b 1
+id_FireJumpingDiagDown:	ds.b 1
+id_FireSteadyUp:		ds.b 1
+id_FireSteadyDiagUp:	ds.b 1
+id_FireSteadyStraight:	ds.b 1
+id_FireSteadyDiagDown:	ds.b 1
 	even
 	dephase
 
@@ -93,6 +123,14 @@ frB_Death3:	ds.b 1
 frB_Death4:	ds.b 1
 frB_Death5:	ds.b 1
 frB_Dash:	ds.b 1
+frB_FireSUp:		ds.b 1
+frB_FireSDiagUp:	ds.b 1
+frB_FireSStraight:	ds.b 1
+frB_FireSDiagDown:	ds.b 1
+frB_FireJUp:		ds.b 1
+frB_FireJDiagUp:	ds.b 1
+frB_FireJStraight:	ds.b 1
+frB_FireJDiagDown:	ds.b 1
 frB_Last:	ds.b 0
 	even
 	dephase
