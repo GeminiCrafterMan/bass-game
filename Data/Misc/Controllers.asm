@@ -95,10 +95,7 @@ Poll_Controllers:
 		move.b d1,0(a0) ; store held buttons
 		and.b d1,d0 ; AND with current buttons
 		move.b d0,1(a0) ; store pressed buttons
-		; if this is a 3 button controller skip the remaining steps
-		move.b (a2),d0 ; save the value
-		tst.b d0 ; is this zero?
-		beq.w ExitReadJoypad ; zero means 3 button controller
+
 	; set counter to 3 + TH high
 		move.b #$40,(a1) ; set TH high
 		nop ; bus synchronization
@@ -115,6 +112,13 @@ Poll_Controllers:
 		move.b #$00,(a1) ; set TH low
 		nop ; bus synchronization
 		nop ; bus synchronization
+	; if this is a 3 button controller skip the remaining steps
+		move.b (a1),d0 ; save the value
+		and.b    #$F,d0
+		seq    d0
+		tst.b d0 ; is this zero?
+		beq.w ExitReadJoypad ; zero means 3 button controller
+
 	; set counter to 7 + TH high
 		move.b #$40,(a1) ; set TH high
 		nop ; bus synchronization
@@ -128,22 +132,24 @@ Poll_Controllers:
 		move.b d1,2(a0) ; store held buttons
 		and.b d1,d0 ; AND with current buttons
 		move.b d0,3(a0) ; store pressed buttons
+		rts
 		;---------------------------------
 		; set counter to 8 + TH low
 		; just for demo purposes - not needed
 		;---------------------------------
-		move.b #$00,(a1) ; set TH low
-		nop ; bus synchronization
-		nop ; bus synchronization
+		;move.b #$00,(a1) ; set TH low
+		;nop ; bus synchronization
+		;nop ; bus synchronization
 		;---------------------------------
 		; set counter to 9 + TH high
 		; just for demo purposes - not needed
 		;---------------------------------
+ExitReadJoypad:
+                ;Read a 6th time just in case
 		move.b #$40,(a1) ; set TH high
-		nop ; bus synchronization
-		nop ; bus synchronization
+		;nop ; bus synchronization
+		;nop ; bus synchronization
 		;---------------------------------
 		; done reading controller
 		;---------------------------------
-ExitReadJoypad:
 		rts
