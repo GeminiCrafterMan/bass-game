@@ -109,7 +109,8 @@
                         }
                     ],
                     "isDirectory": true,
-                    "expanded": true
+                    "expanded": true,
+                    "uuid": "e2910ae7-3887-45b4-a302-3c7d0a71c2fb"
                 },
                 {
                     "format": "Sonic 1.js",

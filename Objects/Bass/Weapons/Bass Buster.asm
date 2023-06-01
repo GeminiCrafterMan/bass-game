@@ -10,7 +10,7 @@ Weapon_BassBuster:	; Rapid-fire buster shot that holds you in place
 		sfx		sfx_BusterShot
 		jsr		FindFreeObj
 		move.l	#Obj_PlayerBall,address(a1)
-		move.b	#0,(v_shottype).w	; Semi-Cardinal, but Normal for now because I wanna snooze
+		move.b	#1,(v_shottype).w	; Semi-Cardinal, but Normal for now because I wanna snooze
 		move.b	#13,shoottimer(a0)
 		move.w	#$600,ground_vel(a1)
 	.objectLoadedJumpPoint:
