@@ -11,6 +11,7 @@ Obj_PlayerLemon:
 		btst	#7,status(a0)
 		bne.w	.delete
 		out_of_xrange.s .delete	; is the projectile off-screen?
+		out_of_yrange.s .delete
 		jsr		(TouchResponse).l
 		jsr		SpeedToPos
 		jmp		DisplaySprite
@@ -30,6 +31,7 @@ Obj_PlayerBall:
 		btst	#7,status(a0)
 		bne.w	.delete
 		out_of_xrange.s .delete	; is the projectile off-screen?
+		out_of_yrange.s .delete
 		jsr		(TouchResponse).l
 		jsr		SpeedToPos
 		jmp		DisplaySprite

@@ -346,6 +346,7 @@ Sonic_MdNormal:
 		bsr.w	Sonic_Jump
 		bsr.w	Player_SlopeResist
 		bsr.w	Sonic_Move
+		bsr.w	Bass_HandleGroundAnimations
 		bsr.w	Player_LevelBound
 		jsr	(MoveSprite2_TestGravity).w
 		bsr.s	Call_Player_AnglePos
@@ -375,6 +376,7 @@ Call_Player_AnglePos:
 Sonic_MdAir:
 		bsr.w	Bass_WeaponSwitch
 		bsr.w	Bass_Shoot
+		bsr.w	Bass_HandleAirAnimations
 		clr.b	dashtimer(a0)
 		bclr	#Status_Dash,status(a0)
 		bsr.w	Sonic_JumpHeight
@@ -401,6 +403,7 @@ Sonic_MdRoll:
 		bsr.w	Player_LevelBound
 		jsr	(MoveSprite2_TestGravity).w
 		bsr.w	Call_Player_AnglePos
+		move.b	#id_Dash,anim(a0)
 		bra.w	Player_SlopeRepel
 
 ; ---------------------------------------------------------------------------
@@ -556,7 +559,7 @@ loc_113FE:
 		bne.s	loc_11412
 		bset	#Status_Facing,status(a0)
 		bne.s	loc_11412
-		jsr		ManageWalkAnim
+		jsr		Bass_HandleGroundAnimations
 
 loc_11412:
 		sub.w	d5,d0
@@ -571,7 +574,7 @@ loc_11412:
 
 loc_11424:
 		move.w	d0,ground_vel(a0)
-		jsr		ManageWalkAnim
+		jsr		Bass_HandleGroundAnimations
 		rts
 ; ---------------------------------------------------------------------------
 
@@ -608,7 +611,7 @@ sub_11482:
 		bmi.s	loc_114B6
 		bclr	#Status_Facing,status(a0)
 		beq.s	loc_1149C
-		jsr		ManageWalkAnim
+		jsr		Bass_HandleGroundAnimations
 
 loc_1149C:
 		add.w	d5,d0
@@ -621,7 +624,7 @@ loc_1149C:
 
 loc_114AA:
 		move.w	d0,ground_vel(a0)
-		jsr		ManageWalkAnim
+		jsr		Bass_HandleGroundAnimations
 		rts
 ; ---------------------------------------------------------------------------
 
@@ -1010,7 +1013,7 @@ Bass_StartDash:
 		bne.s	.held
 		clr.w	ground_vel(a0)
 	.held:
-		jsr		ManageWalkAnim
+		jsr		Bass_HandleGroundAnimations
 		subq.w	#1,y_pos(a0)
 		move.w	default_y_radius(a0),y_radius(a0)
 		bclr	#Status_Dash,status(a0)
@@ -1051,7 +1054,7 @@ FireWeapon:
 		jmp		(a2)
 	.typesLUT:
 		dc.l	WepType_Normal			; 2 of 8 cardinal directions, Mega Buster
-;		dc.l	WepType_SemiCardinal	; 7 of 8 cardinal directions, Bass Buster
+		dc.l	WepType_SemiCardinal	; 7 of 8 cardinal directions, Bass Buster
 ;		dc.l	WepType_Cardinal		; 8 of 8 cardinal directions, Metal Blade
 	
 WepType_Normal:
@@ -1068,6 +1071,78 @@ WepType_Normal:
 		addi.w	#17,x_pos(a1)
 	.doneFlip:
 		move.w	ground_vel(a1),x_vel(a1)	; actually make it go
+		rts
+
+WepType_SemiCardinal:
+		move.w	x_pos(a0),x_pos(a1)
+		move.w	y_pos(a0),y_pos(a1)
+		clr.w	ground_vel(a0)	; stop user in place
+		btst	#bitUp,(Ctrl_1_held_logical).w
+		bne.s	WepType_SemiCardinal_up
+		btst	#bitDn,(Ctrl_1_held_logical).w
+		bne.w	WepType_SemiCardinal_diagdown
+WepType_SemiCardinal_straight:
+		btst	#Status_Facing,status(a0)
+		beq.s	.notFlipped
+		bset	#Status_Facing,status(a1)
+		subi.w	#17,x_pos(a1)
+		neg.w	ground_vel(a1)
+		bra.s	.doneFlip
+	.notFlipped:
+		bclr	#Status_Facing,status(a1)
+		addi.w	#17,x_pos(a1)
+	.doneFlip:
+		move.w	ground_vel(a1),x_vel(a1)	; actually make it go
+		rts
+WepType_SemiCardinal_up:
+		btst	#bitR,(Ctrl_1_held_logical).w
+		bne.s	.diagup
+		btst	#bitL,(Ctrl_1_held_logical).w
+		bne.s	.diagup
+	.straightup:
+		btst	#Status_Facing,status(a0)
+		beq.s	.upNotFlipped
+		bset	#Status_Facing,status(a1)
+		subi.w	#5,x_pos(a1)
+		bra.s	.upDoneFlip
+	.upNotFlipped:
+		bclr	#Status_Facing,status(a1)
+		addi.w	#5,x_pos(a1)
+	.upDoneFlip:
+		neg.w	ground_vel(a1)
+		move.w	ground_vel(a1),y_vel(a1)	; actually make it go
+		rts
+	.diagup:
+		asr.w	#1,ground_vel(a1)
+		neg.w	ground_vel(a1)
+		move.w	ground_vel(a1),y_vel(a1)	; actually make it go
+		neg.w	ground_vel(a1)
+		btst	#Status_Facing,status(a0)
+		beq.s	.diagupNotFlipped
+		bset	#Status_Facing,status(a1)
+		subi.w	#5,x_pos(a1)
+		neg.w	ground_vel(a1)
+		bra.s	.diagupDoneFlip
+	.diagupNotFlipped:
+		bclr	#Status_Facing,status(a1)
+		addi.w	#5,x_pos(a1)
+	.diagupDoneFlip:
+		move.w	ground_vel(a1),x_vel(a1)
+		rts
+WepType_SemiCardinal_diagdown:
+		asr.w	#1,ground_vel(a1)
+		move.w	ground_vel(a1),y_vel(a1)	; actually make it go
+		btst	#Status_Facing,status(a0)
+		beq.s	.notFlipped
+		bset	#Status_Facing,status(a1)
+		subi.w	#5,x_pos(a1)
+		neg.w	ground_vel(a1)
+		bra.s	.doneFlip
+	.notFlipped:
+		bclr	#Status_Facing,status(a1)
+		addi.w	#5,x_pos(a1)
+	.doneFlip:
+		move.w	ground_vel(a1),x_vel(a1)
 		rts
 
 		include	"Objects/Bass/Weapons/Bass Buster.asm"
@@ -1714,7 +1789,7 @@ loc_12344:
 		move.w	d0,x_vel(a0)
 		move.w	d0,ground_vel(a0)
 		move.b	d0,object_control(a0)
-		jsr		ManageWalkAnim
+		jsr		Bass_HandleGroundAnimations
 		move.w	#$100,priority(a0)
 		move.b	#id_SonicControl,routine(a0)
 		move.b	#2*60,invulnerability_timer(a0)
@@ -2121,7 +2196,36 @@ Sonic_Load_PLC2:
 		dbf	d5,-
 +		rts
 
-ManageWalkAnim:
+Obj_DeathOrbs:
+		move.l	#Map_Bass,mappings(a0)
+		move.w	#$100,priority(a0)
+        move.w	#make_art_tile(ArtTile_Sonic,0,0),art_tile(a0)
+		move.b	#4,render_flags(a0)
+        jsr     SpeedToPos
+		move.b	(Player_1+mapping_frame).w,mapping_frame(a0)
+        jmp     DisplaySprite
+
+Bass_HandleGroundAnimations:
+		tst.b	shoottimer(a0)
+		beq.s	.notShooting
+		moveq	#0,d0
+		move.b	(v_shottype).w,d0
+		add.w	d0,d0
+		add.w	d0,d0
+		movea.l	.typesLUT(pc,d0.w),a2
+		jmp		(a2)
+	.typesLUT:
+		dc.l	AnimType_GroundNormalFire
+		dc.l	AnimType_GroundSemiCardinalFire
+;		dc.l	AnimType_GroundThrow
+	.notShooting:
+;		cmpi.b	#id_FireSteadyUp,anim(a0)
+;		blt.s	.notSteady
+;		cmpi.b	#id_FireSteadyDiagDown,anim(a0)
+;		bgt.s	.notSteady
+;		clr.b	move_lock(a0)
+;
+;	.notSteady:
 		cmpi.b	#id_Run,anim(a0)
 		ble.s	.alreadyGoing
 		cmpi.b	#id_Dash,prev_anim(a0)
@@ -2134,14 +2238,94 @@ ManageWalkAnim:
 	.alreadyGoing:
 		rts
 
-Obj_DeathOrbs:
-		move.l	#Map_Bass,mappings(a0)
-		move.w	#$100,priority(a0)
-        move.w	#make_art_tile(ArtTile_Sonic,0,0),art_tile(a0)
-		move.b	#4,render_flags(a0)
-        jsr     SpeedToPos
-		move.b	(Player_1+mapping_frame).w,mapping_frame(a0)
-        jmp     DisplaySprite
+AnimType_GroundNormalFire:
+		cmpi.b	#id_Walk,anim(a0)
+		beq.s	.step
+		cmpi.b	#id_Run,anim(a0)
+		beq.s	.walk
+		move.b	#id_FireStanding,anim(a0)
+		rts
+	.step:
+		move.b	#id_FireStanding,anim(a0)
+		move.b	#id_FireWalking,prev_anim(a0)	; should make this change to that when it's done
+		rts
+	.walk:
+		move.b	#id_FireWalking,anim(a0)
+		rts
+
+AnimType_GroundSemiCardinalFire:
+		btst	#bitUp,(Ctrl_1_held_logical).w
+		bne.s	.up
+		btst	#bitDn,(Ctrl_1_held_logical).w
+		bne.s	.diagdown
+		move.b	#id_FireSteadyStraight,anim(a0)
+		rts
+	.up:
+		btst	#bitR,(Ctrl_1_held_logical).w
+		bne.s	.diagup
+		btst	#bitL,(Ctrl_1_held_logical).w
+		bne.s	.diagup
+		move.b	#id_FireSteadyUp,anim(a0)
+		rts
+	.diagup:
+		move.b	#id_FireSteadyDiagUp,anim(a0)
+		rts
+	.diagdown:
+		move.b	#id_FireSteadyDiagDown,anim(a0)
+		rts
+
+Bass_HandleAirAnimations:
+		tst.b	shoottimer(a0)
+		beq.s	.notShooting
+		moveq	#0,d0
+		move.b	(v_shottype).w,d0
+		add.w	d0,d0
+		add.w	d0,d0
+		movea.l	.typesLUT(pc,d0.w),a2
+		jmp		(a2)
+	.typesLUT:
+		dc.l	AnimType_JumpNormalFire
+		dc.l	AnimType_JumpSemiCardinalFire
+;		dc.l	AnimType_JumpThrow
+	.notShooting:
+		tst.w	y_vel(a0)
+		bmi.s	.rising
+		cmpi.w	#$80,y_vel(a0)
+		bge.s	.falling
+	.neither:
+		move.b	#id_JumpTransition,anim(a0)
+		rts
+	.falling:
+		move.b	#id_Fall,anim(a0)
+		rts
+	.rising:
+		move.b	#id_Roll,anim(a0)
+		rts
+
+AnimType_JumpNormalFire:
+		move.b	#id_FireJumpingStraight,anim(a0)
+		rts
+
+AnimType_JumpSemiCardinalFire:
+		btst	#bitUp,(Ctrl_1_held_logical).w
+		bne.s	.up
+		btst	#bitDn,(Ctrl_1_held_logical).w
+		bne.s	.diagdown
+		move.b	#id_FireJumpingStraight,anim(a0)
+		rts
+	.up:
+		btst	#bitR,(Ctrl_1_held_logical).w
+		bne.s	.diagup
+		btst	#bitL,(Ctrl_1_held_logical).w
+		bne.s	.diagup
+		move.b	#id_FireJumpingUp,anim(a0)
+		rts
+	.diagup:
+		move.b	#id_FireJumpingDiagUp,anim(a0)
+		rts
+	.diagdown:
+		move.b	#id_FireJumpingDiagDown,anim(a0)
+		rts
 
 ; ---------------------------------------------------------------------------
 ; Object Data

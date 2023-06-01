@@ -6,6 +6,8 @@ Ani_Bass: offsetTable
 		offsetTableEntry.w SonAni_Step
 		offsetTableEntry.w SonAni_Walk
 		offsetTableEntry.w SonAni_Jump
+		offsetTableEntry.w SonAni_JumpTransition
+		offsetTableEntry.w SonAni_Fall
 		offsetTableEntry.w SonAni_Wait
 		offsetTableEntry.w SonAni_Dash
 		offsetTableEntry.w SonAni_Victory
@@ -30,11 +32,11 @@ SonAni_Step:
 SonAni_Walk:
 		dc.b	6, frB_Walk1, frB_Walk2, frB_Walk3, frB_Walk4, frB_Walk5, frB_Walk6, afEnd
 SonAni_Jump:
-		dc.b  $77, frB_Jump, afEnd
+		dc.b    6, frB_Jump, afEnd
 SonAni_JumpTransition:
-		dc.b  $77, frB_JumpT, afEnd
+		dc.b    6, frB_JumpT, afEnd
 SonAni_Fall:
-		dc.b  $77, frB_Fall, afEnd
+		dc.b    6, frB_Fall, afEnd
 SonAni_Wait:
 		dc.b	4
 		rept   16
@@ -45,9 +47,9 @@ SonAni_Wait:
 		endr
 		dc.b	afEnd
 SonAni_Dash:
-		dc.b  $77, frB_Dash, afEnd
+		dc.b    6, frB_Dash, afEnd
 SonAni_Victory:
-		dc.b  3, frB_Victory1, frB_Victory2, afEnd
+		dc.b    3, frB_Victory1, frB_Victory2, afEnd
 SonAni_Bubble:
 		dc.b $B, $AC,	$AC,   3,   4, afChange,   id_Walk
 SonAni_Death:
@@ -63,7 +65,7 @@ SonAni_Hurt:
 SonAni_Blank:
 		dc.b  $77, frB_Null, afEnd
 SonAni_FireStanding:
-		dc.b  $77, frB_Fire, afEnd
+		dc.b    6, frB_Fire, afEnd
 SonAni_FireWalking:
 		dc.b	6, frB_Walk1F, frB_Walk2F, frB_Walk3F, frB_Walk4F, frB_Walk5F, frB_Walk6F, afEnd
 SonAni_FireJumpingUp:
