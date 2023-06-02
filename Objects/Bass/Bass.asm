@@ -2226,6 +2226,11 @@ Bass_HandleGroundAnimations:
 ;		clr.b	move_lock(a0)
 ;
 ;	.notSteady:
+		tst.w	ground_vel(a0)
+		bne.s	.moving
+		move.b	#id_Wait,anim(a0)
+		rts
+	.moving:
 		cmpi.b	#id_Run,anim(a0)
 		ble.s	.alreadyGoing
 		cmpi.b	#id_Dash,prev_anim(a0)
