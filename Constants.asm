@@ -457,12 +457,12 @@ Status_ObjDefeated		= 7
 ArtTile_SpikesSprings		= $484
 ArtTile_Monitors			= $4AC
 ArtTile_StarPost			= $5E4
-ArtTile_Sonic				= $680
 ArtTile_Ring				= $6BC
 ArtTile_Ring_Sparks		= ArtTile_Ring+4
 ArtTile_HUD				= $6C4
 ArtTile_Shield			= $79C
 ArtTile_Shield_Sparks		= ArtTile_Shield+$1F
+ArtTile_Sonic				= $79E
 ArtTile_DashDust			= $7F0
 
 ; ---------------------------------------------------------------------------
