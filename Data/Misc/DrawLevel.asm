@@ -114,12 +114,12 @@ Draw_TileColumn2:
 
 Setup_TileColumnDraw:
 		move.w	d1,d2
-		andi.w	#$70,d2
+		andi.w	#4,d2
 		move.w	d1,d3
 		lsl.w	#4,d3
 		andi.w	#$F00,d3
-		asr.w	#4,d1
-		move.w	d1,d4
+		asr.w	#2,d1 ; divide by chunk size (32) and multiply by 8
+		move.w	d1,d4 
 		asr.w	#1,d1
 		and.w	(Layout_row_index_mask).w,d1
 		andi.w	#$F,d4
@@ -202,8 +202,8 @@ Setup_TileColumnDraw:
 		exg	d3,d5
 +		move.l	d5,(a1)+
 		move.l	d3,(a0)+
-		addi.w	#$10,d2
-		andi.w	#$70,d2
+		addi.w	#4,d2
+		andi.w	#4,d2
 		bne.s	+
 		addq.w	#4,d1
 		and.w	(Layout_row_index_mask).w,d1
@@ -221,15 +221,15 @@ Get_LevelChunkColumn:
 		andi.w	#$7FFF,d3
 		adda.w	d3,a4
 		move.w	d0,d3
-		asr.w	#7,d3
+		asr.w	#5,d3
 		adda.w	d3,a4
 		moveq	#-1,d3
 		clr.w	d3
 		move.b	(a4),d3
-		lsl.w	#7,d3
+		lsl.w	#3,d3
 		move.w	d0,d4
-		asr.w	#3,d4
-		andi.w	#$E,d4
+		asr.w	#1,d4
+		andi.w	#2,d4
 		add.w	d4,d3
 		movea.l	d3,a5
 
@@ -293,13 +293,13 @@ Draw_TileRow2:
 		and.w	(Camera_Y_pos_mask).w,d0
 
 Setup_TileRowDraw:
-		asr.w	#4,d1
+		asr.w	#2,d1 ; divide by chunk size (32) and multiply by block size (16) and divide by 2
 		move.w	d1,d2
 		move.w	d1,d4
 		asr.w	#3,d1
 		add.w	d2,d2
 		move.w	d2,d3
-		andi.w	#$E,d2
+		andi.w	#2,d2
 		add.w	d3,d3
 		andi.w	#$7C,d3
 		andi.w	#$1F,d4
@@ -374,7 +374,7 @@ Setup_TileRowDraw:
 +		move.l	d5,(a1)+
 		move.l	d3,(a0)+
 		addq.w	#2,d2
-		andi.w	#$E,d2
+		andi.w	#2,d2
 		bne.s	+
 		addq.w	#1,d1
 		bsr.s	Get_ChunkRow
@@ -387,7 +387,7 @@ Setup_TileRowDraw:
 Get_LevelAddrChunkRow:
 		movea.l	(Level_layout_addr_ROM).w,a4
 		move.w	d0,d3
-		asr.w	#5,d3
+		asr.w	#3,d3 ; divide by chunk size (32) and multiply by 4
 		and.w	(Layout_row_index_mask).w,d3
 		move.w	(a3,d3.w),d3
 		andi.w	#$7FFF,d3
@@ -397,9 +397,10 @@ Get_ChunkRow:
 		moveq	#-1,d3
 		clr.w	d3
 		move.b	(a4,d1.w),d3
-		lsl.w	#7,d3
+		lsl.w	#3,d3 ; multiply by chunk size in bytes (8)
 		move.w	d0,d4
-		andi.w	#$70,d4
+		lsr.w	#2,d4 ; divide by block size (16) and multiply by block row size in bytes (4)
+		andi.w	#4,d4
 		add.w	d4,d3
 		movea.l	d3,a5
 		rts

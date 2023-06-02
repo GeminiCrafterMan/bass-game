@@ -368,15 +368,15 @@ loc_EFA2:
 GetFloorPosition:
 		movea.l	(Level_layout_addr_ROM).w,a1
 		move.w	d2,d0
-		lsr.w	#5,d0
+		lsr.w	#3,d0 ; divide by chunk size (32) and multiply by 4
 		and.w	(Layout_row_index_mask).w,d0
 		move.w	8(a1,d0.w),d0
 		andi.w	#$7FFF,d0
 		adda.w	d0,a1
 		move.w	d3,d1
-		lsr.w	#3,d1
+		lsr.w	#1,d1	; divide by chunk size (32) and multiply by block size (16)
 		move.w	d1,d4
-		lsr.w	#4,d1
+		lsr.w	#4,d1	; divide by block size (16)
 		adda.w	d1,a1
 		moveq	#-1,d1
 		clr.w	d1
@@ -384,9 +384,10 @@ GetFloorPosition:
 		add.w	d1,d1
 		move.w	ChunkAddrArray(pc,d1.w),d1
 		move.w	d2,d0
-		andi.w	#$70,d0
+		lsr.w	#2,d0	; divide by block size (16) and multiply by block row size in bytes (4)
+		andi.w	#4,d0
 		add.w	d0,d1
-		andi.w	#$E,d4
+		andi.w	#2,d4
 		add.w	d4,d1
 		movea.l	d1,a1
 		rts
@@ -396,7 +397,7 @@ ChunkAddrArray:
 .a	set	0
 	rept	$100
 		dc.w	 .a
-.a	set	.a+$80
+.a	set	.a+8 ; add size of each chunk in bytes
 	endr
 
 ; =============== S U B R O U T I N E =======================================
