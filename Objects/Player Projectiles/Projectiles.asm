@@ -28,6 +28,11 @@ Obj_PlayerBall:
 		move.b	#1,damage(a0)	; deals 1 damage to anything but bosses
 		move.w	#bytes_to_word(8,8),height_pixels(a0)
 		move.w	#bytes_to_word(8/2,8/2),y_radius(a0)
+		jsr		(ObjFloorDist).l
+		tst.w	d1
+		bpl.s	.didntHit
+		bset	#7,status(a0)
+	.didntHit:
 		btst	#7,status(a0)
 		bne.w	.delete
 		out_of_xrange.s .delete	; is the projectile off-screen?

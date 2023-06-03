@@ -59,9 +59,9 @@ Sonic_Init:	; Routine 0
 		move.w	#bytes_to_word(48/2,48/2),height_pixels(a0)		; set height and width
 		move.b	#4,render_flags(a0)
 		clr.b	character_id(a0)
-		move.w	#$600,Sonic_Knux_top_speed-Sonic_Knux_top_speed(a4)
+		move.w	#$400,Sonic_Knux_top_speed-Sonic_Knux_top_speed(a4)
 		move.w	#$C,Sonic_Knux_acceleration-Sonic_Knux_top_speed(a4)
-		move.w	#$80,Sonic_Knux_deceleration-Sonic_Knux_top_speed(a4)
+		move.w	#$E0,Sonic_Knux_deceleration-Sonic_Knux_top_speed(a4)
 		clr.b	(v_bulletsonscreen).w	; clear bullets because uhhh bad idea to not do that
 		move.b	#32,(v_health).w		; this isn't used yet, but i'd like it to be here just in case.
 		tst.b	(Last_star_post_hit).w
@@ -233,9 +233,9 @@ Sonic_ChkShoes:										; checks if Speed Shoes have expired and disables them 
 		bne.s	Sonic_ExitChk
 		subq.b	#1,speed_shoes_timer(a0)				; reduce speed_shoes_timer only on every 8th frame
 		bne.s	Sonic_ExitChk
-		move.w	#$600,(a4)							; set Sonic_Knux_top_speed
+		move.w	#$400,(a4)							; set Sonic_Knux_top_speed
 		move.w	#$C,2(a4)							; set Sonic_Knux_acceleration
-		move.w	#$80,4(a4)							; set Sonic_Knux_deceleration
+		move.w	#$E0,4(a4)							; set Sonic_Knux_deceleration
 		bclr	#Status_SpeedShoes,status_secondary(a0)
 		music	mus_Slowdown						; run music at normal speed
 
@@ -293,9 +293,9 @@ Sonic_InWater:
 		jsr		Player_ResetAirTimer
 		move.l	#Obj_Air_CountDown,(v_Breathing_bubbles).w		; load Sonic's breathing bubbles
 		move.b	#$81,(v_Breathing_bubbles+subtype).w
-		move.w	#$300,Sonic_Knux_top_speed-Sonic_Knux_top_speed(a4)
+		move.w	#$200,Sonic_Knux_top_speed-Sonic_Knux_top_speed(a4)
 		move.w	#6,Sonic_Knux_acceleration-Sonic_Knux_top_speed(a4)
-		move.w	#$40,Sonic_Knux_deceleration-Sonic_Knux_top_speed(a4)
+		move.w	#$70,Sonic_Knux_deceleration-Sonic_Knux_top_speed(a4)
 		tst.b	object_control(a0)
 		bne.s	locret_10E2C
 		asr	x_vel(a0)
@@ -313,9 +313,9 @@ Sonic_OutWater:
 
 		movea.w	a0,a1
 		jsr		Player_ResetAirTimer
-		move.w	#$600,Sonic_Knux_top_speed-Sonic_Knux_top_speed(a4)
+		move.w	#$400,Sonic_Knux_top_speed-Sonic_Knux_top_speed(a4)
 		move.w	#$C,Sonic_Knux_acceleration-Sonic_Knux_top_speed(a4)
-		move.w	#$80,Sonic_Knux_deceleration-Sonic_Knux_top_speed(a4)
+		move.w	#$E0,Sonic_Knux_deceleration-Sonic_Knux_top_speed(a4)
 		cmpi.b	#id_SonicHurt,routine(a0)		; is Sonic falling back from getting hurt?
 		beq.s	loc_10EFC			; if yes, branch
 		tst.b	object_control(a0)
@@ -563,6 +563,12 @@ loc_113FE:
 		jsr		Bass_HandleGroundAnimations
 
 loc_11412:
+		cmpi.b	#id_FireSteadyUp,anim(a0)
+		blt.s	.cont
+		cmpi.b	#id_FireSteadyDiagDown,anim(a0)
+		bgt.s	.cont
+		rts
+	.cont:
 		sub.w	d5,d0
 		move.w	d6,d1
 		neg.w	d1
@@ -615,6 +621,12 @@ sub_11482:
 		jsr		Bass_HandleGroundAnimations
 
 loc_1149C:
+		cmpi.b	#id_FireSteadyUp,anim(a0)
+		blt.s	.cont
+		cmpi.b	#id_FireSteadyDiagDown,anim(a0)
+		bgt.s	.cont
+		rts
+	.cont:
 		add.w	d5,d0
 		cmp.w	d6,d0
 		blt.s	loc_114AA
@@ -2257,6 +2269,7 @@ AnimType_GroundNormalFire:
 		rts
 	.walk:
 		move.b	#id_FireWalking,anim(a0)
+		move.b	#id_FireWalking,prev_anim(a0)
 		rts
 
 AnimType_GroundSemiCardinalFire:
