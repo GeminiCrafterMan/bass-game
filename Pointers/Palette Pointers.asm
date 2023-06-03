@@ -6,9 +6,9 @@ PalPointers:				; palette address, RAM address, colours
 
 ; Main
 ptr_Pal_Bass:			palp	Pal_Bass, Normal_palette_line_1, 16		; 0 - Bass
-ptr_Pal_BassWep1:		palp	Pal_BassChillSpike, Normal_palette_line_1, 16		; 0 - Bass
-ptr_Pal_BassWep2:		palp	Pal_BassSolarBlaze, Normal_palette_line_1, 16		; 0 - Bass
-ptr_Pal_BassWep3:		palp	Pal_BassTripleBlade, Normal_palette_line_1, 16		; 0 - Bass
+ptr_Pal_BassWep1:		palp	Pal_BassScorchShield, Normal_palette_line_1, 16		; 0 - Bass
+ptr_Pal_BassWep2:		palp	Pal_Bass, Normal_palette_line_1, 16		; 0 - Bass
+ptr_Pal_BassWep3:		palp	Pal_Bass, Normal_palette_line_1, 16		; 0 - Bass
 ptr_Pal_BassWep4:		palp	Pal_Bass, Normal_palette_line_1, 16		; 0 - Bass
 ptr_Pal_BassWep5:		palp	Pal_Bass, Normal_palette_line_1, 16		; 0 - Bass
 ptr_Pal_BassWep6:		palp	Pal_Bass, Normal_palette_line_1, 16		; 0 - Bass

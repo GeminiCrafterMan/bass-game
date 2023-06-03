@@ -62,6 +62,8 @@ Sonic_Init:	; Routine 0
 		move.w	#$600,Sonic_Knux_top_speed-Sonic_Knux_top_speed(a4)
 		move.w	#$C,Sonic_Knux_acceleration-Sonic_Knux_top_speed(a4)
 		move.w	#$80,Sonic_Knux_deceleration-Sonic_Knux_top_speed(a4)
+		clr.b	(v_bulletsonscreen).w	; clear bullets because uhhh bad idea to not do that
+		move.b	#32,(v_health).w		; this isn't used yet, but i'd like it to be here just in case.
 		tst.b	(Last_star_post_hit).w
 		bne.s	Sonic_Init_Continued
 
@@ -69,7 +71,6 @@ Sonic_Init:	; Routine 0
 		move.w	#make_art_tile(ArtTile_Sonic,0,0),art_tile(a0)
 		move.w	#bytes_to_word($C,$D),top_solid_bit(a0)
 	.setWeaponEnergy:
-		move.b	#32,(v_health).w		; this isn't used yet, but i'd like it to be here just in case.
 		move.w	#bytes_to_word(32,32),(v_weapon1energy).w	; Weapon 1
 		move.w	#bytes_to_word(32,32),(v_weapon2energy).w	; Weapon 2
 		move.w	#bytes_to_word(32,32),(v_weapon3energy).w	; Weapon 3

@@ -15,15 +15,7 @@
                             "length": 1
                         },
                         {
-                            "path": "Objects/Bass/Palettes/Chill Spike.bin",
-                            "length": 1
-                        },
-                        {
-                            "path": "Objects/Bass/Palettes/Solar Blaze.bin",
-                            "length": 1
-                        },
-                        {
-                            "path": "Objects/Bass/Palettes/Triple Blade.bin",
+                            "path": "Objects/Bass/Palettes/Scorch Shield.bin",
                             "length": 1
                         }
                     ],
@@ -66,46 +58,6 @@
                             },
                             "uuid": "e76e2935-5dea-44d0-a0c2-ddb862f636f8",
                             "expanded": true
-                        },
-                        {
-                            "format": "Sonic 3&K Object.js",
-                            "name": "Triple Blade",
-                            "palettes": [],
-                            "art": {
-                                "path": "Objects/Player Projectiles/KosinskiM Art/Triple Blade.bin",
-                                "compression": "Kosinski-M",
-                                "offset": 0
-                            },
-                            "mappings": {
-                                "path": "Objects/Player Projectiles/Object Data/Map - Triple Blade.bin",
-                                "label": ""
-                            },
-                            "dplcs": {
-                                "enabled": false,
-                                "path": "",
-                                "label": ""
-                            },
-                            "uuid": "d3eeb972-0216-40c5-8830-fd89b96be491"
-                        },
-                        {
-                            "format": "Sonic 1.js",
-                            "name": "Chill Spike",
-                            "palettes": [],
-                            "art": {
-                                "path": "",
-                                "compression": "Uncompressed",
-                                "offset": 0
-                            },
-                            "mappings": {
-                                "path": "",
-                                "label": ""
-                            },
-                            "dplcs": {
-                                "enabled": false,
-                                "path": "",
-                                "label": ""
-                            },
-                            "uuid": "eeb97202-1650-4588-b0fd-89b96be49168"
                         }
                     ],
                     "isDirectory": true,
