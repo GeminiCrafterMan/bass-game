@@ -2,8 +2,6 @@
 ; Kosinski Module compressed main graphics
 ; ===========================================================================
 
-ArtKosM_Ring_Sparks:			binclude "Objects/Rings/KosinskiM Art/Sparks.bin"
-	even
 ArtKosM_Hud:					binclude "Objects/HUD/KosinskiM Art/HUD.bin"
 	even
 ArtKosM_Pickups:				binclude "Objects/Pickups/KosinskiM Art/Pickups.bin"
@@ -23,8 +21,6 @@ ArtKosM_DiagonalSpring:			binclude "Objects/Spring/KosinskiM Art/Diagonal Spring
 ArtKosM_Bubbles:				binclude "Objects/Bubbler/KosinskiM Art/Bubbles.bin"
 	even
 ArtKosM_WaterWave:				binclude "Objects/Water Wave/KosinskiM Art/Water Wave.bin"
-	even
-ArtKosM_SignpostStub:			binclude "Objects/Signpost/KosinskiM Art/Stub.bin"
 	even
 ArtKosM_ResultsGeneral:			binclude "Objects/Results/KosinskiM Art/Results General.bin"
 	even

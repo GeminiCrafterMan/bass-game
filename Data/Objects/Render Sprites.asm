@@ -30,7 +30,6 @@ Render_Sprites:
 		tst.b	(Level_started_flag).w
 		beq.s	Render_Sprites_LevelLoop
 		bsr.w	Render_HUD
-		bsr.w	Render_Rings
 
 Render_Sprites_LevelLoop:
 		tst.w	(a5)								; does this level have any objects?

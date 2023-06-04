@@ -76,18 +76,6 @@ SpriteLocPtrs:
 		zonewarning SpriteLocPtrs,(4*4)
 
 ; ===========================================================================
-; Ring locations index
-; ===========================================================================
-
-RingLocPtrs:
-		dc.l Test1_Rings		; Test1
-		dc.l Test2_Rings		; Test2
-		dc.l Test1_Rings		; Test3
-		dc.l Test1_Rings		; Test4
-
-		zonewarning RingLocPtrs,(4*4)
-
-; ===========================================================================
 ; Compressed level graphics - tile, primary patterns and block mappings
 ; ===========================================================================
 
@@ -144,15 +132,4 @@ Test1_Sprites:		binclude "Levels/Test/Object Pos/1.bin"
 	ObjectLayoutBoundary
 Test2_Sprites:		binclude "Levels/Test/Object Pos/2.bin"
 	ObjectLayoutBoundary
-	even
-
-; ===========================================================================
-; Level ring data
-; ===========================================================================
-
-	RingLayoutBoundary
-Test1_Rings:			binclude "Levels/Test/Ring Pos/1.bin"
-	RingLayoutBoundary
-Test2_Rings:			binclude "Levels/Test/Ring Pos/2.bin"
-	RingLayoutBoundary
 	even

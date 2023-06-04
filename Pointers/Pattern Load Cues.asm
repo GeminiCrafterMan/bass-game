@@ -21,7 +21,6 @@ Offs_PLC: offsetTable
 
 PLC_Main: plrlistheader
 		plreq ArtTile_StarPost, ArtKosM_EnemyPtsStarPost	; StarPost
-		plreq ArtTile_Ring_Sparks, ArtKosM_Ring_Sparks	; Rings
 		plreq ArtTile_HUD, ArtKosM_Hud					; HUD
 		plreq $79C, ArtKosM_BusterShots					; Buster shots
 PLC_Main_end

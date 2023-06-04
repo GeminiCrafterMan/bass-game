@@ -3,7 +3,7 @@
 ; ===========================================================================
 
 Obj_Index:
-		dc.l Obj_Ring							; $00
+		dc.l DeleteObject						; $00
 		dc.l DeleteObject						; $01
 		dc.l Obj_PathSwap						; $02
 		dc.l Obj_GravSwap						; $03

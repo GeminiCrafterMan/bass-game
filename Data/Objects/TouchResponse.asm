@@ -5,7 +5,6 @@
 ; =============== S U B R O U T I N E =======================================
 
 TouchResponse:
-		bsr.w	Test_Ring_Collisions
 		tst.b	character_id(a0)								; is the player Sonic?
 		bne.s	.Touch_NoInstaShield						; if not, branch
 		move.b	status_secondary(a0),d0
@@ -354,21 +353,9 @@ Touch_Hurt:
 
 HurtSonic:
 HurtCharacter:
-		move.w	(Ring_count).w,d0
-		btst	#Status_Shield,status_secondary(a0)		; does Sonic have shield?
-		bne.s	.hasshield							; if yes, branch
-		tst.b	status_tertiary(a0)
-		bmi.s	.bounce
-		tst.w	d0									; does Sonic have any rings?
+		move.b	(v_health).w,d0
+		tst.b	d0									; does Bass have any health?
 		beq.w	KillSonic								; if not, branch
-		bsr.w	Create_New_Sprite
-		bne.s	.hasshield
-		move.l	#Obj_Bouncing_Ring,address(a1)		; load bouncing multi rings object
-		move.w	x_pos(a0),x_pos(a1)
-		move.w	y_pos(a0),y_pos(a1)
-		move.w	a0,$3E(a1)
-
-.hasshield:
 		andi.b	#$8E,status_secondary(a0)
 
 .bounce:
@@ -406,9 +393,11 @@ HurtCharacter:
 ; ---------------------------------------------------------------------------
 
 DeathOrbs_VelTbl:	; okay this kind of makes no sense but it also works to help visualize the orbs
-		dc.w	-$140, -$140,	0, -$180,	$140, -$140
-		dc.w	-$180, 0,						$180, 0
-		dc.w	-$140, $140,	0, $180,	$140, $140
+		dc.w	-$180, -$180,	$0, -$200,	$180, -$180
+		dc.w					$0, -$100
+		dc.w	-$200, $0,	-$100, 0,	$100, 0,	$200, 0
+		dc.w					$0, $100
+		dc.w	-$180, $180,	$0, $200,	$180, $180
 	even
 
 KillSonic:
@@ -417,7 +406,7 @@ Kill_Character:
 		bne.w	.dontdie						; if yes, branch
 		clr.l	(v_Shield).w						; remove shield
 		clr.l	(v_Invincibility_stars).w
-		moveq	#8-1,d1						; 8 total, counting the first
+		moveq	#12-1,d1						; 8 total, counting the first
 		lea		(DeathOrbs_VelTbl).l,a3
 
 	.spawnOrbs:

@@ -114,7 +114,6 @@ Level_Screen:
 		move.b	d0,(HUD_RAM.status).w
 		tst.b	(Last_star_post_hit).w							; are you starting from a starpost?
 		bne.s	.starpost									; if yes, branch
-		move.w	d0,(Ring_count).w						; clear rings
 		move.l	d0,(Timer).w								; clear time
 		move.b	d0,(Saved_status_secondary).w
 		move.b	d0,(Respawn_table_keep).w
@@ -125,11 +124,9 @@ Level_Screen:
 		moveq	#1,d0
 		move.b	d0,(Ctrl_1_locked).w
 		move.b	d0,(Update_HUD_score).w					; update score counter
-		move.b	d0,(Update_HUD_ring_count).w			; update rings counter
 		move.b	d0,(Update_HUD_timer).w					; update time counter
 		move.b	d0,(Level_started_flag).w
 		move.l	#Load_Sprites_Init,(Object_load_addr_RAM).w
-		move.l	#Load_Rings_Init,(Rings_manager_addr_RAM).w
 		tst.b	(Water_flag).w
 		beq.s	.notwater2
 		move.l	#Obj_WaterWave,(v_WaterWave).w
@@ -137,7 +134,6 @@ Level_Screen:
 .notwater2
 		bsr.w	SpawnLevelMainSprites
 		jsr	(Load_Sprites).w
-		jsr	(Load_Rings).w
 		jsr	(Process_Sprites).w
 		jsr	(Render_Sprites).w
 		jsr	(Animate_Tiles).l
@@ -166,11 +162,9 @@ Level_Screen:
 		jsr	(DeformBgLayer).w
 		jsr	(ScreenEvents).l
 		jsr	(Handle_Onscreen_Water_Height).l
-		jsr	(Load_Rings).w
 		jsr	(Animate_Tiles).l
 		jsr	(Process_Kos_Module_Queue).w
 		jsr	(OscillateNumDo).w
-		jsr	(ChangeRingFrame).w
 		jsr	(Render_Sprites).w
 		cmpi.b	#id_LevelScreen,(Game_mode).w
 		beq.s	.loop

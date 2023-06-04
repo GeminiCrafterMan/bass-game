@@ -2,7 +2,6 @@
 ; Main objects data
 ; ===========================================================================
 
-		include "Objects/Rings/Rings.asm"
 		include "Objects/PathSwap/PathSwap.asm"
 		include "Objects/PathSwap/GravSwap.asm"
 		include	"Objects/Pickups/Pickups.asm"
@@ -12,7 +11,6 @@
 		include "Objects/Invisible Blocks/Invisible Block(Hurt).asm"
 		include "Objects/Invisible Blocks/Invisible Block(Kill).asm"
 		include "Objects/Title Card/Title Card.asm"
-		include "Objects/Signpost/Signpost.asm"
 		include "Objects/Results/LevelResults.asm"
 		include "Objects/Explosion/Boss Explosion.asm"
 		include "Objects/Explosion/Explosion.asm"
