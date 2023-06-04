@@ -17,6 +17,10 @@
                         {
                             "path": "Objects/Bass/Palettes/Scorch Shield.bin",
                             "length": 1
+                        },
+                        {
+                            "path": "Objects/Bass/Palettes/Freeze Frame.bin",
+                            "length": 1
                         }
                     ],
                     "art": {
