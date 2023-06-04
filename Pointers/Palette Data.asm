@@ -14,5 +14,7 @@ Pal_WaterSonic:		binclude "Objects/Bass/Palettes/Water Sonic.bin"
 	even
 Pal_LevelSelect:	binclude "Data/Screens/Level Select/Palettes/1.bin"
 	even
-Pal_Test:			binclude "Levels/Test/Palettes/Level.bin"
+Pal_Test1:			binclude "Levels/Test/Palettes/Level 1.bin"
+	even
+Pal_Test2:			binclude "Levels/Test/Palettes/Level 2.bin"
 	even
