@@ -354,8 +354,11 @@ Touch_Hurt:
 HurtSonic:
 HurtCharacter:
 		move.b	(v_health).w,d0
-		tst.b	d0									; does Bass have any health?
-		beq.w	KillSonic								; if not, branch
+		sub.b	damage(a2),d0
+		tst.b	d0									; does Bass have any health remaining?
+		beq.w	KillSonic							; if not, branch
+		bmi.w	KillSonic							; if not, branch
+		move.b	d0,(v_health).w
 		andi.b	#$8E,status_secondary(a0)
 
 .bounce:
