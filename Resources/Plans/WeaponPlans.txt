@@ -16,7 +16,7 @@ A rapid fire buster that fires regular shots, up to 5 on screen. Shots cannot pa
 A slower firing buster that fires triple spread shots.
 
 (Weapon) Bass Buster Type-F
-A semi automatic buster that fires more powerful shots that cannot be aimed, up to 3 on screen at a time. You can hold down the button to charge it up to 2 levels.
+A semi automatic buster that fires more powerful shots that cannot be aimed, up to 3 on screen at a time. You can hold down the button to charge it up to 2 levels. Shots can pass through walls.
 
 
 (Module) HP Up Parts 1
@@ -35,7 +35,11 @@ A shield much like Water Shield that incinerates enemies and projectiles alike. 
 (Module) Houshou-geki 鳳昇撃 (Phoenix's Rising Attack)
 An upwards dash that kinda works as a super double jump and hurts enemies directly below you by sending flames from bass's legs downwards.
 
---==  ==--
+--== VIDEO MAN ==--
+
+(Weapon) Freeze Frame
+A full-level timestop that depletes ammo at a rapid rate.
+
 --==  ==--
 --==  ==--
 --==  ==--

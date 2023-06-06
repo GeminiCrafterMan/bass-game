@@ -3,41 +3,41 @@
 ; ---------------------------------------------------------------------------
 
 Ani_Bass: offsetTable
-		offsetTableEntry.w SonAni_Step
-		offsetTableEntry.w SonAni_Walk
-		offsetTableEntry.w SonAni_Jump
-		offsetTableEntry.w SonAni_JumpTransition
-		offsetTableEntry.w SonAni_Fall
-		offsetTableEntry.w SonAni_Wait
-		offsetTableEntry.w SonAni_Dash
-		offsetTableEntry.w SonAni_Victory
-		offsetTableEntry.w SonAni_Bubble
-		offsetTableEntry.w SonAni_Death
-		offsetTableEntry.w SonAni_Drown
-		offsetTableEntry.w SonAni_Hurt
-		offsetTableEntry.w SonAni_Blank
-		offsetTableEntry.w SonAni_FireStanding
-		offsetTableEntry.w SonAni_FireWalking
-		offsetTableEntry.w SonAni_FireJumpingUp
-		offsetTableEntry.w SonAni_FireJumpingDiagUp
-		offsetTableEntry.w SonAni_FireJumpingStraight
-		offsetTableEntry.w SonAni_FireJumpingDiagDown
-		offsetTableEntry.w SonAni_FireSteadyUp
-		offsetTableEntry.w SonAni_FireSteadyDiagUp
-		offsetTableEntry.w SonAni_FireSteadyStraight
-		offsetTableEntry.w SonAni_FireSteadyDiagDown
+		offsetTableEntry.w BassAni_Step
+		offsetTableEntry.w BassAni_Walk
+		offsetTableEntry.w BassAni_Jump
+		offsetTableEntry.w BassAni_JumpTransition
+		offsetTableEntry.w BassAni_Fall
+		offsetTableEntry.w BassAni_Wait
+		offsetTableEntry.w BassAni_Dash
+		offsetTableEntry.w BassAni_Victory
+		offsetTableEntry.w BassAni_Bubble
+		offsetTableEntry.w BassAni_Death
+		offsetTableEntry.w BassAni_Drown
+		offsetTableEntry.w BassAni_Hurt
+		offsetTableEntry.w BassAni_Blank
+		offsetTableEntry.w BassAni_FireStanding
+		offsetTableEntry.w BassAni_FireWalking
+		offsetTableEntry.w BassAni_FireJumpingUp
+		offsetTableEntry.w BassAni_FireJumpingDiagUp
+		offsetTableEntry.w BassAni_FireJumpingStraight
+		offsetTableEntry.w BassAni_FireJumpingDiagDown
+		offsetTableEntry.w BassAni_FireSteadyUp
+		offsetTableEntry.w BassAni_FireSteadyDiagUp
+		offsetTableEntry.w BassAni_FireSteadyStraight
+		offsetTableEntry.w BassAni_FireSteadyDiagDown
 
-SonAni_Step:
+BassAni_Step:
 		dc.b	6, frB_Step,  afChange,  id_Run
-SonAni_Walk:
+BassAni_Walk:
 		dc.b	6, frB_Walk1, frB_Walk2, frB_Walk3, frB_Walk4, frB_Walk5, frB_Walk6, afEnd
-SonAni_Jump:
+BassAni_Jump:
 		dc.b    6, frB_Jump, afEnd
-SonAni_JumpTransition:
+BassAni_JumpTransition:
 		dc.b    6, frB_JumpT, afEnd
-SonAni_Fall:
+BassAni_Fall:
 		dc.b    6, frB_Fall, afEnd
-SonAni_Wait:
+BassAni_Wait:
 		dc.b	4
 		rept   16
 			dc.b	frB_Idle1
@@ -46,43 +46,43 @@ SonAni_Wait:
 			dc.b	frB_Idle2
 		endr
 		dc.b	afEnd
-SonAni_Dash:
+BassAni_Dash:
 		dc.b    6, frB_Dash, afEnd
-SonAni_Victory:
+BassAni_Victory:
 		dc.b    3, frB_Victory1, frB_Victory2, afEnd
-SonAni_Bubble:
+BassAni_Bubble:
 		dc.b $B, $AC,	$AC,   3,   4, afChange,   id_Walk
-SonAni_Death:
+BassAni_Death:
 		dc.b  1
 		rept  6
 			dc.b	frB_Death1, frB_Death2, frB_Death2, frB_Death3, frB_Death4, frB_Death4, frB_Death5
 		endr
 		dc.b  frB_Null, frB_Null, frB_Null, afEnd
-SonAni_Drown:
+BassAni_Drown:
 		dc.b  $20, $A7,	afEnd
-SonAni_Hurt:
+BassAni_Hurt:
 		dc.b  $77, frB_Hurt, afEnd
-SonAni_Blank:
+BassAni_Blank:
 		dc.b  $77, frB_Null, afEnd
-SonAni_FireStanding:
+BassAni_FireStanding:
 		dc.b    6, frB_Fire, afEnd
-SonAni_FireWalking:
+BassAni_FireWalking:
 		dc.b	6, frB_Walk1F, frB_Walk2F, frB_Walk3F, frB_Walk4F, frB_Walk5F, frB_Walk6F, afEnd
-SonAni_FireJumpingUp:
+BassAni_FireJumpingUp:
 		dc.b  $77, frB_FireJUp, afEnd
-SonAni_FireJumpingDiagUp:
+BassAni_FireJumpingDiagUp:
 		dc.b  $77, frB_FireJDiagUp, afEnd
-SonAni_FireJumpingStraight:
+BassAni_FireJumpingStraight:
 		dc.b  $77, frB_FireJStraight, afEnd
-SonAni_FireJumpingDiagDown:
+BassAni_FireJumpingDiagDown:
 		dc.b  $77, frB_FireJDiagDown, afEnd
-SonAni_FireSteadyUp:
+BassAni_FireSteadyUp:
 		dc.b  $77, frB_FireSUp, afEnd
-SonAni_FireSteadyDiagUp:
+BassAni_FireSteadyDiagUp:
 		dc.b  $77, frB_FireSDiagUp, afEnd
-SonAni_FireSteadyStraight:
+BassAni_FireSteadyStraight:
 		dc.b  $77, frB_FireSStraight, afEnd
-SonAni_FireSteadyDiagDown:
+BassAni_FireSteadyDiagDown:
 		dc.b  $77, frB_FireSDiagDown, afEnd
 	even
 

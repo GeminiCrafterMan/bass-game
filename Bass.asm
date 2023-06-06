@@ -290,7 +290,7 @@ EndOfHeader:
 ; Subroutine to load Bass object
 ; ---------------------------------------------------------------------------
 
-		include "Objects/Bass/Bass.asm"
+		include "Objects/Player Characters/Bass/Bass.asm"
 		include "Objects/Spin Dust/SpinDust.asm"
 		include "Objects/Player Projectiles/Projectiles.asm"
 
@@ -330,9 +330,9 @@ EndOfHeader:
 ; ---------------------------------------------------------------------------
 
 		if GameDebugAlt
-			include "Objects/Bass/DebugMode(Crackers).asm"
+			include "Objects/Player Characters/DebugMode(Crackers).asm"
 		else
-			include "Objects/Bass/DebugMode.asm"
+			include "Objects/Player Characters/DebugMode.asm"
 		endif
 
 	endif
