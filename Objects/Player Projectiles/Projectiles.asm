@@ -5,7 +5,7 @@ Obj_PlayerLemon:
 		move.b	#1,mapping_frame(a0)
 		move.w	#$200,priority(a0)
 		move.b	#4,render_flags(a0)
-		move.b	#1,damage(a0)	; deals 1 damage to anything but bosses
+		move.b	#2,damage(a0)	; deals 2 damage to anything but bosses
 		move.w	#bytes_to_word(8,8),height_pixels(a0)
 		move.w	#bytes_to_word(8/2,8/2),y_radius(a0)
 		btst	#7,status(a0)

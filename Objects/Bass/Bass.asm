@@ -63,7 +63,7 @@ Sonic_Init:	; Routine 0
 		move.w	#$C,Sonic_Knux_acceleration-Sonic_Knux_top_speed(a4)
 		move.w	#$E0,Sonic_Knux_deceleration-Sonic_Knux_top_speed(a4)
 		clr.b	(v_bulletsonscreen).w	; clear bullets because uhhh bad idea to not do that
-		move.b	#32,(v_health).w		; this isn't used yet, but i'd like it to be here just in case.
+		move.b	#28,(v_health).w		; this isn't used yet, but i'd like it to be here just in case.
 		tst.b	(Last_star_post_hit).w
 		bne.s	Sonic_Init_Continued
 
@@ -71,15 +71,15 @@ Sonic_Init:	; Routine 0
 		move.w	#make_art_tile(ArtTile_Sonic,0,0),art_tile(a0)
 		move.w	#bytes_to_word($C,$D),top_solid_bit(a0)
 	.setWeaponEnergy:
-		move.w	#bytes_to_word(32,32),(v_weapon1energy).w	; Weapon 1
-		move.w	#bytes_to_word(32,32),(v_weapon2energy).w	; Weapon 2
-		move.w	#bytes_to_word(32,32),(v_weapon3energy).w	; Weapon 3
-		move.w	#bytes_to_word(32,32),(v_weapon4energy).w	; Weapon 4
-		move.w	#bytes_to_word(32,32),(v_weapon5energy).w	; Weapon 5
-		move.w	#bytes_to_word(32,32),(v_weapon6energy).w	; Weapon 6
-		move.w	#bytes_to_word(32,32),(v_weapon7energy).w	; Weapon 7
-		move.w	#bytes_to_word(32,32),(v_weapon8energy).w	; Weapon 8
-		move.w	#bytes_to_word(32,32),(v_utility1energy).w; Treble Boost
+		move.w	#bytes_to_word(28,28),(v_weapon1energy).w	; Weapon 1
+		move.w	#bytes_to_word(28,28),(v_weapon2energy).w	; Weapon 2
+		move.w	#bytes_to_word(28,28),(v_weapon3energy).w	; Weapon 3
+		move.w	#bytes_to_word(28,28),(v_weapon4energy).w	; Weapon 4
+		move.w	#bytes_to_word(28,28),(v_weapon5energy).w	; Weapon 5
+		move.w	#bytes_to_word(28,28),(v_weapon6energy).w	; Weapon 6
+		move.w	#bytes_to_word(28,28),(v_weapon7energy).w	; Weapon 7
+		move.w	#bytes_to_word(28,28),(v_weapon8energy).w	; Weapon 8
+		move.w	#bytes_to_word(28,28),(v_utility1energy).w; Treble Boost
 
 		; only happens when not starting at a Special Stage ring:
 		move.w	x_pos(a0),(Saved_X_pos).w

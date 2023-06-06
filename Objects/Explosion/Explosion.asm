@@ -20,11 +20,6 @@ off_1E5EE: offsetTable
 
 loc_1E5F6:
 		addq.b	#2,routine(a0)
-		jsr	(Create_New_Sprite).w
-		bne.s	loc_1E61A
-		move.l	#Obj_Pickups,address(a1)
-		move.w	x_pos(a0),x_pos(a1)
-		move.w	y_pos(a0),y_pos(a1)
 
 loc_1E61A:
 		sfx	sfx_Break
@@ -47,7 +42,7 @@ loc_1E626:
 loc_1E66E:
 		subq.b	#1,anim_frame_timer(a0)
 		bpl.s	+
-		move.b	#7,anim_frame_timer(a0)
+		move.b	#3,anim_frame_timer(a0)
 		addq.b	#1,mapping_frame(a0)
 		cmpi.b	#5,mapping_frame(a0)
 		beq.w	loc_1E758
@@ -129,4 +124,4 @@ Obj_EnemyScore:
 		jmp	(Draw_Sprite).w
 ; ---------------------------------------------------------------------------
 
-		include "Objects/Explosion/Object Data/Map - Explosion.asm"
+Map_Explosion:		binclude "Objects/Explosion/Object Data/Map - Explosion.bin"

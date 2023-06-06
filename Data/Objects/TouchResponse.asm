@@ -178,6 +178,10 @@ Touch_ChkValue:
 		andi.b	#$3F,d0								; get only collision size
 		cmpi.b	#6,d0								; is touch response $46 ?
 		beq.s	Touch_Monitor						; if yes, branch
+		cmpa.w	#Player_1,a0
+		beq.s	.player
+		bra.s	.locret								; invincible
+	.player:
 		move.b	(Player_1+invulnerability_timer).w,d0	; get the main character's invulnerability_timer
 		cmpi.b	#90,d0								; is there more than 90 frames on the timer remaining?
 		bhs.s	.locret								; if so, branch
@@ -188,6 +192,12 @@ Touch_ChkValue:
 ; ---------------------------------------------------------------------------
 
 Touch_Monitor:
+		cmpa.w	#Player_1,a0
+		beq.s	.player
+	; something about shot health for piercing...
+		bset	#7,status(a0)
+		bra.s	.break
+	.player:
 		move.w	y_vel(a0),d0							; get player's y_vel
 		tst.b	(Reverse_gravity_flag).w					; are we in reverse gravity mode?
 		beq.s	.normalgravity						; if not, branch
@@ -246,11 +256,18 @@ Touch_Monitor:
 		cmpi.b	#id_Roll,anim(a0)						; is Sonic rolling/jumping?
 		bne.s	.locret
 		neg.w	y_vel(a0)
+	.break:
 		move.b	#4,routine(a1)
 		rts
 ; ---------------------------------------------------------------------------
 
 Touch_Enemy:
+		cmpa.w	#Player_1,a0
+		beq.s	.player
+	; something about shot health for piercing...
+		bset	#7,status(a0)
+		bra.s	.checkhurtenemy
+	.player:
 		btst	#Status_Invincible,status_secondary(a0)		; does Sonic have invincibility?
 		bne.s	.checkhurtenemy						; if yes, branch
 		bra.w	Touch_ChkHurt
@@ -259,17 +276,28 @@ Touch_Enemy:
 		; Boss related? Could be special enemies in general
 		tst.b	boss_hitcount2(a1)
 		beq.s	Touch_EnemyNormal
+		move.b	collision_flags(a1),collision_restore_flags(a1)	; save current collision
+		clr.b	collision_flags(a1)
+		cmpa.w	#Player_1,a0
+		bne.s	.hpChecksBullet
 		neg.w	x_vel(a0)								; bounce player directly off boss
 		neg.w	y_vel(a0)
 		neg.w	ground_vel(a0)
-		move.b	collision_flags(a1),collision_restore_flags(a1)	; save current collision
-		clr.b	collision_flags(a1)
+	.hurtHPEnemy:
 		subq.b	#1,boss_hitcount2(a1)
 		bne.s	.bossnotdefeated
+	.killHPEnemy:
 		bset	#7,status(a1)
 
 .bossnotdefeated:
 		rts
+
+.hpChecksBullet:
+		move.b	damage(a0),d0
+		subi.b	d0,boss_hitcount2(a1)	; subtract buster shot HP from enemy's...
+		ble.s	.killHPEnemy		; and break the enemy if it's 0
+		bset	#7,status(a0)		; otherwise, destroy the buster shot
+		bra.s	.bossnotdefeated
 ; ---------------------------------------------------------------------------
 
 Touch_EnemyNormal:
@@ -300,12 +328,52 @@ Touch_EnemyNormal:
 		bsr.w	HUD_AddToScore
 		move.l	#Obj_Explosion,address(a1)			; change object to explosion
 		clr.b	routine(a1)
+		move.w	x_pos(a1),d1
+		move.w	y_pos(a1),d2
+		cmpa.w	#Player_1,a0
+		bne.s	.spawnItem
 		tst.w	y_vel(a0)
 		bmi.s	.bouncedown
 		move.w	y_pos(a0),d0
 		cmp.w	y_pos(a1),d0							; was player above, or at the same height as, the enemy when it was destroyed
 		bhs.s	.bounceup
 		neg.w	y_vel(a0)
+	.spawnItem:
+	; Create a random drop!
+	; From a disassembly of Mega Man 1, the rates are...
+	;
+	; Nothing = 24/128
+	; 1 Up = 1/128
+	; Bonus Ball = 69/128
+	; Small Weapon = 15/128
+	; Small Health = 15/128
+	; Large Weapon = 2/128
+	; Large Health = 2/128
+	;
+	; However, I'm going to replace 2/3 of the Bonus Ball chance with Small Screw, and the last 1/3 with Large Screw.
+	; Therefore...
+	;
+	; Nothing = 24/128
+	; 1 Up = 1/128
+	; Small Screw = 46/128
+	; Large Screw = 23/128
+	; Small Weapon = 15/128
+	; Small Health = 15/128
+	; Large Weapon = 2/128
+	; Large Health = 2/128
+		moveq	#0,d0
+		jsr	(Create_New_Sprite).w
+;		bne.s	.ret
+		move.l	#Obj_Pickups,address(a1)
+		move.w	d1,x_pos(a1)
+		move.w	d2,y_pos(a1)
+		moveq	#0,d0
+;		moveq	#0,d1
+		jsr		(RandomNumber).l
+		andi.w	#127,d0
+		move.b	ItemProbabilityLUT(pc,d0.w),subtype(a1)
+;		move.b	#8,obSubtype(a1)
+	.ret:
 		rts
 ; ---------------------------------------------------------------------------
 
@@ -321,6 +389,32 @@ Touch_EnemyNormal:
 
 Enemy_Points:	dc.w 10, 20, 50, 100					; points awarded div 10
 ; ---------------------------------------------------------------------------
+
+ItemProbabilityLUT:
+	; nothing
+		rept 24
+			dc.b 9
+		endm
+	; 1up
+		dc.b 0
+	; no etanks will probably not be included
+	; small screw
+		rept 46
+			dc.b 8
+		endm
+	; large screw
+		rept 23
+			dc.b 9
+		endm
+	; small health & small weapon energy
+		rept 15
+			dc.b 5
+			dc.b 7
+		endm
+	; large health & weapon energy
+		dc.b 4, 4, 6, 6
+	even
+; ---------------------------------------------------------------------------
 ; subroutine for checking if Sonic/Tails/Knuckles should be hurt and hurting them if so
 ; note: character must be at a0
 ; ---------------------------------------------------------------------------
@@ -328,6 +422,9 @@ Enemy_Points:	dc.w 10, 20, 50, 100					; points awarded div 10
 ; =============== S U B R O U T I N E =======================================
 
 Touch_ChkHurt:
+	; this one is used almost exclusively
+		cmpa.w	#Player_1,a0
+		bne.s	Touch_ChkHurt_Return
 		move.b	status_secondary(a0),d0
 
 Touch_ChkHurt2:
@@ -459,6 +556,7 @@ Kill_Character:
 ; ---------------------------------------------------------------------------
 
 Touch_Special:
+	; this had something about not destroying the shot?
 		move.b	collision_flags(a1),d1					; get collision_flags
 		andi.b	#$3F,d1								; get only collision size (but that doesn't seems to be its use here)
 		cmpi.b	#7,d1
@@ -498,3 +596,26 @@ Add_SpriteToCollisionResponseList:
 
 .locret:
 		rts
+
+GenericEnemy_Hurt:
+		tst.b	collision_flags(a0)			; if collision flags aren't empty, act normal
+		bne.s	.nopain
+		btst	#6,status(a0)				; if you're supposed to be flashing already, then do it
+		bne.s	.flashy
+		move.b	#4,boss_invulnerable_time(a0)	; set the time to 4 frames and make the boss hit sound
+		bset	#6,status(a0)
+		sfx		sfx_BossHit,1
+	.flashy:
+		subq.b	#1,boss_invulnerable_time(a0)
+		beq.s	.restore
+		btst	#0,boss_invulnerable_time(a0)
+		jeq		DisplaySprite
+		rts
+	.restore:
+		move.b	collision_restore_flags(a0),collision_flags(a0)
+		bclr	#6,status(a0)
+	.ret:
+		rts
+
+	.nopain:
+		jmp	(Sprite_OnScreen_Test_Collision).w

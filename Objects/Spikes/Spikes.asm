@@ -15,7 +15,7 @@ byte_23F74:
 ; =============== S U B R O U T I N E =======================================
 
 Obj_Spikes:
-		move.b	#16,damage(a0)
+		move.b	#14,damage(a0)
 		ori.b	#4,render_flags(a0)
 		move.w	#$200,priority(a0)
 		move.b	subtype(a0),d0

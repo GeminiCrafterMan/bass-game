@@ -8,8 +8,6 @@ ArtKosM_Pickups:				binclude "Objects/Pickups/KosinskiM Art/Pickups.bin"
 	even
 ArtKosM_SpikesSprings:			binclude "Objects/Spikes/KosinskiM Art/SpikesSprings.bin"
 	even
-ArtKosM_BossExplosion:			binclude "Objects/Explosion/KosinskiM Art/Boss Explosion.bin"
-	even
 ArtKosM_Explosion:				binclude "Objects/Explosion/KosinskiM Art/Explosion.bin"
 	even
 ArtKosM_EnemyPtsStarPost:		binclude "Objects/StarPost/KosinskiM Art/Enemy points.bin"
@@ -62,3 +60,6 @@ ArtKosM_DEZTitleCard:			binclude "Objects/Title Card/KosinskiM Art/Levels/DEZ - 
 ; ===========================================================================
 ; Kosinski Module compressed Test graphics
 ; ===========================================================================
+
+ArtKosM_Target:					binclude "Objects/Target/KosinskiM Art/Target.bin"
+	even
