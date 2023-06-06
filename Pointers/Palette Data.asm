@@ -8,6 +8,8 @@ Pal_BassScorchShield:	binclude "Objects/Bass/Palettes/Scorch Shield.bin"
 	even
 Pal_BassFreezeFrame:	binclude "Objects/Bass/Palettes/Freeze Frame.bin"
 	even
+Pal_BassWep3:		binclude "Objects/Bass/Palettes/Weapon 3.bin"
+	even
 Pal_BassTreble:		binclude "Objects/Bass/Palettes/Treble Boost.bin"
 	even
 Pal_WaterSonic:		binclude "Objects/Bass/Palettes/Water Sonic.bin"

@@ -2257,19 +2257,12 @@ Bass_HandleGroundAnimations:
 		rts
 
 AnimType_GroundNormalFire:
-		cmpi.b	#id_Walk,anim(a0)
-		beq.s	.step
-		cmpi.b	#id_Run,anim(a0)
-		beq.s	.walk
+		tst.w	ground_vel(a0)
+		bne.s	.walk
 		move.b	#id_FireStanding,anim(a0)
-		rts
-	.step:
-		move.b	#id_FireStanding,anim(a0)
-		move.b	#id_FireWalking,prev_anim(a0)	; should make this change to that when it's done
 		rts
 	.walk:
 		move.b	#id_FireWalking,anim(a0)
-		move.b	#id_FireWalking,prev_anim(a0)
 		rts
 
 AnimType_GroundSemiCardinalFire:
