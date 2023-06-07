@@ -209,6 +209,8 @@ y_pos =					$14 ; word, or long when extra precision is required
 y_sub =					y_pos+2 ; word
 mapping_frame =			$22 ; byte
 previous_frame =		$48	; byte
+art_address =			$38	; long
+dplc_address =			$3C	; long
 
 ; ---------------------------------------------------------------------------
 ; Conventions followed by most objects:
@@ -451,16 +453,14 @@ Status_ObjDefeated		= 7
 ; Universal (used on all standard levels)
 ; ---------------------------------------------------------------------------
 
-ArtTile_SpikesSprings		= $484
-ArtTile_Monitors			= $4AC
-ArtTile_StarPost			= $5E4
-ArtTile_Ring				= $6BC
-ArtTile_Ring_Sparks		= ArtTile_Ring+4
+ArtTile_SpikesSprings	= $484
+ArtTile_Monitors		= $4AC
+ArtTile_StarPost		= $5E4
 ArtTile_HUD				= $6C4
-ArtTile_Shield			= $79C
-ArtTile_Shield_Sparks		= ArtTile_Shield+$1F
-ArtTile_Sonic				= $79E
-ArtTile_DashDust			= $7F0
+ArtTile_BusterShots		= $79C
+ArtTile_Sonic			= $79E
+ArtTile_WeaponStuff		= $7B0
+ArtTile_DashDust		= $7F0
 
 ; ---------------------------------------------------------------------------
 ; VRAM data
