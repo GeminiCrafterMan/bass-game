@@ -231,7 +231,7 @@ f_jpad_6button:						= *
 Six_button_flag:					ds.b 1
 f_jpad2_6button:						= *
 Six_button_flag_2:					ds.b 1
-Player_mode:						ds.b 1					; even
+									ds.b 1					; even
 Sonic_Knux_top_speed:				ds.w 1
 Sonic_Knux_acceleration:			ds.w 1
 Sonic_Knux_deceleration:			ds.w 1
@@ -379,7 +379,8 @@ Apparent_zone:						= *
 Apparent_zone_and_act:				ds.b 1
 a_act:								= *
 Apparent_act:						ds.b 1
-
+Player_mode:						ds.b 1
+									ds.b 1		; even
 f_timeover:							= *
 Time_over_flag:						ds.b 1
 f_ringcount:						= *

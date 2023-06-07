@@ -249,5 +249,8 @@ Animate_CopyRobot:
 ; Object Data
 ; ---------------------------------------------------------------------------
 		include "Objects/Player Characters/Copy Robot/Object Data/Anim - Copy Robot.asm"
+		even
 Map_CopyRobot:		binclude "Objects/Player Characters/Copy Robot/Object Data/Map - Copy Robot.bin"
+		even
 PLC_CopyRobot:		binclude "Objects/Player Characters/Copy Robot/Object Data/PLC - Copy Robot.bin"
+		even

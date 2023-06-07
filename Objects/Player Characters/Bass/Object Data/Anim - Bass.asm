@@ -11,9 +11,7 @@ Ani_Bass: offsetTable
 		offsetTableEntry.w BassAni_Wait
 		offsetTableEntry.w BassAni_Dash
 		offsetTableEntry.w BassAni_Victory
-		offsetTableEntry.w BassAni_Bubble
 		offsetTableEntry.w BassAni_Death
-		offsetTableEntry.w BassAni_Drown
 		offsetTableEntry.w BassAni_Hurt
 		offsetTableEntry.w BassAni_Blank
 		offsetTableEntry.w BassAni_FireStanding
@@ -29,14 +27,19 @@ Ani_Bass: offsetTable
 
 BassAni_Step:
 		dc.b	6, frB_Step,  afChange,  id_Run
+		even
 BassAni_Walk:
 		dc.b	6, frB_Walk1, frB_Walk2, frB_Walk3, frB_Walk4, frB_Walk5, frB_Walk6, afEnd
+		even
 BassAni_Jump:
 		dc.b    6, frB_Jump, afEnd
+		even
 BassAni_JumpTransition:
 		dc.b    6, frB_JumpT, afEnd
+		even
 BassAni_Fall:
 		dc.b    6, frB_Fall, afEnd
+		even
 BassAni_Wait:
 		dc.b	4
 		rept   16
@@ -46,44 +49,56 @@ BassAni_Wait:
 			dc.b	frB_Idle2
 		endr
 		dc.b	afEnd
+		even
 BassAni_Dash:
 		dc.b    6, frB_Dash, afEnd
+		even
 BassAni_Victory:
 		dc.b    3, frB_Victory1, frB_Victory2, afEnd
-BassAni_Bubble:
-		dc.b $B, $AC,	$AC,   3,   4, afChange,   id_Walk
+		even
 BassAni_Death:
 		dc.b  1
 		rept  6
 			dc.b	frB_Death1, frB_Death2, frB_Death2, frB_Death3, frB_Death4, frB_Death4, frB_Death5
 		endr
 		dc.b  frB_Null, frB_Null, frB_Null, afEnd
-BassAni_Drown:
-		dc.b  $20, $A7,	afEnd
+		even
 BassAni_Hurt:
 		dc.b  $77, frB_Hurt, afEnd
+		even
 BassAni_Blank:
 		dc.b  $77, frB_Null, afEnd
+		even
 BassAni_FireStanding:
 		dc.b    6, frB_Fire, afEnd
+		even
 BassAni_FireWalking:
 		dc.b	6, frB_Walk1F, frB_Walk2F, frB_Walk3F, frB_Walk4F, frB_Walk5F, frB_Walk6F, afEnd
+		even
 BassAni_FireJumpingUp:
 		dc.b  $77, frB_FireJUp, afEnd
+		even
 BassAni_FireJumpingDiagUp:
 		dc.b  $77, frB_FireJDiagUp, afEnd
+		even
 BassAni_FireJumpingStraight:
 		dc.b  $77, frB_FireJStraight, afEnd
+		even
 BassAni_FireJumpingDiagDown:
 		dc.b  $77, frB_FireJDiagDown, afEnd
+		even
 BassAni_FireSteadyUp:
 		dc.b  $77, frB_FireSUp, afEnd
+		even
 BassAni_FireSteadyDiagUp:
 		dc.b  $77, frB_FireSDiagUp, afEnd
+		even
 BassAni_FireSteadyStraight:
 		dc.b  $77, frB_FireSStraight, afEnd
+		even
 BassAni_FireSteadyDiagDown:
 		dc.b  $77, frB_FireSDiagDown, afEnd
+		even
 	even
 
 ; Animation IDs
@@ -96,9 +111,7 @@ id_Fall:				ds.b 1
 id_Wait:				ds.b 1
 id_Dash:				ds.b 1
 id_Victory:				ds.b 1
-id_GetAir:				ds.b 1
 id_Death:				ds.b 1
-id_Drown:				ds.b 1
 id_Hurt:				ds.b 1
 id_Null:				ds.b 1
 id_FireStanding:		ds.b 1

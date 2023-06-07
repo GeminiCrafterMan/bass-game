@@ -11,9 +11,7 @@ Ani_CopyRobot: offsetTable
 		offsetTableEntry.w CopyAni_Wait
 		offsetTableEntry.w CopyAni_Dash
 		offsetTableEntry.w CopyAni_Victory
-		offsetTableEntry.w CopyAni_Bubble
 		offsetTableEntry.w CopyAni_Death
-		offsetTableEntry.w CopyAni_Drown
 		offsetTableEntry.w CopyAni_Hurt
 		offsetTableEntry.w CopyAni_Blank
 		offsetTableEntry.w CopyAni_FireStanding
@@ -29,14 +27,19 @@ Ani_CopyRobot: offsetTable
 
 CopyAni_Step:
 		dc.b	6, frC_Step,  afChange,  id_Run
+		even
 CopyAni_Walk:
 		dc.b	6, frC_Walk1, frC_Walk2, frC_Walk3, frC_Walk4, frC_Walk5, frC_Walk6, afEnd
+		even
 CopyAni_Jump:
 		dc.b    6, frC_Jump, afEnd
+		even
 CopyAni_JumpTransition:
 		dc.b    6, frC_JumpT, afEnd
+		even
 CopyAni_Fall:
 		dc.b    6, frC_Fall, afEnd
+		even
 CopyAni_Wait:
 		dc.b	4
 		rept   8
@@ -44,44 +47,56 @@ CopyAni_Wait:
 		endr
 			dc.b	frC_Idle3, frC_Idle4
 		dc.b	afEnd
+		even
 CopyAni_Dash:
 		dc.b    6, frC_Dash, afEnd
+		even
 CopyAni_Victory:
 		dc.b    3, frC_Victory1, frC_Victory2, afEnd
-CopyAni_Bubble:
-		dc.b $B, $AC,	$AC,   3,   4, afChange,   id_Walk
+		even
 CopyAni_Death:
 		dc.b  1
 		rept  6
 			dc.b	frC_Death1, frC_Death2, frC_Death2, frC_Death3, frC_Death4, frC_Death4, frC_Death5
 		endr
 		dc.b  frC_Null, frC_Null, frC_Null, afEnd
-CopyAni_Drown:
-		dc.b  $20, $A7,	afEnd
+		even
 CopyAni_Hurt:
 		dc.b  $77, frC_Hurt, afEnd
+		even
 CopyAni_Blank:
 		dc.b  $77, frC_Null, afEnd
+		even
 CopyAni_FireStanding:
 		dc.b    6, frC_Fire, afEnd
+		even
 CopyAni_FireWalking:
 		dc.b	6, frC_Walk1F, frC_Walk2F, frC_Walk3F, frC_Walk4F, frC_Walk5F, frC_Walk6F, afEnd
+		even
 CopyAni_FireJumpingUp:
 		dc.b  $77, frC_FireJUp, afEnd
+		even
 CopyAni_FireJumpingDiagUp:
 		dc.b  $77, frC_FireJDiagUp, afEnd
+		even
 CopyAni_FireJumpingStraight:
 		dc.b  $77, frC_FireJStraight, afEnd
+		even
 CopyAni_FireJumpingDiagDown:
 		dc.b  $77, frC_FireJDiagDown, afEnd
+		even
 CopyAni_FireSteadyUp:
 		dc.b  $77, frC_FireSUp, afEnd
+		even
 CopyAni_FireSteadyDiagUp:
 		dc.b  $77, frC_FireSDiagUp, afEnd
+		even
 CopyAni_FireSteadyStraight:
 		dc.b  $77, frC_FireSStraight, afEnd
+		even
 CopyAni_FireSteadyDiagDown:
 		dc.b  $77, frC_FireSDiagDown, afEnd
+		even
 	even
 
 ; Frame IDs

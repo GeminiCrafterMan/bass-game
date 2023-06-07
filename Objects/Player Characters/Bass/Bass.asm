@@ -1485,84 +1485,12 @@ Animate_Bass:
 		lea	Ani_Bass(pc),a1
 		jmp		Animate_Player
 
-; =============== S U B R O U T I N E =======================================
-; ---------------------------------------------------------------------------
-; Player graphics loading subroutine
-; ---------------------------------------------------------------------------
-
-Player_Load_PLC:	; huge thanks to AngelKOR64.
-		bsr.w	ReloadPlayerMaps
-		moveq	#0,d0
-		move.b	mapping_frame(a0),d0
-
-Player_Load_PLC2:
-		cmp.b	previous_frame(a0),d0
-		beq.s	.noChange
-		move.b	d0,previous_frame(a0)
-		bsr.w	PlayerDPLCToA2
-		add.w	d0,d0
-		adda.w	(a2,d0.w),a2
-		moveq	#0,d5
-		move.w	(a2)+,d5
-		subq.w	#1,d5
-		bmi.s	.noChange
-		move.w	art_tile(a0),d4	; get art tile
-		andi.w	#$7FF,d4		; clear art flags
-		lsl.w	#5,d4			; get VRAM address
-		bsr.w	PlayerArtToD6
-
-	.readEntry:
-		moveq	#0,d1
-		move.w	(a2)+,d1
-		move.w	d1,d3
-		lsr.w	#8,d3
-		andi.w	#$F0,d3
-		addi.w	#$10,d3
-		andi.w	#$FFF,d1
-		lsl.l	#4,d1
-		add.l	d6,d1
-		move.w	d4,d2
-		add.w	d3,d4
-		add.w	d3,d4
-		jsr	(Add_To_DMA_Queue).w
-		dbf	d5,.readEntry
-	.noChange:
-		rts
-; End of function Player_Load_PLC
-
-ReloadPlayerMaps:
-		moveq	#0,d0
-		move.b	character_id(a0),d0
-		lsl.w	#2,d0
-		move.l	.mapLUT(pc,d0.w),mappings(a0)
-		rts
-
-	.mapLUT:
-		dc.l	Map_Bass, Map_CopyRobot
-
-PlayerDPLCToA2:
-		moveq	#0,d1
-		move.b	character_id(a0),d1
-		lsl.w	#2,d1
-		movea.l	.plcLUT(pc,d1.w),a2
-		rts
-
-	.plcLUT:
-		dc.l	PLC_Bass, PLC_CopyRobot
-
-PlayerArtToD6:
-		moveq	#0,d6
-		move.b	character_id(a0),d6
-		lsl.w	#2,d6
-		move.l	.artLUT(pc,d6.w),d6
-		rts
-
-	.artLUT:
-		dc.l	ArtUnc_Bass>>1, ArtUnc_CopyRobot>>1
-
 ; ---------------------------------------------------------------------------
 ; Object Data
 ; ---------------------------------------------------------------------------
 		include "Objects/Player Characters/Bass/Object Data/Anim - Bass.asm"
+		even
 Map_Bass:		binclude "Objects/Player Characters/Bass/Object Data/Map - Bass.bin"
+		even
 PLC_Bass:		binclude "Objects/Player Characters/Bass/Object Data/PLC - Bass.bin"
+		even
