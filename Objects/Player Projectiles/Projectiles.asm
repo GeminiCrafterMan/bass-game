@@ -105,7 +105,7 @@ Obj_MegaFullCharge:
 		bpl.s	.stay
 		move.b	#2,anim_frame_timer(a0)
 		addq.b	#1,mapping_frame(a0)
-		cmpi.b	#6,mapping_frame(a0)
+		cmpi.b	#7,mapping_frame(a0)
 		bne.s	.stay
 		move.b	#3,mapping_frame(a0)
 	.stay:
