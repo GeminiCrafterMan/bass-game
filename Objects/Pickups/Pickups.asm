@@ -151,6 +151,7 @@ CollectValidPickup:
 	
 	.addEN:
 		move.b	(v_weapon).w,d1
+		beq.s	.ret
 		lea		(v_weapon1energy).w,a1
 		lea		(v_weapon1max).w,a2
 		subq.b	#1,d1

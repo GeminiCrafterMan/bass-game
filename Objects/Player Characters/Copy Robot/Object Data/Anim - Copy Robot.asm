@@ -26,7 +26,7 @@ Ani_CopyRobot: offsetTable
 		offsetTableEntry.w CopyAni_FireSteadyDiagDown
 
 CopyAni_Step:
-		dc.b	6, frC_Step,  afChange,  id_Run
+		dc.b	4, frC_Step1, frC_Step2, afChange,  id_Run
 CopyAni_Walk:
 		dc.b	6, frC_Walk1, frC_Walk2, frC_Walk3, frC_Walk4, frC_Walk5, frC_Walk6, afEnd
 CopyAni_Jump:
@@ -43,7 +43,7 @@ CopyAni_Wait:
 			dc.b	frC_Idle3, frC_Idle4
 		dc.b	afEnd
 CopyAni_Dash:
-		dc.b    6, frC_Dash, afEnd
+		dc.b    4, frC_Slide1, frC_Slide2, afEnd
 CopyAni_Victory:
 		dc.b    3, frC_Victory1, frC_Victory2, afEnd
 CopyAni_Death:
@@ -85,7 +85,8 @@ frC_Idle1:	ds.b 1
 frC_Idle2:	ds.b 1
 frC_Idle3:	ds.b 1
 frC_Idle4:	ds.b 1
-frC_Step:	ds.b 1
+frC_Step1:	ds.b 1
+frC_Step2:	ds.b 1
 frC_Walk1:	ds.b 1
 frC_Walk2:	ds.b 1
 frC_Walk3:	ds.b 1
@@ -116,7 +117,8 @@ frC_Death2:	ds.b 1
 frC_Death3:	ds.b 1
 frC_Death4:	ds.b 1
 frC_Death5:	ds.b 1
-frC_Dash:	ds.b 1
+frC_Slide1:	ds.b 1
+frC_Slide2:	ds.b 1
 frC_Jump:	ds.b 1
 frC_JumpT:	ds.b 1
 frC_Fall:	ds.b 1

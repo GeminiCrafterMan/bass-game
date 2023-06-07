@@ -26,7 +26,7 @@ Ani_Bass: offsetTable
 		offsetTableEntry.w BassAni_FireSteadyDiagDown
 
 BassAni_Step:
-		dc.b	6, frB_Step,  afChange,  id_Run
+		dc.b	8, frB_Step,  afChange,  id_Run
 BassAni_Walk:
 		dc.b	6, frB_Walk1, frB_Walk2, frB_Walk3, frB_Walk4, frB_Walk5, frB_Walk6, afEnd
 BassAni_Jump:

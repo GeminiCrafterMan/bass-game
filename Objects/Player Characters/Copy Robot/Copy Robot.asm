@@ -138,7 +138,7 @@ CopyRobot_Modes: offsetTable
 CopyRobot_MdNormal:
 		bsr.w	Player_WeaponSwitch
 		bsr.w	Player_Shoot
-		bsr.w	CopyRobot_Dash
+		bsr.w	CopyRobot_Slide
 		bsr.w	Sonic_Jump
 		bsr.w	Player_SlopeResist
 		bsr.w	Sonic_Move
@@ -171,12 +171,12 @@ locC_10FD6:
 		bra.w	Player_DoLevelCollision
 ; ---------------------------------------------------------------------------
 ; Start of subroutine CopyRobot_MdRoll
-; Called if CopyRobot is dashing
+; Called if CopyRobot is sliding
 ; CopyRobot_Spin_Path:
 CopyRobot_MdRoll:
 		bsr.w	Player_WeaponSwitch
-		bsr.w	Sonic_Jump
-		bsr.w	CopyRobot_KeepDashing	; dash timer test
+		bsr.w	Sonic_Jump.cont	; skips slide check
+		bsr.w	CopyRobot_KeepSliding	; slide timer test
 		bsr.w	Player_RollRepel
 		bsr.w	Sonic_RollSpeed
 		bsr.w	Player_LevelBound
@@ -186,12 +186,12 @@ CopyRobot_MdRoll:
 		bra.w	Player_SlopeRepel
 
 ; ---------------------------------------------------------------------------
-; Subroutine allowing CopyRobot to dash
+; Subroutine allowing CopyRobot to slide
 ; ---------------------------------------------------------------------------
 
 ; =============== S U B R O U T I N E =======================================
 
-CopyRobot_Dash:
+CopyRobot_Slide:
 		bra.s	.canMove
 	.cantMove:
 		rts
@@ -199,19 +199,20 @@ CopyRobot_Dash:
 		tst.w	move_lock(a0)
 		bne.s	.cantMove
 		btst	#Status_Dash,status(a0)
-		bne.s	CopyRobot_KeepDashing	; keep dashing
+		bne.s	CopyRobot_KeepSliding	; keep sliding
 		tst.b	dashtimer(a0)		; cooldown
 		bne.s	.cantMove			; on cooldown
-		btst	#bitA,(Ctrl_1_pressed_logical).w	; A button dash
+		btst	#bitDn,(Ctrl_1_held_logical).w	; Down...
 		beq.s	.cantMove
-	; was gonna add down+jump dash as well but kind of unnecessary
-CopyRobot_KeepDashing:
-		btst	#Status_Dash,status(a0)	; is CopyRobot already dashing?
-		beq.s	CopyRobot_StartDash			; if not, start dashing
-		tst.b	dashtimer(a0)			; is there time left on your dash?
-		beq.w	CopyRobot_StartDash.stopDashing	; if not, stop dashing
+		andi.b	#btnC,(Ctrl_1_pressed_logical).w	; ...and jump
+		beq.s	.cantMove
+CopyRobot_KeepSliding:
+		btst	#Status_Dash,status(a0)	; is CopyRobot already sliding?
+		beq.s	CopyRobot_StartSlide			; if not, start sliding
+		tst.b	dashtimer(a0)			; is there time left on your slide?
+		beq.w	CopyRobot_StartSlide.stopSliding	; if not, stop sliding
 		rts
-CopyRobot_StartDash:
+CopyRobot_StartSlide:
 		bset	#Status_Dash,status(a0)
 		moveq	#0,d0
 		move.w	#$500,d0
@@ -222,8 +223,9 @@ CopyRobot_StartDash:
 		move.w	d0,ground_vel(a0)	; set ground vel
 		move.b	#id_Dash,anim(a0)
 		move.b	#30,dashtimer(a0)
+		move.w	#bytes_to_word(16/2,16/2),y_radius(a0)
 		sfx		sfx_Dash,1
-	.stopDashing:
+	.stopSliding:
 		move.b	(Ctrl_1_held_logical).w,d0
 		andi.w	#btnDir,d0
 		bne.s	.held

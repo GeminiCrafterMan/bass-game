@@ -770,6 +770,11 @@ Bass_StartDash:
 ; =============== S U B R O U T I N E =======================================
 
 Sonic_Jump:	; Remove all traces of rolling later
+		tst.b	character_id(a0)	; Bass or Copy Robot?
+		beq.s	.cont				; if Bass, continue and ignore this block
+		btst	#bitDn,(Ctrl_1_held_logical).w	; is Down held?
+		bne.w	locret_118B2		; if so, don't jump
+	.cont:
 		move.b	(Ctrl_1_pressed_logical).w,d0
 		andi.b	#btnC,d0
 		beq.w	locret_118B2
