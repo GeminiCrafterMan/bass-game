@@ -114,7 +114,7 @@ locC_10C26:
 		move.b	prev_anim(a0),anim(a0)
 +		btst	#1,object_control(a0)
 		bne.s	++
-		bsr.w	Animate_CopyRobot
+		bsr.w	Animate_Player
 		tst.b	(Reverse_gravity_flag).w
 		beq.s	+
 		eori.b	#2,render_flags(a0)
@@ -239,18 +239,9 @@ CopyRobot_StartDash:
 ; ---------------------------------------------------------------------------
 		include	"Objects/Player Characters/Copy Robot/Weapons/Mega Buster.asm"
 
-; =============== S U B R O U T I N E =======================================
-
-Animate_CopyRobot:
-		lea	Ani_CopyRobot(pc),a1
-		jmp		Animate_Player
-
 ; ---------------------------------------------------------------------------
 ; Object Data
 ; ---------------------------------------------------------------------------
 		include "Objects/Player Characters/Copy Robot/Object Data/Anim - Copy Robot.asm"
-		even
 Map_CopyRobot:		binclude "Objects/Player Characters/Copy Robot/Object Data/Map - Copy Robot.bin"
-		even
 PLC_CopyRobot:		binclude "Objects/Player Characters/Copy Robot/Object Data/PLC - Copy Robot.bin"
-		even

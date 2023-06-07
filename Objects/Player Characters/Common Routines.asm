@@ -410,6 +410,16 @@ Call_Player_AnglePos:
 
 Animate_Player:
 		moveq	#0,d0
+		move.b	character_id(a0),d0
+		lsl.w	#2,d0
+		move.l	.aniRoutLUT(pc,d0.w),a1
+		bra.s	.cont
+
+	.aniRoutLUT:
+		dc.l	Ani_Bass, Ani_CopyRobot
+
+	.cont:
+		moveq	#0,d0
 		move.b	anim(a0),d0
 		cmp.b	prev_anim(a0),d0
 		beq.s	SAnim_Do

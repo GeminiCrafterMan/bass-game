@@ -114,7 +114,7 @@ loc_10C26:
 		move.b	prev_anim(a0),anim(a0)
 +		btst	#1,object_control(a0)
 		bne.s	++
-		bsr.w	Animate_Bass
+		bsr.w	Animate_Player
 		tst.b	(Reverse_gravity_flag).w
 		beq.s	+
 		eori.b	#2,render_flags(a0)
@@ -1479,18 +1479,9 @@ loc_12590:
 +		bsr.w	sub_125E0
 		jmp	(Draw_Sprite).w
 
-; =============== S U B R O U T I N E =======================================
-
-Animate_Bass:
-		lea	Ani_Bass(pc),a1
-		jmp		Animate_Player
-
 ; ---------------------------------------------------------------------------
 ; Object Data
 ; ---------------------------------------------------------------------------
 		include "Objects/Player Characters/Bass/Object Data/Anim - Bass.asm"
-		even
 Map_Bass:		binclude "Objects/Player Characters/Bass/Object Data/Map - Bass.bin"
-		even
 PLC_Bass:		binclude "Objects/Player Characters/Bass/Object Data/PLC - Bass.bin"
-		even
