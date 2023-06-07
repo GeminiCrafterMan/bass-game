@@ -377,8 +377,6 @@ loc_11438:
 		bne.s	locret_11480
 		cmpi.w	#$400,d0
 		blt.s	locret_11480
-		tst.b	flip_type(a0)
-		bmi.s	locret_11480
 		sfx		sfx_Skid
 		move.b	#id_Null,anim(a0)
 		bclr	#Status_Facing,status(a0)
@@ -431,8 +429,6 @@ loc_114BE:
 		bne.s	locret_11506
 		cmpi.w	#-$400,d0
 		bgt.s	locret_11506
-		tst.b	flip_type(a0)
-		bmi.s	locret_11506
 		sfx		sfx_Skid
 		move.b	#id_Null,anim(a0)
 		bset	#Status_Facing,status(a0)
@@ -735,7 +731,7 @@ Bass_KeepDashing:
 		btst	#Status_Dash,status(a0)	; is Bass already dashing?
 		beq.s	Bass_StartDash			; if not, start dashing
 		tst.b	dashtimer(a0)			; is there time left on your dash?
-		beq.w	Bass_StartDash.stopDashing	; if not, stop dashing
+		beq.s	Bass_StopDashing	; if not, stop dashing
 		rts
 Bass_StartDash:
 		bset	#Status_Dash,status(a0)
@@ -749,12 +745,18 @@ Bass_StartDash:
 		move.b	#id_Dash,anim(a0)
 		move.b	#30,dashtimer(a0)
 		sfx		sfx_Dash,1
-	.stopDashing:
-		move.b	(Ctrl_1_held_logical).w,d0
-		andi.w	#btnDir,d0
-		bne.s	.held
-		clr.w	ground_vel(a0)
+Bass_StopDashing:
+		moveq	#0,d0
+		move.b	(Ctrl_1_held_logical).w,d1
+		andi.w	#btnLR,d1
+		beq.s	.cont
 	.held:
+		move.w	(a4),d0
+		btst	#Status_Facing,status(a0)
+		beq.s	.cont
+		neg.w	d0
+	.cont:
+		move.w	d0,ground_vel(a0)
 		jsr		Player_HandleGroundAnimations
 		subq.w	#1,y_pos(a0)
 		move.w	default_y_radius(a0),y_radius(a0)
@@ -1331,10 +1333,8 @@ loc_121D8:
 		moveq	#0,d0
 		move.b	d0,jumping(a0)
 		move.w	d0,(Chain_bonus_counter).w
-		sfx		sfx_JumpLand
-		move.b	d0,flip_angle(a0)
-		move.b	d0,flip_type(a0)
 		move.b	d0,scroll_delay_counter(a0)
+		sfx		sfx_JumpLand
 		tst.b	double_jump_flag(a0)
 		beq.s	locret_12230
 		tst.b	character_id(a0)

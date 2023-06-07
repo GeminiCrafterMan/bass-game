@@ -5,11 +5,12 @@ Player_Init:
 		move.w	#$100,priority(a0)
 		move.w	#bytes_to_word(48/2,48/2),height_pixels(a0)		; set height and width
 		move.b	#4,render_flags(a0)
-		move.w	#$400,Sonic_Knux_top_speed-Sonic_Knux_top_speed(a4)
+		move.w	#$300,Sonic_Knux_top_speed-Sonic_Knux_top_speed(a4)
 		move.w	#$C,Sonic_Knux_acceleration-Sonic_Knux_top_speed(a4)
 		move.w	#$E0,Sonic_Knux_deceleration-Sonic_Knux_top_speed(a4)
-		clr.b	(v_bulletsonscreen).w	; clear bullets because uhhh bad idea to not do that
-		move.b	#28,(v_health).w		; this isn't used yet, but i'd like it to be here just in case.
+		clr.l	(v_bulletsonscreen).w	; clear bullets, weapon, charge, charge cycle timer
+		clr.b	(v_chargecycnum).w		; clear charge cycle number
+		move.b	#28,(v_health).w		; set health... change later to include a "max health" variable as well
 		tst.b	(Last_star_post_hit).w
 		bne.s	Player_Init_Continued
 
@@ -151,13 +152,14 @@ WepType_Normal:
 		btst	#Status_Facing,status(a0)
 		beq.s	.notFlipped
 		bset	#Status_Facing,status(a1)
-		subi.w	#17,x_pos(a1)
+		subi.w	#10,x_pos(a1)
 		neg.w	ground_vel(a1)
 		bra.s	.doneFlip
 	.notFlipped:
 		bclr	#Status_Facing,status(a1)
-		addi.w	#17,x_pos(a1)
+		addi.w	#10,x_pos(a1)
 	.doneFlip:
+		addq.w	#2,y_pos(a1)
 		move.w	ground_vel(a1),x_vel(a1)	; actually make it go
 		rts
 
@@ -173,13 +175,14 @@ WepType_SemiCardinal_straight:
 		btst	#Status_Facing,status(a0)
 		beq.s	.notFlipped
 		bset	#Status_Facing,status(a1)
-		subi.w	#17,x_pos(a1)
+		subi.w	#10,x_pos(a1)
 		neg.w	ground_vel(a1)
 		bra.s	.doneFlip
 	.notFlipped:
 		bclr	#Status_Facing,status(a1)
-		addi.w	#17,x_pos(a1)
+		addi.w	#10,x_pos(a1)
 	.doneFlip:
+		addq.w	#2,y_pos(a1)
 		move.w	ground_vel(a1),x_vel(a1)	; actually make it go
 		rts
 WepType_SemiCardinal_up:
@@ -191,13 +194,14 @@ WepType_SemiCardinal_up:
 		btst	#Status_Facing,status(a0)
 		beq.s	.upNotFlipped
 		bset	#Status_Facing,status(a1)
-		subi.w	#5,x_pos(a1)
+		subi.w	#3,x_pos(a1)
 		bra.s	.upDoneFlip
 	.upNotFlipped:
 		bclr	#Status_Facing,status(a1)
-		addi.w	#5,x_pos(a1)
+		addi.w	#3,x_pos(a1)
 	.upDoneFlip:
 		neg.w	ground_vel(a1)
+		subq.w	#6,y_pos(a1)
 		move.w	ground_vel(a1),y_vel(a1)	; actually make it go
 		rts
 	.diagup:
@@ -208,13 +212,14 @@ WepType_SemiCardinal_up:
 		btst	#Status_Facing,status(a0)
 		beq.s	.diagupNotFlipped
 		bset	#Status_Facing,status(a1)
-		subi.w	#5,x_pos(a1)
+		subi.w	#10,x_pos(a1)
 		neg.w	ground_vel(a1)
 		bra.s	.diagupDoneFlip
 	.diagupNotFlipped:
 		bclr	#Status_Facing,status(a1)
-		addi.w	#5,x_pos(a1)
+		addi.w	#10,x_pos(a1)
 	.diagupDoneFlip:
+		subq.w	#2,y_pos(a1)
 		move.w	ground_vel(a1),x_vel(a1)
 		rts
 WepType_SemiCardinal_diagdown:
@@ -223,13 +228,14 @@ WepType_SemiCardinal_diagdown:
 		btst	#Status_Facing,status(a0)
 		beq.s	.notFlipped
 		bset	#Status_Facing,status(a1)
-		subi.w	#5,x_pos(a1)
+		subi.w	#10,x_pos(a1)
 		neg.w	ground_vel(a1)
 		bra.s	.doneFlip
 	.notFlipped:
 		bclr	#Status_Facing,status(a1)
-		addi.w	#5,x_pos(a1)
+		addi.w	#10,x_pos(a1)
 	.doneFlip:
+		addq.w	#5,y_pos(a1)
 		move.w	ground_vel(a1),x_vel(a1)
 		rts
 
@@ -287,7 +293,7 @@ Player_ChkShoes:										; checks if Speed Shoes have expired and disables them
 		bne.s	Player_ExitChk
 		subq.b	#1,speed_shoes_timer(a0)				; reduce speed_shoes_timer only on every 8th frame
 		bne.s	Player_ExitChk
-		move.w	#$400,(a4)							; set Sohic_Knux_top_speed
+		move.w	#$300,(a4)							; set Sohic_Knux_top_speed
 		move.w	#$C,2(a4)							; set Sohic_Knux_acceleration
 		move.w	#$E0,4(a4)							; set Sohic_Knux_deceleration
 		bclr	#Status_SpeedShoes,status_secondary(a0)
@@ -344,7 +350,7 @@ Player_InWater:
 		bne.s	locret_10E2C									; if already underwater, branch
 		addq.b	#1,(Water_entered_counter).w
 		movea.w	a0,a1
-		move.w	#$200,Sonic_Knux_top_speed-Sonic_Knux_top_speed(a4)
+		move.w	#$180,Sonic_Knux_top_speed-Sonic_Knux_top_speed(a4)
 		move.w	#6,Sonic_Knux_acceleration-Sonic_Knux_top_speed(a4)
 		move.w	#$70,Sonic_Knux_deceleration-Sonic_Knux_top_speed(a4)
 		tst.b	object_control(a0)
@@ -363,7 +369,7 @@ Player_OutWater:
 		addq.b	#1,(Water_entered_counter).w
 
 		movea.w	a0,a1
-		move.w	#$400,Sonic_Knux_top_speed-Sonic_Knux_top_speed(a4)
+		move.w	#$300,Sonic_Knux_top_speed-Sonic_Knux_top_speed(a4)
 		move.w	#$C,Sonic_Knux_acceleration-Sonic_Knux_top_speed(a4)
 		move.w	#$E0,Sonic_Knux_deceleration-Sonic_Knux_top_speed(a4)
 		cmpi.b	#id_BassHurt,routine(a0)		; is Sonic falling back from getting hurt?
@@ -511,9 +517,9 @@ Player_Load_PLC:	; huge thanks to AngelKOR64.
 		move.b	mapping_frame(a0),d0
 
 Player_Load_PLC2:
-		cmp.b	(Player_prev_frame).w,d0
+		cmp.b	previous_frame(a0),d0
 		beq.s	.noChange
-		move.b	d0,(Player_prev_frame).w
+		move.b	d0,previous_frame(a0)
 		bsr.w	PlayerDPLCToA2
 		add.w	d0,d0
 		adda.w	(a2,d0.w),a2
@@ -588,38 +594,29 @@ Player_HandleGroundAnimations:
 		dc.l	AnimType_GroundNormalFire
 		dc.l	AnimType_GroundSemiCardinalFire
 ;		dc.l	AnimType_GroundThrow
+
 	.notShooting:
-;		cmpi.b	#id_FireSteadyUp,anim(a0)
-;		blt.s	.notSteady
-;		cmpi.b	#id_FireSteadyDiagDown,anim(a0)
-;		bgt.s	.notSteady
-;		clr.b	move_lock(a0)
-;
-;	.notSteady:
-		tst.w	ground_vel(a0)
-		bne.s	.moving
+		mvabs.w	ground_vel(a0),d0	; Standing still?
+		bne.s	.moving				; if not, move your ass
 		move.b	#id_Wait,anim(a0)
 		rts
 	.moving:
-		cmpi.b	#id_Run,anim(a0)
-		ble.s	.alreadyGoing
-		cmpi.b	#id_Dash,prev_anim(a0)
-		bne.s	.toWalk
-		move.b	#id_Run,anim(a0)
+		cmpi.w	#$58,d0	; $58 speed?
+		ble.s	.toWalk
+		move.w	#bytes_to_word(id_Run,id_Run),anim(a0)
 		rts
 	.toWalk:
-;		move.w	#bytes_to_word(id_Walk,id_Walk),anim(a0)	; also goes to prev_anim
 		move.b	#id_Walk,anim(a0)
-	.alreadyGoing:
 		rts
 
 AnimType_GroundNormalFire:
-		tst.w	ground_vel(a0)
-		bne.s	.walk
+		mvabs.w	ground_vel(a0),d0	; Standing still?
+		cmpi.w	#$58,d0	; $58 speed?
+		bgt.s	.moving
 		move.b	#id_FireStanding,anim(a0)
 		rts
-	.walk:
-		move.b	#id_FireWalking,anim(a0)
+	.moving:
+		move.w	#bytes_to_word(id_FireWalking,id_FireWalking),anim(a0)
 		rts
 
 AnimType_GroundSemiCardinalFire:

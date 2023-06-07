@@ -180,6 +180,26 @@
                             },
                             "uuid": "e76e2935-5dea-44d0-a0c2-ddb862f636f8",
                             "expanded": true
+                        },
+                        {
+                            "format": "Sonic 3&K Player.js",
+                            "name": "Charged Shots",
+                            "palettes": [],
+                            "art": {
+                                "path": "Objects/Player Projectiles/Uncompressed Art/Mega Buster Charge Shots.bin",
+                                "compression": "Uncompressed",
+                                "offset": 0
+                            },
+                            "mappings": {
+                                "path": "Objects/Player Projectiles/Object Data/Map - Mega Buster Charge Shots.bin",
+                                "label": ""
+                            },
+                            "dplcs": {
+                                "enabled": true,
+                                "path": "Objects/Player Projectiles/Object Data/PLC - Mega Buster Charge Shots.bin",
+                                "label": ""
+                            },
+                            "uuid": "59cf272d-439f-4f7a-84ca-696259b7c962"
                         }
                     ],
                     "isDirectory": true,

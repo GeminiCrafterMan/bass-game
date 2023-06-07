@@ -211,7 +211,7 @@ CopyRobot_KeepSliding:
 		btst	#Status_Dash,status(a0)	; is CopyRobot already sliding?
 		beq.s	CopyRobot_StartSlide			; if not, start sliding
 		tst.b	dashtimer(a0)			; is there time left on your slide?
-		beq.w	CopyRobot_StartSlide.stopSliding	; if not, stop sliding
+		beq.s	CopyRobot_StopSliding	; if not, stop sliding
 		rts
 CopyRobot_StartSlide:
 		bset	#Status_Dash,status(a0)
@@ -226,12 +226,18 @@ CopyRobot_StartSlide:
 		move.b	#30,dashtimer(a0)
 		move.w	#bytes_to_word(24/2,20/2),y_radius(a0)
 		sfx		sfx_Dash,1
-	.stopSliding:
-		move.b	(Ctrl_1_held_logical).w,d0
-		andi.w	#btnDir,d0
-		bne.s	.held
-		clr.w	ground_vel(a0)
+CopyRobot_StopSliding:
+		moveq	#0,d0
+		move.b	(Ctrl_1_held_logical).w,d1
+		andi.w	#btnLR,d1
+		beq.s	.cont
 	.held:
+		move.w	(a4),d0
+		btst	#Status_Facing,status(a0)
+		beq.s	.cont
+		neg.w	d0
+	.cont:
+		move.w	d0,ground_vel(a0)
 		jsr		Player_HandleGroundAnimations
 		subq.w	#1,y_pos(a0)
 		move.w	default_y_radius(a0),y_radius(a0)

@@ -7,9 +7,9 @@ Ani_CopyRobot: offsetTable
 		offsetTableEntry.w CopyAni_Walk
 		offsetTableEntry.w CopyAni_Jump
 		offsetTableEntry.w CopyAni_JumpTransition
-		offsetTableEntry.w CopyAni_Fall
+		offsetTableEntry.w CopyAni_Jump
 		offsetTableEntry.w CopyAni_Wait
-		offsetTableEntry.w CopyAni_Dash
+		offsetTableEntry.w CopyAni_Slide
 		offsetTableEntry.w CopyAni_Victory
 		offsetTableEntry.w CopyAni_Death
 		offsetTableEntry.w CopyAni_Hurt
@@ -30,11 +30,9 @@ CopyAni_Step:
 CopyAni_Walk:
 		dc.b	6, frC_Walk1, frC_Walk2, frC_Walk3, frC_Walk4, frC_Walk5, frC_Walk6, afEnd
 CopyAni_Jump:
-		dc.b    6, frC_Jump, afEnd
+		dc.b    4, frC_Jump1, frC_Jump2, afEnd
 CopyAni_JumpTransition:
-		dc.b    6, frC_JumpT, afEnd
-CopyAni_Fall:
-		dc.b    6, frC_Fall, afEnd
+		dc.b    6, frC_Jump2, afEnd
 CopyAni_Wait:
 		dc.b	4
 		rept   8
@@ -42,7 +40,7 @@ CopyAni_Wait:
 		endr
 			dc.b	frC_Idle3, frC_Idle4
 		dc.b	afEnd
-CopyAni_Dash:
+CopyAni_Slide:
 		dc.b    4, frC_Slide1, frC_Slide2, afEnd
 CopyAni_Victory:
 		dc.b    3, frC_Victory1, frC_Victory2, afEnd
@@ -57,7 +55,7 @@ CopyAni_Hurt:
 CopyAni_Blank:
 		dc.b  $77, frC_Null, afEnd
 CopyAni_FireStanding:
-		dc.b    6, frC_Fire, afEnd
+		dc.b    4, frC_Fire1, frC_Fire2, afEnd
 CopyAni_FireWalking:
 		dc.b	6, frC_Walk1F, frC_Walk2F, frC_Walk3F, frC_Walk4F, frC_Walk5F, frC_Walk6F, afEnd
 CopyAni_FireJumpingUp:
@@ -65,7 +63,7 @@ CopyAni_FireJumpingUp:
 CopyAni_FireJumpingDiagUp:
 		dc.b  $77, frC_FireJDiagUp, afEnd
 CopyAni_FireJumpingStraight:
-		dc.b  $77, frC_FireJStraight, afEnd
+		dc.b  4, frC_FireJStraight1, frC_FireJStraight2, afEnd
 CopyAni_FireJumpingDiagDown:
 		dc.b  $77, frC_FireJDiagDown, afEnd
 CopyAni_FireSteadyUp:
@@ -93,7 +91,8 @@ frC_Walk3:	ds.b 1
 frC_Walk4:	ds.b 1
 frC_Walk5:	ds.b 1
 frC_Walk6:	ds.b 1
-frC_Fire:	ds.b 1
+frC_Fire1:	ds.b 1
+frC_Fire2:	ds.b 1
 frC_Walk1F:	ds.b 1
 frC_Walk2F:	ds.b 1
 frC_Walk3F:	ds.b 1
@@ -119,16 +118,16 @@ frC_Death4:	ds.b 1
 frC_Death5:	ds.b 1
 frC_Slide1:	ds.b 1
 frC_Slide2:	ds.b 1
-frC_Jump:	ds.b 1
-frC_JumpT:	ds.b 1
-frC_Fall:	ds.b 1
+frC_Jump1:	ds.b 1
+frC_Jump2:	ds.b 1
 frC_FireSUp:		ds.b 1
 frC_FireSDiagUp:	ds.b 1
 frC_FireSStraight:	ds.b 1
 frC_FireSDiagDown:	ds.b 1
 frC_FireJUp:		ds.b 1
 frC_FireJDiagUp:	ds.b 1
-frC_FireJStraight:	ds.b 1
+frC_FireJStraight1:	ds.b 1
+frC_FireJStraight2:	ds.b 1
 frC_FireJDiagDown:	ds.b 1
 frC_Last:	ds.b 0
 	even

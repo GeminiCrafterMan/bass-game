@@ -59,7 +59,7 @@ BassAni_Hurt:
 BassAni_Blank:
 		dc.b  $77, frB_Null, afEnd
 BassAni_FireStanding:
-		dc.b    6, frB_Fire, afEnd
+		dc.b    1, frB_Fire, afEnd
 BassAni_FireWalking:
 		dc.b	6, frB_Walk1F, frB_Walk2F, frB_Walk3F, frB_Walk4F, frB_Walk5F, frB_Walk6F, afEnd
 BassAni_FireJumpingUp:
