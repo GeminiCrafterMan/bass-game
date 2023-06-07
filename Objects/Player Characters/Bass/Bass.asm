@@ -1,7 +1,7 @@
 
 ; =============== S U B R O U T I N E =======================================
 
-Obj_Sonic:
+Obj_Bass:
 		; Load some addresses into registers
 		; This is done to allow some subroutines to be
 		; shared with Tails/Knuckles.
@@ -11,96 +11,50 @@ Obj_Sonic:
 
 	if GameDebug
 		tst.w	(Debug_placement_mode).w
-		beq.s	Sonic_Normal
+		beq.s	Bass_Normal
 
 ; Debug only code
-		cmpi.b	#1,(Debug_placement_type).w	; Are Sonic in debug object placement mode?
-		beq.s	JmpTo_DebugMode			; If so, skip to debug mode routine
+		cmpi.b	#1,(Debug_placement_type).w	; Is Bass in debug object placement mode?
+		jeq		(DebugMode).l			; If so, skip to debug mode routine
 		; By this point, we're assuming you're in frame cycling mode
 		btst	#button_B,(Ctrl_1_pressed).w
 		beq.s	+
 		clr.w	(Debug_placement_mode).w	; Leave debug mode
 +		addq.b	#1,mapping_frame(a0)		; Next frame
-		cmpi.b	#frB_Last,mapping_frame(a0)	; Have we reached the end of Sonic's frames?
+		cmpi.b	#frB_Last,mapping_frame(a0)	; Have we reached the end of Bass's frames?
 		blo.s		+
-		clr.b	mapping_frame(a0)	; If so, reset to Sonic's first frame
-+		bsr.w	Sonic_Load_PLC
+		clr.b	mapping_frame(a0)	; If so, reset to Bass's first frame
++		bsr.w	Player_Load_PLC
 		jmp	(Draw_Sprite).w
 ; ---------------------------------------------------------------------------
 
-JmpTo_DebugMode:
-		jmp	(DebugMode).l
-; ---------------------------------------------------------------------------
-
-Sonic_Normal:
+Bass_Normal:
 	endif
 		moveq	#0,d0
 		move.b	routine(a0),d0
-		move.w	Sonic_Index(pc,d0.w),d1
-		jmp	Sonic_Index(pc,d1.w)
+		move.w	Bass_Index(pc,d0.w),d1
+		jmp	Bass_Index(pc,d1.w)
 ; ---------------------------------------------------------------------------
 
-Sonic_Index: offsetTable
-ptr_Sonic_Init:		offsetTableEntry.w Sonic_Init		; 0
-ptr_Sonic_Control:	offsetTableEntry.w Sonic_Control	; 2
-ptr_Sonic_Hurt:		offsetTableEntry.w Sonic_Hurt		; 4
-ptr_Sonic_Death:	offsetTableEntry.w Sonic_Death		; 6
-ptr_Sonic_Restart:	offsetTableEntry.w Sonic_Restart	; 8
+Bass_Index: offsetTable
+ptr_Bass_Init:		offsetTableEntry.w Bass_Init		; 0
+ptr_Bass_Control:	offsetTableEntry.w Bass_Control	; 2
+ptr_Bass_Hurt:		offsetTableEntry.w Sonic_Hurt		; 4
+ptr_Bass_Death:		offsetTableEntry.w Sonic_Death		; 6
+ptr_Bass_Restart:	offsetTableEntry.w Sonic_Restart	; 8
 					offsetTableEntry.w loc_12590		; A
-ptr_Sonic_Drown:	offsetTableEntry.w Sonic_Drown		; C
 ; ---------------------------------------------------------------------------
 
-Sonic_Init:	; Routine 0
-		addq.b	#2,routine(a0)				; => Obj01_Control
-		move.w	#bytes_to_word(28/2,14/2),y_radius(a0)	; set y_radius and x_radius	; this sets Sonic's collision height (2*pixels)
-		move.w	#bytes_to_word(28/2,14/2),default_y_radius(a0)	; set default_y_radius and default_x_radius
+Bass_Init:	; Routine 0
 		move.l	#Map_Bass,mappings(a0)
-		move.w	#$100,priority(a0)
-		move.w	#bytes_to_word(48/2,48/2),height_pixels(a0)		; set height and width
-		move.b	#4,render_flags(a0)
 		clr.b	character_id(a0)
-		move.w	#$400,Sonic_Knux_top_speed-Sonic_Knux_top_speed(a4)
-		move.w	#$C,Sonic_Knux_acceleration-Sonic_Knux_top_speed(a4)
-		move.w	#$E0,Sonic_Knux_deceleration-Sonic_Knux_top_speed(a4)
-		clr.b	(v_bulletsonscreen).w	; clear bullets because uhhh bad idea to not do that
-		move.b	#28,(v_health).w		; this isn't used yet, but i'd like it to be here just in case.
-		tst.b	(Last_star_post_hit).w
-		bne.s	Sonic_Init_Continued
-
-		; only happens when not starting at a checkpoint:
-		move.w	#make_art_tile(ArtTile_Sonic,0,0),art_tile(a0)
-		move.w	#bytes_to_word($C,$D),top_solid_bit(a0)
-	.setWeaponEnergy:
-		move.w	#bytes_to_word(28,28),(v_weapon1energy).w	; Weapon 1
-		move.w	#bytes_to_word(28,28),(v_weapon2energy).w	; Weapon 2
-		move.w	#bytes_to_word(28,28),(v_weapon3energy).w	; Weapon 3
-		move.w	#bytes_to_word(28,28),(v_weapon4energy).w	; Weapon 4
-		move.w	#bytes_to_word(28,28),(v_weapon5energy).w	; Weapon 5
-		move.w	#bytes_to_word(28,28),(v_weapon6energy).w	; Weapon 6
-		move.w	#bytes_to_word(28,28),(v_weapon7energy).w	; Weapon 7
-		move.w	#bytes_to_word(28,28),(v_weapon8energy).w	; Weapon 8
-		move.w	#bytes_to_word(28,28),(v_utility1energy).w; Treble Boost
-
-		; only happens when not starting at a Special Stage ring:
-		move.w	x_pos(a0),(Saved_X_pos).w
-		move.w	y_pos(a0),(Saved_Y_pos).w
-		move.w	art_tile(a0),(Saved_art_tile).w
-		move.w	top_solid_bit(a0),(Saved_solid_bits).w
-
-Sonic_Init_Continued:
-		move.b	#30,air_left(a0)
-		subi.w	#$20,x_pos(a0)
-		addi.w	#4,y_pos(a0)
-		bsr.w	Reset_Player_Position_Array
-		addi.w	#$20,x_pos(a0)
-		subi.w	#4,y_pos(a0)
-		rts
+		jmp		Player_Init
 
 ; ---------------------------------------------------------------------------
-; Normal state for Sonic
+; Normal state for Bass
 ; ---------------------------------------------------------------------------
 
-Sonic_Control:								; Routine 2
+Bass_Control:								; Routine 2
 	if GameDebug
 		tst.b	(Debug_mode_flag).w				; is debug cheat enabled?
 		beq.s	loc_10BF0					; if not, branch
@@ -111,7 +65,7 @@ Sonic_Control:								; Routine 2
 loc_10BCE:
 		btst	#button_B,(Ctrl_1_pressed).w		; is button B pressed?
 		beq.s	loc_10BF0					; if not, branch
-		move.w	#1,(Debug_placement_mode).w	; change Sonic into a ring/item
+		move.w	#1,(Debug_placement_mode).w	; change Bass into a ring/item
 		clr.b	(Ctrl_1_locked).w					; unlock control
 		btst	#button_C,(Ctrl_1_held).w			; was button C held before pressing B?
 		beq.s	locret_10BEE					; if not, branch
@@ -128,8 +82,8 @@ loc_10BF0:
 		move.l	(Ctrl_1).w,(Ctrl_1_logical).w	; copy new held buttons, to enable joypad control
 
 loc_10BFC:
-		btst	#0,object_control(a0)				; is Sonic interacting with another object that holds him in place or controls his movement somehow?
-		beq.s	loc_10C0C					; if yes, branch to skip Sonic's control
+		btst	#0,object_control(a0)				; is Bass interacting with another object that holds him in place or controls his movement somehow?
+		beq.s	loc_10C0C					; if yes, branch to skip Bass's control
 		clr.b	double_jump_flag(a0)				; enable double jump
 		bra.s	loc_10C26
 ; ---------------------------------------------------------------------------
@@ -139,18 +93,18 @@ loc_10C0C:
 		moveq	#0,d0
 		move.b	status(a0),d0
 		andi.w	#6,d0
-		move.w	Sonic_Modes(pc,d0.w),d1
-		jsr	Sonic_Modes(pc,d1.w)	; run Sonic's movement control code
+		move.w	Bass_Modes(pc,d0.w),d1
+		jsr	Bass_Modes(pc,d1.w)	; run Bass's movement control code
 		movem.l	(sp)+,a4-a6
 
 loc_10C26:
 		cmpi.w	#-$100,(Camera_min_Y_pos).w		; is vertical wrapping enabled?
 		bne.s	+								; if not, branch
 		move.w	(Screen_Y_wrap_value).w,d0
-		and.w	d0,y_pos(a0)						; perform wrapping of Sonic's y position
-+		bsr.s	Sonic_Display
-		bsr.w	Sonic_RecordPos
-		bsr.w	Sonic_Water
+		and.w	d0,y_pos(a0)						; perform wrapping of Bass's y position
++		bsr.w	Player_Display
+		bsr.w	Player_RecordPos
+		bsr.w	Player_Water
 		move.b	(Primary_Angle).w,next_tilt(a0)
 		move.b	(Secondary_Angle).w,tilt(a0)
 		tst.b	(WindTunnel_flag).w
@@ -160,224 +114,48 @@ loc_10C26:
 		move.b	prev_anim(a0),anim(a0)
 +		btst	#1,object_control(a0)
 		bne.s	++
-		bsr.w	Animate_Sonic
+		bsr.w	Animate_Bass
 		tst.b	(Reverse_gravity_flag).w
 		beq.s	+
 		eori.b	#2,render_flags(a0)
-+		bsr.w	Sonic_Load_PLC
++		bsr.w	Player_Load_PLC
 +		move.b	object_control(a0),d0
 		andi.b	#$A0,d0
 		bne.s	+
 		jsr	TouchResponse(pc)
 +		rts
 ; ---------------------------------------------------------------------------
-; secondary states under state Sonic_Control
+; secondary states under state Bass_Control
 
-Sonic_Modes: offsetTable
-		offsetTableEntry.w Sonic_MdNormal	; 0
-		offsetTableEntry.w Sonic_MdAir		; 2
-		offsetTableEntry.w Sonic_MdRoll		; 4
-		offsetTableEntry.w Sonic_MdAir		; 6
-
-; =============== S U B R O U T I N E =======================================
-
-Sonic_Display:
-		tst.b	shoottimer(a0)
-		beq.s	.noDecShoot
-		subq.b	#1,shoottimer(a0)
-		bne.s	.noDecShoot
-		bclr	#Status_Shooting,status(a0)
-	.noDecShoot:
-		tst.b	dashtimer(a0)
-		beq.s	.noDecDash
-		subq.b	#1,dashtimer(a0)
-	.noDecDash:
-		move.b	invulnerability_timer(a0),d0
-		beq.s	loc_10CA6
-		subq.b	#1,invulnerability_timer(a0)
-		lsr.b	#3,d0
-		bcc.s	Sonic_ChkInvin
-
-loc_10CA6:
-		jsr	(Draw_Sprite).w
-
-Sonic_ChkInvin:										; checks if invincibility has expired and disables it if it has.
-		btst	#Status_Invincible,status_secondary(a0)
-		beq.s	Sonic_ChkShoes
-		tst.b	invincibility_timer(a0)
-		beq.s	Sonic_ChkShoes						; if there wasn't any time left, that means we're in Super/Hyper mode
-		move.b	(Level_frame_counter+1).w,d0
-		andi.b	#7,d0
-		bne.s	Sonic_ChkShoes
-		subq.b	#1,invincibility_timer(a0)				; reduce invincibility_timer only on every 8th frame
-		bne.s	Sonic_ChkShoes						; if time is still left, branch
-		tst.b	(Level_end_flag).w						; don't change music if level is end
-		bne.s	Sonic_RmvInvin
-		tst.b	(Boss_flag).w								; don't change music if in a boss fight
-		bne.s	Sonic_RmvInvin
-		cmpi.b	#12,air_left(a0)						; don't change music if drowning
-		blo.s		Sonic_RmvInvin
-		move.w	(Current_music).w,d0
-		jsr	(SMPS_QueueSound1).w					; stop playing invincibility theme and resume normal level music
-
-Sonic_RmvInvin:
-		bclr	#Status_Invincible,status_secondary(a0)
-
-Sonic_ChkShoes:										; checks if Speed Shoes have expired and disables them if they have.
-		btst	#Status_SpeedShoes,status_secondary(a0)	; does Sonic have speed shoes?
-		beq.s	Sonic_ExitChk						; if so, branch
-		tst.b	speed_shoes_timer(a0)
-		beq.s	Sonic_ExitChk
-		move.b	(Level_frame_counter+1).w,d0
-		andi.b	#7,d0
-		bne.s	Sonic_ExitChk
-		subq.b	#1,speed_shoes_timer(a0)				; reduce speed_shoes_timer only on every 8th frame
-		bne.s	Sonic_ExitChk
-		move.w	#$400,(a4)							; set Sonic_Knux_top_speed
-		move.w	#$C,2(a4)							; set Sonic_Knux_acceleration
-		move.w	#$E0,4(a4)							; set Sonic_Knux_deceleration
-		bclr	#Status_SpeedShoes,status_secondary(a0)
-		music	mus_Slowdown						; run music at normal speed
-
-Sonic_ExitChk:
-		rts
-; ---------------------------------------------------------------------------
-; Subroutine to record Sonic's previous positions for invincibility stars
-; and input/status flags for Tails' AI to follow
-; ---------------------------------------------------------------------------
+Bass_Modes: offsetTable
+		offsetTableEntry.w Bass_MdNormal	; 0
+		offsetTableEntry.w Bass_MdAir		; 2
+		offsetTableEntry.w Bass_MdRoll		; 4
+		offsetTableEntry.w Bass_MdAir		; 6
 
 ; =============== S U B R O U T I N E =======================================
 
-Sonic_RecordPos:
-		move.w	(Pos_table_index).w,d0
-		lea	(Pos_table).w,a1
-		lea	(a1,d0.w),a1
-		move.w	x_pos(a0),(a1)+			; write location to pos_table
-		move.w	y_pos(a0),(a1)+
-		addq.b	#4,(Pos_table_byte).w		; increment index as the post-increments did a1
-		rts
-
-; =============== S U B R O U T I N E =======================================
-
-Reset_Player_Position_Array:
-		lea	(Pos_table).w,a1
-		moveq	#$3F,d0
-
--		move.w	x_pos(a0),(a1)+			; write location to pos_table
-		move.w	y_pos(a0),(a1)+
-		dbf	d0,-
-		clr.w	(Pos_table_index).w
-		rts
-; ---------------------------------------------------------------------------
-; Subroutine for Sonic when he's underwater
-; ---------------------------------------------------------------------------
-
-; =============== S U B R O U T I N E =======================================
-
-Sonic_Water:
-		tst.b	(Water_flag).w			; does level have water?
-		bne.s	Sonic_InWater		; if yes, branch
-
-locret_10E2C:
-		rts
-; ---------------------------------------------------------------------------
-
-Sonic_InWater:
-		move.w	(Water_level).w,d0
-		cmp.w	y_pos(a0),d0									; is Sonic above the water?
-		bge.s	Sonic_OutWater								; if yes, branch
-		bset	#Status_Underwater,status(a0)						; set underwater flag
-		bne.s	locret_10E2C									; if already underwater, branch
-		addq.b	#1,(Water_entered_counter).w
-		movea.w	a0,a1
-		jsr		Player_ResetAirTimer
-		move.l	#Obj_Air_CountDown,(v_Breathing_bubbles).w		; load Sonic's breathing bubbles
-		move.b	#$81,(v_Breathing_bubbles+subtype).w
-		move.w	#$200,Sonic_Knux_top_speed-Sonic_Knux_top_speed(a4)
-		move.w	#6,Sonic_Knux_acceleration-Sonic_Knux_top_speed(a4)
-		move.w	#$70,Sonic_Knux_deceleration-Sonic_Knux_top_speed(a4)
-		tst.b	object_control(a0)
-		bne.s	locret_10E2C
-		asr	x_vel(a0)
-		asr	y_vel(a0)				; memory operands can only be shifted one bit at a time
-		asr	y_vel(a0)
-		beq.s	locret_10E2C
-		move.w	#bytes_to_word(1,0),anim(a6)	; splash animation, write 1 to anim and clear prev_anim
-		sfx	sfx_Splash,1				; splash sound
-; ---------------------------------------------------------------------------
-
-Sonic_OutWater:
-		bclr	#Status_Underwater,status(a0)	; unset underwater flag
-		beq.s	locret_10E2C				; if already above water, branch
-		addq.b	#1,(Water_entered_counter).w
-
-		movea.w	a0,a1
-		jsr		Player_ResetAirTimer
-		move.w	#$400,Sonic_Knux_top_speed-Sonic_Knux_top_speed(a4)
-		move.w	#$C,Sonic_Knux_acceleration-Sonic_Knux_top_speed(a4)
-		move.w	#$E0,Sonic_Knux_deceleration-Sonic_Knux_top_speed(a4)
-		cmpi.b	#id_SonicHurt,routine(a0)		; is Sonic falling back from getting hurt?
-		beq.s	loc_10EFC			; if yes, branch
-		tst.b	object_control(a0)
-		bne.s	loc_10EFC
-		move.w	y_vel(a0),d0
-		cmpi.w	#-$400,d0
-		blt.s		loc_10EFC
-		asl	y_vel(a0)
-
-loc_10EFC:
-		cmpi.b	#id_Null,anim(a0)	; is Sonic in his 'blank' animation
-		beq.w	locret_10E2C			; if so, branch
-		tst.w	y_vel(a0)
-		beq.w	locret_10E2C
-		move.w	#bytes_to_word(1,0),anim(a6)	; splash animation, write 1 to anim and clear prev_anim
-		cmpi.w	#-$1000,y_vel(a0)
-		bgt.s	loc_10F22
-		move.w	#-$1000,y_vel(a0)	; limit upward y velocity exiting the water
-
-loc_10F22:
-		sfx	sfx_Splash,1				; splash sound
-
-; =============== S U B R O U T I N E =======================================
-
-Sonic_MdNormal:
-		bsr.w	Bass_WeaponSwitch
-		bsr.w	Bass_Shoot
+Bass_MdNormal:
+		bsr.w	Player_WeaponSwitch
+		bsr.w	Player_Shoot
 		bsr.w	Bass_Dash
 		bsr.w	Sonic_Jump
 		bsr.w	Player_SlopeResist
 		bsr.w	Sonic_Move
-		bsr.w	Bass_HandleGroundAnimations
+		bsr.w	Player_HandleGroundAnimations
 		bsr.w	Player_LevelBound
 		jsr	(MoveSprite2_TestGravity).w
-		bsr.s	Call_Player_AnglePos
+		bsr.w	Call_Player_AnglePos
 		bra.w	Player_SlopeRepel
 
-; =============== S U B R O U T I N E =======================================
-
-Call_Player_AnglePos:
-		tst.b	(Reverse_gravity_flag).w
-		beq.w	Player_AnglePos
-		move.b	angle(a0),d0
-		addi.b	#$40,d0
-		neg.b	d0
-		subi.b	#$40,d0
-		move.b	d0,angle(a0)
-		bsr.w	Player_AnglePos
-		move.b	angle(a0),d0
-		addi.b	#$40,d0
-		neg.b	d0
-		subi.b	#$40,d0
-		move.b	d0,angle(a0)
-		rts
 ; ---------------------------------------------------------------------------
-; Start of subroutine Sonic_MdAir
+; Start of subroutine Bass_MdAir
 ; Called if Sonic is airborne, but not in a ball (thus, probably not jumping)
-; Sonic_Stand_Freespace:
-Sonic_MdAir:
-		bsr.w	Bass_WeaponSwitch
-		bsr.w	Bass_Shoot
-		bsr.w	Bass_HandleAirAnimations
+; Bass_Stand_Freespace:
+Bass_MdAir:
+		bsr.w	Player_WeaponSwitch
+		bsr.w	Player_Shoot
+		bsr.w	Player_HandleAirAnimations
 		clr.b	dashtimer(a0)
 		bclr	#Status_Dash,status(a0)
 		bsr.w	Sonic_JumpHeight
@@ -392,11 +170,11 @@ loc_10FD6:
 		bsr.w	Player_JumpAngle
 		bra.w	Player_DoLevelCollision
 ; ---------------------------------------------------------------------------
-; Start of subroutine Sonic_MdRoll
-; Called if Sonic is in a ball, but not airborne (thus, probably rolling)
-; Sonic_Spin_Path:
-Sonic_MdRoll:
-		bsr.w	Bass_WeaponSwitch
+; Start of subroutine Bass_MdRoll
+; Called if Bass is dashing
+; Bass_Spin_Path:
+Bass_MdRoll:
+		bsr.w	Player_WeaponSwitch
 		bsr.w	Sonic_Jump
 		bsr.w	Bass_KeepDashing	; dash timer test
 		bsr.w	Player_RollRepel
@@ -560,7 +338,7 @@ loc_113FE:
 		bne.s	loc_11412
 		bset	#Status_Facing,status(a0)
 		bne.s	loc_11412
-		jsr		Bass_HandleGroundAnimations
+		jsr		Player_HandleGroundAnimations
 
 loc_11412:
 		cmpi.b	#id_FireSteadyUp,anim(a0)
@@ -581,7 +359,7 @@ loc_11412:
 
 loc_11424:
 		move.w	d0,ground_vel(a0)
-		jsr		Bass_HandleGroundAnimations
+		jsr		Player_HandleGroundAnimations
 		rts
 ; ---------------------------------------------------------------------------
 
@@ -603,8 +381,6 @@ loc_11438:
 		sfx		sfx_Skid
 		move.b	#id_Null,anim(a0)
 		bclr	#Status_Facing,status(a0)
-		cmpi.b	#12,air_left(a0)
-		bcs.s	locret_11480
 		move.b	#6,routine(a6)			; v_Dust
 		move.b	#$15,mapping_frame(a6)	; v_Dust
 
@@ -618,7 +394,7 @@ sub_11482:
 		bmi.s	loc_114B6
 		bclr	#Status_Facing,status(a0)
 		beq.s	loc_1149C
-		jsr		Bass_HandleGroundAnimations
+		jsr		Player_HandleGroundAnimations
 
 loc_1149C:
 		cmpi.b	#id_FireSteadyUp,anim(a0)
@@ -637,7 +413,7 @@ loc_1149C:
 
 loc_114AA:
 		move.w	d0,ground_vel(a0)
-		jsr		Bass_HandleGroundAnimations
+		jsr		Player_HandleGroundAnimations
 		rts
 ; ---------------------------------------------------------------------------
 
@@ -659,8 +435,6 @@ loc_114BE:
 		sfx		sfx_Skid
 		move.b	#id_Null,anim(a0)
 		bset	#Status_Facing,status(a0)
-		cmpi.b	#12,air_left(a0)
-		bcs.s	locret_11506
 		move.b	#6,routine(a6)			; v_Dust
 		move.b	#$15,mapping_frame(a6)	; v_Dust
 
@@ -937,52 +711,6 @@ loc_11732:
 		bra.s	Player_Boundary_CheckBottom
 
 ; ---------------------------------------------------------------------------
-; Subroutine allowing Bass to switch weapons
-; ---------------------------------------------------------------------------
-
-; =============== S U B R O U T I N E =======================================
-
-Bass_WeaponSwitch:
-		tst.b	(v_bulletsonscreen).w
-		bne.s	.ret
-		move.b	(Ctrl_1_pressed_logical_6btn).w,d2
-		btst	#button_X,d2	; X check
-		bne.s	.upWep
-		btst	#button_Y,d2	; Y check
-		bne.s	.resetWep
-		btst	#button_Z,d2	; Z check
-		bne.s	.downWep
-	.ret:
-		rts
-	.upWep:
-		subq.b	#1,(v_weapon).w	; subtract 1
-		tst.b	(v_weapon).w	; if above 0
-		bge.s	.loadWepPal			; return
-		move.b	#9,(v_weapon).w	; wrap back around if above
-		bra.s	.loadWepPal
-	.downWep:
-		addq.b	#1,(v_weapon).w	; add 1
-		cmpi.b	#10,(v_weapon).w	; if below 9
-		blt.s	.loadWepPal			; return
-	.resetWep:
-		clr.b	(v_weapon).w	; wrap back around if above
-	; continue into .loadWepPal
-	.loadWepPal:
-;		bclr	#4,obStatus(a0)
-		clr.b	(v_charge).w	; clear charge
-		clr.b	(v_chargecyctimer).w	; clear charge
-		clr.b	(v_chargecycnum).w	; clear charge
-
-	; this needs to be changed if we add more characters, but i think for bass it'll be fine
-		moveq	#0,d0
-		move.b	(v_weapon).w,d0
-		ext.w	d0	; sign extend
-		move.w	d0,d1
-		jsr	(LoadPalette).w
-		move.w	d1,d0
-		jmp	(LoadPalette_Immediate).w
-
-; ---------------------------------------------------------------------------
 ; Subroutine allowing Bass to dash
 ; ---------------------------------------------------------------------------
 
@@ -1026,140 +754,14 @@ Bass_StartDash:
 		bne.s	.held
 		clr.w	ground_vel(a0)
 	.held:
-		jsr		Bass_HandleGroundAnimations
+		jsr		Player_HandleGroundAnimations
 		subq.w	#1,y_pos(a0)
 		move.w	default_y_radius(a0),y_radius(a0)
 		bclr	#Status_Dash,status(a0)
 		move.b	#5,dashtimer(a0)
 		rts
 
-; ---------------------------------------------------------------------------
-; Subroutine allowing Bass to shoot
-; ---------------------------------------------------------------------------
-
-; =============== S U B R O U T I N E =======================================
-
-Bass_Shoot:
-		moveq	#0,d0
-		move.b	(v_weapon).w,d0
-		add.w	d0,d0
-		add.w	d0,d0
-		movea.l	.weaponLUT(pc,d0.w),a1
-		jmp		(a1)
-	.weaponLUT:
-		dc.l	Weapon_BassBuster
-		dc.l	Weapon_Test	; Master Wep 1 - Chill Spike, at the moment
-		dc.l	Weapon_Test	; Master Wep 2 - Solar Blaze, at the moment
-		dc.l	Weapon_Test	; Master Wep 3 - Triple Blade, at the moment
-		dc.l	Weapon_Test	; Master Wep 4
-		dc.l	Weapon_Test	; Master Wep 5
-		dc.l	Weapon_Test	; Master Wep 6
-		dc.l	Weapon_Test	; Master Wep 7
-		dc.l	Weapon_Test	; Master Wep 8
-		dc.l	Weapon_Test	; Treble Boost
-
-FireWeapon:
-		moveq	#0,d0
-		move.b	(v_shottype).w,d0
-		add.w	d0,d0
-		add.w	d0,d0
-		movea.l	.typesLUT(pc,d0.w),a2
-		jmp		(a2)
-	.typesLUT:
-		dc.l	WepType_Normal			; 2 of 8 cardinal directions, Mega Buster
-		dc.l	WepType_SemiCardinal	; 7 of 8 cardinal directions, Bass Buster
-;		dc.l	WepType_Cardinal		; 8 of 8 cardinal directions, Metal Blade
-	
-WepType_Normal:
-		move.w	x_pos(a0),x_pos(a1)
-		move.w	y_pos(a0),y_pos(a1)
-		btst	#Status_Facing,status(a0)
-		beq.s	.notFlipped
-		bset	#Status_Facing,status(a1)
-		subi.w	#17,x_pos(a1)
-		neg.w	ground_vel(a1)
-		bra.s	.doneFlip
-	.notFlipped:
-		bclr	#Status_Facing,status(a1)
-		addi.w	#17,x_pos(a1)
-	.doneFlip:
-		move.w	ground_vel(a1),x_vel(a1)	; actually make it go
-		rts
-
-WepType_SemiCardinal:
-		move.w	x_pos(a0),x_pos(a1)
-		move.w	y_pos(a0),y_pos(a1)
-		clr.w	ground_vel(a0)	; stop user in place
-		btst	#bitUp,(Ctrl_1_held_logical).w
-		bne.s	WepType_SemiCardinal_up
-		btst	#bitDn,(Ctrl_1_held_logical).w
-		bne.w	WepType_SemiCardinal_diagdown
-WepType_SemiCardinal_straight:
-		btst	#Status_Facing,status(a0)
-		beq.s	.notFlipped
-		bset	#Status_Facing,status(a1)
-		subi.w	#17,x_pos(a1)
-		neg.w	ground_vel(a1)
-		bra.s	.doneFlip
-	.notFlipped:
-		bclr	#Status_Facing,status(a1)
-		addi.w	#17,x_pos(a1)
-	.doneFlip:
-		move.w	ground_vel(a1),x_vel(a1)	; actually make it go
-		rts
-WepType_SemiCardinal_up:
-		btst	#bitR,(Ctrl_1_held_logical).w
-		bne.s	.diagup
-		btst	#bitL,(Ctrl_1_held_logical).w
-		bne.s	.diagup
-	.straightup:
-		btst	#Status_Facing,status(a0)
-		beq.s	.upNotFlipped
-		bset	#Status_Facing,status(a1)
-		subi.w	#5,x_pos(a1)
-		bra.s	.upDoneFlip
-	.upNotFlipped:
-		bclr	#Status_Facing,status(a1)
-		addi.w	#5,x_pos(a1)
-	.upDoneFlip:
-		neg.w	ground_vel(a1)
-		move.w	ground_vel(a1),y_vel(a1)	; actually make it go
-		rts
-	.diagup:
-		asr.w	#1,ground_vel(a1)
-		neg.w	ground_vel(a1)
-		move.w	ground_vel(a1),y_vel(a1)	; actually make it go
-		neg.w	ground_vel(a1)
-		btst	#Status_Facing,status(a0)
-		beq.s	.diagupNotFlipped
-		bset	#Status_Facing,status(a1)
-		subi.w	#5,x_pos(a1)
-		neg.w	ground_vel(a1)
-		bra.s	.diagupDoneFlip
-	.diagupNotFlipped:
-		bclr	#Status_Facing,status(a1)
-		addi.w	#5,x_pos(a1)
-	.diagupDoneFlip:
-		move.w	ground_vel(a1),x_vel(a1)
-		rts
-WepType_SemiCardinal_diagdown:
-		asr.w	#1,ground_vel(a1)
-		move.w	ground_vel(a1),y_vel(a1)	; actually make it go
-		btst	#Status_Facing,status(a0)
-		beq.s	.notFlipped
-		bset	#Status_Facing,status(a1)
-		subi.w	#5,x_pos(a1)
-		neg.w	ground_vel(a1)
-		bra.s	.doneFlip
-	.notFlipped:
-		bclr	#Status_Facing,status(a1)
-		addi.w	#5,x_pos(a1)
-	.doneFlip:
-		move.w	ground_vel(a1),x_vel(a1)
-		rts
-
 		include	"Objects/Player Characters/Bass/Weapons/Bass Buster.asm"
-		include	"Objects/Player Characters/Bass/Weapons/Test.asm"
 
 ; ---------------------------------------------------------------------------
 ; Subroutine allowing Sonic to jump
@@ -1768,8 +1370,8 @@ loc_122F2:
 loc_12302:
 		bsr.s	sub_12318
 		bsr.w	Player_LevelBound
-		bsr.w	Sonic_RecordPos
-		bsr.w	sub_125E0
+		bsr.w	Player_RecordPos
+		jsr		sub_125E0
 		jmp	(Draw_Sprite).w
 
 ; =============== S U B R O U T I N E =======================================
@@ -1802,9 +1404,9 @@ loc_12344:
 		move.w	d0,x_vel(a0)
 		move.w	d0,ground_vel(a0)
 		move.b	d0,object_control(a0)
-		jsr		Bass_HandleGroundAnimations
+		jsr		Player_HandleGroundAnimations
 		move.w	#$100,priority(a0)
-		move.b	#id_SonicControl,routine(a0)
+		move.b	#id_BassControl,routine(a0)
 		move.b	#2*60,invulnerability_timer(a0)
 		clr.b	spin_dash_flag(a0)
 
@@ -1831,7 +1433,7 @@ Sonic_Death:
 	endif
 		bsr.s	sub_123C2
 ;		jsr	(MoveSprite_TestGravity).w
-		bsr.w	Sonic_RecordPos
+		bsr.w	Player_RecordPos
 		jmp		sub_125E0
 ;		jmp	(Draw_Sprite).w
 
@@ -1847,7 +1449,7 @@ sub_123C2:
 		st	(Scroll_lock).w
 		clr.b	spin_dash_flag(a0)
 
-		move.b	#id_SonicRestart,routine(a0)
+		move.b	#id_BassRestart,routine(a0)
 		move.w	#1*60,restart_timer(a0)
 		clr.b	(Respawn_table_keep).w
 
@@ -1873,125 +1475,44 @@ loc_12590:
 		bne.s	+
 		tst.w	(V_scroll_amount).w
 		bne.s	+
-		move.b	#id_SonicControl,routine(a0)
-+		bsr.s	sub_125E0
+		move.b	#id_BassControl,routine(a0)
++		bsr.w	sub_125E0
 		jmp	(Draw_Sprite).w
 
 ; =============== S U B R O U T I N E =======================================
 
-Sonic_Drown:
-	if GameDebug
-		tst.b	(Debug_mode_flag).w
-		beq.s	+
-		btst	#button_B,(Ctrl_1_pressed).w
-		beq.s	+
-		move.w	#1,(Debug_placement_mode).w
-		clr.b	(Ctrl_1_locked).w
-		rts
-; ---------------------------------------------------------------------------
-+
-	endif
-		jsr	(MoveSprite2_TestGravity).w
-		addi.w	#$10,y_vel(a0)
-		bsr.w	Sonic_RecordPos
-		bsr.s	sub_125E0
-		jmp	(Draw_Sprite).w
-
-; =============== S U B R O U T I N E =======================================
-
-sub_125E0:
-		bsr.s	Animate_Sonic
-		tst.b	(Reverse_gravity_flag).w
-		beq.s	+
-		eori.b	#2,render_flags(a0)
-+		bra.w	Sonic_Load_PLC
-
-; =============== S U B R O U T I N E =======================================
-
-Animate_Sonic:
+Animate_Bass:
 		lea	Ani_Bass(pc),a1
-Animate_Player:
-		moveq	#0,d0
-		move.b	anim(a0),d0
-		cmp.b	prev_anim(a0),d0
-		beq.s	SAnim_Do
-		move.b	d0,prev_anim(a0)
-		clr.b	anim_frame(a0)
-		clr.b	anim_frame_timer(a0)
-
-SAnim_Do:
-		add.w	d0,d0
-		adda.w	(a1,d0.w),a1
-		move.b	(a1),d0
-		move.b	status(a0),d1
-		andi.b	#1,d1
-		andi.b	#-4,render_flags(a0)
-		or.b	d1,render_flags(a0)
-		subq.b	#1,anim_frame_timer(a0)
-		bpl.s	SAnim_Delay
-		move.b	d0,anim_frame_timer(a0)
-
-SAnim_Do2:
-		moveq	#0,d1
-		move.b	anim_frame(a0),d1
-		move.b	1(a1,d1.w),d0
-		cmpi.b	#-4,d0
-		bcc.s	SAnim_End_FF
-
-SAnim_Next:
-		move.b	d0,mapping_frame(a0)
-		addq.b	#1,anim_frame(a0)
-
-SAnim_Delay:
-		rts
-; ---------------------------------------------------------------------------
-
-SAnim_End_FF:
-		addq.b	#1,d0
-		bne.s	SAnim_End_FE
-		clr.b	anim_frame(a0)
-		move.b	1(a1),d0
-		bra.s	SAnim_Next
-; ---------------------------------------------------------------------------
-
-SAnim_End_FE:
-		addq.b	#1,d0
-		bne.s	SAnim_End_FD
-		move.b	2(a1,d1.w),d0
-		sub.b	d0,anim_frame(a0)
-		sub.b	d0,d1
-		move.b	1(a1,d1.w),d0
-		bra.s	SAnim_Next
-; ---------------------------------------------------------------------------
-
-SAnim_End_FD:
-		addq.b	#1,d0
-		bne.s	SAnim_End
-		move.b	2(a1,d1.w),anim(a0)
-
-SAnim_End:
-		rts
+		jmp		Animate_Player
 
 ; =============== S U B R O U T I N E =======================================
+; ---------------------------------------------------------------------------
+; Player graphics loading subroutine
+; ---------------------------------------------------------------------------
 
-Sonic_Load_PLC:
+Player_Load_PLC:	; huge thanks to AngelKOR64.
+		bsr.w	ReloadPlayerMaps
 		moveq	#0,d0
 		move.b	mapping_frame(a0),d0
 
-Sonic_Load_PLC2:
-		cmp.b	(Player_prev_frame).w,d0
-		beq.s	+
-		move.b	d0,(Player_prev_frame).w
-		lea	(PLC_Bass).l,a2
+Player_Load_PLC2:
+		cmp.b	previous_frame(a0),d0
+		beq.s	.noChange
+		move.b	d0,previous_frame(a0)
+		bsr.w	PlayerDPLCToA2
 		add.w	d0,d0
 		adda.w	(a2,d0.w),a2
+		moveq	#0,d5
 		move.w	(a2)+,d5
 		subq.w	#1,d5
-		bmi.s	+
-		move.w	#tiles_to_bytes(ArtTile_Sonic),d4
-		move.l	#ArtUnc_Bass>>1,d6
+		bmi.s	.noChange
+		move.w	art_tile(a0),d4	; get art tile
+		andi.w	#$7FF,d4		; clear art flags
+		lsl.w	#5,d4			; get VRAM address
+		bsr.w	PlayerArtToD6
 
--		moveq	#0,d1
+	.readEntry:
+		moveq	#0,d1
 		move.w	(a2)+,d1
 		move.w	d1,d3
 		lsr.w	#8,d3
@@ -2004,138 +1525,40 @@ Sonic_Load_PLC2:
 		add.w	d3,d4
 		add.w	d3,d4
 		jsr	(Add_To_DMA_Queue).w
-		dbf	d5,-
-+		rts
+		dbf	d5,.readEntry
+	.noChange:
+		rts
+; End of function Player_Load_PLC
 
-Obj_DeathOrbs:
-		move.l	#Map_Bass,mappings(a0)
-		move.w	#$100,priority(a0)
-        move.w	#make_art_tile(ArtTile_Sonic,0,0),art_tile(a0)
-		move.b	#4,render_flags(a0)
-        jsr     SpeedToPos
-		move.b	(Player_1+mapping_frame).w,mapping_frame(a0)
-        jmp     DisplaySprite
-
-Bass_HandleGroundAnimations:
-		tst.b	shoottimer(a0)
-		beq.s	.notShooting
+ReloadPlayerMaps:
 		moveq	#0,d0
-		move.b	(v_shottype).w,d0
-		add.w	d0,d0
-		add.w	d0,d0
-		movea.l	.typesLUT(pc,d0.w),a2
-		jmp		(a2)
-	.typesLUT:
-		dc.l	AnimType_GroundNormalFire
-		dc.l	AnimType_GroundSemiCardinalFire
-;		dc.l	AnimType_GroundThrow
-	.notShooting:
-;		cmpi.b	#id_FireSteadyUp,anim(a0)
-;		blt.s	.notSteady
-;		cmpi.b	#id_FireSteadyDiagDown,anim(a0)
-;		bgt.s	.notSteady
-;		clr.b	move_lock(a0)
-;
-;	.notSteady:
-		tst.w	ground_vel(a0)
-		bne.s	.moving
-		move.b	#id_Wait,anim(a0)
-		rts
-	.moving:
-		cmpi.b	#id_Run,anim(a0)
-		ble.s	.alreadyGoing
-		cmpi.b	#id_Dash,prev_anim(a0)
-		bne.s	.toWalk
-		move.b	#id_Run,anim(a0)
-		rts
-	.toWalk:
-;		move.w	#bytes_to_word(id_Walk,id_Walk),anim(a0)	; also goes to prev_anim
-		move.b	#id_Walk,anim(a0)
-	.alreadyGoing:
+		move.b	character_id(a0),d0
+		lsl.w	#2,d0
+		move.l	.mapLUT(pc,d0.w),mappings(a0)
 		rts
 
-AnimType_GroundNormalFire:
-		tst.w	ground_vel(a0)
-		bne.s	.walk
-		move.b	#id_FireStanding,anim(a0)
-		rts
-	.walk:
-		move.b	#id_FireWalking,anim(a0)
+	.mapLUT:
+		dc.l	Map_Bass, Map_CopyRobot
+
+PlayerDPLCToA2:
+		moveq	#0,d1
+		move.b	character_id(a0),d1
+		lsl.w	#2,d1
+		movea.l	.plcLUT(pc,d1.w),a2
 		rts
 
-AnimType_GroundSemiCardinalFire:
-		btst	#bitUp,(Ctrl_1_held_logical).w
-		bne.s	.up
-		btst	#bitDn,(Ctrl_1_held_logical).w
-		bne.s	.diagdown
-		move.b	#id_FireSteadyStraight,anim(a0)
-		rts
-	.up:
-		btst	#bitR,(Ctrl_1_held_logical).w
-		bne.s	.diagup
-		btst	#bitL,(Ctrl_1_held_logical).w
-		bne.s	.diagup
-		move.b	#id_FireSteadyUp,anim(a0)
-		rts
-	.diagup:
-		move.b	#id_FireSteadyDiagUp,anim(a0)
-		rts
-	.diagdown:
-		move.b	#id_FireSteadyDiagDown,anim(a0)
+	.plcLUT:
+		dc.l	PLC_Bass, PLC_CopyRobot
+
+PlayerArtToD6:
+		moveq	#0,d6
+		move.b	character_id(a0),d6
+		lsl.w	#2,d6
+		move.l	.artLUT(pc,d6.w),d6
 		rts
 
-Bass_HandleAirAnimations:
-		tst.b	shoottimer(a0)
-		beq.s	.notShooting
-		moveq	#0,d0
-		move.b	(v_shottype).w,d0
-		add.w	d0,d0
-		add.w	d0,d0
-		movea.l	.typesLUT(pc,d0.w),a2
-		jmp		(a2)
-	.typesLUT:
-		dc.l	AnimType_JumpNormalFire
-		dc.l	AnimType_JumpSemiCardinalFire
-;		dc.l	AnimType_JumpThrow
-	.notShooting:
-		tst.w	y_vel(a0)
-		bmi.s	.rising
-		cmpi.w	#$80,y_vel(a0)
-		bge.s	.falling
-	.neither:
-		move.b	#id_JumpTransition,anim(a0)
-		rts
-	.falling:
-		move.b	#id_Fall,anim(a0)
-		rts
-	.rising:
-		move.b	#id_Roll,anim(a0)
-		rts
-
-AnimType_JumpNormalFire:
-		move.b	#id_FireJumpingStraight,anim(a0)
-		rts
-
-AnimType_JumpSemiCardinalFire:
-		btst	#bitUp,(Ctrl_1_held_logical).w
-		bne.s	.up
-		btst	#bitDn,(Ctrl_1_held_logical).w
-		bne.s	.diagdown
-		move.b	#id_FireJumpingStraight,anim(a0)
-		rts
-	.up:
-		btst	#bitR,(Ctrl_1_held_logical).w
-		bne.s	.diagup
-		btst	#bitL,(Ctrl_1_held_logical).w
-		bne.s	.diagup
-		move.b	#id_FireJumpingUp,anim(a0)
-		rts
-	.diagup:
-		move.b	#id_FireJumpingDiagUp,anim(a0)
-		rts
-	.diagdown:
-		move.b	#id_FireJumpingDiagDown,anim(a0)
-		rts
+	.artLUT:
+		dc.l	ArtUnc_Bass>>1, ArtUnc_CopyRobot>>1
 
 ; ---------------------------------------------------------------------------
 ; Object Data

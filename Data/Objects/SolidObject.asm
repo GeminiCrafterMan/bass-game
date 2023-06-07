@@ -402,7 +402,7 @@ SolidObject_cont:
 SolidObject_ChkBounds:
 		tst.b	object_control(a1)
 		bmi.w	SolidObject_TestClearPush
-		cmpi.b	#id_SonicDeath,routine(a1)
+		cmpi.b	#id_BassDeath,routine(a1)
 		bhs.w	SolidObject_NoCollision
 		tst.w	(Debug_placement_mode).w
 		bne.w	SolidObject_NoCollision
@@ -617,7 +617,7 @@ loc_1E1AA:
 loc_1E1CA:
 		tst.b	object_control(a1)
 		bmi.s	locret_1E1F2
-		cmpi.b	#id_SonicDeath,routine(a1)
+		cmpi.b	#id_BassDeath,routine(a1)
 		bhs.s	locret_1E1F2
 		tst.w	(Debug_placement_mode).w
 		bne.s	locret_1E1F2
@@ -635,7 +635,7 @@ locret_1E1F2:
 loc_1E1F4:
 		tst.b	object_control(a1)
 		bmi.s	locret_1E21C
-		cmpi.b	#id_SonicDeath,routine(a1)
+		cmpi.b	#id_BassDeath,routine(a1)
 		bhs.s	locret_1E21C
 		tst.w	(Debug_placement_mode).w
 		bne.s	locret_1E21C
@@ -902,7 +902,7 @@ loc_1E45A:
 		blo.s		locret_1E4D4
 		tst.b	object_control(a1)
 		bmi.s	locret_1E4D4
-		cmpi.b	#id_SonicDeath,routine(a1)
+		cmpi.b	#id_BassDeath,routine(a1)
 		bhs.s	locret_1E4D4
 		add.w	d0,d2
 		addq.w	#3,d2
@@ -949,7 +949,7 @@ loc_1E4D6:
 		blo.s		locret_1E4D4
 		tst.b	object_control(a1)
 		bmi.s	locret_1E4D4
-		cmpi.b	#id_SonicDeath,routine(a1)
+		cmpi.b	#id_BassDeath,routine(a1)
 		bhs.s	locret_1E4D4
 		sub.w	d1,d2
 		subq.w	#4,d2

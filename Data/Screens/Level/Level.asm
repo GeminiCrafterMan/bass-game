@@ -56,11 +56,7 @@ Level_Screen:
 		move.w	#$8A00+255,(H_int_counter_command).w				; set palette change position (for water)
 		move.w	(H_int_counter_command).w,VDP_control_port-VDP_control_port(a6)
 		ResetDMAQueue
-		moveq	#palid_Bass,d0
-		move.w	d0,d1
-		jsr	(LoadPalette).w											; load Sonic's palette
-		move.w	d1,d0
-		jsr	(LoadPalette_Immediate).w
+		jsr		LoadPlayerPal
 		lea	(PLC_Main).l,a5
 		jsr	(LoadPLC_Raw_KosM).w									; load hud and ring art
 		jsr	(CheckLevelForWater).l
@@ -173,10 +169,34 @@ Level_Screen:
 ; =============== S U B R O U T I N E =======================================
 
 SpawnLevelMainSprites:
+		moveq	#0,d0
+		move.b	(Player_mode).w,d0
+		ext.w	d0
+		lsl.w	#2,d0
+		move.l	.plrIDs(pc,d0.w),(Player_1).w
 		move.l	#Obj_ResetCollisionResponseList,(Reserved_object_3).w
-		move.l	#Obj_Sonic,(Player_1).w
 		move.l	#Obj_DashDust,(v_Dust).w
 		rts
+
+.plrIDs:
+		dc.l	Obj_Bass		; Bass
+		dc.l	Obj_CopyRobot	; Copy Robot
+
+LoadPlayerPal:
+		moveq	#0,d0
+		move.b	(Player_mode).w,d0
+		ext.w	d0
+		lsl.w	#1,d0
+		move.w	.palIDs(pc,d0.w),d0
+		move.w	d0,d1
+		jsr	(LoadPalette).w											; load Sonic's palette
+		move.w	d1,d0
+		jmp	(LoadPalette_Immediate).w
+
+.palIDs:
+		dc.w	palid_Bass		; Bass
+		dc.w	palid_CopyRobot	; Copy Robot
+		even
 
 ; =============== S U B R O U T I N E =======================================
 

@@ -24,8 +24,6 @@ Process_Sprites_Loop:
 ; =============== S U B R O U T I N E =======================================
 
 Process_Sprites_FreezeObject:
-		cmpi.b	#id_SonicDrown,(Player_1+routine).w
-		beq.s	Process_Sprites_Skip
 		moveq	#(((Dynamic_object_RAM+object_size)-Object_RAM)/object_size)-1,d7
 		bsr.s	Process_Sprites_Loop
 		moveq	#(((Dynamic_object_RAM_end+object_size)-(Dynamic_object_RAM+object_size))/object_size)-1,d7

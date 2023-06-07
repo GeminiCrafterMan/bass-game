@@ -39,12 +39,10 @@ CopyAni_Fall:
 		dc.b    6, frC_Fall, afEnd
 CopyAni_Wait:
 		dc.b	4
-		rept   16
-			dc.b	frC_Idle1
+		rept   8
+			dc.b	frC_Idle1, frC_Idle2
 		endr
-		rept	2
-			dc.b	frC_Idle2
-		endr
+			dc.b	frC_Idle3, frC_Idle4
 		dc.b	afEnd
 CopyAni_Dash:
 		dc.b    6, frC_Dash, afEnd
@@ -91,6 +89,8 @@ CopyAni_FireSteadyDiagDown:
 frC_Null:	ds.b 1
 frC_Idle1:	ds.b 1
 frC_Idle2:	ds.b 1
+frC_Idle3:	ds.b 1
+frC_Idle4:	ds.b 1
 frC_Step:	ds.b 1
 frC_Walk1:	ds.b 1
 frC_Walk2:	ds.b 1

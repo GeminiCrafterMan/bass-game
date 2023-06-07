@@ -87,7 +87,7 @@ Obj_Index:
 		dc.l DeleteObject						; $51
 		dc.l DeleteObject						; $52
 		dc.l DeleteObject						; $53
-		dc.l Obj_Bubbler						; $54
+		dc.l DeleteObject						; $54
 		dc.l DeleteObject						; $55
 		dc.l DeleteObject						; $56
 		dc.l DeleteObject						; $57

@@ -9,7 +9,7 @@ DebugMode:
 		bne.w	.action
 		addq.b	#2,(Debug_placement_routine).w
 		move.l	mappings(a0),(Saved_mappings).w
-		cmpi.b	#id_SonicDeath,routine(a0)
+		cmpi.b	#id_BassDeath,routine(a0)
 		bhs.s	.death
 		move.w	art_tile(a0),(Saved_art_tile).w
 
@@ -22,7 +22,6 @@ DebugMode:
 		bclr	#Status_Underwater,status(a0)
 		beq.s	.select
 		movea.w	a0,a1
-		jsr	Player_ResetAirTimer(pc)
 		move.w	#$600,(Sonic_Knux_top_speed).w
 		move.w	#$C,(Sonic_Knux_acceleration).w
 		move.w	#$80,(Sonic_Knux_deceleration).w
@@ -197,7 +196,7 @@ DebugMode:
 		move.w	d0,ground_vel(a1)
 		andi.b	#1,status(a1)
 		ori.b	#2,status(a1)
-		move.b	#id_SonicControl,routine(a1)
+		move.b	#id_BassControl,routine(a1)
 		move.w	#bytes_to_word(38/2,18/2),y_radius(a1)	; set y_radius and x_radius
 		rts
 ; ---------------------------------------------------------------------------

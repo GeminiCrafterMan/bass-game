@@ -93,7 +93,6 @@ Obj_TitleCardWait:
 		clr.w	(Ring_count).w			; Reset HUD rings and timer
 		st	(Update_HUD_timer).w
 		st	(Update_HUD_ring_count).w	; Start updating timer and rings again
-		move.b	#30,(Player_1+air_left).w	; Reset air
 		jsr	(Restore_LevelMusic).w		; Play music
 +		clr.w	$48(a0)
 		addq.b	#2,routine(a0)

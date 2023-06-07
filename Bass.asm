@@ -287,10 +287,13 @@ EndOfHeader:
 		include "Data/Misc/Interrupt Handler.asm"
 
 ; ---------------------------------------------------------------------------
-; Subroutine to load Bass object
+; Subroutine to load player objects
 ; ---------------------------------------------------------------------------
 
+		include "Objects/Player Characters/Common Routines.asm"
 		include "Objects/Player Characters/Bass/Bass.asm"
+		include "Objects/Player Characters/Copy Robot/Copy Robot.asm"
+
 		include "Objects/Spin Dust/SpinDust.asm"
 		include "Objects/Player Projectiles/Projectiles.asm"
 

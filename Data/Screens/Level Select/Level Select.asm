@@ -63,6 +63,7 @@ LevelSelect_Screen:
 		lea	(Pal_LevelSelect).l,a1
 		lea	(Target_palette).w,a2
 		jsr	(PalLoad_Line32).w
+		jsr		LevelSelect_LoadLevel_CharacterSwitcher.update
 		bsr.w	LevelSelect_LoadText
 		move.w	#palette_line_1+LevelSelect_VRAM,d3
 		bsr.w	LevelSelect_LoadMainText
@@ -92,6 +93,8 @@ LevelSelect_Screen:
 		move.w	#palette_line_1,d3
 		bsr.w	LevelSelect_MarkFields
 		enableInts
+		jsr	(Process_Sprites).w
+		jsr	(Render_Sprites).w
 		tst.b	(Ctrl_1_pressed).w
 		bpl.s	.loop
 		cmpi.w	#LevelSelect_ZoneCount,(vLevelSelect_VCount).w
@@ -118,9 +121,10 @@ LevelSelect_Controls:
 		cmpi.w	#LevelSelect_SampleTestCount,d3
 		beq.w	LevelSelect_LoadSampleNumber
 		cmpi.w	#LevelSelect_SoundTestCount,d3
-		beq.s	LevelSelect_LoadSoundNumber
+		beq.w	LevelSelect_LoadSoundNumber
 		cmpi.w	#LevelSelect_MusicTestCount,d3
-		beq.s	LevelSelect_LoadMusicNumber
+		beq.w	LevelSelect_LoadMusicNumber
+		bsr.s	LevelSelect_LoadLevel_CharacterSwitcher
 		cmpi.w	#LevelSelect_ZoneCount,d3
 		bhs.s	LevelSelect_LoadLevel_Return
 
@@ -151,6 +155,39 @@ LevelSelect_LoadMaxActs:
 		zonewarning LevelSelect_LoadMaxActs,2
 
 ; ---------------------------------------------------------------------------
+; Load Characters
+; ---------------------------------------------------------------------------
+
+LevelSelect_LoadLevel_CharacterSwitcher:
+		btst	#button_C,(Ctrl_1_pressed).w
+		beq.s	.ret
+		bchg	#0,(Player_mode).w	; this gets reset at some point and you always end up spawning as Bass
+		sfx		sfx_Switch
+	.update:	; this part sucks a lot
+		moveq	#0,d0
+		move.b	(Player_mode).w,d0
+		lsl.w	#2,d0
+		add.w	d0,d0
+		move.w	#make_art_tile(ArtTile_Sonic,2,0),(Player_1+art_tile).w
+		move.w	#tiles_to_bytes(ArtTile_Sonic),(Player_1+vram_art).w
+		move.l	.plrIDs(pc,d0.w),(Player_1).w
+		move.w	#$194,(Player_1+x_pos).w
+		move.w	#$F0,(Player_1+y_pos).w
+		bset	#0,(Player_1+status).w
+		add.w	#4,d0
+		move.l	.plrIDs(pc,d0.w),d1
+		lea	(Target_palette_line_3).w,a2
+		jsr	(PalLoad_Line16).w
+		move.l	.plrIDs(pc,d0.w),a1
+		lea	(Normal_palette_line_3).w,a2
+		jmp	(PalLoad_Line16).w
+.plrIDs:
+		dc.l	Obj_CharSel_Bass,		Pal_Bass		; Bass
+		dc.l	Obj_CharSel_CopyRobot,	Pal_CopyRobot	; Copy Robot
+	.ret:
+		rts
+
+; ---------------------------------------------------------------------------
 ; Load Music
 ; ---------------------------------------------------------------------------
 
@@ -162,7 +199,7 @@ LevelSelect_LoadMusicNumber:
 		move.w	d3,(vLevelSelect_MusicCount).w
 		move.b	(Ctrl_1_pressed).w,d1
 		andi.b	#btnABC,d1
-		beq.s	LevelSelect_LoadLevel_Return
+		beq.w	LevelSelect_LoadLevel_Return
 		move.w	d3,d0
 		addq.w	#mus__First,d0		; $00 is reserved for silence
 		jmp	(SMPS_QueueSound1).w	; play music
@@ -179,7 +216,7 @@ LevelSelect_LoadSoundNumber:
 		move.w	d3,(vLevelSelect_SoundCount).w
 		move.b	(Ctrl_1_pressed).w,d1
 		andi.b	#btnABC,d1
-		beq.s	LevelSelect_LoadLevel_Return
+		beq.w	LevelSelect_LoadLevel_Return
 		move.w	d3,d0
 		addi.w	#sfx__First,d0
 		jmp	(SMPS_QueueSound2).w	; play sfx
@@ -196,7 +233,7 @@ LevelSelect_LoadSampleNumber:
 		move.w	d3,(vLevelSelect_SampleCount).w
 		move.b	(Ctrl_1_pressed).w,d1
 		andi.b	#btnABC,d1
-		beq.s	LevelSelect_LoadLevel_Return
+		beq.w	LevelSelect_LoadLevel_Return
 		move.w	d3,d0
 		addi.w	#dac__First,d0
 		jmp	(SMPS_PlayDACSample).w	; play sample

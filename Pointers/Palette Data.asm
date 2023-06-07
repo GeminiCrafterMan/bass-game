@@ -1,7 +1,8 @@
 ; ===========================================================================
-; Normal palette
+; Player palettes
 ; ===========================================================================
 
+; Bass
 Pal_Bass:			binclude "Objects/Player Characters/Bass/Palettes/Bass.bin"
 	even
 Pal_BassScorchShield:	binclude "Objects/Player Characters/Bass/Palettes/Scorch Shield.bin"
@@ -14,6 +15,15 @@ Pal_BassTreble:		binclude "Objects/Player Characters/Bass/Palettes/Treble Boost.
 	even
 Pal_WaterSonic:		binclude "Objects/Player Characters/Bass/Palettes/Water Sonic.bin"
 	even
+
+; Copy Robot
+Pal_CopyRobot:		binclude "Objects/Player Characters/Copy Robot/Palettes/Copy Robot.bin"
+	even
+
+; ===========================================================================
+; Other palettes
+; ===========================================================================
+
 Pal_LevelSelect:	binclude "Data/Screens/Level Select/Palettes/1.bin"
 	even
 Pal_Test1:			binclude "Levels/Test/Palettes/Level 1.bin"

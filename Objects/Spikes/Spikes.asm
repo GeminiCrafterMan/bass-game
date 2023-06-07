@@ -137,7 +137,7 @@ sub_24280:
 		bne.s	+
 		tst.b	invulnerability_timer(a1)
 		bne.s	+
-		cmpi.b	#id_SonicHurt,routine(a1)
+		cmpi.b	#id_BassHurt,routine(a1)
 		bhs.s	+
 		move.l	y_pos(a1),d3
 		move.w	y_vel(a1),d0

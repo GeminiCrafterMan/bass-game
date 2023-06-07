@@ -459,7 +459,7 @@ HurtCharacter:
 		andi.b	#$8E,status_secondary(a0)
 
 .bounce:
-		move.b	#id_SonicHurt,routine(a0)
+		move.b	#id_BassHurt,routine(a0)
 		bsr.w	Sonic_ResetOnFloor
 		bset	#Status_InAir,status(a0)
 		move.w	#-$400,y_vel(a0)						; make Sonic bounce away from the object
@@ -521,7 +521,7 @@ Kill_Character:
 	.doneSpawning:
 		clr.b	status_secondary(a0)
 		clr.b	status_tertiary(a0)
-		move.b	#id_SonicDeath,routine(a0)
+		move.b	#id_BassDeath,routine(a0)
 		move.w	(a3)+,x_vel(a0)
 		move.w	(a3)+,y_vel(a0)
 ;		move.w	d0,-(sp)

@@ -118,7 +118,7 @@ sub_22F98:
 		clr.b	jumping(a1)
 		clr.b	spin_dash_flag(a1)
 		move.b	#id_Roll,anim(a1)
-		move.b	#id_SonicControl,routine(a1)
+		move.b	#id_BassControl,routine(a1)
 		move.b	subtype(a0),d0
 		bpl.s	loc_22FE0
 		clr.w	x_vel(a1)
@@ -314,7 +314,7 @@ loc_2346C:
 		bset	#Status_InAir,status(a1)
 		bclr	#Status_OnObj,status(a1)
 		clr.b	jumping(a1)
-		move.b	#id_SonicControl,routine(a1)
+		move.b	#id_BassControl,routine(a1)
 		clr.b	double_jump_flag(a1)
 		sfx	sfx_Spring,1
 
@@ -376,7 +376,7 @@ loc_23542:
 		bclr	#Status_OnObj,status(a1)
 		clr.b	jumping(a1)
 		move.b	#id_Dash,anim(a1)
-		move.b	#id_SonicControl,routine(a1)
+		move.b	#id_BassControl,routine(a1)
 		move.b	subtype(a0),d0
 		andi.b	#$C,d0
 		cmpi.b	#4,d0
@@ -433,7 +433,7 @@ loc_23660:
 		bset	#Status_InAir,status(a1)
 		bclr	#Status_OnObj,status(a1)
 		clr.b	jumping(a1)
-		move.b	#id_SonicControl,routine(a1)
+		move.b	#id_BassControl,routine(a1)
 		move.b	subtype(a0),d0
 		andi.b	#$C,d0
 		cmpi.b	#4,d0

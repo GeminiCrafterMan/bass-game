@@ -95,20 +95,18 @@ VintID_Level =					id(ptr_VInt_Level)		; 8
 VintID_Fade =					id(ptr_VInt_Fade)		; A
 
 ; ---------------------------------------------------------------------------
-; Sonic routines
+; Bass routines
 ; ---------------------------------------------------------------------------
 
-offset :=	Sonic_Index
+offset :=	Bass_Index
 ptrsize :=	1
 idstart :=	0
 
-id_SonicInit =					id(ptr_Sonic_Init)			; 0
-id_SonicControl =					id(ptr_Sonic_Control)		; 2
-id_SonicHurt =					id(ptr_Sonic_Hurt)		; 4
-id_SonicDeath =					id(ptr_Sonic_Death)		; 6
-id_SonicRestart =					id(ptr_Sonic_Restart)		; 8
-
-id_SonicDrown =					id(ptr_Sonic_Drown)		; C
+id_BassInit =					id(ptr_Bass_Init)			; 0
+id_BassControl =					id(ptr_Bass_Control)		; 2
+id_BassHurt =					id(ptr_Bass_Hurt)		; 4
+id_BassDeath =					id(ptr_Bass_Death)		; 6
+id_BassRestart =					id(ptr_Bass_Restart)		; 8
 
 ; ---------------------------------------------------------------------------
 ; Levels
@@ -210,6 +208,7 @@ x_sub =					x_pos+2 ; word
 y_pos =					$14 ; word, or long when extra precision is required
 y_sub =					y_pos+2 ; word
 mapping_frame =			$22 ; byte
+previous_frame =		$48	; byte
 
 ; ---------------------------------------------------------------------------
 ; Conventions followed by most objects:
@@ -262,7 +261,7 @@ ground_vel =				$1C ; word ; overall velocity along ground, not updated when in 
 double_jump_property =	$25 ; byte ; remaining frames of flight / 2 for Tails, gliding-related for Knuckles
 flip_angle =				$27 ; byte ; angle about horizontal axis (360 degrees = 256)
 status_secondary =		$2B ; byte ; see SCHG for details
-air_left =				$2C ; byte
+;air_left =				$2C ; byte
 flip_type =				$2D ; byte ; bit 7 set means flipping is inverted, lower bits control flipping type
 object_control =			$2E ; byte ; bit 0 set means character can jump out, bit 7 set means he can't
 double_jump_flag =		$2F ; byte ; meaning depends on current character, see SCHG for details

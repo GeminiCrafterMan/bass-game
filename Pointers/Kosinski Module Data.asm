@@ -16,8 +16,6 @@ ArtKosM_GrayButton:				binclude "Objects/Button/KosinskiM Art/Gray Button.bin"
 	even
 ArtKosM_DiagonalSpring:			binclude "Objects/Spring/KosinskiM Art/Diagonal Spring.bin"
 	even
-ArtKosM_Bubbles:				binclude "Objects/Bubbler/KosinskiM Art/Bubbles.bin"
-	even
 ArtKosM_WaterWave:				binclude "Objects/Water Wave/KosinskiM Art/Water Wave.bin"
 	even
 ArtKosM_ResultsGeneral:			binclude "Objects/Results/KosinskiM Art/Results General.bin"
