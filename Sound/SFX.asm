@@ -45,6 +45,8 @@ ptr_snd5D:	SMPS_SFX_METADATA	Sound5D, $70, 0
 ptr_snd5E:	SMPS_SFX_METADATA	Sound5E, $70, 0	; Buster shot
 ptr_snd5F:	SMPS_SFX_METADATA	Sound5F, $70, 0	; Jump land
 ptr_snd60:	SMPS_SFX_METADATA	Sound60, $70, 0	; 1-up
+ptr_snd61:	SMPS_SFX_METADATA	Sound61, $70, 0	; Buster charging
+ptr_snd62:	SMPS_SFX_METADATA	Sound62, $70, 0	; Buster charged
 
 ptr_sndend
 ; ---------------------------------------------------------------------------
@@ -116,4 +118,8 @@ Sound5E:	include	"Sound/SFX/Snd - Buster Shot.asm"
 Sound5F:	include	"Sound/SFX/Snd - Jump Land.asm"
 	even
 Sound60:	include	"Sound/SFX/Snd - 1up.asm"
+	even
+Sound61:	include	"Sound/SFX/Snd - Charge Start.asm"
+	even
+Sound62:	include	"Sound/SFX/Snd - Charge Loop.asm"
 	even

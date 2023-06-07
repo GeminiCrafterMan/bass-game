@@ -44,5 +44,12 @@ Obj_PlayerBall:
 		subq.b	#1,(v_bulletsonscreen).w	; subtract 1
 		jmp		(DeleteObject).l
 
+Obj_MegaMidCharge:
+		subq.b	#1,(v_bulletsonscreen).w	; subtract 1
+		jmp		(DeleteObject).l
+Obj_MegaFullCharge:
+		subq.b	#3,(v_bulletsonscreen).w	; subtract 3
+		jmp		(DeleteObject).l
+
 Map_BusterShots:	binclude	"Objects/Player Projectiles/Object Data/Map - Buster Shots.bin"
 		even

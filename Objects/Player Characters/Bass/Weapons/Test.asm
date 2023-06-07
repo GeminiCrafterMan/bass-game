@@ -1,4 +1,6 @@
 Weapon_Test:	; Standard Buster weapon. Will be used when out of ammo for any given weapon.
+		cmpi.b	#id_Dash,anim(a0)
+		beq.w	.ret
 		btst	#bitB,(Ctrl_1_pressed_logical).w	; Pressing B?
 		beq.w	.ret
 		cmpi.b	#3,(v_bulletsonscreen).w

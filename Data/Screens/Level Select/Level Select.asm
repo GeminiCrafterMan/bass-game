@@ -159,15 +159,15 @@ LevelSelect_LoadMaxActs:
 ; ---------------------------------------------------------------------------
 
 LevelSelect_LoadLevel_CharacterSwitcher:
+	; todo: fix this loading the level palette upon going back to the menu, it's very distracting...
 		btst	#button_C,(Ctrl_1_pressed).w
 		beq.s	.ret
-		bchg	#0,(Player_mode).w	; this gets reset at some point and you always end up spawning as Bass
+		bchg	#0,(Player_mode).w
 		sfx		sfx_Switch
 	.update:	; this part sucks a lot
 		moveq	#0,d0
 		move.b	(Player_mode).w,d0
-		lsl.w	#2,d0
-		add.w	d0,d0
+		lsl.w	#3,d0
 		move.w	#make_art_tile(ArtTile_Sonic,2,0),(Player_1+art_tile).w
 		move.w	#tiles_to_bytes(ArtTile_Sonic),(Player_1+vram_art).w
 		move.l	.plrIDs(pc,d0.w),(Player_1).w

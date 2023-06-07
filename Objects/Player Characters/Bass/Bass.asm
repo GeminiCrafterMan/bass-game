@@ -175,6 +175,7 @@ loc_10FD6:
 ; Bass_Spin_Path:
 Bass_MdRoll:
 		bsr.w	Player_WeaponSwitch
+		bsr.w	Player_Shoot
 		bsr.w	Sonic_Jump
 		bsr.w	Bass_KeepDashing	; dash timer test
 		bsr.w	Player_RollRepel

@@ -175,6 +175,7 @@ locC_10FD6:
 ; CopyRobot_Spin_Path:
 CopyRobot_MdRoll:
 		bsr.w	Player_WeaponSwitch
+		bsr.w	Player_Shoot
 		bsr.w	Sonic_Jump.cont	; skips slide check
 		bsr.w	CopyRobot_KeepSliding	; slide timer test
 		bsr.w	Player_RollRepel
@@ -223,7 +224,7 @@ CopyRobot_StartSlide:
 		move.w	d0,ground_vel(a0)	; set ground vel
 		move.b	#id_Dash,anim(a0)
 		move.b	#30,dashtimer(a0)
-		move.w	#bytes_to_word(16/2,16/2),y_radius(a0)
+		move.w	#bytes_to_word(24/2,20/2),y_radius(a0)
 		sfx		sfx_Dash,1
 	.stopSliding:
 		move.b	(Ctrl_1_held_logical).w,d0

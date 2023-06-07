@@ -1,4 +1,6 @@
 Weapon_BassBuster:	; Rapid-fire buster shot that holds you in place
+		cmpi.b	#id_Dash,anim(a0)
+		beq.w	.ret
 		btst	#bitB,(Ctrl_1_held_logical).w	; Holding B?
 		beq.w	.ret
 		cmpi.b	#4,(v_bulletsonscreen).w
