@@ -61,3 +61,5 @@ ArtKosM_DEZTitleCard:			binclude "Objects/Title Card/KosinskiM Art/Levels/DEZ - 
 
 ArtKosM_Target:					binclude "Objects/Target/KosinskiM Art/Target.bin"
 	even
+ArtKosM_Motobug:			binclude "Objects/Motobug/KosinskiM Art/Motobug.bin"
+	even

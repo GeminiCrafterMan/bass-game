@@ -25,6 +25,7 @@
 ; ===========================================================================
 
 		include	"Objects/Target/Target.asm"
+		include "Objects/Motobug/Motobug.asm"
 
 ; ===========================================================================
 ; Bosses objects data

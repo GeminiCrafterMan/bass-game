@@ -323,6 +323,7 @@ obColProp =				$29	; collision extra property
 obStatus =				$2A	; orientation or mode
 obSubtype =				$2C	; object subtype
 obTimer =				$2E	; object timer
+ob2ndRout =				$3C ; byte ; used by monitors for this purpose at least
 obParent =				$42 	; word ; parent of child objects
 obParent4 =				$44 	; word ; parent of child objects
 obParent3 =				$46 	; word ; parent of child objects
@@ -461,6 +462,7 @@ ArtTile_BusterShots		= $79C
 ArtTile_Sonic			= $79E
 ArtTile_WeaponStuff		= $7B0
 ArtTile_DashDust		= $7F0
+ArtTile_Motobug:		= $52E
 
 ; ---------------------------------------------------------------------------
 ; VRAM data

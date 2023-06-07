@@ -17,7 +17,7 @@ Obj_Index:
 		dc.l DeleteObject						; $0B
 		dc.l DeleteObject						; $0C
 		dc.l DeleteObject						; $0D
-		dc.l DeleteObject						; $0E
+		dc.l Obj_Motobug						; $0E
 		dc.l DeleteObject						; $0F
 		dc.l DeleteObject						; $10
 		dc.l DeleteObject						; $11

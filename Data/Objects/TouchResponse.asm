@@ -609,8 +609,8 @@ GenericEnemy_Hurt:
 		subq.b	#1,boss_invulnerable_time(a0)
 		beq.s	.restore
 		btst	#0,boss_invulnerable_time(a0)
-		jeq		DisplaySprite
-		rts
+		bne.s	.ret
+		jmp		RememberState
 	.restore:
 		move.b	collision_restore_flags(a0),collision_flags(a0)
 		bclr	#6,status(a0)
@@ -618,4 +618,5 @@ GenericEnemy_Hurt:
 		rts
 
 	.nopain:
-		jmp	(Sprite_OnScreen_Test_Collision).w
+		jsr		Add_SpriteToCollisionResponseList
+		jmp		RememberState
