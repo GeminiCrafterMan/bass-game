@@ -47,6 +47,8 @@ ptr_snd5F:	SMPS_SFX_METADATA	Sound5F, $70, 0	; Jump land
 ptr_snd60:	SMPS_SFX_METADATA	Sound60, $70, 0	; 1-up
 ptr_snd61:	SMPS_SFX_METADATA	Sound61, $70, 0	; Buster charging
 ptr_snd62:	SMPS_SFX_METADATA	Sound62, $70, 0	; Buster charged
+ptr_snd63:	SMPS_SFX_METADATA	Sound63, $70, 0	; Energy fill (health, weapon, boss)
+ptr_snd64:	SMPS_SFX_METADATA	Sound64, $70, 0	; Menu cursor
 
 ptr_sndend
 ; ---------------------------------------------------------------------------
@@ -122,4 +124,8 @@ Sound60:	include	"Sound/SFX/Snd - 1up.asm"
 Sound61:	include	"Sound/SFX/Snd - Charge Start.asm"
 	even
 Sound62:	include	"Sound/SFX/Snd - Charge Loop.asm"
+	even
+Sound63:	include	"Sound/SFX/Snd - Energy Fill.asm"
+	even
+Sound64:	include	"Sound/SFX/Snd - Menu Cursor.asm"
 	even

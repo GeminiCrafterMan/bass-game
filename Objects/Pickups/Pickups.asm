@@ -141,7 +141,7 @@ CollectValidPickup:
 	.addHPLoop:
 		cmpi.b	#28,(v_health).w
 		beq.s	.stopLoop
-		sfx		sfx_Switch
+		sfx		sfx_EnergyFill
 		addi.b	#1,(v_health).w
 		move.b	#VintID_Main,(V_int_routine).w
 		jsr		Wait_VSync
@@ -164,7 +164,7 @@ CollectValidPickup:
 	.addENLoop:
 		cmp.b	d3,d4
 		beq.s	.stopLoop
-		sfx		sfx_Switch
+		sfx		sfx_EnergyFill
 		addi.b	#1,d3
 		move.b	d3,(a1)
 		move.b	#VintID_Main,(V_int_routine).w
