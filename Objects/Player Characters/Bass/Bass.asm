@@ -1361,6 +1361,7 @@ Sonic_Hurt:
 ; ---------------------------------------------------------------------------
 +
 	endif
+		jsr		Player_WeaponSwitch.loadWepPal
 		jsr	(MoveSprite2_TestGravity).w
 		addi.w	#$30,y_vel(a0)
 		btst	#Status_Underwater,status(a0)

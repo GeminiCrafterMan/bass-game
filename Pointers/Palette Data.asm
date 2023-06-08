@@ -19,6 +19,8 @@ Pal_WaterSonic:		binclude "Objects/Player Characters/Bass/Palettes/Water Sonic.b
 ; Copy Robot
 Pal_CopyRobot:		binclude "Objects/Player Characters/Copy Robot/Palettes/Copy Robot.bin"
 	even
+Pal_CopyRobotChargeShot:	binclude "Objects/Player Characters/Copy Robot/Palettes/Charge Cycle.bin"
+	even
 
 ; ===========================================================================
 ; Other palettes
