@@ -1,7 +1,7 @@
 {
     "Flex": 2,
     "name": "",
-    "node": "0c7872ed-187e-4c57-9b1c-7531db1bfa0d",
+    "node": "59cf272d-439f-4f7a-84ca-696259b7c962",
     "objects": [
         {
             "format": "Sonic 3&K Player.js",
@@ -184,7 +184,16 @@
                         {
                             "format": "Sonic 3&K Player.js",
                             "name": "Charged Shots",
-                            "palettes": [],
+                            "palettes": [
+                                {
+                                    "path": "Objects/Player Characters/Copy Robot/Palettes/Copy Robot.bin",
+                                    "length": 1
+                                },
+                                {
+                                    "path": "Levels/Guaranteed Colors.bin",
+                                    "length": 1
+                                }
+                            ],
                             "art": {
                                 "path": "Objects/Player Projectiles/Uncompressed Art/Mega Buster Charge Shots.bin",
                                 "compression": "Uncompressed",
