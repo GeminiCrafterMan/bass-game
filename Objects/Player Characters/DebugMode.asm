@@ -175,7 +175,7 @@ DebugMode:
 ; ---------------------------------------------------------------------------
 
 .backtonormal
-		btst	#button_B,(Ctrl_1_pressed).w			; is button B pressed?
+		btst	#button_mode,(Ctrl_1_pressed_6btn).w			; is button B pressed?
 		beq.s	.stayindebug						; if not, branch
 		clr.w	(Debug_placement_mode).w		; deactivate debug mode
 		disableInts

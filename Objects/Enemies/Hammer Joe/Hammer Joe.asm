@@ -16,7 +16,7 @@ Obj_HammerJoe_Index:	offsetTable
 Obj_HammerJoe_Init:	; Routine 0
 		addq.b	#2,routine(a0)
 		move.l	#Map_HammerJoe,mappings(a0)
-		move.w	#make_art_tile(ArtTile_Motobug,0,0),art_tile(a0)
+		move.w	#make_art_tile(ArtTile_HammerJoe,0,0),art_tile(a0)
 		move.b	#4,render_flags(a0)
 		move.w	#$200,priority(a0)
 ;		move.b	#$C9,collision_flags(a0)	; same size, but deflect shots
@@ -80,7 +80,7 @@ Obj_HammerJoe_Delete:	; Shouldn't be necessary, but putting it here just in case
 Obj_HammerJoe_Hammer:
 		addq.b	#2,routine(a0)
 		move.l	#Map_HammerJoe,mappings(a0)
-		move.w	#make_art_tile(ArtTile_Motobug,0,0),art_tile(a0)
+		move.w	#make_art_tile(ArtTile_HammerJoe,0,0),art_tile(a0)
 		move.b	#4,render_flags(a0)
 		move.w	#$200,priority(a0)
 ;		move.b	#$D8,collision_flags(a0)	; deflect shots
@@ -106,15 +106,15 @@ Ani_HammerJoe:	offsetTable
 		offsetTableEntry.w	.throw
 		offsetTableEntry.w	.hammer
 
-	.swing1:	dc.b 4
+	.swing1:	dc.b 5
 				rept 5
 					dc.b 1, 2, 3, 4
 				endr
 				dc.b afRoutine
-	.swing2:	dc.b 4
-				rept 3
+	.swing2:	dc.b 2
+					dc.b 5, 5, 6, 6, 7, 7, 8, 8
+					dc.b 5, 5, 6, 6, 7, 8
 					dc.b 5, 6, 7, 8
-				endr
 				dc.b afRoutine
 	.throw:		dc.b 14, 9, afRoutine
 	.hammer:	dc.b 4, 10, 11, afEnd

@@ -17,7 +17,7 @@ Obj_Bass:
 		cmpi.b	#1,(Debug_placement_type).w	; Is Bass in debug object placement mode?
 		jeq		(DebugMode).l			; If so, skip to debug mode routine
 		; By this point, we're assuming you're in frame cycling mode
-		btst	#button_B,(Ctrl_1_pressed).w
+		btst	#button_mode,(Ctrl_1_pressed_6btn).w
 		beq.s	+
 		clr.w	(Debug_placement_mode).w	; Leave debug mode
 +		addq.b	#1,mapping_frame(a0)		; Next frame
@@ -63,7 +63,7 @@ Bass_Control:								; Routine 2
 		eori.b	#1,(Reverse_gravity_flag).w		; toggle reverse gravity
 
 loc_10BCE:
-		btst	#button_B,(Ctrl_1_pressed).w		; is button B pressed?
+		btst	#button_mode,(Ctrl_1_pressed_6btn).w	; is button Mode pressed?
 		beq.s	loc_10BF0					; if not, branch
 		move.w	#1,(Debug_placement_mode).w	; change Bass into a ring/item
 		clr.b	(Ctrl_1_locked).w					; unlock control
@@ -1353,7 +1353,7 @@ Sonic_Hurt:
 	if GameDebug
 		tst.b	(Debug_mode_flag).w
 		beq.s	+
-		btst	#button_B,(Ctrl_1_pressed).w
+		btst	#button_mode,(Ctrl_1_pressed_6btn).w
 		beq.s	+
 		move.w	#1,(Debug_placement_mode).w
 		clr.b	(Ctrl_1_locked).w
@@ -1430,7 +1430,7 @@ Sonic_Death:
 	if GameDebug
 		tst.b	(Debug_mode_flag).w
 		beq.s	+
-		btst	#button_B,(Ctrl_1_pressed).w
+		btst	#button_mode,(Ctrl_1_pressed_6btn).w
 		beq.s	+
 		move.w	#1,(Debug_placement_mode).w
 		clr.b	(Ctrl_1_locked).w
