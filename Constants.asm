@@ -526,9 +526,11 @@ VRAM_Plane_Table_Size		= $1000	; 64 cells x 32 cells x 2 bytes per cell
 ; Sprite render screen flags
 ; ---------------------------------------------------------------------------
 
+rfXFlip						= %00000001	; horizontal flip flag ($01)
+rfYFlip						= %00000010	; vertical flip flag ($02)
 rfCoord						= %00000100	; screen coordinates flag ($04)
 
-rfStatic						= %00100000	; static mappings flag ($20)
+rfStatic					= %00100000	; static mappings flag ($20)
 rfMulti						= %01000000	; multi-draw flag ($40)
 rfOnscreen					= %10000000	; on-screen flag ($80)
 
@@ -536,9 +538,11 @@ rfOnscreen					= %10000000	; on-screen flag ($80)
 ; Sprite render screen bits
 ; ---------------------------------------------------------------------------
 
+rbXFlip						= 0		; horizontal flip bit
+rbYFlip						= 1		; vertical flip bit
 rbCoord						= 2		; screen coordinates bit
 
-rbStatic						= 5		; static mappings bit
+rbStatic					= 5		; static mappings bit
 rbMulti						= 6		; multi-draw bit
 rbOnscreen					= 7		; on-screen bit
 

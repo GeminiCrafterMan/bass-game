@@ -151,12 +151,12 @@ WepType_Normal:
 		move.w	y_pos(a0),y_pos(a1)
 		btst	#Status_Facing,status(a0)
 		beq.s	.notFlipped
-		bset	#Status_Facing,status(a1)
+		bset	#rbXFlip,render_flags(a1)
 		subi.w	#10,x_pos(a1)
 		neg.w	ground_vel(a1)
 		bra.s	.doneFlip
 	.notFlipped:
-		bclr	#Status_Facing,status(a1)
+		bclr	#rbXFlip,render_flags(a1)
 		addi.w	#10,x_pos(a1)
 	.doneFlip:
 		addq.w	#2,y_pos(a1)
@@ -174,12 +174,12 @@ WepType_SemiCardinal:
 WepType_SemiCardinal_straight:
 		btst	#Status_Facing,status(a0)
 		beq.s	.notFlipped
-		bset	#Status_Facing,status(a1)
+		bset	#rbXFlip,render_flags(a1)
 		subi.w	#10,x_pos(a1)
 		neg.w	ground_vel(a1)
 		bra.s	.doneFlip
 	.notFlipped:
-		bclr	#Status_Facing,status(a1)
+		bclr	#rbXFlip,render_flags(a1)
 		addi.w	#10,x_pos(a1)
 	.doneFlip:
 		addq.w	#2,y_pos(a1)
@@ -193,11 +193,11 @@ WepType_SemiCardinal_up:
 	.straightup:
 		btst	#Status_Facing,status(a0)
 		beq.s	.upNotFlipped
-		bset	#Status_Facing,status(a1)
+		bset	#rbXFlip,render_flags(a1)
 		subi.w	#3,x_pos(a1)
 		bra.s	.upDoneFlip
 	.upNotFlipped:
-		bclr	#Status_Facing,status(a1)
+		bclr	#rbXFlip,render_flags(a1)
 		addi.w	#3,x_pos(a1)
 	.upDoneFlip:
 		neg.w	ground_vel(a1)
@@ -211,12 +211,12 @@ WepType_SemiCardinal_up:
 		neg.w	ground_vel(a1)
 		btst	#Status_Facing,status(a0)
 		beq.s	.diagupNotFlipped
-		bset	#Status_Facing,status(a1)
+		bset	#rbXFlip,render_flags(a1)
 		subi.w	#10,x_pos(a1)
 		neg.w	ground_vel(a1)
 		bra.s	.diagupDoneFlip
 	.diagupNotFlipped:
-		bclr	#Status_Facing,status(a1)
+		bclr	#rbXFlip,render_flags(a1)
 		addi.w	#10,x_pos(a1)
 	.diagupDoneFlip:
 		subq.w	#2,y_pos(a1)
@@ -227,12 +227,12 @@ WepType_SemiCardinal_diagdown:
 		move.w	ground_vel(a1),y_vel(a1)	; actually make it go
 		btst	#Status_Facing,status(a0)
 		beq.s	.notFlipped
-		bset	#Status_Facing,status(a1)
+		bset	#rbXFlip,render_flags(a1)
 		subi.w	#10,x_pos(a1)
 		neg.w	ground_vel(a1)
 		bra.s	.doneFlip
 	.notFlipped:
-		bclr	#Status_Facing,status(a1)
+		bclr	#rbXFlip,render_flags(a1)
 		addi.w	#10,x_pos(a1)
 	.doneFlip:
 		addq.w	#5,y_pos(a1)

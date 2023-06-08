@@ -9,7 +9,7 @@ Obj_PlayerLemon:
 		move.w	#bytes_to_word(8,8),height_pixels(a0)
 		move.w	#bytes_to_word(8/2,8/2),y_radius(a0)
 		btst	#7,status(a0)
-		bne.w	.delete
+		bne.s	.delete
 		out_of_xrange.s .delete	; is the projectile off-screen?
 		out_of_yrange.s .delete
 		jsr		(TouchResponse).l
@@ -36,7 +36,7 @@ Obj_PlayerBall:
 		bset	#7,status(a0)
 	.didntHit:
 		btst	#7,status(a0)
-		bne.w	.delete
+		bne.s	.delete
 		out_of_xrange.s .delete	; is the projectile off-screen?
 		out_of_yrange.s .delete
 		jsr		(TouchResponse).l
@@ -61,7 +61,7 @@ Obj_MegaMidCharge:
 		move.l	#.main,address(a0)
 	.main:
 		btst	#7,status(a0)
-		bne.w	.delete
+		bne.s	.delete
 		out_of_xrange.s .delete	; is the projectile off-screen?
 		out_of_yrange.s .delete
 	; animate
@@ -96,7 +96,7 @@ Obj_MegaFullCharge:
 		move.l	#.main,address(a0)
 	.main:
 		btst	#7,status(a0)
-		bne.w	.delete
+		bne.s	.delete
 		out_of_xrange.s .delete	; is the projectile off-screen?
 		out_of_yrange.s .delete
 	; animate
