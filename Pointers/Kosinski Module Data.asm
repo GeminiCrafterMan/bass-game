@@ -59,7 +59,9 @@ ArtKosM_DEZTitleCard:			binclude "Objects/Title Card/KosinskiM Art/Levels/DEZ - 
 ; Kosinski Module compressed Test graphics
 ; ===========================================================================
 
-ArtKosM_Target:					binclude "Objects/Target/KosinskiM Art/Target.bin"
+ArtKosM_Target:					binclude "Objects/Enemies/Target/KosinskiM Art/Target.bin"
 	even
-ArtKosM_Motobug:			binclude "Objects/Motobug/KosinskiM Art/Motobug.bin"
+ArtKosM_HammerJoe:				binclude "Objects/Enemies/Hammer Joe/KosinskiM Art/Hammer Joe.bin"
+	even
+ArtKosM_Motobug:				binclude "Objects/Enemies/Motobug/KosinskiM Art/Motobug.bin"
 	even

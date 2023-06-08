@@ -49,5 +49,6 @@ PLC1_Test1_Misc_end
 ; ===========================================================================
 
 PLC2_Test1_Enemy: plrlistheader
-		plreq ArtTile_Motobug, ArtKosM_Motobug			; Motobug
+;		plreq ArtTile_Motobug, ArtKosM_Motobug			; Motobug
+		plreq ArtTile_Motobug, ArtKosM_HammerJoe		; Hammer Joe
 PLC2_Test1_Enemy_end

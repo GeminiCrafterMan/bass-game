@@ -22,4 +22,4 @@ Obj_Target:
 +		jmp		GenericEnemy_Hurt
 ; ===========================================================================
 
-Map_Target:		binclude	"Objects/Target/Object Data/Map - Target.bin"
+Map_Target:		binclude	"Objects/Enemies/Target/Object Data/Map - Target.bin"

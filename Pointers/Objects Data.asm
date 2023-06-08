@@ -24,8 +24,9 @@
 ; Levels objects data
 ; ===========================================================================
 
-		include	"Objects/Target/Target.asm"
-		include "Objects/Motobug/Motobug.asm"
+		include	"Objects/Enemies/Target/Target.asm"
+		include "Objects/Enemies/Motobug/Motobug.asm"
+		include	"Objects/Enemies/Hammer Joe/Hammer Joe.asm"
 
 ; ===========================================================================
 ; Bosses objects data

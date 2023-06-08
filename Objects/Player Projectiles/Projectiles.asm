@@ -14,7 +14,7 @@ Obj_PlayerLemon:
 		out_of_yrange.s .delete
 		jsr		(TouchResponse).l
 		jsr		SpeedToPos
-		jmp		DisplaySprite
+		jmp		(Draw_Sprite).w
 	.delete:
 		subq.b	#1,(v_bulletsonscreen).w	; subtract 1
 		jmp		(DeleteObject).l

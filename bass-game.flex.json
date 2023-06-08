@@ -1,7 +1,7 @@
 {
     "Flex": 2,
     "name": "",
-    "node": "59cf272d-439f-4f7a-84ca-696259b7c962",
+    "node": "ebeac7bf-f211-4f97-8f8c-5b85c58a205b",
     "objects": [
         {
             "format": "Sonic 3&K Player.js",
@@ -31,26 +31,6 @@
                 "label": ""
             },
             "uuid": "ee6599ae-1b4a-4e97-87c5-8d521c0791ca"
-        },
-        {
-            "format": "Sonic 3&K Object.js",
-            "name": "Target",
-            "palettes": [],
-            "art": {
-                "path": "Objects/Target/KosinskiM Art/Target.bin",
-                "compression": "Kosinski-M",
-                "offset": 0
-            },
-            "mappings": {
-                "path": "Objects/Target/Object Data/Map - Target.bin",
-                "label": ""
-            },
-            "dplcs": {
-                "enabled": false,
-                "path": "",
-                "label": ""
-            },
-            "uuid": "1bd6b94b-3c8f-49d7-9be4-c7c6906fb9f9"
         },
         {
             "format": "Sonic 3&K Object.js",
@@ -269,7 +249,8 @@
                 "path": "Objects/Mega Man/Object Data/PLC - Mega Man.bin",
                 "label": ""
             },
-            "uuid": "a2a8113a-f2bd-47ff-8e2d-05fd3e240425"
+            "uuid": "a2a8113a-f2bd-47ff-8e2d-05fd3e240425",
+            "expanded": true
         },
         {
             "format": "Sonic 3&K Object.js",
@@ -298,7 +279,64 @@
                 "path": "",
                 "label": ""
             },
-            "uuid": "2c4aed46-f2e9-4da3-95bf-0b053b2f579c"
+            "uuid": "2c4aed46-f2e9-4da3-95bf-0b053b2f579c",
+            "expanded": true
+        },
+        {
+            "name": "Enemies",
+            "children": [
+                {
+                    "format": "Sonic 3&K Object.js",
+                    "name": "Target",
+                    "palettes": [],
+                    "art": {
+                        "path": "Objects/Enemies/Target/KosinskiM Art/Target.bin",
+                        "compression": "Kosinski-M",
+                        "offset": 0
+                    },
+                    "mappings": {
+                        "path": "Objects/Enemies/Target/Object Data/Map - Target.bin",
+                        "label": ""
+                    },
+                    "dplcs": {
+                        "enabled": false,
+                        "path": "",
+                        "label": ""
+                    },
+                    "uuid": "1bd6b94b-3c8f-49d7-9be4-c7c6906fb9f9"
+                },
+                {
+                    "format": "Sonic 3&K Object.js",
+                    "name": "Hammer Joe",
+                    "palettes": [
+                        {
+                            "length": 1,
+                            "blank": true
+                        },
+                        {
+                            "path": "Levels/Test/Palettes/Level 1.bin",
+                            "length": 3
+                        }
+                    ],
+                    "art": {
+                        "path": "Objects/Enemies/Hammer Joe/KosinskiM Art/Hammer Joe.bin",
+                        "compression": "Kosinski-M",
+                        "offset": 0
+                    },
+                    "mappings": {
+                        "path": "Objects/Enemies/Hammer Joe/Object Data/Map - Hammer Joe.bin",
+                        "label": ""
+                    },
+                    "dplcs": {
+                        "enabled": false,
+                        "path": "",
+                        "label": ""
+                    },
+                    "uuid": "ebeac7bf-f211-4f97-8f8c-5b85c58a205b"
+                }
+            ],
+            "isDirectory": true,
+            "expanded": true
         }
     ]
 }
