@@ -37,15 +37,15 @@ UpdateHUD:
 .chkrings
 		tst.b	(Update_HUD_ring_count).w						; does the ring counter	need updating?
 		beq.s	.chktime										; if not, branch
-		bpl.s	.notzero
-		bsr.w	HUD_DrawZeroRings							; reset rings to 0 if Sonic is hit
+;		bpl.s	.notzero
+;		bsr.w	HUD_DrawZeroRings							; reset rings to 0 if Sonic is hit
 
 .notzero
 		clr.b	(Update_HUD_ring_count).w
-		locVRAM	tiles_to_bytes(ArtTile_HUD+$36),d0		; set VRAM address
+		locVRAM	tiles_to_bytes(ArtTile_HUD+$38),d0		; set VRAM address
 		moveq	#0,d1
-		move.w	(Ring_count).w,d1								; load number of rings
-		bsr.w	DrawThreeDigitNumber
+		move.b	(v_health).w,d1								; load number of rings
+		bsr.w	DrawTwoDigitNumber
 
 .chktime
 		tst.b	(Update_HUD_timer).w							; does the time need updating?
@@ -115,15 +115,15 @@ HudDebug:
 		bsr.w	HUD_Debug
 		tst.b	(Update_HUD_ring_count).w						; does the ring counter need updating?
 		beq.s	.objcounter									; if not, branch
-		bpl.s	.notzero
-		bsr.w	HUD_DrawZeroRings							; reset rings to 0 if Sonic is hit
+;		bpl.s	.notzero
+;		bsr.w	HUD_DrawZeroRings							; reset rings to 0 if Sonic is hit
 
 .notzero:
 		clr.b	(Update_HUD_ring_count).w
-		locVRAM	tiles_to_bytes(ArtTile_HUD+$36),d0		; set VRAM address
+		locVRAM	tiles_to_bytes(ArtTile_HUD+$38),d0		; set VRAM address
 		moveq	#0,d1
-		move.w	(Ring_count).w,d1								; load number of rings
-		bsr.w	DrawThreeDigitNumber
+		move.b	(v_health).w,d1								; load number of rings
+		bsr.w	DrawTwoDigitNumber
 
 .objcounter
 		locVRAM	tiles_to_bytes(ArtTile_HUD+$28),d0		; set VRAM address

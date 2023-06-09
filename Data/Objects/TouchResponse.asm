@@ -456,6 +456,7 @@ HurtCharacter:
 		beq.w	KillSonic							; if not, branch
 		bmi.w	KillSonic							; if not, branch
 		move.b	d0,(v_health).w
+		move.b	#$80,(Update_HUD_ring_count).w
 		andi.b	#$8E,status_secondary(a0)
 
 .bounce:
@@ -504,6 +505,8 @@ KillSonic:
 Kill_Character:
 		tst.w	(Debug_placement_mode).w			; is debug mode active?
 		bne.w	.dontdie						; if yes, branch
+		clr.b	(v_health).w
+		move.b	#$80,(Update_HUD_ring_count).w
 		clr.l	(v_Shield).w						; remove shield
 		clr.l	(v_Invincibility_stars).w
 		moveq	#12-1,d1						; 8 total, counting the first

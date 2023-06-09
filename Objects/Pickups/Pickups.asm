@@ -143,6 +143,7 @@ CollectValidPickup:
 		beq.s	.stopLoop
 		sfx		sfx_EnergyFill
 		addi.b	#1,(v_health).w
+		move.b	#1,(Update_HUD_ring_count).w	; update ring counter
 		move.b	#VintID_Main,(V_int_routine).w
 		jsr		Wait_VSync
 		dbf		d2,.addHPLoop

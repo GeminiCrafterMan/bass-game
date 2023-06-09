@@ -33,6 +33,15 @@ Obj_HammerJoe_Swing1:
 ;		move.b	#$C9,collision_flags(a0)	; same size, but deflect shots
 		move.b	#$89,collision_flags(a0)	; until i get deflection in
 	; todo: follow player's orientation
+		jsr		Find_Sonic
+		tst.w	d0
+		beq.s	.left
+	.right:
+		bset	#Status_Facing,status(a0)
+		bra.s	.finish
+	.left:
+		bclr	#Status_Facing,status(a0)
+	.finish:
 		bra.s	Obj_HammerJoe_AnimateAndTouch
 ; ---------------------------------------------------------------------------
 
@@ -40,6 +49,15 @@ Obj_HammerJoe_Swing2:
 		move.b	#1,anim(a0)
 		move.b	#9,collision_flags(a0)		; same size, but take shots
 	; todo: follow player's orientation
+		jsr		Find_Sonic
+		tst.w	d0
+		beq.s	.left
+	.right:
+		bset	#Status_Facing,status(a0)
+		bra.s	.finish
+	.left:
+		bclr	#Status_Facing,status(a0)
+	.finish:
 		bra.s	Obj_HammerJoe_AnimateAndTouch
 ; ---------------------------------------------------------------------------
 
@@ -52,9 +70,12 @@ Obj_HammerJoe_Throw:
 		move.l	#Obj_HammerJoe_Hammer,(a1)
 		move.w	x_pos(a0),x_pos(a1)
 		move.w	y_pos(a0),y_pos(a1)
+		addq.w	#6,y_pos(a1)
 		move.w	#$600,d0
+		bset	#Status_Facing,status(a1)
 		btst	#Status_Facing,status(a0)
 		bne.s	.noFlip
+		bclr	#Status_Facing,status(a1)
 		neg.w	d0
 	.noFlip:
 		move.w	d0,x_vel(a1)
@@ -106,17 +127,20 @@ Ani_HammerJoe:	offsetTable
 		offsetTableEntry.w	.throw
 		offsetTableEntry.w	.hammer
 
-	.swing1:	dc.b 5
+	.swing1:	dc.b 3
 				rept 5
 					dc.b 1, 2, 3, 4
 				endr
 				dc.b afRoutine
-	.swing2:	dc.b 2
+	.swing2:	dc.b 1
+				rept 2
 					dc.b 5, 5, 6, 6, 7, 7, 8, 8
-					dc.b 5, 5, 6, 6, 7, 8
+				endr
+				rept 2
 					dc.b 5, 6, 7, 8
+				endr
 				dc.b afRoutine
-	.throw:		dc.b 14, 9, afRoutine
+	.throw:		dc.b 18, 9, afRoutine
 	.hammer:	dc.b 4, 10, 11, afEnd
 	even
 

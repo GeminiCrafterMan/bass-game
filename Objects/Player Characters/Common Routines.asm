@@ -11,6 +11,7 @@ Player_Init:
 		clr.l	(v_bulletsonscreen).w	; clear bullets, weapon, charge, charge cycle timer
 		clr.b	(v_chargecycnum).w		; clear charge cycle number
 		move.b	#28,(v_health).w		; set health... change later to include a "max health" variable as well
+		ori.b	#1,(Update_HUD_ring_count).w
 		tst.b	(Last_star_post_hit).w
 		bne.s	Player_Init_Continued
 

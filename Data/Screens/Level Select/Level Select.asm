@@ -163,7 +163,7 @@ LevelSelect_LoadLevel_CharacterSwitcher:
 		btst	#button_C,(Ctrl_1_pressed).w
 		beq.s	.ret
 		bchg	#0,(Player_mode).w
-		sfx		sfx_Switch
+		sfx		sfx_MenuCursor
 	.update:	; this part sucks a lot
 		moveq	#0,d0
 		move.b	(Player_mode).w,d0
