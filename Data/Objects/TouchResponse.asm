@@ -276,6 +276,7 @@ Touch_Enemy:
 		; Boss related? Could be special enemies in general
 		tst.b	boss_hitcount2(a1)
 		beq.s	Touch_EnemyNormal
+		bmi.s	Touch_EnemyNormal
 		move.b	collision_flags(a1),collision_restore_flags(a1)	; save current collision
 		clr.b	collision_flags(a1)
 		cmpa.w	#Player_1,a0
