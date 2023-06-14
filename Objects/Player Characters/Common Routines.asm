@@ -26,7 +26,7 @@ Player_Init:
 		move.w	#bytes_to_word(28,28),(v_weapon5energy).w	; Weapon 5
 		move.w	#bytes_to_word(28,28),(v_weapon6energy).w	; Weapon 6
 		move.w	#bytes_to_word(28,28),(v_weapon7energy).w	; Weapon 7
-		move.w	#bytes_to_word(28,28),(v_weapon8energy).w	; Weapon 8
+		move.w	#bytes_to_word(112,112),(v_weapon8energy).w	; Weapon 8 - Metal Blade, for now
 		move.w	#bytes_to_word(28,28),(v_utility1energy).w; Treble Boost
 
 		; only happens when not starting at a Special Stage ring:
@@ -75,6 +75,7 @@ Player_WeaponSwitch:
 		clr.b	(v_weapon).w	; wrap back around if above
 	; continue into .loadWepPal
 	.loadWepPal:
+		clr.b	(Weapon_art_loaded_flag).w
 ;		bclr	#4,obStatus(a0)
 		clr.b	(v_charge).w	; clear charge
 		clr.b	(v_chargecyctimer).w	; clear charge
@@ -113,27 +114,27 @@ Player_Shoot:
 		jmp		(a1)
 	.weaponLUT:
 		dc.l	Weapon_BassBuster
-		dc.l	Weapon_Test	; Master Wep 1 - Chill Spike, at the moment
-		dc.l	Weapon_Test	; Master Wep 2 - Solar Blaze, at the moment
-		dc.l	Weapon_Test	; Master Wep 3 - Triple Blade, at the moment
-		dc.l	Weapon_Test	; Master Wep 4
-		dc.l	Weapon_Test	; Master Wep 5
-		dc.l	Weapon_Test	; Master Wep 6
-		dc.l	Weapon_Test	; Master Wep 7
-		dc.l	Weapon_Test	; Master Wep 8
-		dc.l	Weapon_Test	; Treble Boost
+		dc.l	Weapon_NoAmmo	; Master Wep 1
+		dc.l	Weapon_NoAmmo	; Master Wep 2
+		dc.l	Weapon_NoAmmo	; Master Wep 3
+		dc.l	Weapon_NoAmmo	; Master Wep 4
+		dc.l	Weapon_NoAmmo	; Master Wep 5
+		dc.l	Weapon_NoAmmo	; Master Wep 6
+		dc.l	Weapon_NoAmmo	; Master Wep 7
+		dc.l	Weapon_MetalBlade	; Master Wep 8
+		dc.l	Weapon_NoAmmo	; Treble Boost
 
 	.cRobotWeaponLUT:
 		dc.l	Weapon_MegaBuster
-		dc.l	Weapon_Test	; Master Wep 1 - Chill Spike, at the moment
-		dc.l	Weapon_Test	; Master Wep 2 - Solar Blaze, at the moment
-		dc.l	Weapon_Test	; Master Wep 3 - Triple Blade, at the moment
-		dc.l	Weapon_Test	; Master Wep 4
-		dc.l	Weapon_Test	; Master Wep 5
-		dc.l	Weapon_Test	; Master Wep 6
-		dc.l	Weapon_Test	; Master Wep 7
-		dc.l	Weapon_Test	; Master Wep 8
-		dc.l	Weapon_Test	; Treble Boost
+		dc.l	Weapon_NoAmmo	; Master Wep 1
+		dc.l	Weapon_NoAmmo	; Master Wep 2
+		dc.l	Weapon_NoAmmo	; Master Wep 3
+		dc.l	Weapon_NoAmmo	; Master Wep 4
+		dc.l	Weapon_NoAmmo	; Master Wep 5
+		dc.l	Weapon_NoAmmo	; Master Wep 6
+		dc.l	Weapon_NoAmmo	; Master Wep 7
+		dc.l	Weapon_MetalBlade	; Master Wep 8
+		dc.l	Weapon_NoAmmo	; Utility 1
 
 FireWeapon:
 		moveq	#0,d0
@@ -145,7 +146,7 @@ FireWeapon:
 	.typesLUT:
 		dc.l	WepType_Normal			; 2 of 8 cardinal directions, Mega Buster
 		dc.l	WepType_SemiCardinal	; 7 of 8 cardinal directions, Bass Buster
-;		dc.l	WepType_Cardinal		; 8 of 8 cardinal directions, Metal Blade
+		dc.l	WepType_Cardinal		; 8 of 8 cardinal directions, Metal Blade
 	
 WepType_Normal:
 		move.w	x_pos(a0),x_pos(a1)
@@ -240,7 +241,103 @@ WepType_SemiCardinal_diagdown:
 		move.w	ground_vel(a1),x_vel(a1)
 		rts
 
-		include	"Objects/Player Characters/Bass/Weapons/Test.asm"
+WepType_Cardinal:
+		move.w	x_pos(a0),x_pos(a1)
+		move.w	y_pos(a0),y_pos(a1)
+		clr.w	ground_vel(a0)	; stop user in place
+		btst	#bitUp,(Ctrl_1_held_logical).w
+		bne.s	WepType_Cardinal_up
+		btst	#bitDn,(Ctrl_1_held_logical).w
+		bne.w	WepType_Cardinal_down
+WepType_Cardinal_straight:
+		btst	#Status_Facing,status(a0)
+		beq.s	.notFlipped
+		bset	#rbXFlip,render_flags(a1)
+		subi.w	#10,x_pos(a1)
+		neg.w	ground_vel(a1)
+		bra.s	.doneFlip
+	.notFlipped:
+		bclr	#rbXFlip,render_flags(a1)
+		addi.w	#10,x_pos(a1)
+	.doneFlip:
+		addq.w	#2,y_pos(a1)
+		move.w	ground_vel(a1),x_vel(a1)	; actually make it go
+		rts
+WepType_Cardinal_up:
+		btst	#bitR,(Ctrl_1_held_logical).w
+		bne.s	.diagup
+		btst	#bitL,(Ctrl_1_held_logical).w
+		bne.s	.diagup
+	.straightup:
+		btst	#Status_Facing,status(a0)
+		beq.s	.upNotFlipped
+		bset	#rbXFlip,render_flags(a1)
+		subi.w	#3,x_pos(a1)
+		bra.s	.upDoneFlip
+	.upNotFlipped:
+		bclr	#rbXFlip,render_flags(a1)
+		addi.w	#3,x_pos(a1)
+	.upDoneFlip:
+		neg.w	ground_vel(a1)
+		subq.w	#6,y_pos(a1)
+		move.w	ground_vel(a1),y_vel(a1)	; actually make it go
+		rts
+	.diagup:
+		asr.w	#1,ground_vel(a1)
+		neg.w	ground_vel(a1)
+		move.w	ground_vel(a1),y_vel(a1)	; actually make it go
+		neg.w	ground_vel(a1)
+		btst	#Status_Facing,status(a0)
+		beq.s	.diagupNotFlipped
+		bset	#rbXFlip,render_flags(a1)
+		subi.w	#10,x_pos(a1)
+		neg.w	ground_vel(a1)
+		bra.s	.diagupDoneFlip
+	.diagupNotFlipped:
+		bclr	#rbXFlip,render_flags(a1)
+		addi.w	#10,x_pos(a1)
+	.diagupDoneFlip:
+		subq.w	#2,y_pos(a1)
+		move.w	ground_vel(a1),x_vel(a1)
+		rts
+WepType_Cardinal_down:
+		btst	#bitR,(Ctrl_1_held_logical).w
+		bne.s	.diagdown
+		btst	#bitL,(Ctrl_1_held_logical).w
+		bne.s	.diagdown
+	.straightdown:
+		btst	#Status_Facing,status(a0)
+		beq.s	.downNotFlipped
+		bset	#rbXFlip,render_flags(a1)
+		subi.w	#3,x_pos(a1)
+		bra.s	.downDoneFlip
+	.downNotFlipped:
+		bclr	#rbXFlip,render_flags(a1)
+		addi.w	#3,x_pos(a1)
+	.downDoneFlip:
+;		neg.w	ground_vel(a1)
+		addq.w	#6,y_pos(a1)
+		move.w	ground_vel(a1),y_vel(a1)	; actually make it go
+		rts
+	.diagdown:
+		asr.w	#1,ground_vel(a1)
+		move.w	ground_vel(a1),y_vel(a1)	; actually make it go
+		btst	#Status_Facing,status(a0)
+		beq.s	.notFlipped
+		bset	#rbXFlip,render_flags(a1)
+		subi.w	#10,x_pos(a1)
+		neg.w	ground_vel(a1)
+		bra.s	.doneFlip
+	.notFlipped:
+		bclr	#rbXFlip,render_flags(a1)
+		addi.w	#10,x_pos(a1)
+	.doneFlip:
+		addq.w	#5,y_pos(a1)
+		move.w	ground_vel(a1),x_vel(a1)
+		rts
+
+		include	"Objects/Player Characters/Common Weapons/No Ammo.asm"
+		include	"Objects/Player Characters/Common Weapons/Metal Blade.asm"
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -594,7 +691,7 @@ Player_HandleGroundAnimations:
 	.typesLUT:
 		dc.l	AnimType_GroundNormalFire
 		dc.l	AnimType_GroundSemiCardinalFire
-;		dc.l	AnimType_GroundThrow
+		dc.l	AnimType_GroundThrow
 
 	.notShooting:
 		mvabs.w	ground_vel(a0),d0	; Standing still?
@@ -641,6 +738,10 @@ AnimType_GroundSemiCardinalFire:
 		move.b	#id_FireSteadyDiagDown,anim(a0)
 		rts
 
+AnimType_GroundThrow:
+		move.b	#id_ThrowStanding,anim(a0)
+		rts
+
 Player_HandleAirAnimations:
 		tst.b	shoottimer(a0)
 		beq.s	.notShooting
@@ -653,7 +754,7 @@ Player_HandleAirAnimations:
 	.typesLUT:
 		dc.l	AnimType_JumpNormalFire
 		dc.l	AnimType_JumpSemiCardinalFire
-;		dc.l	AnimType_JumpThrow
+		dc.l	AnimType_JumpThrow
 	.notShooting:
 		tst.w	y_vel(a0)
 		bmi.s	.rising
@@ -692,4 +793,8 @@ AnimType_JumpSemiCardinalFire:
 		rts
 	.diagdown:
 		move.b	#id_FireJumpingDiagDown,anim(a0)
+		rts
+
+AnimType_JumpThrow:
+		move.b	#id_ThrowJumping,anim(a0)
 		rts

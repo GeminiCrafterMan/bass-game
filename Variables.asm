@@ -231,7 +231,7 @@ f_jpad_6button:						= *
 Six_button_flag:					ds.b 1
 f_jpad2_6button:						= *
 Six_button_flag_2:					ds.b 1
-									ds.b 1					; even
+Weapon_art_loaded_flag:				ds.b 1
 Sonic_Knux_top_speed:				ds.w 1
 Sonic_Knux_acceleration:			ds.w 1
 Sonic_Knux_deceleration:			ds.w 1

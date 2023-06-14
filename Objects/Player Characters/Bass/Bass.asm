@@ -344,7 +344,7 @@ loc_113FE:
 loc_11412:
 		cmpi.b	#id_FireSteadyUp,anim(a0)
 		blt.s	.cont
-		cmpi.b	#id_FireSteadyDiagDown,anim(a0)
+		cmpi.b	#id_ThrowStanding,anim(a0)
 		bgt.s	.cont
 		rts
 	.cont:

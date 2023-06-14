@@ -13,7 +13,7 @@ ptr_Pal_BassWep4:		palp	Pal_Bass, Normal_palette_line_1, 16			; 0 - Bass
 ptr_Pal_BassWep5:		palp	Pal_Bass, Normal_palette_line_1, 16			; 0 - Bass
 ptr_Pal_BassWep6:		palp	Pal_Bass, Normal_palette_line_1, 16			; 0 - Bass
 ptr_Pal_BassWep7:		palp	Pal_Bass, Normal_palette_line_1, 16			; 0 - Bass
-ptr_Pal_BassWep8:		palp	Pal_Bass, Normal_palette_line_1, 16			; 0 - Bass
+ptr_Pal_BassWep8:		palp	Pal_BassMetalBlade, Normal_palette_line_1, 16			; 0 - Bass
 ptr_Pal_BassUtil1:		palp	Pal_BassTreble, Normal_palette_line_1, 16	; 0 - Bass
 
 ptr_Pal_CopyRobot:		palp	Pal_CopyRobot, Normal_palette_line_1, 16	; 0 - CopyRobot
@@ -24,7 +24,7 @@ ptr_Pal_CopyRobotWep4:	palp	Pal_CopyRobot, Normal_palette_line_1, 16	; 0 - CopyR
 ptr_Pal_CopyRobotWep5:	palp	Pal_CopyRobot, Normal_palette_line_1, 16	; 0 - CopyRobot
 ptr_Pal_CopyRobotWep6:	palp	Pal_CopyRobot, Normal_palette_line_1, 16	; 0 - CopyRobot
 ptr_Pal_CopyRobotWep7:	palp	Pal_CopyRobot, Normal_palette_line_1, 16	; 0 - CopyRobot
-ptr_Pal_CopyRobotWep8:	palp	Pal_CopyRobot, Normal_palette_line_1, 16	; 0 - CopyRobot
+ptr_Pal_CopyRobotWep8:	palp	Pal_CopyRobotMetalBlade, Normal_palette_line_1, 16	; 0 - CopyRobot
 ptr_Pal_CopyRobotUtil1:	palp	Pal_CopyRobot, Normal_palette_line_1, 16	; 0 - CopyRobot
 
 ptr_Pal_WaterSonic:		palp	Pal_WaterSonic, Water_palette_line_1, 16	; 1 - Water Sonic	; get rid of this shit later

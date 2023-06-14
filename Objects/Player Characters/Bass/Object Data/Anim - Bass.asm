@@ -24,6 +24,8 @@ Ani_Bass: offsetTable
 		offsetTableEntry.w BassAni_FireSteadyDiagUp
 		offsetTableEntry.w BassAni_FireSteadyStraight
 		offsetTableEntry.w BassAni_FireSteadyDiagDown
+		offsetTableEntry.w BassAni_ThrowStanding
+		offsetTableEntry.w BassAni_ThrowJumping
 
 BassAni_Step:
 		dc.b	8, frB_Step,  afChange,  id_Run
@@ -78,6 +80,10 @@ BassAni_FireSteadyStraight:
 		dc.b  $77, frB_FireSStraight, afEnd
 BassAni_FireSteadyDiagDown:
 		dc.b  $77, frB_FireSDiagDown, afEnd
+BassAni_ThrowStanding:
+		dc.b  $77, frB_ThrowS, afEnd
+BassAni_ThrowJumping:
+		dc.b  $77, frB_ThrowJ, afEnd
 	even
 
 ; Animation IDs
@@ -103,6 +109,8 @@ id_FireSteadyUp:		ds.b 1
 id_FireSteadyDiagUp:	ds.b 1
 id_FireSteadyStraight:	ds.b 1
 id_FireSteadyDiagDown:	ds.b 1
+id_ThrowStanding:		ds.b 1
+id_ThrowJumping:		ds.b 1
 	even
 	dephase
 
@@ -154,6 +162,8 @@ frB_FireJUp:		ds.b 1
 frB_FireJDiagUp:	ds.b 1
 frB_FireJStraight:	ds.b 1
 frB_FireJDiagDown:	ds.b 1
+frB_ThrowJ:			ds.b 1
+frB_ThrowS:			ds.b 1
 frB_Last:	ds.b 0
 	even
 	dephase
