@@ -159,7 +159,6 @@ LevelSelect_LoadMaxActs:
 ; ---------------------------------------------------------------------------
 
 LevelSelect_LoadLevel_CharacterSwitcher:
-	; todo: fix this loading the level palette upon going back to the menu, it's very distracting...
 		btst	#button_C,(Ctrl_1_pressed).w
 		beq.s	.ret
 		bchg	#0,(Player_mode).w
@@ -167,23 +166,30 @@ LevelSelect_LoadLevel_CharacterSwitcher:
 	.update:	; this part sucks a lot
 		moveq	#0,d0
 		move.b	(Player_mode).w,d0
-		lsl.w	#3,d0
+		lsl.w	#2,d0
 		move.w	#make_art_tile(ArtTile_Sonic,2,0),(Player_1+art_tile).w
 		move.w	#tiles_to_bytes(ArtTile_Sonic),(Player_1+vram_art).w
 		move.l	.plrIDs(pc,d0.w),(Player_1).w
 		move.w	#$194,(Player_1+x_pos).w
 		move.w	#$F0,(Player_1+y_pos).w
 		bset	#0,(Player_1+status).w
-		add.w	#4,d0
-		move.l	.plrIDs(pc,d0.w),d1
-		lea	(Target_palette_line_3).w,a2
-		jsr	(PalLoad_Line16).w
-		move.l	.plrIDs(pc,d0.w),a1
-		lea	(Normal_palette_line_3).w,a2
-		jmp	(PalLoad_Line16).w
+		moveq	#0,d0
+		move.b	(Player_mode).w,d0
+		ext.w	d0
+		lsl.w	#1,d0
+		move.w	.palIDs(pc,d0.w),d0
+		move.w	d0,d1
+		jsr	(LoadPalette).w											; load Sonic's palette
+		move.w	d1,d0
+		jmp	(LoadPalette_Immediate).w
+
+.palIDs:
+		dc.w	palid_Bass_LS		; Bass
+		dc.w	palid_CopyRobot_LS	; Copy Robot
+		even
 .plrIDs:
-		dc.l	Obj_CharSel_Bass,		Pal_Bass		; Bass
-		dc.l	Obj_CharSel_CopyRobot,	Pal_CopyRobot	; Copy Robot
+		dc.l	Obj_CharSel_Bass		; Bass
+		dc.l	Obj_CharSel_CopyRobot	; Copy Robot
 	.ret:
 		rts
 

@@ -32,6 +32,10 @@ ptr_Pal_WaterSonic:		palp	Pal_WaterSonic, Water_palette_line_1, 16	; 1 - Water S
 ; Levels
 ptr_Pal_Test1:			palp	Pal_Test1, Normal_palette_line_2, 48		; 2 - Test1
 ptr_Pal_Test2:			palp	Pal_Test2, Normal_palette_line_2, 48		; 2 - Test1
+
+; Misc
+ptr_Pal_Bass_LS:		palp	Pal_Bass, Normal_palette_line_3, 16			; 0 - Bass
+ptr_Pal_CopyRobot_LS:	palp	Pal_CopyRobot, Normal_palette_line_3, 16	; 0 - CopyRobot
 ; ---------------------------------------------------------------------------
 
 ; Main
@@ -60,5 +64,9 @@ palid_CopyRobotUtil1:	equ (ptr_Pal_CopyRobotUtil1-PalPointers)/8		; 0 - CopyRobo
 palid_WaterSonic:		equ (ptr_Pal_WaterSonic-PalPointers)/8			; 1 - Water Sonic
 
 ; Levels
-palid_Test1:				equ (ptr_Pal_Test1-PalPointers)/8			; 2 - Test1
-palid_Test2:				equ (ptr_Pal_Test2-PalPointers)/8			; 2 - Test1
+palid_Test1:			equ (ptr_Pal_Test1-PalPointers)/8				; 2 - Test1
+palid_Test2:			equ (ptr_Pal_Test2-PalPointers)/8				; 2 - Test1
+
+; Misc
+palid_Bass_LS:			equ (ptr_Pal_Bass_LS-PalPointers)/8				; 0 - Bass
+palid_CopyRobot_LS:		equ (ptr_Pal_CopyRobot_LS-PalPointers)/8		; 0 - CopyRobot
