@@ -2,15 +2,11 @@
 ; Kosinski Module compressed main graphics
 ; ===========================================================================
 
-ArtKosM_Ring_Sparks:			binclude "Objects/Rings/KosinskiM Art/Sparks.bin"
-	even
 ArtKosM_Hud:					binclude "Objects/HUD/KosinskiM Art/HUD.bin"
 	even
 ArtKosM_Pickups:				binclude "Objects/Pickups/KosinskiM Art/Pickups.bin"
 	even
 ArtKosM_SpikesSprings:			binclude "Objects/Spikes/KosinskiM Art/SpikesSprings.bin"
-	even
-ArtKosM_BossExplosion:			binclude "Objects/Explosion/KosinskiM Art/Boss Explosion.bin"
 	even
 ArtKosM_Explosion:				binclude "Objects/Explosion/KosinskiM Art/Explosion.bin"
 	even
@@ -20,11 +16,7 @@ ArtKosM_GrayButton:				binclude "Objects/Button/KosinskiM Art/Gray Button.bin"
 	even
 ArtKosM_DiagonalSpring:			binclude "Objects/Spring/KosinskiM Art/Diagonal Spring.bin"
 	even
-ArtKosM_Bubbles:				binclude "Objects/Bubbler/KosinskiM Art/Bubbles.bin"
-	even
 ArtKosM_WaterWave:				binclude "Objects/Water Wave/KosinskiM Art/Water Wave.bin"
-	even
-ArtKosM_SignpostStub:			binclude "Objects/Signpost/KosinskiM Art/Stub.bin"
 	even
 ArtKosM_ResultsGeneral:			binclude "Objects/Results/KosinskiM Art/Results General.bin"
 	even
@@ -66,3 +58,10 @@ ArtKosM_DEZTitleCard:			binclude "Objects/Title Card/KosinskiM Art/Levels/DEZ - 
 ; ===========================================================================
 ; Kosinski Module compressed Test graphics
 ; ===========================================================================
+
+ArtKosM_Target:					binclude "Objects/Enemies/Target/KosinskiM Art/Target.bin"
+	even
+ArtKosM_HammerJoe:				binclude "Objects/Enemies/Hammer Joe/KosinskiM Art/Hammer Joe.bin"
+	even
+ArtKosM_Motobug:				binclude "Objects/Enemies/Motobug/KosinskiM Art/Motobug.bin"
+	even

@@ -139,10 +139,11 @@ CollectValidPickup:
 		subq.b	#1,d2	; subtract 1 because you run into the loop first before looping
 		st		(Game_paused).w
 	.addHPLoop:
-		cmpi.b	#32,(v_health).w
+		cmpi.b	#28,(v_health).w
 		beq.s	.stopLoop
-		sfx		sfx_Switch
+		sfx		sfx_EnergyFill
 		addi.b	#1,(v_health).w
+		move.b	#1,(Update_HUD_ring_count).w	; update ring counter
 		move.b	#VintID_Main,(V_int_routine).w
 		jsr		Wait_VSync
 		dbf		d2,.addHPLoop
@@ -151,6 +152,7 @@ CollectValidPickup:
 	
 	.addEN:
 		move.b	(v_weapon).w,d1
+		beq.s	.ret
 		lea		(v_weapon1energy).w,a1
 		lea		(v_weapon1max).w,a2
 		subq.b	#1,d1
@@ -163,7 +165,7 @@ CollectValidPickup:
 	.addENLoop:
 		cmp.b	d3,d4
 		beq.s	.stopLoop
-		sfx		sfx_Switch
+		sfx		sfx_EnergyFill
 		addi.b	#1,d3
 		move.b	d3,(a1)
 		move.b	#VintID_Main,(V_int_routine).w

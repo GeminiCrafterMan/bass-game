@@ -7,15 +7,14 @@
 ZoneCount:				= 1	; discrete zones are: DEZ
 GameDebug:				= 1	; if 1, enable debug mode for Sonic
 GameDebugAlt:			= 0	; if 1, enable alt debug mode for Sonic
-Lagometer:				= 1	; if 1, enable debug lagometer
+Lagometer:				= 0	; if 1, enable debug lagometer
 ExtendedCamera:			= 0	; if 1, enable extended camera
-RollInAir:				= 1	; if 1, enable roll in air for Sonic
 OptimiseSound:	  		= 1	; change to 1 to optimise sound queuing
-OptimiseStopZ80:	  		= 2	; if 1, remove stopZ80 and startZ80, if 2, use only for controllers(ignores sound driver)
+OptimiseStopZ80:	  	= 2	; if 1, remove stopZ80 and startZ80, if 2, use only for controllers(ignores sound driver)
 ZeroOffsetOptimization:	= 1	; if 1, makes a handful of zero-offset instructions smaller
-AllOptimizations:			= 1	; if 1, enables all optimizations
+AllOptimizations:		= 1	; if 1, enables all optimizations
 EnableSRAM:				= 0	; change to 1 to enable SRAM
-BackupSRAM:			= 0
+BackupSRAM:				= 0
 AddressSRAM:			= 0	; 0 = odd+even; 2 = even only; 3 = odd only
 ; ---------------------------------------------------------------------------
 
@@ -189,12 +188,6 @@ EndOfHeader:
 		include "Data/Misc/Load HUD.asm"
 
 ; ---------------------------------------------------------------------------
-; Load Rings Subroutine
-; ---------------------------------------------------------------------------
-
-		include "Data/Misc/Load Rings.asm"
-
-; ---------------------------------------------------------------------------
 ; Draw Level Subroutine
 ; ---------------------------------------------------------------------------
 
@@ -293,10 +286,13 @@ EndOfHeader:
 		include "Data/Misc/Interrupt Handler.asm"
 
 ; ---------------------------------------------------------------------------
-; Subroutine to load Bass object
+; Subroutine to load player objects
 ; ---------------------------------------------------------------------------
 
-		include "Objects/Bass/Bass.asm"
+		include "Objects/Player Characters/Common Routines.asm"
+		include "Objects/Player Characters/Bass/Bass.asm"
+		include "Objects/Player Characters/Copy Robot/Copy Robot.asm"
+
 		include "Objects/Spin Dust/SpinDust.asm"
 		include "Objects/Player Projectiles/Projectiles.asm"
 
@@ -336,9 +332,9 @@ EndOfHeader:
 ; ---------------------------------------------------------------------------
 
 		if GameDebugAlt
-			include "Objects/Bass/DebugMode(Crackers).asm"
+			include "Objects/Player Characters/DebugMode(Crackers).asm"
 		else
-			include "Objects/Bass/DebugMode.asm"
+			include "Objects/Player Characters/DebugMode.asm"
 		endif
 
 	endif

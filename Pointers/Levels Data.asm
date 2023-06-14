@@ -2,12 +2,12 @@
 ; Levels Data
 ; ===========================================================================
 
-		;		1st 8x8 data		1st 16x16 data		1st 128x128 data	palette
+		;		1st 8x8 data		1st 16x16 data		1st 32x32 data	palette
 LevelLoadBlock:
-		levartptrs Test_8x8_KosM, Test_16x16_Unc, Test_128x128_Kos, palid_Test		; Test1
-		levartptrs Test_8x8_KosM, Test_16x16_Unc, Test_128x128_Kos, palid_Test		; Test2
-		levartptrs Test_8x8_KosM, Test_16x16_Unc, Test_128x128_Kos, palid_Test		; Test3
-		levartptrs Test_8x8_KosM, Test_16x16_Unc, Test_128x128_Kos, palid_Test		; Test4
+		levartptrs Test1_8x8_KosM, Test1_16x16_Unc, Test1_32x32_Kos, palid_Test1		; Test1
+		levartptrs Test2_8x8_KosM, Test2_16x16_Unc, Test2_32x32_Kos, palid_Test2		; Test2
+		levartptrs Test1_8x8_KosM, Test1_16x16_Unc, Test1_32x32_Kos, palid_Test1		; Test3
+		levartptrs Test1_8x8_KosM, Test1_16x16_Unc, Test1_32x32_Kos, palid_Test1		; Test4
 
 		zonewarning LevelLoadBlock,(12*4)
 
@@ -45,7 +45,7 @@ LevelLoadPointer:
 
 SolidIndexes:
 		dc.l Test1_Solid		; Test1
-		dc.l Test1_Solid		; Test2
+		dc.l Test2_Solid		; Test2
 		dc.l Test1_Solid		; Test3
 		dc.l Test1_Solid		; Test4
 
@@ -57,7 +57,7 @@ SolidIndexes:
 
 LevelPtrs:
 		dc.l Test1_Layout		; Test1
-		dc.l Test1_Layout		; Test2
+		dc.l Test2_Layout		; Test2
 		dc.l Test1_Layout		; Test3
 		dc.l Test1_Layout		; Test4
 
@@ -69,33 +69,27 @@ LevelPtrs:
 
 SpriteLocPtrs:
 		dc.l Test1_Sprites		; Test1
-		dc.l Test1_Sprites		; Test2
+		dc.l Test2_Sprites		; Test2
 		dc.l Test1_Sprites		; Test3
 		dc.l Test1_Sprites		; Test4
 
 		zonewarning SpriteLocPtrs,(4*4)
 
 ; ===========================================================================
-; Ring locations index
-; ===========================================================================
-
-RingLocPtrs:
-		dc.l Test1_Rings		; Test1
-		dc.l Test1_Rings		; Test2
-		dc.l Test1_Rings		; Test3
-		dc.l Test1_Rings		; Test4
-
-		zonewarning RingLocPtrs,(4*4)
-
-; ===========================================================================
 ; Compressed level graphics - tile, primary patterns and block mappings
 ; ===========================================================================
 
-Test_8x8_KosM:		binclude "Levels/Test/Tiles/Primary.bin"
+Test1_8x8_KosM:		binclude "Levels/Test/Tiles/Primary.bin"
 	even
-Test_16x16_Unc:		binclude "Levels/Test/Blocks/Primary.bin"
+Test1_16x16_Unc:	binclude "Levels/Test/Blocks/Primary.bin"
 	even
-Test_128x128_Kos:	binclude "Levels/Test/Chunks/Primary.bin"
+Test1_32x32_Kos:	binclude "Levels/Test/Chunks/Primary.bin"
+	even
+Test2_8x8_KosM:		binclude "Levels/Test/Tiles/Secondary.bin"
+	even
+Test2_16x16_Unc:	binclude "Levels/Test/Blocks/Secondary.bin"
+	even
+Test2_32x32_Kos:	binclude "Levels/Test/Chunks/Secondary.bin"
 	even
 
 ; ===========================================================================
@@ -115,6 +109,8 @@ HeightMapsRot:		binclude "Misc Data/Height Maps Rotated.bin"
 
 Test1_Solid:			binclude "Levels/Test/Collision/1.bin"
 	even
+Test2_Solid:			binclude "Levels/Test/Collision/2.bin"
+	even
 
 ; ===========================================================================
 ; Level layout data
@@ -124,6 +120,8 @@ Test1_Solid:			binclude "Levels/Test/Collision/1.bin"
 
 Test1_Layout:		binclude "Levels/Test/Layout/1.bin"
 	even
+Test2_Layout:		binclude "Levels/Test/Layout/2.bin"
+	even
 
 ; ===========================================================================
 ; Level object data
@@ -132,13 +130,6 @@ Test1_Layout:		binclude "Levels/Test/Layout/1.bin"
 	ObjectLayoutBoundary
 Test1_Sprites:		binclude "Levels/Test/Object Pos/1.bin"
 	ObjectLayoutBoundary
-	even
-
-; ===========================================================================
-; Level ring data
-; ===========================================================================
-
-	RingLayoutBoundary
-Test1_Rings:			binclude "Levels/Test/Ring Pos/1.bin"
-	RingLayoutBoundary
+Test2_Sprites:		binclude "Levels/Test/Object Pos/2.bin"
+	ObjectLayoutBoundary
 	even

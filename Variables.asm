@@ -242,7 +242,6 @@ Object_respawn_index_back:			ds.w 1					; The object respawn table index for the
 Collision_addr:						ds.l 1					; Points to the primary or secondary collision data as appropriate
 Primary_collision_addr:				ds.l 1
 Secondary_collision_addr:			ds.l 1
-Player_prev_frame:					ds.b 1
 Reverse_gravity_flag:				ds.b 1
 Primary_Angle:						ds.b 1
 Secondary_Angle:					ds.b 1
@@ -255,7 +254,6 @@ Screen_event_routine:				ds.b 1
 Screen_event_flag:					ds.b 1
 Background_event_routine:			ds.b 1
 Background_event_flag:				ds.b 1
-									ds.b 1					; even
 Debug_placement_mode:				= *						; Both routine and type (word)
 Debug_placement_routine:			ds.b 1
 Debug_placement_type:				ds.b 1					; 0 = normal gameplay, 1 = normal object placement, 2 = frame cycling
@@ -379,7 +377,8 @@ Apparent_zone:						= *
 Apparent_zone_and_act:				ds.b 1
 a_act:								= *
 Apparent_act:						ds.b 1
-
+Player_mode:						ds.b 1
+									ds.b 1		; even
 f_timeover:							= *
 Time_over_flag:						ds.b 1
 f_ringcount:						= *

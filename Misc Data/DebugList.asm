@@ -13,9 +13,6 @@ DebugList: offsetTable
 
 				; Object Mappings Subtype Frame VRAM
 .DEZ1: dbglistheader
-	dbglistobj Obj_Ring, Map_Ring, 0, 0, make_art_tile(ArtTile_Ring,1,1)
-	dbglistobj Obj_PathSwap, Map_PathSwap, 9, 1, make_art_tile(ArtTile_Ring,1,0)
-	dbglistobj Obj_PathSwap, Map_PathSwap, $D, 5, make_art_tile(ArtTile_Ring,1,0)
 	dbglistobj Obj_Spring, Map_Spring, $81, 0, make_art_tile($494,0,0)
 	dbglistobj Obj_Spring, Map_Spring2, $82, 0, make_art_tile($494,0,0)
 	dbglistobj Obj_Spring, Map_Spring, $90, 3, make_art_tile($4A0,0,0)

@@ -72,8 +72,6 @@ loc_18BEC:
 ; ---------------------------------------------------------------------------
 
 loc_18C20:
-		cmpi.b	#12,air_left(a2)
-		blo.w	loc_18CAA
 		cmpi.b	#4,routine(a2)
 		bhs.s	loc_18CAA
 		tst.b	$3D(a2)
@@ -102,8 +100,6 @@ loc_18C60:
 ; ---------------------------------------------------------------------------
 
 loc_18C84:
-		cmpi.b	#12,air_left(a2)
-		blo.s		loc_18CAA
 		btst	#6,status(a0)
 		bne.s	loc_18CAA
 

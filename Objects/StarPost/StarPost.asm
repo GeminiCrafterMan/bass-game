@@ -85,7 +85,7 @@ sub_2D028:
 		move.w	#$20,$36(a1)
 		move.w	a0,$3E(a1)
 		cmpi.w	#20,(Ring_count).w
-		blo.s		loc_2D0D0
+		blo.s	loc_2D0D0
 		bsr.w	sub_2D3C8
 
 loc_2D0D0:
@@ -157,7 +157,6 @@ Save_Level_Data:
 		move.w	(Apparent_zone_and_act).w,(Saved_apparent_zone_and_act).w
 		move.w	(Player_1+art_tile).w,(Saved_art_tile).w
 		move.w	(Player_1+top_solid_bit).w,(Saved_solid_bits).w
-		move.w	(Ring_count).w,(Saved_ring_count).w
 		move.l	(Timer).w,(Saved_timer).w
 		move.l	(Level_data_addr_RAM.Resize).w,(Saved_dynamic_resize).w
 		move.w	(Camera_max_Y_pos).w,(Saved_camera_max_Y_pos).w
@@ -176,12 +175,6 @@ Load_StarPost_Settings:
 		move.w	(Saved_apparent_zone_and_act).w,(Apparent_zone_and_act).w
 		move.w	(Saved_X_pos).w,(Player_1+x_pos).w
 		move.w	(Saved_Y_pos).w,(Player_1+y_pos).w
-		move.w	(Saved_ring_count).w,(Ring_count).w
-		tst.b	(Respawn_table_keep).w
-		bne.s	.skip
-		clr.w	(Ring_count).w
-
-.skip
 		move.l	(Saved_timer).w,(Timer).w
 		move.b	#59,(Timer_frame).w
 		subq.b	#1,(Timer_second).w
@@ -259,7 +252,6 @@ loc_2D47E:	; 8
 		andi.b	#$71,d0
 		move.b	d0,(Saved_status_secondary).w
 		st	(Respawn_table_keep).w
-		jsr	(Clear_SpriteRingMem).w
 
 loc_2D506:
 		clr.b	collision_property(a0)

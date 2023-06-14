@@ -10,6 +10,9 @@ idstart :=	1
 mus__First = idstart
 ; Levels
 mus_WT3 =			SMPS_id(ptr_mus_wt3)
+mus_Snake =			SMPS_id(ptr_mus_snake)
+mus_Shadow =		SMPS_id(ptr_mus_shadow)
+mus_Air =			SMPS_id(ptr_mus_air)
 
 ; Bosses
 mus_MidBoss =		SMPS_id(ptr_mus_boss)
@@ -61,6 +64,10 @@ sfx_Register =		SMPS_id(ptr_snd5D)
 sfx_BusterShot =	SMPS_id(ptr_snd5E)
 sfx_JumpLand =		SMPS_id(ptr_snd5F)
 sfx_1up =			SMPS_id(ptr_snd60)
+sfx_ChargeStart =	SMPS_id(ptr_snd61)
+sfx_ChargeLoop =	SMPS_id(ptr_snd62)
+sfx_EnergyFill =	SMPS_id(ptr_snd63)
+sfx_MenuCursor =	SMPS_id(ptr_snd64)
 
 sfx__Last =			SMPS_id(ptr_sndend)-1
 

@@ -108,7 +108,6 @@ Obj_LevelResultsWait:
 		subq.w	#1,$2E(a0)
 		cmpi.w	#$121,$2E(a0)
 		bne.s	locret_2DC9E						; Play after eh, a second or so
-		move.b	#30,(Player_1+air_left).w				; Reset air
 		music	mus_GotThrough,1					; Play level complete theme
 ; ---------------------------------------------------------------------------
 

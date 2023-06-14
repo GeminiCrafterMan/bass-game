@@ -4,6 +4,75 @@
     "node": "6ed0f213-b203-4ea2-a0ab-c5cdf2406ea0",
     "objects": [
         {
+            "format": "Sonic 3&K Player.js",
+            "name": "Character Select",
+            "palettes": [
+                {
+                    "path": "Objects/Player Characters/Bass/Palettes/Bass.bin",
+                    "length": 1
+                },
+                {
+                    "path": "Objects/Player Characters/Copy Robot/Palettes/Copy Robot.bin",
+                    "length": 1
+                }
+            ],
+            "art": {
+                "path": "Objects/Character Select/Uncompressed Art/Character Select.bin",
+                "compression": "Uncompressed",
+                "offset": 0
+            },
+            "mappings": {
+                "path": "Objects/Character Select/Object Data/Map - Character Select.bin",
+                "label": ""
+            },
+            "dplcs": {
+                "enabled": true,
+                "path": "Objects/Character Select/Object Data/PLC - Character Select.bin",
+                "label": ""
+            },
+            "uuid": "ee6599ae-1b4a-4e97-87c5-8d521c0791ca"
+        },
+        {
+            "format": "Sonic 3&K Object.js",
+            "name": "Explosions",
+            "palettes": [],
+            "art": {
+                "path": "Objects/Explosion/KosinskiM Art/Explosion.bin",
+                "compression": "Kosinski-M",
+                "offset": 0
+            },
+            "mappings": {
+                "path": "Objects/Explosion/Object Data/Map - Explosion.bin",
+                "label": ""
+            },
+            "dplcs": {
+                "enabled": false,
+                "path": "",
+                "label": ""
+            },
+            "uuid": "501bd6b9-4b3c-4fd9-97db-e4c7c6906fb9"
+        },
+        {
+            "format": "Sonic 3&K Object.js",
+            "name": "Boss Explosions",
+            "palettes": [],
+            "art": {
+                "path": "Objects/Explosion/KosinskiM Art/Explosion.bin",
+                "compression": "Kosinski-M",
+                "offset": 0
+            },
+            "mappings": {
+                "path": "Objects/Explosion/Object Data/Map - Boss Explosion.bin",
+                "label": ""
+            },
+            "dplcs": {
+                "enabled": false,
+                "path": "",
+                "label": ""
+            },
+            "uuid": "1b501bd6-b94b-4c8f-99d7-dbe4c7c6906f"
+        },
+        {
             "name": "Player",
             "children": [
                 {
@@ -11,34 +80,59 @@
                     "name": "Bass",
                     "palettes": [
                         {
-                            "path": "Objects/Bass/Palettes/Bass.bin",
+                            "path": "Objects/Player Characters/Bass/Palettes/Bass.bin",
                             "length": 1
                         },
                         {
-                            "path": "Objects/Bass/Palettes/Chill Spike.bin",
+                            "path": "Objects/Player Characters/Bass/Palettes/Scorch Shield.bin",
                             "length": 1
                         },
                         {
-                            "path": "Objects/Bass/Palettes/Solar Blaze.bin",
+                            "path": "Objects/Player Characters/Bass/Palettes/Freeze Frame.bin",
                             "length": 1
                         },
                         {
-                            "path": "Objects/Bass/Palettes/Triple Blade.bin",
+                            "path": "Objects/Player Characters/Bass/Palettes/Weapon 3.bin",
                             "length": 1
                         }
                     ],
                     "art": {
-                        "path": "Objects/Bass/Uncompressed Art/Bass.bin",
+                        "path": "Objects/Player Characters/Bass/Uncompressed Art/Bass.bin",
                         "compression": "Uncompressed",
                         "offset": 0
                     },
                     "mappings": {
-                        "path": "Objects/Bass/Object Data/Map - Bass.bin",
+                        "path": "Objects/Player Characters/Bass/Object Data/Map - Bass.bin",
                         "label": ""
                     },
                     "dplcs": {
                         "enabled": true,
-                        "path": "Objects/Bass/Object Data/PLC - Bass.bin",
+                        "path": "Objects/Player Characters/Bass/Object Data/PLC - Bass.bin",
+                        "label": ""
+                    },
+                    "uuid": "0c7872ed-187e-4c57-9b1c-7531db1bfa0d"
+                },
+                {
+                    "format": "Sonic 3&K Player.js",
+                    "name": "Mega Man?",
+                    "palettes": [
+                        {
+                            "path": "Objects/Player Characters/Copy Robot/Palettes/Copy Robot.bin",
+                            "length": 1
+                        }
+                    ],
+                    "art": {
+                        "path": "Objects/Player Characters/Copy Robot/Uncompressed Art/Copy Robot.bin",
+                        "compression": "Uncompressed",
+                        "offset": 0
+                    },
+                    "mappings": {
+                        "path": "Objects/Player Characters/Copy Robot/Object Data/Map - Copy Robot.bin",
+                        "label": ""
+                    },
+                    "dplcs": {
+                        "enabled": true,
+                        "path": "Objects/Player Characters/Copy Robot/Object Data/PLC - Copy Robot.bin",
                         "label": ""
                     },
                     "uuid": "6ed0f213-b203-4ea2-a0ab-c5cdf2406ea0"
@@ -68,44 +162,33 @@
                             "expanded": true
                         },
                         {
-                            "format": "Sonic 3&K Object.js",
-                            "name": "Triple Blade",
-                            "palettes": [],
+                            "format": "Sonic 3&K Player.js",
+                            "name": "Charged Shots",
+                            "palettes": [
+                                {
+                                    "path": "Objects/Player Characters/Copy Robot/Palettes/Copy Robot.bin",
+                                    "length": 1
+                                },
+                                {
+                                    "path": "Levels/Guaranteed Colors.bin",
+                                    "length": 1
+                                }
+                            ],
                             "art": {
-                                "path": "Objects/Player Projectiles/KosinskiM Art/Triple Blade.bin",
-                                "compression": "Kosinski-M",
-                                "offset": 0
-                            },
-                            "mappings": {
-                                "path": "Objects/Player Projectiles/Object Data/Map - Triple Blade.bin",
-                                "label": ""
-                            },
-                            "dplcs": {
-                                "enabled": false,
-                                "path": "",
-                                "label": ""
-                            },
-                            "uuid": "d3eeb972-0216-40c5-8830-fd89b96be491"
-                        },
-                        {
-                            "format": "Sonic 1.js",
-                            "name": "Chill Spike",
-                            "palettes": [],
-                            "art": {
-                                "path": "",
+                                "path": "Objects/Player Projectiles/Uncompressed Art/Mega Buster Charge Shots.bin",
                                 "compression": "Uncompressed",
                                 "offset": 0
                             },
                             "mappings": {
-                                "path": "",
+                                "path": "Objects/Player Projectiles/Object Data/Map - Mega Buster Charge Shots.bin",
                                 "label": ""
                             },
                             "dplcs": {
-                                "enabled": false,
-                                "path": "",
+                                "enabled": true,
+                                "path": "Objects/Player Projectiles/Object Data/PLC - Mega Buster Charge Shots.bin",
                                 "label": ""
                             },
-                            "uuid": "eeb97202-1650-4588-b0fd-89b96be49168"
+                            "uuid": "59cf272d-439f-4f7a-84ca-696259b7c962"
                         }
                     ],
                     "isDirectory": true,
@@ -117,7 +200,7 @@
                     "name": "Treble",
                     "palettes": [
                         {
-                            "path": "Objects/Bass/Palettes/Treble Boost.bin",
+                            "path": "Objects/Player Characters/Bass/Palettes/Treble Boost.bin",
                             "length": 1
                         }
                     ],
@@ -166,14 +249,15 @@
                 "path": "Objects/Mega Man/Object Data/PLC - Mega Man.bin",
                 "label": ""
             },
-            "uuid": "a2a8113a-f2bd-47ff-8e2d-05fd3e240425"
+            "uuid": "a2a8113a-f2bd-47ff-8e2d-05fd3e240425",
+            "expanded": true
         },
         {
             "format": "Sonic 3&K Object.js",
             "name": "Pickups",
             "palettes": [
                 {
-                    "path": "Objects/Bass/Palettes/Bass.bin",
+                    "path": "Objects/Player Characters/Bass/Palettes/Bass.bin",
                     "length": 1
                 },
                 {
@@ -195,7 +279,65 @@
                 "path": "",
                 "label": ""
             },
-            "uuid": "2c4aed46-f2e9-4da3-95bf-0b053b2f579c"
+            "uuid": "2c4aed46-f2e9-4da3-95bf-0b053b2f579c",
+            "expanded": true
+        },
+        {
+            "name": "Enemies",
+            "children": [
+                {
+                    "format": "Sonic 3&K Object.js",
+                    "name": "Target",
+                    "palettes": [],
+                    "art": {
+                        "path": "Objects/Enemies/Target/KosinskiM Art/Target.bin",
+                        "compression": "Kosinski-M",
+                        "offset": 0
+                    },
+                    "mappings": {
+                        "path": "Objects/Enemies/Target/Object Data/Map - Target.bin",
+                        "label": ""
+                    },
+                    "dplcs": {
+                        "enabled": false,
+                        "path": "",
+                        "label": ""
+                    },
+                    "uuid": "1bd6b94b-3c8f-49d7-9be4-c7c6906fb9f9"
+                },
+                {
+                    "format": "Sonic 3&K Object.js",
+                    "name": "Hammer Joe",
+                    "palettes": [
+                        {
+                            "length": 1,
+                            "blank": true
+                        },
+                        {
+                            "path": "Levels/Test/Palettes/Level 1.bin",
+                            "length": 3
+                        }
+                    ],
+                    "art": {
+                        "path": "Objects/Enemies/Hammer Joe/KosinskiM Art/Hammer Joe.bin",
+                        "compression": "Kosinski-M",
+                        "offset": 0
+                    },
+                    "mappings": {
+                        "path": "Objects/Enemies/Hammer Joe/Object Data/Map - Hammer Joe.bin",
+                        "label": ""
+                    },
+                    "dplcs": {
+                        "enabled": false,
+                        "path": "",
+                        "label": ""
+                    },
+                    "uuid": "ebeac7bf-f211-4f97-8f8c-5b85c58a205b"
+                }
+            ],
+            "isDirectory": true,
+            "expanded": true,
+            "uuid": "0b7d2ffd-cf6b-4edf-8242-16fac01c21ca"
         }
     ]
 }

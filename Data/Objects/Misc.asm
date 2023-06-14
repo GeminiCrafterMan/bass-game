@@ -311,7 +311,7 @@ EnemyDefeat_Score:
 
 HurtCharacter_WithoutDamage:
 		lea	(Player_1).w,a1
-		move.b	#id_SonicHurt,routine(a1)	; Hit animation
+		move.b	#id_BassHurt,routine(a1)	; Hit animation
 		bclr	#Status_OnObj,status(a1)
 		bclr	#Status_Push,status(a1)		; Player is not standing on/pushing an object
 		bset	#Status_InAir,status(a1)
@@ -350,7 +350,7 @@ Load_LevelResults:
 		bne.s	+
 		btst	#Status_InAir,status(a1)
 		bne.s	+
-		cmpi.b	#id_SonicDeath,routine(a1)
+		cmpi.b	#id_BassDeath,routine(a1)
 		bcc.s	+
 		bsr.s	Set_PlayerEndingPose
 		clr.b	(TitleCard_end_flag).w

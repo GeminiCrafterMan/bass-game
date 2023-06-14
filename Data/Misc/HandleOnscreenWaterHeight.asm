@@ -9,7 +9,7 @@ Handle_Onscreen_Water_Height:
 		beq.s	.return								; if not, branch
 		tst.b	(Deform_lock).w
 		bne.s	.skip
-		cmpi.b	#id_SonicDeath,(Player_1+routine).w	; is player dead?
+		cmpi.b	#id_BassDeath,(Player_1+routine).w	; is player dead?
 		bhs.s	.skip								; if yes, branch
 		bsr.s	DynamicWaterHeight
 
@@ -119,6 +119,6 @@ StartingWaterHeights:
 ; ---------------------------------------------------------------------------
 
 WaterPalette_Index:
-		dc.b palid_Test, palid_Test, palid_Test, palid_Test		; DEZ 1,2,3,4
+		dc.b palid_Test1, palid_Test2, palid_Test1, palid_Test1		; DEZ 1,2,3,4
 
 		zonewarning WaterPalette_Index,(1*4)

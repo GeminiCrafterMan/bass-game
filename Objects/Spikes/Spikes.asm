@@ -15,6 +15,7 @@ byte_23F74:
 ; =============== S U B R O U T I N E =======================================
 
 Obj_Spikes:
+		move.b	#14,damage(a0)
 		ori.b	#4,render_flags(a0)
 		move.w	#$200,priority(a0)
 		move.b	subtype(a0),d0
@@ -136,7 +137,7 @@ sub_24280:
 		bne.s	+
 		tst.b	invulnerability_timer(a1)
 		bne.s	+
-		cmpi.b	#id_SonicHurt,routine(a1)
+		cmpi.b	#id_BassHurt,routine(a1)
 		bhs.s	+
 		move.l	y_pos(a1),d3
 		move.w	y_vel(a1),d0

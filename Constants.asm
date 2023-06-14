@@ -95,20 +95,18 @@ VintID_Level =					id(ptr_VInt_Level)		; 8
 VintID_Fade =					id(ptr_VInt_Fade)		; A
 
 ; ---------------------------------------------------------------------------
-; Sonic routines
+; Bass routines
 ; ---------------------------------------------------------------------------
 
-offset :=	Sonic_Index
+offset :=	Bass_Index
 ptrsize :=	1
 idstart :=	0
 
-id_SonicInit =					id(ptr_Sonic_Init)			; 0
-id_SonicControl =					id(ptr_Sonic_Control)		; 2
-id_SonicHurt =					id(ptr_Sonic_Hurt)		; 4
-id_SonicDeath =					id(ptr_Sonic_Death)		; 6
-id_SonicRestart =					id(ptr_Sonic_Restart)		; 8
-
-id_SonicDrown =					id(ptr_Sonic_Drown)		; C
+id_BassInit =					id(ptr_Bass_Init)			; 0
+id_BassControl =					id(ptr_Bass_Control)		; 2
+id_BassHurt =					id(ptr_Bass_Hurt)		; 4
+id_BassDeath =					id(ptr_Bass_Death)		; 6
+id_BassRestart =					id(ptr_Bass_Restart)		; 8
 
 ; ---------------------------------------------------------------------------
 ; Levels
@@ -210,6 +208,9 @@ x_sub =					x_pos+2 ; word
 y_pos =					$14 ; word, or long when extra precision is required
 y_sub =					y_pos+2 ; word
 mapping_frame =			$22 ; byte
+previous_frame =		$48	; byte
+art_address =			$38	; long
+dplc_address =			$3C	; long
 
 ; ---------------------------------------------------------------------------
 ; Conventions followed by most objects:
@@ -260,10 +261,8 @@ respawn_addr =			$48 ; word ; the address of this object's entry in the respawn 
 
 ground_vel =				$1C ; word ; overall velocity along ground, not updated when in the air
 double_jump_property =	$25 ; byte ; remaining frames of flight / 2 for Tails, gliding-related for Knuckles
-flip_angle =				$27 ; byte ; angle about horizontal axis (360 degrees = 256)
 status_secondary =		$2B ; byte ; see SCHG for details
-air_left =				$2C ; byte
-flip_type =				$2D ; byte ; bit 7 set means flipping is inverted, lower bits control flipping type
+; $27, $2C, and $2D are free
 object_control =			$2E ; byte ; bit 0 set means character can jump out, bit 7 set means he can't
 double_jump_flag =		$2F ; byte ; meaning depends on current character, see SCHG for details
 shoottimer =			$30 ; byte
@@ -273,7 +272,7 @@ invulnerability_timer =	$34 ; byte ; decremented every frame
 invincibility_timer =		$35 ; byte ; decremented every 8 frames
 speed_shoes_timer =		$36 ; byte ; decremented every 8 frames
 status_tertiary =			$37 ; byte ; see SCHG for details
-character_id =			$38 ; byte ; 0 for Sonic, 1 for Tails, 2 for Knuckles
+character_id =			$38 ; byte ; 0 for Bass, 1 for Copy Robot
 scroll_delay_counter =		$39 ; byte ; incremented each frame the character is looking up/down, camera starts scrolling when this reaches 120
 next_tilt =				$3A ; byte ; angle on ground in front of character
 tilt =					$3B ; byte ; angle on ground
@@ -324,6 +323,7 @@ obColProp =				$29	; collision extra property
 obStatus =				$2A	; orientation or mode
 obSubtype =				$2C	; object subtype
 obTimer =				$2E	; object timer
+ob2ndRout =				$3C ; byte ; used by monitors for this purpose at least
 obParent =				$42 	; word ; parent of child objects
 obParent4 =				$44 	; word ; parent of child objects
 obParent3 =				$46 	; word ; parent of child objects
@@ -454,16 +454,16 @@ Status_ObjDefeated		= 7
 ; Universal (used on all standard levels)
 ; ---------------------------------------------------------------------------
 
-ArtTile_SpikesSprings		= $484
-ArtTile_Monitors			= $4AC
-ArtTile_StarPost			= $5E4
-ArtTile_Sonic				= $680
-ArtTile_Ring				= $6BC
-ArtTile_Ring_Sparks		= ArtTile_Ring+4
+ArtTile_SpikesSprings	= $484
+ArtTile_Monitors		= $4AC
+ArtTile_StarPost		= $5E4
 ArtTile_HUD				= $6C4
-ArtTile_Shield			= $79C
-ArtTile_Shield_Sparks		= ArtTile_Shield+$1F
-ArtTile_DashDust			= $7F0
+ArtTile_BusterShots		= $79C
+ArtTile_Sonic			= $79E
+ArtTile_WeaponStuff		= $7B0
+ArtTile_DashDust		= $7F0
+ArtTile_HammerJoe		= $4D7
+ArtTile_Motobug			= $52E
 
 ; ---------------------------------------------------------------------------
 ; VRAM data
@@ -527,9 +527,11 @@ VRAM_Plane_Table_Size		= $1000	; 64 cells x 32 cells x 2 bytes per cell
 ; Sprite render screen flags
 ; ---------------------------------------------------------------------------
 
+rfXFlip						= %00000001	; horizontal flip flag ($01)
+rfYFlip						= %00000010	; vertical flip flag ($02)
 rfCoord						= %00000100	; screen coordinates flag ($04)
 
-rfStatic						= %00100000	; static mappings flag ($20)
+rfStatic					= %00100000	; static mappings flag ($20)
 rfMulti						= %01000000	; multi-draw flag ($40)
 rfOnscreen					= %10000000	; on-screen flag ($80)
 
@@ -537,9 +539,11 @@ rfOnscreen					= %10000000	; on-screen flag ($80)
 ; Sprite render screen bits
 ; ---------------------------------------------------------------------------
 
+rbXFlip						= 0		; horizontal flip bit
+rbYFlip						= 1		; vertical flip bit
 rbCoord						= 2		; screen coordinates bit
 
-rbStatic						= 5		; static mappings bit
+rbStatic					= 5		; static mappings bit
 rbMulti						= 6		; multi-draw bit
 rbOnscreen					= 7		; on-screen bit
 
