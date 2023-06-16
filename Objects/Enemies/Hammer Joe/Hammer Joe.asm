@@ -19,8 +19,7 @@ Obj_HammerJoe_Init:	; Routine 0
 		move.w	#make_art_tile(ArtTile_HammerJoe,0,0),art_tile(a0)
 		move.b	#4,render_flags(a0)
 		move.w	#$200,priority(a0)
-;		move.b	#$C9,collision_flags(a0)	; same size, but deflect shots
-		move.b	#$89,collision_flags(a0)	; until i get deflection in
+		move.b	#$C9,collision_flags(a0)	; same size, but deflect shots
 		move.w	#bytes_to_word(32/2,24/2),height_pixels(a0)
 		move.w	#bytes_to_word(32/2,24/2),y_radius(a0)
 		move.b	#4,damage(a0)			; contact damage
@@ -30,9 +29,8 @@ Obj_HammerJoe_Init:	; Routine 0
 
 Obj_HammerJoe_Swing1:
 		clr.b	anim(a0)
-;		move.b	#$C9,collision_flags(a0)	; same size, but deflect shots
-		move.b	#$89,collision_flags(a0)	; until i get deflection in
-	; todo: follow player's orientation
+		move.b	#$C9,collision_flags(a0)	; same size, but deflect shots
+	; follow player's orientation
 		jsr		Find_Sonic
 		tst.w	d0
 		beq.s	.left
@@ -48,7 +46,7 @@ Obj_HammerJoe_Swing1:
 Obj_HammerJoe_Swing2:
 		move.b	#1,anim(a0)
 		move.b	#9,collision_flags(a0)		; same size, but take shots
-	; todo: follow player's orientation
+	; follow player's orientation
 		jsr		Find_Sonic
 		tst.w	d0
 		beq.s	.left
@@ -65,7 +63,7 @@ Obj_HammerJoe_Throw:
 		addq.b	#2,routine(a0)				; wait
 		move.b	#2,anim(a0)
 		move.b	#9,collision_flags(a0)		; same size, but take shots
-	; to not do: don't(!) follow player's orientation
+	; don't(!) follow player's orientation
 		jsr		FindFreeObj
 		move.l	#Obj_HammerJoe_Hammer,(a1)
 		move.w	x_pos(a0),x_pos(a1)
@@ -104,8 +102,7 @@ Obj_HammerJoe_Hammer:
 		move.w	#make_art_tile(ArtTile_HammerJoe,0,0),art_tile(a0)
 		move.b	#4,render_flags(a0)
 		move.w	#$200,priority(a0)
-;		move.b	#$D8,collision_flags(a0)	; deflect shots
-		move.b	#$98,collision_flags(a0)	; don't deflect but don't take either
+		move.b	#$D8,collision_flags(a0)	; deflect shots
 		move.w	#bytes_to_word(10/2,20/2),height_pixels(a0)
 		move.w	#bytes_to_word(10/2,20/2),y_radius(a0)
 		move.b	#2,damage(a0)			; contact damage

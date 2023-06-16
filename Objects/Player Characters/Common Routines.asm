@@ -363,14 +363,14 @@ loc_10CA6:
 
 Player_ChkInvin:										; checks if invincibility has expired and disables it if it has.
 		btst	#Status_Invincible,status_secondary(a0)
-		beq.s	Player_ChkShoes
+		beq.s	Player_ExitChk
 		tst.b	invincibility_timer(a0)
-		beq.s	Player_ChkShoes						; if there wasn't any time left, that means we're in Super/Hyper mode
+		beq.s	Player_ExitChk						; if there wasn't any time left, that means we're in Super/Hyper mode
 		move.b	(Level_frame_counter+1).w,d0
 		andi.b	#7,d0
-		bne.s	Player_ChkShoes
+		bne.s	Player_ExitChk
 		subq.b	#1,invincibility_timer(a0)				; reduce invincibility_timer only on every 8th frame
-		bne.s	Player_ChkShoes						; if time is still left, branch
+		bne.s	Player_ExitChk						; if time is still left, branch
 		tst.b	(Level_end_flag).w						; don't change music if level is end
 		bne.s	Player_RmvInvin
 		tst.b	(Boss_flag).w								; don't change music if in a boss fight
@@ -380,22 +380,6 @@ Player_ChkInvin:										; checks if invincibility has expired and disables it 
 
 Player_RmvInvin:
 		bclr	#Status_Invincible,status_secondary(a0)
-
-Player_ChkShoes:										; checks if Speed Shoes have expired and disables them if they have.
-		btst	#Status_SpeedShoes,status_secondary(a0)	; does Player have speed shoes?
-		beq.s	Player_ExitChk						; if so, branch
-		tst.b	speed_shoes_timer(a0)
-		beq.s	Player_ExitChk
-		move.b	(Level_frame_counter+1).w,d0
-		andi.b	#7,d0
-		bne.s	Player_ExitChk
-		subq.b	#1,speed_shoes_timer(a0)				; reduce speed_shoes_timer only on every 8th frame
-		bne.s	Player_ExitChk
-		move.w	#$300,(a4)							; set Sohic_Knux_top_speed
-		move.w	#$C,2(a4)							; set Sohic_Knux_acceleration
-		move.w	#$E0,4(a4)							; set Sohic_Knux_deceleration
-		bclr	#Status_SpeedShoes,status_secondary(a0)
-		music	mus_Slowdown						; run music at normal speed
 
 Player_ExitChk:
 		rts

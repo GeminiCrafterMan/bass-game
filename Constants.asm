@@ -262,7 +262,7 @@ respawn_addr =			$48 ; word ; the address of this object's entry in the respawn 
 ground_vel =				$1C ; word ; overall velocity along ground, not updated when in the air
 double_jump_property =	$25 ; byte ; remaining frames of flight / 2 for Tails, gliding-related for Knuckles
 status_secondary =		$2B ; byte ; see SCHG for details
-; $27, $2C, and $2D are free
+; $27, $2C, $2D, and $36 are free
 object_control =			$2E ; byte ; bit 0 set means character can jump out, bit 7 set means he can't
 double_jump_flag =		$2F ; byte ; meaning depends on current character, see SCHG for details
 shoottimer =			$30 ; byte
@@ -270,7 +270,6 @@ dashtimer =				$31 ; byte
 move_lock =				$32 ; word ; horizontal control lock, counts down to 0
 invulnerability_timer =	$34 ; byte ; decremented every frame
 invincibility_timer =		$35 ; byte ; decremented every 8 frames
-speed_shoes_timer =		$36 ; byte ; decremented every 8 frames
 status_tertiary =			$37 ; byte ; see SCHG for details
 character_id =			$38 ; byte ; 0 for Bass, 1 for Copy Robot
 scroll_delay_counter =		$39 ; byte ; incremented each frame the character is looking up/down, camera starts scrolling when this reaches 120
@@ -421,25 +420,20 @@ touch_top_mask			= p1_touch_top|p2_touch_top
 ; Player status variables
 ; ---------------------------------------------------------------------------
 
-Status_Facing			= 0
-Status_InAir			= 1
-Status_Dash				= 2
-Status_OnObj			= 3
-Status_Push				= 5
-Status_Underwater		= 6
-Status_Shooting			= 7
+Status_Facing				= 0
+Status_InAir				= 1
+Status_Dash					= 2
+Status_OnObj				= 3
+Status_Push					= 5
+Status_Underwater			= 6
+Status_Shooting				= 7
 
 ; ---------------------------------------------------------------------------
 ; Player status secondary variables
 ; ---------------------------------------------------------------------------
 
-Status_Shield				= 0
 Status_Invincible			= 1
-Status_SpeedShoes		= 2
-
-Status_FireShield			= 4
-Status_LtngShield			= 5
-Status_BublShield			= 6
+; bits 0 and 2-7 are free, i have yet to free 1
 
 ; ---------------------------------------------------------------------------
 ; Object Status Variables
@@ -447,8 +441,8 @@ Status_BublShield			= 6
 
 Status_ObjOrienX			= 0
 Status_ObjOrienY			= 1
-Status_ObjTouch			= 6
-Status_ObjDefeated		= 7
+Status_ObjTouch				= 6
+Status_ObjDefeated			= 7
 
 ; ---------------------------------------------------------------------------
 ; Universal (used on all standard levels)

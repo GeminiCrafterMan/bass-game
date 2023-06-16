@@ -78,7 +78,7 @@ Touch_Height:
 ; $00-$3F	- Touch
 ; $40-$7F	- Ring/Monitor
 ; $80-$BF	- Enemy(Hurt)
-; $C0-$FF	- Special
+; $C0-$FF	- Deflect
 ; ---------------------------------------------------------------------------
 
 Touch_Sizes:
@@ -134,11 +134,12 @@ Touch_Sizes:
 		dc.b 4/2, 16/2	; 31
 		dc.b 32/2, 128/2	; 32
 		dc.b 24/2, 8/2	; 33
-		dc.b 16/2, 24/2	; 34
+		dc.b 16/2, 24/2	; 34	; sorta player-sized (sniper joes)
 		dc.b 80/2, 64/2	; 35
 		dc.b 128/2, 4/2	; 36
 		dc.b 192/2, 4/2	; 37
 		dc.b 80/2, 80/2	; 38
+	; custom sizes... when i add them
 ; ---------------------------------------------------------------------------
 
 Touch_ChkValue:
@@ -146,7 +147,7 @@ Touch_ChkValue:
 		andi.b	#$C0,d1								; get only collision type bits
 		beq.w	Touch_Enemy						; if 00, enemy, branch
 		cmpi.b	#$C0,d1
-		beq.w	Touch_Special						; if 11, "special thing for starpole", branch
+		beq.w	Touch_Deflect						; if 11, "deflect", branch
 		tst.b	d1
 		bmi.w	Touch_ChkHurt						; if 10, "harmful", branch
 		; If 01...
@@ -535,34 +536,13 @@ Kill_Character:
 		rts
 ; ---------------------------------------------------------------------------
 
-Touch_Special:
-	; this had something about not destroying the shot?
-		move.b	collision_flags(a1),d1					; get collision_flags
-		andi.b	#$3F,d1								; get only collision size (but that doesn't seems to be its use here)
-		cmpi.b	#7,d1
-		beq.s	loc_103FA
-		cmpi.b	#6,d1
-		beq.s	loc_103FA
-		cmpi.b	#$A,d1
-		beq.s	loc_103FA
-		cmpi.b	#$C,d1
-		beq.s	loc_103FA
-		cmpi.b	#$15,d1
-		beq.s	loc_103FA
-		cmpi.b	#$16,d1
-		beq.s	loc_103FA
-		cmpi.b	#$17,d1
-		beq.s	loc_103FA
-		cmpi.b	#$18,d1
-		beq.s	loc_103FA
-		cmpi.b	#$21,d1
-		beq.s	loc_103FA
-		rts
-; ---------------------------------------------------------------------------
-
-loc_103FA:
-		addq.b	#1,collision_property(a1)				; otherwise, it seems everything else does double
-		rts
+Touch_Deflect:
+		cmpa.w	#Player_1,a0
+		beq.w	Touch_ChkHurt
+		neg.w	x_vel(a0)								; bounce bullet directly off enemy
+		neg.w	y_vel(a0)
+		neg.w	ground_vel(a0)
+		sfx		sfx_Deflect,1
 
 ; =============== S U B R O U T I N E =======================================
 

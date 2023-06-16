@@ -166,6 +166,7 @@ CollectValidPickup:
 		lea		(v_weapon1max).w,a2
 		subq.b	#1,d1
 		subq.b	#1,d2	; loop counter
+		lsl.b	#1,d1	; multiply by 2 to get the right address
 		adda.l	d1,a1	; get correct address for weapon energy
 		adda.l	d1,a2	; and max energy
 		st		(Game_paused).w
