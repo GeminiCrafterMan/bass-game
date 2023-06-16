@@ -16,7 +16,6 @@ off_2CFB6: offsetTable
 		offsetTableEntry.w loc_2D012	; 2
 		offsetTableEntry.w loc_2D0F8	; 4
 		offsetTableEntry.w loc_2D10A	; 6
-		offsetTableEntry.w loc_2D47E	; 8
 ; ---------------------------------------------------------------------------
 
 loc_2CFC0:
@@ -84,9 +83,6 @@ sub_2D028:
 		move.b	#2,mapping_frame(a1)
 		move.w	#$20,$36(a1)
 		move.w	a0,$3E(a1)
-		cmpi.w	#20,(Ring_count).w
-		blo.s	loc_2D0D0
-		bsr.w	sub_2D3C8
 
 loc_2D0D0:
 		move.b	#1,anim(a0)
@@ -191,156 +187,8 @@ Load_StarPost_Settings:
 		move.b	(Saved_water_full_screen_flag).w,(Water_full_screen_flag).w
 +		rts
 
-; =============== S U B R O U T I N E =======================================
-
-sub_2D3C8:
-		moveq	#4-1,d1
-		moveq	#0,d2
-
--		jsr	(Create_New_Sprite).w
-		bne.s	+
-		move.l	address(a0),address(a1)
-		move.l	#Map_StarPostStars,mappings(a1)
-		move.w	#make_art_tile(ArtTile_StarPost+8,0,0),art_tile(a1)
-		move.b	#4,render_flags(a1)
-		move.b	#8,routine(a1)
-		move.w	x_pos(a0),d0
-		move.w	d0,x_pos(a1)
-		move.w	d0,$30(a1)
-		move.w	y_pos(a0),d0
-		subi.w	#$30,d0
-		move.w	d0,y_pos(a1)
-		move.w	d0,$32(a1)
-		move.w	priority(a0),priority(a1)
-		move.b	#16/2,width_pixels(a1)
-		move.b	#1,mapping_frame(a1)
-		move.w	#-$400,x_vel(a1)
-		clr.w	y_vel(a1)
-		move.w	d2,$34(a1)
-		addi.w	#$40,d2
-		dbf	d1,-
-+		lea	(ArtKosM_StarPostStars3).l,a1
-		move.w	(Ring_count).w,d0
-		subi.w	#20,d0
-		divu.w	#15,d0
-		ext.l	d0
-		moveq	#3,d2
-		divu.w	d2,d0
-		swap	d0
-		tst.w	d0
-		beq.s	+
-		lea	(ArtKosM_StarPostStars1).l,a1
-		cmpi.w	#1,d0
-		beq.s	+
-		lea	(ArtKosM_StarPostStars2).l,a1
-+		move.w	#tiles_to_bytes($5EC),d2
-		jmp	(Queue_Kos_Module).w
-; ---------------------------------------------------------------------------
-
-loc_2D47E:	; 8
-		move.b	collision_property(a0),d0
-		beq.s	loc_2D50A
-		andi.b	#1,d0
-		beq.s	loc_2D506
-
-; Load bonus stage
-		move.w	#$100,(Current_zone_and_act).w
-		move.w	(Ring_count).w,(Saved_ring_count).w
-		clr.b	(Last_star_post_hit).w
-		st	(Restart_level_flag).w
-		move.b	(Player_1+status_secondary).w,d0
-		andi.b	#$71,d0
-		move.b	d0,(Saved_status_secondary).w
-		st	(Respawn_table_keep).w
-
-loc_2D506:
-		clr.b	collision_property(a0)
-
-loc_2D50A:
-		addi.w	#$A,$34(a0)
-		move.w	$34(a0),d0
-		andi.w	#$FF,d0
-		jsr	(GetSineCosine).w
-		asr.w	#5,d0
-		asr.w	#3,d1
-		move.w	d1,d3
-		move.w	$34(a0),d2
-		andi.w	#$3E0,d2
-		lsr.w	#5,d2
-		moveq	#2,d5
-		moveq	#0,d4
-		cmpi.w	#$10,d2
-		ble.s		loc_2D53A
-		neg.w	d1
-
-loc_2D53A:
-		andi.w	#$F,d2
-		cmpi.w	#8,d2
-		ble.s		loc_2D54A
-		neg.w	d2
-		andi.w	#7,d2
-
-loc_2D54A:
-		lsr.w	#1,d2
-		beq.s	loc_2D550
-		add.w	d1,d4
-
-loc_2D550:
-		asl.w	#1,d1
-		dbf	d5,loc_2D54A
-		asr.w	#4,d4
-		add.w	d4,d0
-		addq.w	#1,$36(a0)
-		move.w	$36(a0),d1
-		cmpi.w	#$80,d1
-		beq.s	loc_2D574
-		bgt.s	loc_2D57A
-
-loc_2D56A:
-		muls.w	d1,d0
-		muls.w	d1,d3
-		asr.w	#7,d0
-		asr.w	#7,d3
-		bra.s	loc_2D58C
-; ---------------------------------------------------------------------------
-
-loc_2D574:
-		move.b	#$18|$C0,collision_flags(a0)
-
-loc_2D57A:
-		cmpi.w	#$180,d1
-		ble.s		loc_2D58C
-		neg.w	d1
-		addi.w	#$200,d1
-		bmi.s	loc_2D5C0
-		bra.s	loc_2D56A
-; ---------------------------------------------------------------------------
-
-loc_2D58C:
-		move.w	$30(a0),d2
-		add.w	d3,d2
-		move.w	d2,x_pos(a0)
-		move.w	$32(a0),d2
-		add.w	d0,d2
-		move.w	d2,y_pos(a0)
-		addq.b	#1,$23(a0)
-		move.b	$23(a0),d0
-		andi.w	#6,d0
-		lsr.w	#1,d0
-		cmpi.b	#3,d0
-		bne.s	loc_2D5B6
-		moveq	#1,d0
-
-loc_2D5B6:
-		move.b	d0,mapping_frame(a0)
-		jmp	(RememberState_Collision).w
-; ---------------------------------------------------------------------------
-
-loc_2D5C0:
-		jmp	(Delete_Current_Sprite).w
 ; ---------------------------------------------------------------------------
 
 		include "Objects/StarPost/Object Data/Anim - StarPost.asm"
 		include "Objects/StarPost/Object Data/Map - StarPost.asm"
-		include "Objects/StarPost/Object Data/Map - StarPost Stars.asm"
 		include "Objects/StarPost/Object Data/Map - Enemy Points.asm"

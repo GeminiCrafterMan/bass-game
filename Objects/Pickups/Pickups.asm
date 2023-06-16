@@ -8,14 +8,14 @@ Obj_Pickups:
 		jmp		Sprite_CheckDeleteTouch	; Should handle both deletion and contact...
 ; ===========================================================================
 
-Pickups_Index:
-		dc.w	Pickups_Main-Pickups_Index
-		dc.w	Pickups_Animate-Pickups_Index
-		dc.w	Pickups_Collect-Pickups_Index
-		dc.w	Pickups_Delete-Pickups_Index
+Pickups_Index:	offsetTable
+		offsetTableEntry.w	Pickups_Init
+		offsetTableEntry.w	Pickups_Main
+		offsetTableEntry.w	Pickups_Collect
+		offsetTableEntry.w	Pickups_Delete
 ; ===========================================================================
 
-Pickups_Main:	; Routine 0
+Pickups_Init:	; Routine 0
 		addq.b	#2,routine(a0)
 		move.l	#Map_Pickups,mappings(a0)
 		move.w	#make_art_tile($580,0,0),art_tile(a0)
@@ -23,12 +23,21 @@ Pickups_Main:	; Routine 0
 		move.w	#$200,priority(a0)
 		move.b	#$47,collision_flags(a0)
 		move.b	subtype(a0),anim(a0)
+		tst.b	subtype(a0)		; 1-up?
+		bne.s	.not1up
+		tst.b	(Player_mode).w
+		bne.s	.copy
+		clr.b	anim(a0)
+		bra.s	.not1up
+	.copy:
+		move.b	#10,anim(a0)	; Copy Robot 1up head thing.
+	.not1up:
 		move.b	#4*60,invulnerability_timer(a0)
 		cmpi.b	#5,anim(a0)	; Small health
 		beq.s	.small
 		cmpi.b	#7,anim(a0)	; Small energy
 		beq.s	.small
-		cmpi.b	#9,anim(a0)	; Small health
+		cmpi.b	#9,anim(a0)	; Small screw
 		beq.s	.small
 		move.w	#bytes_to_word(8,8),y_radius(a0)
 		move.w	#bytes_to_word(16,16),height_pixels(a0)
@@ -39,7 +48,7 @@ Pickups_Main:	; Routine 0
 		rts
 ; ===========================================================================
 
-Pickups_Animate:	; Routine 2
+Pickups_Main:	; Routine 2
 		lea		(Ani_Pickups).l,a1
 		jsr		AnimateSprite
 
@@ -53,7 +62,7 @@ Pickups_Animate:	; Routine 2
 	.notOnFloor:
 		tst.w	respawn_addr(a0)
 		bne.s	.justDisplay		; .wasPlaced in the original code, but something up there is handling respawning the item
-
+	; todo: fix the flashing to actually work again...
 		move.b	invulnerability_timer(a0),d0
 		beq.s	Pickups_Delete					; if 0, delete
 		subq.b	#1,invulnerability_timer(a0)	; subtract 1 from the flash time
@@ -180,7 +189,7 @@ CollectValidPickup:
 ; ===========================================================================
 
 Ani_Pickups:
-		dc.w	.extraLife-Ani_Pickups
+		dc.w	.extraLifeB-Ani_Pickups
 		dc.w	.energyTank-Ani_Pickups
 		dc.w	.weaponTank-Ani_Pickups
 		dc.w	.mysteryTank-Ani_Pickups
@@ -190,8 +199,9 @@ Ani_Pickups:
 		dc.w	.smallEnergy-Ani_Pickups
 		dc.w	.largeScrew-Ani_Pickups
 		dc.w	.smallScrew-Ani_Pickups
-	
-	.extraLife:		dc.b 0, 1, afEnd
+		dc.w	.extraLifeC-Ani_Pickups
+
+	.extraLifeB:	dc.b 0, 1, afEnd
 		even
 	.energyTank:	dc.b 8, 3, 2, afEnd
 		even
@@ -210,6 +220,8 @@ Ani_Pickups:
 	.largeScrew:	dc.b 0, 14, afEnd
 		even
 	.smallScrew:	dc.b 0, 15, afEnd
+		even
+	.extraLifeC:	dc.b 0, 16, afEnd
 		even
 
 Map_Pickups:	binclude "Objects/Pickups/Object Data/Map - Pickups.bin"

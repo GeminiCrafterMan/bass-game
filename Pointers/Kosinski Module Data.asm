@@ -30,15 +30,9 @@ ArtKosM_TitleCardNum3:			binclude "Objects/Title Card/KosinskiM Art/Title Card N
 	even
 ArtKosM_TitleCardNum4:			binclude "Objects/Title Card/KosinskiM Art/Title Card Number 4.bin"
 	even
-ArtKosM_TitleCardRedAct:			binclude "Objects/Title Card/KosinskiM Art/Title Card Red ACT.bin"
+ArtKosM_TitleCardRedAct:		binclude "Objects/Title Card/KosinskiM Art/Title Card Red ACT.bin"
 	even
-ArtKosM_StarPostStars1:			binclude "Objects/StarPost/KosinskiM Art/StarPost Stars 1.bin"
-	even
-ArtKosM_StarPostStars2:			binclude "Objects/StarPost/KosinskiM Art/StarPost Stars 2.bin"
-	even
-ArtKosM_StarPostStars3:			binclude "Objects/StarPost/KosinskiM Art/StarPost Stars 3.bin"
-	even
-ArtKosM_LevelSelectText:			binclude "Data/Screens/Level Select/KosinskiM Art/Text.bin"
+ArtKosM_LevelSelectText:		binclude "Data/Screens/Level Select/KosinskiM Art/Text.bin"
 	even
 
 ; ===========================================================================

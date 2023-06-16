@@ -5,30 +5,6 @@
 ; =============== S U B R O U T I N E =======================================
 
 TouchResponse:
-		tst.b	character_id(a0)								; is the player Sonic?
-		bne.s	.Touch_NoInstaShield						; if not, branch
-		move.b	status_secondary(a0),d0
-		andi.b	#$73,d0									; does the player have any shields or is invincible?
-		bne.s	.Touch_NoInstaShield						; if so, branch
-		; By this point, we're focussing purely on the Insta-Shield
-		cmpi.b	#1,double_jump_flag(a0)					; is the Insta-Shield currently in its 'attacking' mode?
-		bne.s	.Touch_NoInstaShield						; if not, branch
-		bset	#Status_Invincible,status_secondary(a0)			; make the player invincible
-		move.w	x_pos(a0),d2								; get player's x_pos
-		move.w	y_pos(a0),d3								; get player's y_pos
-		subi.w	#$18,d2									; subtract width of Insta-Shield
-		subi.w	#$18,d3									; subtract height of Insta-Shield
-		moveq	#$30,d4									; player's width
-		moveq	#$30,d5									; player's height
-		bsr.s	.Touch_Process
-		bclr	#Status_Invincible,status_secondary(a0)			; make the player vulnerable again
-
-.alreadyinvincible:
-		moveq	#0,d0
-		rts
-; ---------------------------------------------------------------------------
-
-.Touch_NoInstaShield:
 		move.w	x_pos(a0),d2								; get player's x_pos
 		move.w	y_pos(a0),d3								; get player's y_pos
 		subq.w	#8,d2
@@ -394,7 +370,7 @@ Enemy_Points:	dc.w 10, 20, 50, 100					; points awarded div 10
 ItemProbabilityLUT:
 	; nothing
 		rept 24
-			dc.b 9
+			dc.b 10
 		endm
 	; 1up
 		dc.b 0
