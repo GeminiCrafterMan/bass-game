@@ -1,4 +1,6 @@
 Weapon_MegaBuster:	; The usual Mega Buster.
+		btst	#bitB,(Ctrl_1_pressed_logical).w	; Holding B?
+		bne.w	FireMegaBuster
 		btst	#bitB,(Ctrl_1_held_logical).w	; Holding B?
 		beq.w	FireMegaBuster
 	.charging:
@@ -28,10 +30,8 @@ Weapon_MegaBuster:	; The usual Mega Buster.
 		clr.b	(v_shottype).w
 		btst	#bitB,(Ctrl_1_pressed_logical).w	; pressing B?
 		bne.s	.fireLemon	; fire lemon if so
-		tst.b	(v_charge).w	; don't fire if not charging
-		beq.w	.dontFire
 		cmpi.b	#32,(v_charge).w
-		blt.s	.fireLemon	; not charged enough to care
+		blt.w	.dontFire	; not charged enough to care
 		cmpi.b	#64,(v_charge).w
 		blt.s	.fireMediumCharge	; medium charge
 		cmpi.b	#92,(v_charge).w
