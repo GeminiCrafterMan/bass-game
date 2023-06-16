@@ -38,3 +38,10 @@ Pal_Test1:			binclude "Levels/Test/Palettes/Level 1.bin"
 	even
 Pal_Test2:			binclude "Levels/Test/Palettes/Level 2.bin"
 	even
+
+Pal_Blaze:			binclude "Levels/Robot Master stages/Palettes/Blaze Man stage.bin"
+	even
+Pal_Video:			binclude "Levels/Robot Master stages/Palettes/Video Man stage.bin"
+	even
+Pal_Smog:			binclude "Levels/Robot Master stages/Palettes/Smog Man stage.bin"
+	even

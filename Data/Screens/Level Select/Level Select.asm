@@ -151,6 +151,8 @@ LevelSelect_LoadLevel_Return:
 
 LevelSelect_LoadMaxActs:
 		dc.w LevelSelect_ActDEZCount-1	; DEZ
+		dc.w LevelSelect_ActDEZCount-1	; DEZ
+		dc.w LevelSelect_ActDEZCount-1	; DEZ
 
 		zonewarning LevelSelect_LoadMaxActs,2
 
@@ -385,19 +387,35 @@ LevelSelect_ActTextIndex: offsetTable
 		offsetTableEntry.w LevelSelect_LoadAct3		; DEZ3
 		offsetTableEntry.w LevelSelect_LoadAct4		; DEZ4
 
+		offsetTableEntry.w LevelSelect_BlazeMan		; DEZ1
+		offsetTableEntry.w LevelSelect_VideoMan		; DEZ2
+		offsetTableEntry.w LevelSelect_LoadAct3		; DEZ3
+		offsetTableEntry.w LevelSelect_SmogMan		; DEZ4
+
+		offsetTableEntry.w LevelSelect_LoadAct1		; DEZ1
+		offsetTableEntry.w LevelSelect_LoadAct2		; DEZ2
+		offsetTableEntry.w LevelSelect_LoadAct3		; DEZ3
+		offsetTableEntry.w LevelSelect_LoadAct4		; DEZ4
+
 		zonewarning LevelSelect_ActTextIndex,(2*4)
 ; --------------------------------------------------------------------------
 
 LevelSelect_LoadAct1:
-		levselstr "ACT 1"
+		levselstr "ACT 1    "
 LevelSelect_LoadAct2:
-		levselstr "ACT 2"
+		levselstr "ACT 2    "
 LevelSelect_LoadAct3:
-		levselstr "ACT 3"
+		levselstr "ACT 3    "
 LevelSelect_LoadAct4:
-		levselstr "ACT 4"
+		levselstr "ACT 4    "
+LevelSelect_BlazeMan:
+		levselstr "BLAZE MAN"
+LevelSelect_VideoMan:
+		levselstr "VIDEO MAN"
+LevelSelect_SmogMan:
+		levselstr "SMOG MAN "
 LevelSelect_MainText:
-		levselstr "SONIC TEST GAME - *** DEBUG MODE ***                            "
+		levselstr "BASS GAME - *** DEBUG MODE ***                                  "
 	even
 
 ; ---------------------------------------------------------------------------
@@ -566,8 +584,8 @@ LevelSelect_MappingOffsets:
 		dc.w planeLocH28(0,26)
 LevelSelect_Text:
 		levselstr "   DEATH EGG          - ACT 1           "
-		levselstr "   UNKNOWN LEVEL      - UNKNOWN         "
-		levselstr "   UNKNOWN LEVEL      - UNKNOWN         "
+		levselstr "   RM STAGES - PART 1 - BLAZE MAN       "
+		levselstr "   RM STAGES - PART 2 - ACT 1           "
 		levselstr "   UNKNOWN LEVEL      - UNKNOWN         "
 		levselstr "   UNKNOWN LEVEL      - UNKNOWN         "
 		levselstr "   UNKNOWN LEVEL      - UNKNOWN         "

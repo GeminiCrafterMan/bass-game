@@ -110,15 +110,22 @@ LoadWaterPalette:
 ; ---------------------------------------------------------------------------
 
 StartingWaterHeights:
+	rept 4
 		dc.w $400	; DEZ 1
-		dc.w $400	; DEZ 2
-		dc.w $400	; DEZ 3
-		dc.w $400	; DEZ 4
+	endr
+	rept 4
+		dc.w $400	; DEZ 1
+	endr
+	rept 4
+		dc.w $400	; DEZ 1
+	endr
 
 		zonewarning StartingWaterHeights,(2*4)
 ; ---------------------------------------------------------------------------
 
 WaterPalette_Index:
 		dc.b palid_Test1, palid_Test2, palid_Test1, palid_Test1		; DEZ 1,2,3,4
+		dc.b palid_Blaze, palid_Video, palid_Test1, palid_Smog
+		dc.b palid_Test1, palid_Test1, palid_Test1, palid_Test1		; DEZ 1,2,3,4
 
 		zonewarning WaterPalette_Index,(1*4)

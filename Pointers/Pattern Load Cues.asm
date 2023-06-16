@@ -4,14 +4,18 @@
 
 Offs_PLC: offsetTable
 
+	rept 4
 		offsetTableEntry.w PLC1_Test1_Misc
 		offsetTableEntry.w PLC2_Test1_Enemy
+	endr
+	rept 4
 		offsetTableEntry.w PLC1_Test1_Misc
 		offsetTableEntry.w PLC2_Test1_Enemy
+	endr
+	rept 4
 		offsetTableEntry.w PLC1_Test1_Misc
 		offsetTableEntry.w PLC2_Test1_Enemy
-		offsetTableEntry.w PLC1_Test1_Misc
-		offsetTableEntry.w PLC2_Test1_Enemy
+	endr
 
 		zonewarning Offs_PLC,(4*4)
 
