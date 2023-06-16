@@ -54,5 +54,6 @@ PLC1_Test1_Misc_end
 
 PLC2_Test1_Enemy: plrlistheader
 		plreq ArtTile_HammerJoe, ArtKosM_HammerJoe		; Hammer Joe
-		plreq ArtTile_Motobug, ArtKosM_Motobug			; Motobug
+		plreq ArtTile_SniperJoe, ArtKosM_SniperJoe		; Sniper Joe
+		plreq ArtTile_Metall, ArtKosM_Metall		; Metall
 PLC2_Test1_Enemy_end

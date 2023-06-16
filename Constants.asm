@@ -457,7 +457,8 @@ ArtTile_Sonic			= $79E
 ArtTile_WeaponStuff		= $7B0
 ArtTile_DashDust		= $7F0
 ArtTile_HammerJoe		= $4D7
-ArtTile_Motobug			= $52E
+ArtTile_SniperJoe		= $52E
+ArtTile_Metall			= $54E
 
 ; ---------------------------------------------------------------------------
 ; VRAM data

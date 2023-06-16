@@ -9,15 +9,15 @@ Obj_Index:
 		dc.l Obj_GravSwap						; $03
 		dc.l Obj_Pickups						; $04
 		dc.l Obj_HammerJoe						; $05
-		dc.l DeleteObject						; $06
+		dc.l Obj_SniperJoe						; $06
 		dc.l Obj_Spring							; $07
 		dc.l Obj_Spikes							; $08
-		dc.l DeleteObject						; $09
+		dc.l Obj_Metall							; $09
 		dc.l DeleteObject						; $0A
 		dc.l DeleteObject						; $0B
 		dc.l DeleteObject						; $0C
 		dc.l DeleteObject						; $0D
-		dc.l Obj_Motobug						; $0E
+		dc.l DeleteObject						; $0E
 		dc.l DeleteObject						; $0F
 		dc.l DeleteObject						; $10
 		dc.l DeleteObject						; $11

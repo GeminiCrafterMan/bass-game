@@ -59,5 +59,7 @@ ArtKosM_Target:					binclude "Objects/Enemies/Target/KosinskiM Art/Target.bin"
 	even
 ArtKosM_HammerJoe:				binclude "Objects/Enemies/Hammer Joe/KosinskiM Art/Hammer Joe.bin"
 	even
-ArtKosM_Motobug:				binclude "Objects/Enemies/Motobug/KosinskiM Art/Motobug.bin"
+ArtKosM_SniperJoe:				binclude "Objects/Enemies/Sniper Joe/KosinskiM Art/Sniper Joe.bin"
+	even
+ArtKosM_Metall:					binclude "Objects/Enemies/Metall/KosinskiM Art/Metall.bin"
 	even

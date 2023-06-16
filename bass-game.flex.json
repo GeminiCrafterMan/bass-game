@@ -419,6 +419,26 @@
                         "label": ""
                     },
                     "uuid": "ebeac7bf-f211-4f97-8f8c-5b85c58a205b"
+                },
+                {
+                    "format": "Sonic 3&K Object.js",
+                    "name": "Metall",
+                    "palettes": [],
+                    "art": {
+                        "path": "Objects/Enemies/Metall/KosinskiM Art/Metall.bin",
+                        "compression": "Kosinski-M",
+                        "offset": 0
+                    },
+                    "mappings": {
+                        "path": "Objects/Enemies/Metall/Object Data/Map - Metall.bin",
+                        "label": ""
+                    },
+                    "dplcs": {
+                        "enabled": false,
+                        "path": "",
+                        "label": ""
+                    },
+                    "uuid": "c1ef2ba2-0d81-4c78-b25b-637d483d0d36"
                 }
             ],
             "isDirectory": true,

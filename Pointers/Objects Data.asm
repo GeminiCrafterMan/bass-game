@@ -19,14 +19,16 @@
 		include "Objects/StarPost/StarPost.asm"
 		include "Objects/Button/Button.asm"
 		include "Objects/Smooth Palette/Smooth Palette.asm"
+		include	"Objects/Enemies/Generic Bullet.asm"
 
 ; ===========================================================================
 ; Levels objects data
 ; ===========================================================================
 
 		include	"Objects/Enemies/Target/Target.asm"
-		include "Objects/Enemies/Motobug/Motobug.asm"
 		include	"Objects/Enemies/Hammer Joe/Hammer Joe.asm"
+		include	"Objects/Enemies/Sniper Joe/Sniper Joe.asm"
+		include "Objects/Enemies/Metall/Metall.asm"
 
 ; ===========================================================================
 ; Bosses objects data

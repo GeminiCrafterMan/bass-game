@@ -6,7 +6,7 @@ Obj_PlayerLemon:
 		move.w	#$200,priority(a0)
 		ori.b	#4,render_flags(a0)
 		move.b	#1,damage(a0)	; deals 1 damage to anything but bosses
-		move.w	#bytes_to_word(8,8),height_pixels(a0)
+		move.w	#bytes_to_word(8/2,8/2),height_pixels(a0)
 		move.w	#bytes_to_word(8/2,8/2),y_radius(a0)
 		btst	#7,status(a0)
 		bne.s	.delete
@@ -26,7 +26,7 @@ Obj_PlayerBall:
 		move.w	#$200,priority(a0)
 		ori.b	#4,render_flags(a0)
 		move.b	#1,damage(a0)	; deals 1 damage to anything but bosses
-		move.w	#bytes_to_word(8,8),height_pixels(a0)
+		move.w	#bytes_to_word(8/2,8/2),height_pixels(a0)
 		move.w	#bytes_to_word(8/2,8/2),y_radius(a0)
 		move.l	#.main,address(a0)
 	.main:
@@ -52,7 +52,7 @@ Obj_MegaMidCharge:
 		move.w	#$200,priority(a0)
 		ori.b	#4,render_flags(a0)
 		move.b	#2,damage(a0)	; deals 2 damage to anything but bosses
-		move.w	#bytes_to_word(16,16),height_pixels(a0)
+		move.w	#bytes_to_word(16/2,16/2),height_pixels(a0)
 		move.w	#bytes_to_word(16/2,16/2),y_radius(a0)
 		move.l	#PLC_MegaBuster,dplc_address(a0)
 		move.l	#ArtUnc_MegaBuster>>1,art_address(a0)
@@ -87,7 +87,7 @@ Obj_MegaFullCharge:
 		move.w	#$200,priority(a0)
 		ori.b	#4,render_flags(a0)
 		move.b	#3,damage(a0)	; deals 3 damage to anything but bosses
-		move.w	#bytes_to_word(32,32),height_pixels(a0)
+		move.w	#bytes_to_word(32/2,32/2),height_pixels(a0)
 		move.w	#bytes_to_word(30/2,30/2),y_radius(a0)
 		move.l	#PLC_MegaBuster,dplc_address(a0)
 		move.l	#ArtUnc_MegaBuster>>1,art_address(a0)
@@ -123,7 +123,7 @@ Obj_MetalBlade:
 		move.w	#$200,priority(a0)
 		ori.b	#4,render_flags(a0)
 		move.b	#2,damage(a0)	; deals 2 damage to anything but bosses
-		move.w	#bytes_to_word(8,8),height_pixels(a0)
+		move.w	#bytes_to_word(8/2,8/2),height_pixels(a0)
 		move.w	#bytes_to_word(8/2,8/2),y_radius(a0)
 		btst	#7,status(a0)
 		bne.s	.delete
