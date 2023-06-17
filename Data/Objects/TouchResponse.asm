@@ -242,42 +242,25 @@ Touch_Monitor:
 
 Touch_Enemy:
 		cmpa.w	#Player_1,a0
-		beq.s	.player
-	; something about shot health for piercing...
-		bset	#7,status(a0)
-		bra.s	.checkhurtenemy
-	.player:
-		btst	#Status_Invincible,status_secondary(a0)		; does Sonic have invincibility?
-		bne.s	.checkhurtenemy						; if yes, branch
-		bra.w	Touch_ChkHurt
-
-.checkhurtenemy:
-		; Boss related? Could be special enemies in general
+		beq.w	Touch_ChkHurt
+	; Boss related? Could be special enemies in general
+	; todo: rewrite this later or at least clean it up please
 		tst.b	boss_hitcount2(a1)
 		beq.s	Touch_EnemyNormal
 		bmi.s	Touch_EnemyNormal
 		move.b	collision_flags(a1),collision_restore_flags(a1)	; save current collision
 		clr.b	collision_flags(a1)
-		cmpa.w	#Player_1,a0
-		bne.s	.hpChecksBullet
-		neg.w	x_vel(a0)								; bounce player directly off boss
-		neg.w	y_vel(a0)
-		neg.w	ground_vel(a0)
-	.hurtHPEnemy:
-		subq.b	#1,boss_hitcount2(a1)
-		bne.s	.bossnotdefeated
+		move.b	damage(a0),d0
+		subi.b	d0,boss_hitcount2(a1)	; subtract buster shot HP from enemy's...
+		beq.s	.killHPEnemy			; and break the enemy if it's 0
+		bmi.s	.killHPEnemy			; or less
+		bset	#7,status(a0)			; otherwise, destroy the buster shot
+		bra.s	.bossnotdefeated
 	.killHPEnemy:
 		bset	#7,status(a1)
 
 .bossnotdefeated:
 		rts
-
-.hpChecksBullet:
-		move.b	damage(a0),d0
-		subi.b	d0,boss_hitcount2(a1)	; subtract buster shot HP from enemy's...
-		ble.s	.killHPEnemy		; and break the enemy if it's 0
-		bset	#7,status(a0)		; otherwise, destroy the buster shot
-		bra.s	.bossnotdefeated
 ; ---------------------------------------------------------------------------
 
 Touch_EnemyNormal:
@@ -293,15 +276,15 @@ Touch_EnemyNormal:
 		move.w	(Chain_bonus_counter).w,d0
 		addq.w	#2,(Chain_bonus_counter).w			; add 2 to item bonus counter
 		cmpi.w	#6,d0
-		blo.s		.notreachedlimit
+		blo.s	.notreachedlimit
 		moveq	#6,d0								; max bonus is lvl6
 
 .notreachedlimit:
 		move.w	d0,objoff_3E(a1)
 		move.w	Enemy_Points(pc,d0.w),d0
-		cmpi.w	#16*2,(Chain_bonus_counter).w			; have 16 enemies been destroyed?
-		blo.s		.notreachedlimit2	; if not, branch
-		move.w	#1000,d0							; fix bonus to 10000
+		cmpi.w	#16*2,(Chain_bonus_counter).w	; have 16 enemies been destroyed?
+		blo.s	.notreachedlimit2				; if not, branch
+		move.w	#1000,d0						; fix bonus to 10000
 		move.w	#10,objoff_3E(a1)
 
 .notreachedlimit2:
@@ -310,14 +293,6 @@ Touch_EnemyNormal:
 		clr.b	routine(a1)
 		move.w	x_pos(a1),d1
 		move.w	y_pos(a1),d2
-		cmpa.w	#Player_1,a0
-		bne.s	.spawnItem
-		tst.w	y_vel(a0)
-		bmi.s	.bouncedown
-		move.w	y_pos(a0),d0
-		cmp.w	y_pos(a1),d0							; was player above, or at the same height as, the enemy when it was destroyed
-		bhs.s	.bounceup
-		neg.w	y_vel(a0)
 	.spawnItem:
 	; Create a random drop!
 	; From a disassembly of Mega Man 1, the rates are...
@@ -354,16 +329,6 @@ Touch_EnemyNormal:
 		move.b	ItemProbabilityLUT(pc,d0.w),subtype(a1)
 ;		move.b	#8,obSubtype(a1)
 	.ret:
-		rts
-; ---------------------------------------------------------------------------
-
-.bouncedown:
-		addi.w	#$100,y_vel(a0)						; bounce down
-		rts
-; ---------------------------------------------------------------------------
-
-.bounceup:
-		subi.w	#$100,y_vel(a0)						; bounce up
 		rts
 ; ---------------------------------------------------------------------------
 
@@ -404,24 +369,16 @@ ItemProbabilityLUT:
 Touch_ChkHurt:
 	; this one is used almost exclusively
 		cmpa.w	#Player_1,a0
-		bne.s	Touch_ChkHurt_Return
-		move.b	status_secondary(a0),d0
+		bne.s	Touch_ChkHurt_Return		; don't hurt if you're not the player
 
-Touch_ChkHurt2:
-		btst	#Status_Invincible,status_secondary(a0)		; does Sonic have invincibility?
-		beq.s	Touch_Hurt	; if not, branch
+		tst.b	invulnerability_timer(a0)	; is the player invulnerable?
+		bne.s	Touch_ChkHurt_Return		; if so, branch
+		movea.w	a1,a2
+		bra.s	HurtCharacter
 
 Touch_ChkHurt_Return:
-		moveq	#-1,d0
 		rts
-; ---------------------------------------------------------------------------
 
-Touch_Hurt:
-		tst.b	invulnerability_timer(a0)					; is the player invulnerable?
-		bne.s	Touch_ChkHurt_Return				; if so, branch
-		movea.w	a1,a2
-
-; continue straight to HurtCharacter
 ; ---------------------------------------------------------------------------
 ; Hurting Sonic/Tails/Knuckles subroutine
 ; ---------------------------------------------------------------------------
@@ -445,8 +402,8 @@ HurtCharacter:
 		bset	#Status_InAir,status(a0)
 		move.w	#-$400,y_vel(a0)						; make Sonic bounce away from the object
 		move.w	#-$200,x_vel(a0)
-		btst	#Status_Underwater,status(a0)				; is Sonic underwater?
-		beq.s	.isdry								; if not, branch
+		btst	#Status_Underwater,status(a0)			; is Sonic underwater?
+		beq.s	.isdry									; if not, branch
 		move.w	#-$200,y_vel(a0)						; slower bounce
 		move.w	#-$100,x_vel(a0)
 
@@ -454,7 +411,7 @@ HurtCharacter:
 		move.w	x_pos(a0),d0
 		cmp.w	x_pos(a2),d0
 		blo.s		.isleft								; if Sonic is left of the object, branch
-		neg.w	x_vel(a0)							; if Sonic is right of the object, reverse
+		neg.w	x_vel(a0)								; if Sonic is right of the object, reverse
 
 .isleft:
 		clr.w	ground_vel(a0)
@@ -477,8 +434,6 @@ Kill_Character:
 		bne.w	.dontdie						; if yes, branch
 		clr.b	(v_health).w
 		move.b	#$80,(Update_HUD_ring_count).w
-		clr.l	(v_Shield).w						; remove shield
-		clr.l	(v_Invincibility_stars).w
 		moveq	#12-1,d1						; 8 total, counting the first
 		lea		(DeathOrbs_VelTbl).l,a3
 

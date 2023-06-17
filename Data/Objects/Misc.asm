@@ -225,9 +225,6 @@ Restore_LevelMusic:
 		lea	(LevelMusic_Playlist).l,a2
 		move.b	(a2,d0.w),d0
 		move.w	d0,(Current_music).w
-		btst	#Status_Invincible,(Player_1+status_secondary).w
-		beq.s	+
-		moveq	#signextendB(mus_Invincible),d0	; if invincible, play invincibility music
 +		jmp	(SMPS_QueueSound1).w				; play music
 
 ; =============== S U B R O U T I N E =======================================
@@ -244,8 +241,6 @@ Load_Routine:
 
 HurtCharacter_Directly2:
 		tst.b	invulnerability_timer(a1)
-		bne.s	HurtCharacter_Directly_Return
-		btst	#Status_Invincible,status_secondary(a1)
 		bne.s	HurtCharacter_Directly_Return
 
 HurtCharacter_Directly:

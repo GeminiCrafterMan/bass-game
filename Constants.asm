@@ -262,14 +262,13 @@ respawn_addr =			$48 ; word ; the address of this object's entry in the respawn 
 ground_vel =				$1C ; word ; overall velocity along ground, not updated when in the air
 double_jump_property =	$25 ; byte ; remaining frames of flight / 2 for Tails, gliding-related for Knuckles
 status_secondary =		$2B ; byte ; see SCHG for details
-; $27, $2C, $2D, and $36 are free
+; $27, $2C, $2D, $35, and $36 are free
 object_control =			$2E ; byte ; bit 0 set means character can jump out, bit 7 set means he can't
 double_jump_flag =		$2F ; byte ; meaning depends on current character, see SCHG for details
 shoottimer =			$30 ; byte
 dashtimer =				$31 ; byte
 move_lock =				$32 ; word ; horizontal control lock, counts down to 0
 invulnerability_timer =	$34 ; byte ; decremented every frame
-invincibility_timer =		$35 ; byte ; decremented every 8 frames
 status_tertiary =			$37 ; byte ; see SCHG for details
 character_id =			$38 ; byte ; 0 for Bass, 1 for Copy Robot
 scroll_delay_counter =		$39 ; byte ; incremented each frame the character is looking up/down, camera starts scrolling when this reaches 120
@@ -432,8 +431,7 @@ Status_Shooting				= 7
 ; Player status secondary variables
 ; ---------------------------------------------------------------------------
 
-Status_Invincible			= 1
-; bits 0 and 2-7 are free, i have yet to free 1
+; all bits are free
 
 ; ---------------------------------------------------------------------------
 ; Object Status Variables

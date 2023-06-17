@@ -17,8 +17,6 @@ Dynamic_object_RAM:					ds.b object_size*90		; 90 objects
 Dynamic_object_RAM_end				= *
 									ds.b object_size
 v_Dust:								ds.b object_size
-v_Shield:							ds.b object_size
-									ds.b object_size
 v_Breathing_bubbles:				ds.b object_size
 									ds.b object_size
 									ds.b object_size
@@ -28,7 +26,6 @@ v_Breathing_bubbles:				ds.b object_size
 									ds.b object_size
 									ds.b object_size
 v_WaterWave:						ds.b object_size
-v_Invincibility_stars:				ds.b object_size*4		; 4 objects
 									ds.b $34				; null
 Object_RAM_end						= *
 
