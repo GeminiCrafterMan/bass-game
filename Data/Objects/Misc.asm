@@ -225,9 +225,6 @@ Restore_LevelMusic:
 		lea	(LevelMusic_Playlist).l,a2
 		move.b	(a2,d0.w),d0
 		move.w	d0,(Current_music).w
-		btst	#Status_Invincible,(Player_1+status_secondary).w
-		beq.s	+
-		moveq	#signextendB(mus_Invincible),d0	; if invincible, play invincibility music
 +		jmp	(SMPS_QueueSound1).w				; play music
 
 ; =============== S U B R O U T I N E =======================================
@@ -244,8 +241,6 @@ Load_Routine:
 
 HurtCharacter_Directly2:
 		tst.b	invulnerability_timer(a1)
-		bne.s	HurtCharacter_Directly_Return
-		btst	#Status_Invincible,status_secondary(a1)
 		bne.s	HurtCharacter_Directly_Return
 
 HurtCharacter_Directly:
@@ -341,23 +336,6 @@ word_85890:
 		dc.w Player_1
 		dc.w Player_1
 		dc.w Player_1
-
-; =============== S U B R O U T I N E =======================================
-
-Load_LevelResults:
-		lea	(Player_1).w,a1
-		btst	#7,status(a1)
-		bne.s	+
-		btst	#Status_InAir,status(a1)
-		bne.s	+
-		cmpi.b	#id_BassDeath,routine(a1)
-		bcc.s	+
-		bsr.s	Set_PlayerEndingPose
-		clr.b	(TitleCard_end_flag).w
-		bsr.w	Create_New_Sprite
-		bne.s	+
-		move.l	#Obj_LevelResults,address(a1)
-+		rts
 
 ; =============== S U B R O U T I N E =======================================
 

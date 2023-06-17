@@ -356,30 +356,10 @@ Player_Display:
 		beq.s	loc_10CA6
 		subq.b	#1,invulnerability_timer(a0)
 		lsr.b	#3,d0
-		bcc.s	Player_ChkInvin
+		bcc.s	Player_ExitChk
 
 loc_10CA6:
 		jsr	(Draw_Sprite).w
-
-Player_ChkInvin:										; checks if invincibility has expired and disables it if it has.
-		btst	#Status_Invincible,status_secondary(a0)
-		beq.s	Player_ExitChk
-		tst.b	invincibility_timer(a0)
-		beq.s	Player_ExitChk						; if there wasn't any time left, that means we're in Super/Hyper mode
-		move.b	(Level_frame_counter+1).w,d0
-		andi.b	#7,d0
-		bne.s	Player_ExitChk
-		subq.b	#1,invincibility_timer(a0)				; reduce invincibility_timer only on every 8th frame
-		bne.s	Player_ExitChk						; if time is still left, branch
-		tst.b	(Level_end_flag).w						; don't change music if level is end
-		bne.s	Player_RmvInvin
-		tst.b	(Boss_flag).w								; don't change music if in a boss fight
-		bne.s	Player_RmvInvin
-		move.w	(Current_music).w,d0
-		jsr	(SMPS_QueueSound1).w					; stop playing invincibility theme and resume normal level music
-
-Player_RmvInvin:
-		bclr	#Status_Invincible,status_secondary(a0)
 
 Player_ExitChk:
 		rts

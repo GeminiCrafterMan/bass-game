@@ -7,14 +7,16 @@
 TouchResponse:
 		move.w	x_pos(a0),d2								; get player's x_pos
 		move.w	y_pos(a0),d3								; get player's y_pos
-		subq.w	#8,d2
+		move.b	x_radius(a0),d5
+		ext.w	d5
+		sub.w	d5,d2
 		moveq	#0,d5
 		move.b	y_radius(a0),d5							; load Sonic's height
 		subq.b	#3,d5
 		sub.w	d5,d3
-		; Note the lack of a check for if the player is ducking
-		; Height is no longer reduced by ducking
-		moveq	#$10,d4									; player's collision width
+		move.b	x_radius(a0),d4
+		ext.w	d4
+		lsl.w	#1,d4
 		add.w	d5,d5
 
 .Touch_Process:
@@ -75,14 +77,14 @@ Touch_Height:
 		bra.s	Touch_ChkValue
 ; ---------------------------------------------------------------------------
 ; collision sizes $00-$3F (width,height)
-; $00-$3F	- Touch
+; $00-$3F	- Enemy
 ; $40-$7F	- Ring/Monitor
-; $80-$BF	- Enemy(Hurt)
+; $80-$BF	- Harmful, but invincible
 ; $C0-$FF	- Deflect
 ; ---------------------------------------------------------------------------
 
 Touch_Sizes:
-		dc.b 8/2, 8/2		; 0
+		dc.b 8/2, 8/2	; 0
 		dc.b 40/2, 40/2	; 1
 		dc.b 24/2, 40/2	; 2
 		dc.b 40/2, 24/2	; 3
@@ -101,12 +103,12 @@ Touch_Sizes:
 		dc.b 80/2, 32/2	; 10
 		dc.b 32/2, 48/2	; 11
 		dc.b 16/2, 32/2	; 12
-		dc.b 64/2, 224/2	; 13
-		dc.b 128/2, 64/2	; 14
-		dc.b 256/2, 64/2	; 15
+		dc.b 64/2, 224/2; 13
+		dc.b 128/2, 64/2; 14
+		dc.b 256/2, 64/2; 15
 		dc.b 64/2, 64/2	; 16
 		dc.b 16/2, 16/2	; 17
-		dc.b 8/2, 8/2		; 18
+		dc.b 8/2, 8/2	; 18
 		dc.b 64/2, 16/2	; 19
 		dc.b 24/2, 24/2	; 1A
 		dc.b 16/2, 8/2	; 1B
@@ -118,7 +120,7 @@ Touch_Sizes:
 		dc.b 48/2, 48/2	; 21
 		dc.b 48/2, 48/2	; 22
 		dc.b 24/2, 48/2	; 23
-		dc.b 144/2, 16/2	; 24
+		dc.b 144/2, 16/2; 24
 		dc.b 48/2, 80/2	; 25
 		dc.b 32/2, 8/2	; 26
 		dc.b 64/2, 4/2	; 27
@@ -126,13 +128,13 @@ Touch_Sizes:
 		dc.b 24/2, 72/2	; 29
 		dc.b 32/2, 4/2	; 2A
 		dc.b 8/2, 128/2	; 2B
-		dc.b 48/2, 128/2	; 2C
+		dc.b 48/2, 128/2; 2C
 		dc.b 64/2, 32/2	; 2D
 		dc.b 56/2, 40/2	; 2E
 		dc.b 32/2, 4/2	; 2F
 		dc.b 32/2, 2/2	; 30
 		dc.b 4/2, 16/2	; 31
-		dc.b 32/2, 128/2	; 32
+		dc.b 32/2, 128/2; 32
 		dc.b 24/2, 8/2	; 33
 		dc.b 16/2, 24/2	; 34	; sorta player-sized (sniper joes)
 		dc.b 80/2, 64/2	; 35
@@ -240,42 +242,25 @@ Touch_Monitor:
 
 Touch_Enemy:
 		cmpa.w	#Player_1,a0
-		beq.s	.player
-	; something about shot health for piercing...
-		bset	#7,status(a0)
-		bra.s	.checkhurtenemy
-	.player:
-		btst	#Status_Invincible,status_secondary(a0)		; does Sonic have invincibility?
-		bne.s	.checkhurtenemy						; if yes, branch
-		bra.w	Touch_ChkHurt
-
-.checkhurtenemy:
-		; Boss related? Could be special enemies in general
+		beq.w	Touch_ChkHurt
+	; Boss related? Could be special enemies in general
+	; todo: rewrite this later or at least clean it up please
 		tst.b	boss_hitcount2(a1)
 		beq.s	Touch_EnemyNormal
 		bmi.s	Touch_EnemyNormal
 		move.b	collision_flags(a1),collision_restore_flags(a1)	; save current collision
 		clr.b	collision_flags(a1)
-		cmpa.w	#Player_1,a0
-		bne.s	.hpChecksBullet
-		neg.w	x_vel(a0)								; bounce player directly off boss
-		neg.w	y_vel(a0)
-		neg.w	ground_vel(a0)
-	.hurtHPEnemy:
-		subq.b	#1,boss_hitcount2(a1)
-		bne.s	.bossnotdefeated
+		move.b	damage(a0),d0
+		subi.b	d0,boss_hitcount2(a1)	; subtract buster shot HP from enemy's...
+		beq.s	.killHPEnemy			; and break the enemy if it's 0
+		bmi.s	.killHPEnemy			; or less
+		bset	#7,status(a0)			; otherwise, destroy the buster shot
+		bra.s	.bossnotdefeated
 	.killHPEnemy:
 		bset	#7,status(a1)
 
 .bossnotdefeated:
 		rts
-
-.hpChecksBullet:
-		move.b	damage(a0),d0
-		subi.b	d0,boss_hitcount2(a1)	; subtract buster shot HP from enemy's...
-		ble.s	.killHPEnemy		; and break the enemy if it's 0
-		bset	#7,status(a0)		; otherwise, destroy the buster shot
-		bra.s	.bossnotdefeated
 ; ---------------------------------------------------------------------------
 
 Touch_EnemyNormal:
@@ -291,15 +276,15 @@ Touch_EnemyNormal:
 		move.w	(Chain_bonus_counter).w,d0
 		addq.w	#2,(Chain_bonus_counter).w			; add 2 to item bonus counter
 		cmpi.w	#6,d0
-		blo.s		.notreachedlimit
+		blo.s	.notreachedlimit
 		moveq	#6,d0								; max bonus is lvl6
 
 .notreachedlimit:
 		move.w	d0,objoff_3E(a1)
 		move.w	Enemy_Points(pc,d0.w),d0
-		cmpi.w	#16*2,(Chain_bonus_counter).w			; have 16 enemies been destroyed?
-		blo.s		.notreachedlimit2	; if not, branch
-		move.w	#1000,d0							; fix bonus to 10000
+		cmpi.w	#16*2,(Chain_bonus_counter).w	; have 16 enemies been destroyed?
+		blo.s	.notreachedlimit2				; if not, branch
+		move.w	#1000,d0						; fix bonus to 10000
 		move.w	#10,objoff_3E(a1)
 
 .notreachedlimit2:
@@ -308,14 +293,6 @@ Touch_EnemyNormal:
 		clr.b	routine(a1)
 		move.w	x_pos(a1),d1
 		move.w	y_pos(a1),d2
-		cmpa.w	#Player_1,a0
-		bne.s	.spawnItem
-		tst.w	y_vel(a0)
-		bmi.s	.bouncedown
-		move.w	y_pos(a0),d0
-		cmp.w	y_pos(a1),d0							; was player above, or at the same height as, the enemy when it was destroyed
-		bhs.s	.bounceup
-		neg.w	y_vel(a0)
 	.spawnItem:
 	; Create a random drop!
 	; From a disassembly of Mega Man 1, the rates are...
@@ -352,16 +329,6 @@ Touch_EnemyNormal:
 		move.b	ItemProbabilityLUT(pc,d0.w),subtype(a1)
 ;		move.b	#8,obSubtype(a1)
 	.ret:
-		rts
-; ---------------------------------------------------------------------------
-
-.bouncedown:
-		addi.w	#$100,y_vel(a0)						; bounce down
-		rts
-; ---------------------------------------------------------------------------
-
-.bounceup:
-		subi.w	#$100,y_vel(a0)						; bounce up
 		rts
 ; ---------------------------------------------------------------------------
 
@@ -402,24 +369,16 @@ ItemProbabilityLUT:
 Touch_ChkHurt:
 	; this one is used almost exclusively
 		cmpa.w	#Player_1,a0
-		bne.s	Touch_ChkHurt_Return
-		move.b	status_secondary(a0),d0
+		bne.s	Touch_ChkHurt_Return		; don't hurt if you're not the player
 
-Touch_ChkHurt2:
-		btst	#Status_Invincible,status_secondary(a0)		; does Sonic have invincibility?
-		beq.s	Touch_Hurt	; if not, branch
+		tst.b	invulnerability_timer(a0)	; is the player invulnerable?
+		bne.s	Touch_ChkHurt_Return		; if so, branch
+		movea.w	a1,a2
+		bra.s	HurtCharacter
 
 Touch_ChkHurt_Return:
-		moveq	#-1,d0
 		rts
-; ---------------------------------------------------------------------------
 
-Touch_Hurt:
-		tst.b	invulnerability_timer(a0)					; is the player invulnerable?
-		bne.s	Touch_ChkHurt_Return				; if so, branch
-		movea.w	a1,a2
-
-; continue straight to HurtCharacter
 ; ---------------------------------------------------------------------------
 ; Hurting Sonic/Tails/Knuckles subroutine
 ; ---------------------------------------------------------------------------
@@ -443,8 +402,8 @@ HurtCharacter:
 		bset	#Status_InAir,status(a0)
 		move.w	#-$400,y_vel(a0)						; make Sonic bounce away from the object
 		move.w	#-$200,x_vel(a0)
-		btst	#Status_Underwater,status(a0)				; is Sonic underwater?
-		beq.s	.isdry								; if not, branch
+		btst	#Status_Underwater,status(a0)			; is Sonic underwater?
+		beq.s	.isdry									; if not, branch
 		move.w	#-$200,y_vel(a0)						; slower bounce
 		move.w	#-$100,x_vel(a0)
 
@@ -452,23 +411,13 @@ HurtCharacter:
 		move.w	x_pos(a0),d0
 		cmp.w	x_pos(a2),d0
 		blo.s		.isleft								; if Sonic is left of the object, branch
-		neg.w	x_vel(a0)							; if Sonic is right of the object, reverse
+		neg.w	x_vel(a0)								; if Sonic is right of the object, reverse
 
 .isleft:
 		clr.w	ground_vel(a0)
 		move.b	#id_Hurt,anim(a0)
 		move.b	#2*60,invulnerability_timer(a0)			; set temp invincible time to 2 seconds
-		moveq	#signextendB(sfx_Death),d0			; load normal damage sound
-		cmpi.l	#Obj_Spikes,address(a2)				; was damage caused by spikes?
-		blo.s		.sound								; if not, branch
-		cmpi.l	#sub_24280,address(a2)
-		bhs.s	.sound
-		moveq	#signextendB(sfx_SpikeHit),d0			; load spikes damage sound
-
-.sound:
-		jsr	(SMPS_QueueSound2).w
-		moveq	#-1,d0
-		rts
+		sfx		sfx_Death,1
 ; ---------------------------------------------------------------------------
 
 DeathOrbs_VelTbl:	; okay this kind of makes no sense but it also works to help visualize the orbs
@@ -485,8 +434,6 @@ Kill_Character:
 		bne.w	.dontdie						; if yes, branch
 		clr.b	(v_health).w
 		move.b	#$80,(Update_HUD_ring_count).w
-		clr.l	(v_Shield).w						; remove shield
-		clr.l	(v_Invincibility_stars).w
 		moveq	#12-1,d1						; 8 total, counting the first
 		lea		(DeathOrbs_VelTbl).l,a3
 

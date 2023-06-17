@@ -6,13 +6,6 @@ using SonicRetro.SonLVL.API;
 
 namespace S3KObjectDefinitions.Common
 {
-	class InvisibleHurtBlock : InvisibleBlock
-	{
-		public override string Name
-		{
-			get { return "Invisible Hurt Block"; }
-		}
-	}
 
 	class InvisibleKillBlock : InvisibleBlock
 	{
