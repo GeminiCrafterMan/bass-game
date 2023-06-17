@@ -171,13 +171,11 @@ SMPS_RAM STRUCT DOTS
 	f_stopmusic:		ds.b 1	; flag set to stop music when paused
 
 	bitfield1:		ds.b 1
-v_ring_speaker			= 0	; which speaker the "ring" sound is played in (0 = right; 1 = left)
+;v_ring_speaker			= 0	; which speaker the "ring" sound is played in (0 = right; 1 = left)
     if SMPS_GloopSFXBehaviour
 v_gloop_toggle			= 1	; if set, prevents further gloop sounds from playing
     endif
-    if SMPS_EnableSpinDashSFX
-f_spindash_lastsound		= 2
-    endif
+;f_spindash_lastsound		= 2
     if SMPS_PushSFXBehaviour
 f_push_playing			= 3
     endif
@@ -185,10 +183,8 @@ f_push_playing			= 3
 f_continuous_sfx		= 4
     endif
 
-    if SMPS_EnableSpinDashSFX
-	v_spindash_timer:	ds.b 1
-	v_spindash_pitch:	ds.b 1
-    endif
+;	v_spindash_timer:	ds.b 1
+;	v_spindash_pitch:	ds.b 1
 
 	SMPS_running_flag:	ds.b 1
 SMPS_RAM ENDSTRUCT

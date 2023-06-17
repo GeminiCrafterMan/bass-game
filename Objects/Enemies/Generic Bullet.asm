@@ -5,6 +5,7 @@ Obj_GenericBullet:
 		move.w	#$200,priority(a0)
 		ori.b	#4,render_flags(a0)
 		move.b	#$98,collision_flags(a0)	; don't take shots wtf are you doing
+		move.b	#1,boss_hitcount2(a0)	; health, just so it doesn't explode
 	; Damage is set by the one firing this.
 		move.w	#bytes_to_word(8/2,8/2),height_pixels(a0)
 		move.w	#bytes_to_word(8/2,8/2),y_radius(a0)

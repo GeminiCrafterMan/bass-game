@@ -27,7 +27,8 @@ Player_Init:
 		move.w	#bytes_to_word(28,28),(v_weapon6energy).w	; Weapon 6
 		move.w	#bytes_to_word(28,28),(v_weapon7energy).w	; Weapon 7
 		move.w	#bytes_to_word(112,112),(v_weapon8energy).w	; Weapon 8 - Metal Blade, for now
-		move.w	#bytes_to_word(28,28),(v_utility1energy).w; Treble Boost
+		move.w	#bytes_to_word(28,28),(v_utility1energy).w	; Utility 1
+		move.w	#bytes_to_word(28,28),(v_utility2energy).w	; Utility 2
 
 		; only happens when not starting at a Special Stage ring:
 		move.w	x_pos(a0),(Saved_X_pos).w
@@ -64,16 +65,18 @@ Player_WeaponSwitch:
 	.upWep:
 		subq.b	#1,(v_weapon).w	; subtract 1
 		tst.b	(v_weapon).w	; if above 0
-		bge.s	.loadWepPal			; return
-		move.b	#9,(v_weapon).w	; wrap back around if above
-		bra.s	.loadWepPal
+		bge.s	.switch			; return
+		move.b	#10,(v_weapon).w	; wrap back around if above
+		bra.s	.switch
 	.downWep:
 		addq.b	#1,(v_weapon).w	; add 1
-		cmpi.b	#10,(v_weapon).w	; if below 9
-		blt.s	.loadWepPal			; return
+		cmpi.b	#11,(v_weapon).w	; if below 10
+		blt.s	.switch			; return
 	.resetWep:
 		clr.b	(v_weapon).w	; wrap back around if above
-	; continue into .loadWepPal
+	; continue into .switch
+	.switch:
+		sfx		sfx_MenuCursor
 	.loadWepPal:
 		clr.b	(Weapon_art_loaded_flag).w
 ;		bclr	#4,obStatus(a0)
@@ -92,7 +95,6 @@ Player_WeaponSwitch:
 		jsr	(LoadPalette).w
 		move.w	d1,d0
 		jmp	(LoadPalette_Immediate).w
-
 
 ; ---------------------------------------------------------------------------
 ; Subroutine allowing characters to shoot
@@ -114,27 +116,29 @@ Player_Shoot:
 		jmp		(a1)
 	.weaponLUT:
 		dc.l	Weapon_BassBuster
-		dc.l	Weapon_NoAmmo	; Master Wep 1
-		dc.l	Weapon_NoAmmo	; Master Wep 2
-		dc.l	Weapon_NoAmmo	; Master Wep 3
-		dc.l	Weapon_NoAmmo	; Master Wep 4
-		dc.l	Weapon_NoAmmo	; Master Wep 5
-		dc.l	Weapon_NoAmmo	; Master Wep 6
-		dc.l	Weapon_NoAmmo	; Master Wep 7
+		dc.l	Weapon_NoAmmo		; Master Wep 1
+		dc.l	Weapon_NoAmmo		; Master Wep 2
+		dc.l	Weapon_NoAmmo		; Master Wep 3
+		dc.l	Weapon_NoAmmo		; Master Wep 4
+		dc.l	Weapon_NoAmmo		; Master Wep 5
+		dc.l	Weapon_NoAmmo		; Master Wep 6
+		dc.l	Weapon_NoAmmo		; Master Wep 7
 		dc.l	Weapon_MetalBlade	; Master Wep 8
-		dc.l	Weapon_NoAmmo	; Treble Boost
+		dc.l	Weapon_NoAmmo		; Utility 1
+		dc.l	Weapon_NoAmmo		; Utility 2
 
 	.cRobotWeaponLUT:
 		dc.l	Weapon_MegaBuster
-		dc.l	Weapon_NoAmmo	; Master Wep 1
-		dc.l	Weapon_NoAmmo	; Master Wep 2
-		dc.l	Weapon_NoAmmo	; Master Wep 3
-		dc.l	Weapon_NoAmmo	; Master Wep 4
-		dc.l	Weapon_NoAmmo	; Master Wep 5
-		dc.l	Weapon_NoAmmo	; Master Wep 6
-		dc.l	Weapon_NoAmmo	; Master Wep 7
+		dc.l	Weapon_NoAmmo		; Master Wep 1
+		dc.l	Weapon_NoAmmo		; Master Wep 2
+		dc.l	Weapon_NoAmmo		; Master Wep 3
+		dc.l	Weapon_NoAmmo		; Master Wep 4
+		dc.l	Weapon_NoAmmo		; Master Wep 5
+		dc.l	Weapon_NoAmmo		; Master Wep 6
+		dc.l	Weapon_NoAmmo		; Master Wep 7
 		dc.l	Weapon_MetalBlade	; Master Wep 8
-		dc.l	Weapon_NoAmmo	; Utility 1
+		dc.l	Weapon_NoAmmo		; Utility 1
+		dc.l	Weapon_NoAmmo		; Utility 2
 
 FireWeapon:
 		moveq	#0,d0

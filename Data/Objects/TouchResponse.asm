@@ -245,17 +245,16 @@ Touch_Enemy:
 		beq.w	Touch_ChkHurt
 	; Boss related? Could be special enemies in general
 	; todo: rewrite this later or at least clean it up please
-		tst.b	boss_hitcount2(a1)
-		beq.s	Touch_EnemyNormal
-		bmi.s	Touch_EnemyNormal
 		move.b	collision_flags(a1),collision_restore_flags(a1)	; save current collision
 		clr.b	collision_flags(a1)
 		move.b	damage(a0),d0
 		subi.b	d0,boss_hitcount2(a1)	; subtract buster shot HP from enemy's...
-		beq.s	.killHPEnemy			; and break the enemy if it's 0
+		beq.s	.killBoth				; and break the enemy if it's 0
 		bmi.s	.killHPEnemy			; or less
 		bset	#7,status(a0)			; otherwise, destroy the buster shot
 		bra.s	.bossnotdefeated
+	.killBoth:
+		bset	#7,status(a0)			; destroy the buster shot
 	.killHPEnemy:
 		bset	#7,status(a1)
 
@@ -505,6 +504,9 @@ Add_SpriteToCollisionResponseList:
 		rts
 
 GenericEnemy_Hurt:
+		tst.b	boss_hitcount2(a0)
+		beq.s	.die
+		bmi.s	.die
 		tst.b	collision_flags(a0)			; if collision flags aren't empty, act normal
 		bne.s	.nopain
 		btst	#6,status(a0)				; if you're supposed to be flashing already, then do it
@@ -523,7 +525,9 @@ GenericEnemy_Hurt:
 		bclr	#6,status(a0)
 	.ret:
 		rts
-
+	.die:
+		move.l	a0,a1
+		jmp		Touch_EnemyNormal
 	.nopain:
 		jsr		Add_SpriteToCollisionResponseList
 		jmp		RememberState

@@ -31,14 +31,10 @@ ptrsize :=	4
 idstart :=	$40
 
 sfx__First = idstart
-sfx_RingRight =			SMPS_id(ptr_snd40)
-sfx_RingLeft =			SMPS_id(ptr_snd41)
-sfx_RingLoss =			SMPS_id(ptr_snd42)
 sfx_Jump =				SMPS_id(ptr_snd43)
 sfx_Roll =				SMPS_id(ptr_snd44)
 sfx_Skid =				SMPS_id(ptr_snd45)
 sfx_Death =				SMPS_id(ptr_snd46)
-sfx_SpinDash =			SMPS_id(ptr_snd47)
 sfx_Splash =			SMPS_id(ptr_snd48)
 sfx_InstaAttack =		SMPS_id(ptr_snd49)
 sfx_FireShield =		SMPS_id(ptr_snd4A)

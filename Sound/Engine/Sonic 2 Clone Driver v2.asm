@@ -39,12 +39,6 @@ SMPS_UpdateDriver:
 	bsr.w	CycleSoundQueue
 ; loc_71BBC:
 .nosndinput:
-    if SMPS_EnableSpinDashSFX
-	tst.b   SMPS_RAM.v_spindash_timer(a6)
-	beq.s	.notimer
-	subq.b	#1,SMPS_RAM.v_spindash_timer(a6)
-.notimer:
-    endif
 	; Clownacy | Pretty large rearrangements have been made here for the
 	; Sonic 2-style selective PAL mode. With S2's driver, if the drowning music played on a PAL
 	; system, the drowning theme would play at 50fps speed, or 'PAL speed'
@@ -942,14 +936,6 @@ PWMInitBytes:
 	even
 ; ===========================================================================
 
-PlaySFX_Ring:
-	bchg	#v_ring_speaker,SMPS_RAM.bitfield1(a6)	; Is the ring sound playing on right speaker?
-	bne.s	.gotringspeaker			; Branch if not
-	move.b	#SndID_RingLeft,d7		; Play ring sound in left speaker
-; loc_721EE:
-.gotringspeaker:
-	bra.s	Sound_PlaySFX.play_sfx
-
     if SMPS_PushSFXBehaviour
 PlaySFX_Push:
 	bset	#f_push_playing,SMPS_RAM.bitfield1(a6)	; Mark pushing sound as playing
@@ -964,27 +950,6 @@ PlaySFX_Gloop:
 	rts
     endif
 
-    if SMPS_EnableSpinDashSFX
-PlaySFX_SpinDashRev:
-	move.b	SMPS_RAM.v_spindash_pitch(a6),d0		; Store extra frequency
-	tst.b	SMPS_RAM.v_spindash_timer(a6)		; Is the Spin Dash timer active?
-	bne.s	.sfx_timeractive		; If it is, branch
-	moveq	#-1,d0				; Otherwise, reset frequency (becomes 0 on next line)
-
-.sfx_timeractive:
-	addq.b	#1,d0
-	cmpi.b	#$C,d0				; Has the limit been reached?
-	bhs.s	.sfx_limitreached		; If it has, branch
-	move.b	d0,SMPS_RAM.v_spindash_pitch(a6)		; Otherwise, set new frequency
-
-.sfx_limitreached:
-	bset	#f_spindash_lastsound,SMPS_RAM.bitfield1(a6)	; Set flag
-	move.b	#60,SMPS_RAM.v_spindash_timer(a6)		; Set timer
-	bra.s	Sound_PlaySFX.play_sfx
-
-.sfx_notspindashrev:
-    endif
-
 ; ---------------------------------------------------------------------------
 ; Play normal sound effect
 ; ---------------------------------------------------------------------------
@@ -996,12 +961,7 @@ Sound_PlaySFX:
 ;	bne.w	.clear_sndprio			; Exit if it is
 	btst	#f_fadeinflag,SMPS_RAM.variables.bitfield2(a6)		; Is music being faded in?
 	bne.w	.clear_sndprio			; Exit if it is
-    if SMPS_EnableSpinDashSFX
-	bclr	#f_spindash_lastsound,SMPS_RAM.bitfield1(a6)
-    endif
 
-	cmpi.b	#SndID_Ring,d7			; Is ring sound	effect played?
-	beq.s	PlaySFX_Ring
     if SMPS_PushSFXBehaviour
 	cmpi.b	#sfx_Push,d7			; Is "pushing" sound played?
 	beq.s	PlaySFX_Push
@@ -1009,10 +969,6 @@ Sound_PlaySFX:
     if SMPS_GloopSFXBehaviour
 	cmpi.b	#SndID_Gloop,d7			; Is bloop/gloop sound played?
 	beq.s	PlaySFX_Gloop
-    endif
-    if SMPS_EnableSpinDashSFX
-	cmpi.b	#SndID_SpindashRev,d7		; Is this the Spin Dash sound?
-	beq.s	PlaySFX_SpinDashRev
     endif
 
 .play_sfx:
@@ -1129,13 +1085,6 @@ Sound_PlaySFX:
 	move.b	(a1)+,SMPS_Track.Transpose(a5)		; load FM/PSG channel modifier
 	move.b	(a1)+,SMPS_Track.Volume(a5)		; load FM/PSG channel modifier
 	move.b	#1,SMPS_Track.DurationTimeout(a5)		; Set duration of first "note"
-    if SMPS_EnableSpinDashSFX
-	btst	#f_spindash_lastsound,SMPS_RAM.bitfield1(a6)	; Is the Spin Dash sound playing?
-	beq.s	.notspindash				; If not, branch
-	move.b	SMPS_RAM.v_spindash_pitch(a6),d0
-	add.b	d0,SMPS_Track.Transpose(a5)
-.notspindash:
-    endif
 	move.b	d6,SMPS_Track.StackPointer(a5)	; Set "gosub" (coord flag F8h) stack init value
 	tst.b	d4				; Is this a PSG channel?
 	bmi.s	.sfxpsginitdone			; Branch if yes

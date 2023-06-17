@@ -8,6 +8,7 @@ Obj_Target:
 		move.w	#bytes_to_word(16/2,16/2),y_radius(a0)
 		move.b	#6,damage(a0)
 		move.b	subtype(a0),boss_hitcount2(a0)
+		addq.b	#1,boss_hitcount2(a0)
 		move.b	#3,anim_frame_timer(a0)
 		clr.b	routine(a0)
 		move.l	#.main,address(a0)

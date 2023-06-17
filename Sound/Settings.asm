@@ -12,9 +12,6 @@ SMPS_PushSFXBehaviour	= 0
 SMPS_EnableSpecSFX	= 0
 ;	| If 1, include the Special SFX system. Used by S1's waterfall SFX
 ;
-SMPS_EnableSpinDashSFX	= 1
-;	| If 1, include S2's spin dash SFX pitch system
-;
 SMPS_EnableContSFX	= 0
 ;	| If 1, include S3K's continuous SFX system
 ;
@@ -89,14 +86,4 @@ FlgID__End		= flg__Last+1
 ; ---MUSIC CONSTANTS---
 MusID_ExtraLife		= $00
 ;	| ID of your Extra Life jingle
-;
-; ---SFX CONSTANTS---
-SndID_Ring			= sfx_RingRight
-;	| ID of your ring SFX
-;
-SndID_RingLeft		= sfx_RingLeft
-;	| ID of your alternate ring SFX
-;
-SndID_SpindashRev	= sfx_SpinDash
-;	| Set this to the ID of your Spin Dash SFX (if you have one). Use with EnableSpinDashSFX
 ;

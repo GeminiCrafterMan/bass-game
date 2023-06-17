@@ -24,7 +24,7 @@ Obj_Metall_Init:	; Routine 0
 		move.w	#bytes_to_word(14/2,18/2),height_pixels(a0)
 		move.w	#bytes_to_word(14/2,18/2),y_radius(a0)
 		move.b	#4,damage(a0)			; contact damage
-	; No health. 1 hit, it's dead.
+		move.b	#1,boss_hitcount2(a0)	; health
 		rts
 ; ---------------------------------------------------------------------------
 

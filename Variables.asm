@@ -447,7 +447,7 @@ v_weapon:							ds.b 1					; currently-selected weapon
 v_charge:							ds.b 1					; weapon charge -- not used for bass (yet)
 v_chargecyctimer:					ds.b 1					; charge cycle timer -- not used for bass (yet)
 v_chargecycnum:						ds.b 1					; charge cycle number -- not used for bass (yet)
-v_health:							ds.b 1					; player health, usually 32
+v_health:							ds.b 1					; player health, usually 28
 
 v_weapon1energy:					ds.b 1					; weapon 1 energy
 v_weapon1max:						ds.b 1					; weapon 1 max
@@ -465,8 +465,10 @@ v_weapon7energy:					ds.b 1					; weapon 7 energy
 v_weapon7max:						ds.b 1					; weapon 7 max
 v_weapon8energy:					ds.b 1					; weapon 8 energy
 v_weapon8max:						ds.b 1					; weapon 8 max
-v_utility1energy:					ds.b 1					; utility 1 energy -- usually treble boost, but not necessarily always
-v_utility1max:						ds.b 1					; utility 1 max -- usually treble boost, but not necessarily always
+v_utility1energy:					ds.b 1					; utility 1 energy
+v_utility1max:						ds.b 1					; utility 1 max
+v_utility2energy:					ds.b 1					; utility 2 energy
+v_utility2max:						ds.b 1					; utility 2 max
 
 v_weaponsowned:						ds.b 1					; bitfield, used to show what weapons are owned
 v_itemsowned:						ds.b 1					; bitfield, used to show what items are owned

@@ -9,9 +9,9 @@ Pal_BassScorchShield:	binclude "Objects/Player Characters/Bass/Palettes/Scorch S
 	even
 Pal_BassFreezeFrame:	binclude "Objects/Player Characters/Bass/Palettes/Freeze Frame.bin"
 	even
-Pal_BassWep3:			binclude "Objects/Player Characters/Bass/Palettes/Weapon 3.bin"
+Pal_BassToxicCloud:		binclude "Objects/Player Characters/Bass/Palettes/Toxic Cloud.bin"
 	even
-Pal_BassWep4:			binclude "Objects/Player Characters/Bass/Palettes/Weapon 4.bin"
+Pal_BassFinShredder:	binclude "Objects/Player Characters/Bass/Palettes/Fin Shredder.bin"
 	even
 Pal_BassMetalBlade:		binclude "Objects/Player Characters/Bass/Palettes/Metal Blade.bin"
 	even
@@ -24,6 +24,8 @@ Pal_WaterSonic:			binclude "Objects/Player Characters/Bass/Palettes/Water Sonic.
 Pal_CopyRobot:				binclude "Objects/Player Characters/Copy Robot/Palettes/Copy Robot.bin"
 	even
 Pal_CopyRobotMetalBlade:	binclude "Objects/Player Characters/Copy Robot/Palettes/Metal Blade.bin"
+	even
+Pal_CopyRobotCarry:			binclude "Objects/Player Characters/Copy Robot/Palettes/Carry.bin"
 	even
 Pal_CopyRobotChargeShot:	binclude "Objects/Player Characters/Copy Robot/Palettes/Charge Cycle.bin"
 	even
@@ -44,4 +46,6 @@ Pal_Blaze:			binclude "Levels/Robot Master stages/Palettes/Blaze Man stage.bin"
 Pal_Video:			binclude "Levels/Robot Master stages/Palettes/Video Man stage.bin"
 	even
 Pal_Smog:			binclude "Levels/Robot Master stages/Palettes/Smog Man stage.bin"
+	even
+Pal_Shark:			binclude "Levels/Robot Master stages/Palettes/Shark Man stage.bin"
 	even

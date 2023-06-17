@@ -24,7 +24,7 @@ Obj_SniperJoe_Init:	; Routine 0
 		move.w	#bytes_to_word(28/2,14/2),height_pixels(a0)
 		move.w	#bytes_to_word(28/2,14/2),y_radius(a0)
 		move.b	#4,damage(a0)			; contact damage
-		move.b	#10-1,boss_hitcount2(a0)	; health
+		move.b	#10,boss_hitcount2(a0)	; health
 		move.w	#$20,wait(a0)
 		lea		ChildObjDat_SniperJoeShield(pc),a2
 		jmp		(CreateChild1_Normal).w

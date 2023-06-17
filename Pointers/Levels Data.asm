@@ -9,10 +9,10 @@ LevelLoadBlock:
 		levartptrs Test1_8x8_KosM,	Test1_16x16_Unc,Test1_128x128_Kos,palid_Test1		; Test3
 		levartptrs Test1_8x8_KosM,	Test1_16x16_Unc,Test1_128x128_Kos,palid_Test1		; Test4
 
-		levartptrs Blaze_8x8_KosM,	Blaze_16x16_Unc,Blaze_128x128_Kos,palid_Blaze		; Blaze Man
-		levartptrs Video_8x8_KosM,	Video_16x16_Unc,Video_128x128_Kos,palid_Video		; Video Man
-		levartptrs Test1_8x8_KosM,	Test1_16x16_Unc,Test1_128x128_Kos,palid_Test1		; Test
+		levartptrs Blaze_8x8_KosM,	Blaze_16x16_Unc,Blaze_128x128_Kos,	palid_Blaze		; Blaze Man
+		levartptrs Video_8x8_KosM,	Video_16x16_Unc,Video_128x128_Kos,	palid_Video		; Video Man
 		levartptrs Smog_8x8_KosM,	Smog_16x16_Unc,	Smog_128x128_Kos,	palid_Smog		; Smog Man
+		levartptrs Shark_8x8_KosM,	Shark_16x16_Unc,Shark_128x128_Kos,	palid_Shark		; Shark Man
 
 		levartptrs Test1_8x8_KosM,	Test1_16x16_Unc,Test1_128x128_Kos,palid_Test1		; Test
 		levartptrs Test1_8x8_KosM,	Test1_16x16_Unc,Test1_128x128_Kos,palid_Test1		; Test
@@ -61,8 +61,8 @@ SolidIndexes:
 
 		dc.l Blaze_Solid	; Blaze Man
 		dc.l Video_Solid	; Video Man
-		dc.l Test1_Solid	; Test1
 		dc.l Smog_Solid		; Smog Man
+		dc.l Shark_Solid	; Shark Man
 
 		dc.l Test1_Solid	; Test1
 		dc.l Test1_Solid	; Test1
@@ -83,8 +83,8 @@ LevelPtrs:
 
 		dc.l Blaze_Layout	; Blaze Man
 		dc.l Video_Layout	; Video Man
-		dc.l Test1_Layout	; Test1
 		dc.l Smog_Layout	; Smog Man
+		dc.l Shark_Layout	; Shark Man
 
 		dc.l Test1_Layout	; Test1
 		dc.l Test1_Layout	; Test1
@@ -105,8 +105,8 @@ SpriteLocPtrs:
 
 		dc.l Blaze_Sprites	; Blaze Man
 		dc.l Video_Sprites	; Video Man
-		dc.l Test1_Sprites	; Test1
 		dc.l Smog_Sprites	; Smog Man
+		dc.l Shark_Sprites	; Shark Man
 
 		dc.l Test1_Sprites	; Test1
 		dc.l Test1_Sprites	; Test1
@@ -153,6 +153,13 @@ Smog_16x16_Unc:		binclude "Levels/Robot Master stages/Blocks/Smog Man.bin"
 Smog_128x128_Kos:	binclude "Levels/Robot Master stages/Chunks/Smog Man.bin"
 	even
 
+Shark_8x8_KosM:		binclude "Levels/Robot Master stages/Tiles/Shark Man.bin"
+	even
+Shark_16x16_Unc:		binclude "Levels/Robot Master stages/Blocks/Shark Man.bin"
+	even
+Shark_128x128_Kos:	binclude "Levels/Robot Master stages/Chunks/Shark Man.bin"
+	even
+
 ; ===========================================================================
 ; Collision data
 ; ===========================================================================
@@ -179,6 +186,8 @@ Video_Solid:			binclude "Levels/Robot Master stages/Collision/Video Man.bin"
 	even
 Smog_Solid:				binclude "Levels/Robot Master stages/Collision/Smog Man.bin"
 	even
+Shark_Solid:				binclude "Levels/Robot Master stages/Collision/Shark Man.bin"
+	even
 
 ; ===========================================================================
 ; Level layout data
@@ -197,6 +206,8 @@ Video_Layout:		binclude "Levels/Robot Master stages/Layout/Video Man.bin"
 	even
 Smog_Layout:		binclude "Levels/Robot Master stages/Layout/Smog Man.bin"
 	even
+Shark_Layout:		binclude "Levels/Robot Master stages/Layout/Shark Man.bin"
+	even
 
 ; ===========================================================================
 ; Level object data
@@ -212,5 +223,7 @@ Blaze_Sprites:		binclude "Levels/Robot Master stages/Object Pos/Blaze Man.bin"
 Video_Sprites:		binclude "Levels/Robot Master stages/Object Pos/Video Man.bin"
 	ObjectLayoutBoundary
 Smog_Sprites:		binclude "Levels/Robot Master stages/Object Pos/Smog Man.bin"
+	ObjectLayoutBoundary
+Shark_Sprites:		binclude "Levels/Robot Master stages/Object Pos/Shark Man.bin"
 	ObjectLayoutBoundary
 	even

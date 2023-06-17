@@ -12,14 +12,10 @@
 ; TODO Maybe I should make it apply to Special SFX, too.
 ; ---------------------------------------------------------------------------
 SoundIndex:
-ptr_snd40:	SMPS_SFX_METADATA	Sound40, $70, 0
-ptr_snd41:	SMPS_SFX_METADATA	Sound41, $70, 0
-ptr_snd42:	SMPS_SFX_METADATA	Sound42, $70, 0
 ptr_snd43:	SMPS_SFX_METADATA	Sound43, $70, 0
 ptr_snd44:	SMPS_SFX_METADATA	Sound44, $70, 0
 ptr_snd45:	SMPS_SFX_METADATA	Sound45, $70, 0
 ptr_snd46:	SMPS_SFX_METADATA	Sound46, $70, 0
-ptr_snd47:	SMPS_SFX_METADATA	Sound47, $70, 0
 ptr_snd48:	SMPS_SFX_METADATA	Sound48, $70, 0
 ptr_snd49:	SMPS_SFX_METADATA	Sound49, $70, 0
 ptr_snd4A:	SMPS_SFX_METADATA	Sound4A, $70, 0
@@ -56,12 +52,6 @@ ptr_sndend
 ; SFX data ($40-$EF)
 ; ---------------------------------------------------------------------------
 
-Sound40:	include	"Sound/SFX/Snd - Ring.asm"
-	even
-Sound41:	include	"Sound/SFX/Snd - Ring Left Speaker.asm"
-	even
-Sound42:	include	"Sound/SFX/Snd - Ring Loss.asm"
-	even
 Sound43:	include	"Sound/SFX/Snd - Jump.asm"
 	even
 Sound44:	include	"Sound/SFX/Snd - Roll.asm"
@@ -69,8 +59,6 @@ Sound44:	include	"Sound/SFX/Snd - Roll.asm"
 Sound45:	include	"Sound/SFX/Snd - Skid.asm"
 	even
 Sound46:	include	"Sound/SFX/Snd - Death.asm"
-	even
-Sound47:	include	"Sound/SFX/Snd - SpinDash.asm"
 	even
 Sound48:	include	"Sound/SFX/Snd - Splash.asm"
 	even

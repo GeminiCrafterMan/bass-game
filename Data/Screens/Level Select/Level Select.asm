@@ -389,8 +389,8 @@ LevelSelect_ActTextIndex: offsetTable
 
 		offsetTableEntry.w LevelSelect_BlazeMan		; DEZ1
 		offsetTableEntry.w LevelSelect_VideoMan		; DEZ2
-		offsetTableEntry.w LevelSelect_LoadAct3		; DEZ3
-		offsetTableEntry.w LevelSelect_SmogMan		; DEZ4
+		offsetTableEntry.w LevelSelect_SmogMan		; DEZ3
+		offsetTableEntry.w LevelSelect_SharkMan		; DEZ4
 
 		offsetTableEntry.w LevelSelect_LoadAct1		; DEZ1
 		offsetTableEntry.w LevelSelect_LoadAct2		; DEZ2
@@ -414,6 +414,8 @@ LevelSelect_VideoMan:
 		levselstr "VIDEO MAN"
 LevelSelect_SmogMan:
 		levselstr "SMOG MAN "
+LevelSelect_SharkMan:
+		levselstr "SHARK MAN"
 LevelSelect_MainText:
 		levselstr "BASS GAME - *** DEBUG MODE ***                                  "
 	even

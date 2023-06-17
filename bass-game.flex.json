@@ -1,7 +1,7 @@
 {
     "Flex": 2,
     "name": "",
-    "node": "0c7872ed-187e-4c57-9b1c-7531db1bfa0d",
+    "node": "6ed0f213-b203-4ea2-a0ab-c5cdf2406ea0",
     "objects": [
         {
             "format": "Sonic 3&K Player.js",
@@ -82,18 +82,6 @@
                         {
                             "path": "Objects/Player Characters/Bass/Palettes/Bass.bin",
                             "length": 1
-                        },
-                        {
-                            "path": "Objects/Player Characters/Bass/Palettes/Scorch Shield.bin",
-                            "length": 1
-                        },
-                        {
-                            "path": "Objects/Player Characters/Bass/Palettes/Freeze Frame.bin",
-                            "length": 1
-                        },
-                        {
-                            "path": "Objects/Player Characters/Bass/Palettes/Weapon 3.bin",
-                            "length": 1
                         }
                     ],
                     "art": {
@@ -118,18 +106,6 @@
                     "palettes": [
                         {
                             "path": "Objects/Player Characters/Bass/Palettes/Weapon Get/Bass.bin",
-                            "length": 1
-                        },
-                        {
-                            "path": "Objects/Player Characters/Bass/Palettes/Weapon Get/Scorch Shield.bin",
-                            "length": 1
-                        },
-                        {
-                            "path": "Objects/Player Characters/Bass/Palettes/Weapon Get/Freeze Frame.bin",
-                            "length": 1
-                        },
-                        {
-                            "path": "Objects/Player Characters/Bass/Palettes/Weapon Get/Weapon 3.bin",
                             "length": 1
                         }
                     ],

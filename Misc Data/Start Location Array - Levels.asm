@@ -10,8 +10,8 @@ StartLocArray:
 
 		binclude "Levels/Robot Master stages/Start Location/Blaze Man.bin"	; Blaze Man
 		binclude "Levels/Robot Master stages/Start Location/Video Man.bin"	; Video Man
-		binclude "Levels/Test/Start Location/1.bin"	; Test 3
 		binclude "Levels/Robot Master stages/Start Location/Smog Man.bin"	; Smog Man
+		binclude "Levels/Robot Master stages/Start Location/Shark Man.bin"	; Shark Man
 
 	rept 4
 		binclude "Levels/Test/Start Location/1.bin"	; Test 1

@@ -23,7 +23,7 @@ Obj_HammerJoe_Init:	; Routine 0
 		move.w	#bytes_to_word(32/2,24/2),height_pixels(a0)
 		move.w	#bytes_to_word(32/2,24/2),y_radius(a0)
 		move.b	#4,damage(a0)			; contact damage
-		move.b	#8-1,boss_hitcount2(a0)	; health
+		move.b	#8,boss_hitcount2(a0)	; health
 		rts
 ; ---------------------------------------------------------------------------
 
@@ -100,6 +100,7 @@ Obj_HammerJoe_Hammer:
 		addq.b	#2,routine(a0)
 		move.l	#Map_HammerJoe,mappings(a0)
 		move.w	#make_art_tile(ArtTile_HammerJoe,0,0),art_tile(a0)
+		move.b	#1,boss_hitcount2(a0)	; health, just so it doesn't explode
 		move.b	#4,render_flags(a0)
 		move.w	#$200,priority(a0)
 		move.b	#$D8,collision_flags(a0)	; deflect shots
@@ -112,7 +113,7 @@ Obj_HammerJoe_Hammer:
 		out_of_xrange.s Obj_HammerJoe_Delete	; is the projectile off-screen?
 		out_of_yrange.s Obj_HammerJoe_Delete
 		jsr		SpeedToPos
-		bra.s	Obj_HammerJoe_AnimateAndTouch
+		bra.w	Obj_HammerJoe_AnimateAndTouch
 
 ; ===========================================================================
 ; swing 5 times, open eye, swing 3 more times, throw
