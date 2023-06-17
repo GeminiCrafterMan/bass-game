@@ -448,7 +448,6 @@ Status_ObjDefeated			= 7
 ; Universal (used on all standard levels)
 ; ---------------------------------------------------------------------------
 
-ArtTile_SpikesSprings	= $484
 ArtTile_Monitors		= $4AC
 ArtTile_StarPost		= $5E4
 ArtTile_HUD				= $6C4

@@ -10,8 +10,8 @@ Obj_Index:
 		dc.l Obj_Pickups						; $04
 		dc.l Obj_HammerJoe						; $05
 		dc.l Obj_SniperJoe						; $06
-		dc.l Obj_Spring							; $07
-		dc.l Obj_Spikes							; $08
+		dc.l DeleteObject						; $07
+		dc.l DeleteObject						; $08
 		dc.l Obj_Metall							; $09
 		dc.l DeleteObject						; $0A
 		dc.l DeleteObject						; $0B
@@ -109,7 +109,7 @@ Obj_Index:
 		dc.l DeleteObject						; $67
 		dc.l DeleteObject						; $68
 		dc.l DeleteObject						; $69
-		dc.l Obj_Invisible_HurtBlock			; $6A
+		dc.l DeleteObject						; $6A
 		dc.l Obj_Invisible_KillBlock			; $6B
 		dc.l DeleteObject						; $6C
 		dc.l DeleteObject						; $6D

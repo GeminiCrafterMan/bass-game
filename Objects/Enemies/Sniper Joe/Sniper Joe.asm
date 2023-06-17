@@ -142,7 +142,7 @@ Obj_SniperJoeShield:
 ChildObjDat_SniperJoeShield:
 		dc.w	0	; amount to create -1
 		dc.l	Obj_SniperJoeShield	; object pointer
-		dc.b	-12, -2	; X/Y offsets
+		dc.b	-8, -3	; X/Y offsets
 
 ; ===========================================================================
 ; wait for player to get near, lower shield, then shoot 3 bullets, then raise the shield

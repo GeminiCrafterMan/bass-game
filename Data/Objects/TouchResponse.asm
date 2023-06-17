@@ -7,14 +7,16 @@
 TouchResponse:
 		move.w	x_pos(a0),d2								; get player's x_pos
 		move.w	y_pos(a0),d3								; get player's y_pos
-		subq.w	#8,d2
+		move.b	x_radius(a0),d5
+		ext.w	d5
+		sub.w	d5,d2
 		moveq	#0,d5
 		move.b	y_radius(a0),d5							; load Sonic's height
 		subq.b	#3,d5
 		sub.w	d5,d3
-		; Note the lack of a check for if the player is ducking
-		; Height is no longer reduced by ducking
-		moveq	#$10,d4									; player's collision width
+		move.b	x_radius(a0),d4
+		ext.w	d4
+		lsl.w	#1,d4
 		add.w	d5,d5
 
 .Touch_Process:
@@ -75,14 +77,14 @@ Touch_Height:
 		bra.s	Touch_ChkValue
 ; ---------------------------------------------------------------------------
 ; collision sizes $00-$3F (width,height)
-; $00-$3F	- Touch
+; $00-$3F	- Enemy
 ; $40-$7F	- Ring/Monitor
-; $80-$BF	- Enemy(Hurt)
+; $80-$BF	- Harmful, but invincible
 ; $C0-$FF	- Deflect
 ; ---------------------------------------------------------------------------
 
 Touch_Sizes:
-		dc.b 8/2, 8/2		; 0
+		dc.b 8/2, 8/2	; 0
 		dc.b 40/2, 40/2	; 1
 		dc.b 24/2, 40/2	; 2
 		dc.b 40/2, 24/2	; 3
@@ -101,12 +103,12 @@ Touch_Sizes:
 		dc.b 80/2, 32/2	; 10
 		dc.b 32/2, 48/2	; 11
 		dc.b 16/2, 32/2	; 12
-		dc.b 64/2, 224/2	; 13
-		dc.b 128/2, 64/2	; 14
-		dc.b 256/2, 64/2	; 15
+		dc.b 64/2, 224/2; 13
+		dc.b 128/2, 64/2; 14
+		dc.b 256/2, 64/2; 15
 		dc.b 64/2, 64/2	; 16
 		dc.b 16/2, 16/2	; 17
-		dc.b 8/2, 8/2		; 18
+		dc.b 8/2, 8/2	; 18
 		dc.b 64/2, 16/2	; 19
 		dc.b 24/2, 24/2	; 1A
 		dc.b 16/2, 8/2	; 1B
@@ -118,7 +120,7 @@ Touch_Sizes:
 		dc.b 48/2, 48/2	; 21
 		dc.b 48/2, 48/2	; 22
 		dc.b 24/2, 48/2	; 23
-		dc.b 144/2, 16/2	; 24
+		dc.b 144/2, 16/2; 24
 		dc.b 48/2, 80/2	; 25
 		dc.b 32/2, 8/2	; 26
 		dc.b 64/2, 4/2	; 27
@@ -126,13 +128,13 @@ Touch_Sizes:
 		dc.b 24/2, 72/2	; 29
 		dc.b 32/2, 4/2	; 2A
 		dc.b 8/2, 128/2	; 2B
-		dc.b 48/2, 128/2	; 2C
+		dc.b 48/2, 128/2; 2C
 		dc.b 64/2, 32/2	; 2D
 		dc.b 56/2, 40/2	; 2E
 		dc.b 32/2, 4/2	; 2F
 		dc.b 32/2, 2/2	; 30
 		dc.b 4/2, 16/2	; 31
-		dc.b 32/2, 128/2	; 32
+		dc.b 32/2, 128/2; 32
 		dc.b 24/2, 8/2	; 33
 		dc.b 16/2, 24/2	; 34	; sorta player-sized (sniper joes)
 		dc.b 80/2, 64/2	; 35
@@ -458,17 +460,7 @@ HurtCharacter:
 		clr.w	ground_vel(a0)
 		move.b	#id_Hurt,anim(a0)
 		move.b	#2*60,invulnerability_timer(a0)			; set temp invincible time to 2 seconds
-		moveq	#signextendB(sfx_Death),d0			; load normal damage sound
-		cmpi.l	#Obj_Spikes,address(a2)				; was damage caused by spikes?
-		blo.s		.sound								; if not, branch
-		cmpi.l	#sub_24280,address(a2)
-		bhs.s	.sound
-		moveq	#signextendB(sfx_SpikeHit),d0			; load spikes damage sound
-
-.sound:
-		jsr	(SMPS_QueueSound2).w
-		moveq	#-1,d0
-		rts
+		sfx		sfx_Death,1
 ; ---------------------------------------------------------------------------
 
 DeathOrbs_VelTbl:	; okay this kind of makes no sense but it also works to help visualize the orbs

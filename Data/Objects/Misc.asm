@@ -344,23 +344,6 @@ word_85890:
 
 ; =============== S U B R O U T I N E =======================================
 
-Load_LevelResults:
-		lea	(Player_1).w,a1
-		btst	#7,status(a1)
-		bne.s	+
-		btst	#Status_InAir,status(a1)
-		bne.s	+
-		cmpi.b	#id_BassDeath,routine(a1)
-		bcc.s	+
-		bsr.s	Set_PlayerEndingPose
-		clr.b	(TitleCard_end_flag).w
-		bsr.w	Create_New_Sprite
-		bne.s	+
-		move.l	#Obj_LevelResults,address(a1)
-+		rts
-
-; =============== S U B R O U T I N E =======================================
-
 Set_PlayerEndingPose:
 		move.b	#$81,object_control(a1)
 		move.b	#id_Victory,anim(a1)
