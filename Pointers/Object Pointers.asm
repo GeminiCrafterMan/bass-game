@@ -10,7 +10,7 @@ Obj_Index:
 		dc.l Obj_Pickups						; $04
 		dc.l Obj_HammerJoe						; $05
 		dc.l Obj_SniperJoe						; $06
-		dc.l DeleteObject						; $07
+		dc.l Obj_FireTelly						; $07
 		dc.l DeleteObject						; $08
 		dc.l Obj_Metall							; $09
 		dc.l DeleteObject						; $0A

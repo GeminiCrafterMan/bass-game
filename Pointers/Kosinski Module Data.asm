@@ -55,3 +55,5 @@ ArtKosM_SniperJoe:				binclude "Objects/Enemies/Sniper Joe/KosinskiM Art/Sniper 
 	even
 ArtKosM_Metall:					binclude "Objects/Enemies/Metall/KosinskiM Art/Metall.bin"
 	even
+ArtKosM_FireTelly:				binclude "Objects/Enemies/Fire Telly/KosinskiM Art/Fire Telly.bin"
+	even

@@ -120,22 +120,13 @@ Obj_SniperJoeShield:
 		move.b	render_flags(a2),render_flags(a0)
 		move.w	height_pixels(a2),height_pixels(a0)
 		move.w	#$180,priority(a0)
-		move.b	#4,mapping_frame(a0)
-;		btst	#Status_Facing,status(a2)
-;		beq.s	.noFlip
-;		move.b	#-12,child_dx(a0)
-;		bra.s	.doneFlip
-;	.noFlip:
-;		move.b	#12,child_dx(a0)
-;	.doneFlip:
 		jsr	(Refresh_ChildPositionAdjusted).w
 		move.b	#$DE,collision_flags(a0)	; should be reflective 8x16 sprite
 		cmpi.b	#1,mapping_frame(a2)
 		beq.s	.collide
 		rts
 	.collide:
-;		jmp		Child_AddToTouchList
-		jmp		Child_DrawTouch_Sprite
+		jmp		Child_AddToTouchList
 	.del:
 		jmp		DeleteObject
 

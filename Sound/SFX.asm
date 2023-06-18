@@ -46,6 +46,8 @@ ptr_snd62:	SMPS_SFX_METADATA	Sound62, $70, 0	; Buster charged
 ptr_snd63:	SMPS_SFX_METADATA	Sound63, $70, 0	; Energy fill (health, weapon, boss)
 ptr_snd64:	SMPS_SFX_METADATA	Sound64, $70, 0	; Menu cursor
 ptr_snd65:	SMPS_SFX_METADATA	Sound65, $70, 0	; Deflect
+ptr_snd66:	SMPS_SFX_METADATA	Sound66, $70, 0	; Fireball
+ptr_snd67:	SMPS_SFX_METADATA	Sound67, $70, 0	; Burning
 
 ptr_sndend
 ; ---------------------------------------------------------------------------
@@ -119,4 +121,8 @@ Sound63:	include	"Sound/SFX/Snd - Energy Fill.asm"
 Sound64:	include	"Sound/SFX/Snd - Menu Cursor.asm"
 	even
 Sound65:	include	"Sound/SFX/Snd - Deflect.asm"
+	even
+Sound66:	include	"Sound/SFX/Snd - Fireball.asm"
+	even
+Sound67:	include	"Sound/SFX/Snd - Burning.asm"
 	even

@@ -65,6 +65,8 @@ sfx_ChargeLoop =		SMPS_id(ptr_snd62)
 sfx_EnergyFill =		SMPS_id(ptr_snd63)
 sfx_MenuCursor =		SMPS_id(ptr_snd64)
 sfx_Deflect =			SMPS_id(ptr_snd65)
+sfx_Fireball =			SMPS_id(ptr_snd66)
+sfx_Burning =			SMPS_id(ptr_snd67)
 
 sfx__Last =			SMPS_id(ptr_sndend)-1
 

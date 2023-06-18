@@ -35,7 +35,7 @@ PLC_Main_end
 
 PLC_Main2: plrlistheader
 		plreq $47E, ArtKosM_GrayButton						; Button
-		plreq $580, ArtKosM_Pickups							; Items
+		plreq ArtTile_Pickups, ArtKosM_Pickups				; Items
 		plreq $5A0, ArtKosM_Explosion						; Explosion
 		plreq ArtTile_Monitors,	ArtKosM_Target
 PLC_Main2_end
@@ -52,7 +52,8 @@ PLC1_Test1_Misc_end
 ; ===========================================================================
 
 PLC2_Test1_Enemy: plrlistheader
-		plreq ArtTile_HammerJoe, ArtKosM_HammerJoe		; Hammer Joe
-		plreq ArtTile_SniperJoe, ArtKosM_SniperJoe		; Sniper Joe
+		plreq ArtTile_HammerJoe, ArtKosM_HammerJoe	; Hammer Joe
+		plreq ArtTile_SniperJoe, ArtKosM_SniperJoe	; Sniper Joe
 		plreq ArtTile_Metall, ArtKosM_Metall		; Metall
+		plreq ArtTile_FireTelly, ArtKosM_FireTelly	; Fire Telly
 PLC2_Test1_Enemy_end

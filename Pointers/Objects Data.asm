@@ -25,6 +25,7 @@
 		include	"Objects/Enemies/Hammer Joe/Hammer Joe.asm"
 		include	"Objects/Enemies/Sniper Joe/Sniper Joe.asm"
 		include "Objects/Enemies/Metall/Metall.asm"
+		include	"Objects/Enemies/Fire Telly/Fire Telly.asm"
 
 ; ===========================================================================
 ; Bosses objects data

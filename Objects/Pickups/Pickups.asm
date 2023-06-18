@@ -18,7 +18,7 @@ Pickups_Index:	offsetTable
 Pickups_Init:	; Routine 0
 		addq.b	#2,routine(a0)
 		move.l	#Map_Pickups,mappings(a0)
-		move.w	#make_art_tile($580,0,0),art_tile(a0)
+		move.w	#make_art_tile(ArtTile_Pickups,0,0),art_tile(a0)
 		move.b	#4,render_flags(a0)
 		move.w	#$200,priority(a0)
 		move.b	#$47,collision_flags(a0)

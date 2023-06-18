@@ -7,7 +7,7 @@ Ani_CopyRobot: offsetTable
 		offsetTableEntry.w CopyAni_Walk
 		offsetTableEntry.w CopyAni_Jump
 		offsetTableEntry.w CopyAni_JumpTransition
-		offsetTableEntry.w CopyAni_Jump
+		offsetTableEntry.w CopyAni_Fall
 		offsetTableEntry.w CopyAni_Wait
 		offsetTableEntry.w CopyAni_Slide
 		offsetTableEntry.w CopyAni_Victory
@@ -34,7 +34,9 @@ CopyAni_Walk:
 CopyAni_Jump:
 		dc.b    4, frC_Jump1, frC_Jump2, afEnd
 CopyAni_JumpTransition:
-		dc.b    6, frC_Jump2, afEnd
+		dc.b    6, frC_JumpT, afEnd
+CopyAni_Fall:
+		dc.b    4, frC_Fall1, frC_Fall2, afEnd
 CopyAni_Wait:
 		dc.b	4
 		rept   8
@@ -126,6 +128,9 @@ frC_Slide1:	ds.b 1
 frC_Slide2:	ds.b 1
 frC_Jump1:	ds.b 1
 frC_Jump2:	ds.b 1
+frC_JumpT:	ds.b 1
+frC_Fall1:	ds.b 1
+frC_Fall2:	ds.b 1
 frC_FireSUp:		ds.b 1
 frC_FireSDiagUp:	ds.b 1
 frC_FireSStraight:	ds.b 1
