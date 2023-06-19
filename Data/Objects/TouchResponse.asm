@@ -520,7 +520,7 @@ GenericEnemy_Hurt:
 		beq.s	.restore
 		btst	#0,boss_invulnerable_time(a0)
 		bne.s	.ret
-		jmp		RememberState_CollisionXY	; RememberState_XY
+		jmp		RememberState_Collision	; RememberState_XY
 	.restore:
 		bclr	#5,status(a0)
 	.ret:
@@ -529,4 +529,4 @@ GenericEnemy_Hurt:
 		move.l	a0,a1
 		jmp		Touch_EnemyNormal
 	.nopain:
-		jmp		RememberState_CollisionXY
+		jmp		RememberState_Collision
