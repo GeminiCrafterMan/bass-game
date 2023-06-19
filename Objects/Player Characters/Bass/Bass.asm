@@ -732,6 +732,8 @@ Bass_KeepDashing:
 		beq.s	Bass_StartDash			; if not, start dashing
 		tst.b	dashtimer(a0)			; is there time left on your dash?
 		beq.s	Bass_StopDashing	; if not, stop dashing
+		btst	#bitA,(Ctrl_1_held_logical).w	; A button *held* dash, like Zero
+		beq.s	Bass_StopDashing	; if not, stop dashing
 		rts
 Bass_StartDash:
 		bset	#Status_Dash,status(a0)

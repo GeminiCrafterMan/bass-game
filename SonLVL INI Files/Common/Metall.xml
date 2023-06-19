@@ -14,13 +14,4 @@
     <Subtype id="00" name="Hide" image="mm1" />
     <Subtype id="01" name="Run" image="mm2" />
   </Subtypes>
-  <Properties>
-    <BitsProperty name="Type" type="Behavior" startbit="0" length="4" />
-  </Properties>
-  <Enums>
-    <Enum name="Behavior">
-      <EnumMember name="Hide" />
-      <EnumMember name="Run" />
-    </Enum>
-  </Enums>
 </ObjDef>

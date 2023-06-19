@@ -1,4 +1,8 @@
 Obj_FireTelly:
+		tst.b	subtype(a0)
+		beq.s	.cont
+		jmp		Obj_FireDropper
+	.cont:
 		moveq	#0,d0
 		move.b	routine(a0),d0
 		move.w	Obj_FireTelly_Index(pc,d0.w),d1
@@ -28,7 +32,13 @@ Obj_FireTelly_Init:	; Routine 0
 
 Obj_FireTelly_CheckPlayer:
 		clr.b	anim(a0)
+		btst	#Status_Facing,status(a0)
+		beq.s	.noFlip
+		move.w	#$100,x_vel(a0)
+		bra.s	.finish
+	.noFlip:
 		move.w	#-$100,x_vel(a0)
+	.finish:
 		jsr		SpeedToPos
 		cmpi.b	#1,mapping_frame(a0)
 		bne.s	.ret
@@ -104,7 +114,6 @@ Obj_FireTellyFlame_Init:	; Routine 0
 		move.w	#bytes_to_word(14/2,18/2),y_radius(a0)
 		move.b	#2,damage(a0)			; contact damage
 		move.b	#1,boss_hitcount2(a0)	; health, so it doesn't explode on spawn
-		move.w	#$18,wait(a0)
 		rts
 ; ---------------------------------------------------------------------------
 
@@ -137,6 +146,21 @@ Obj_FireTellyFlame_Die:
 		move.b	#6,routine(a0)
 		rts
 
+; ===========================================================================
+
+Obj_FireDropper:
+		tst.w	wait(a0)
+		beq.s	.shoot
+		subq.w	#1,wait(a0)
+	.ret:
+		rts
+	.shoot:
+		move.w	#$80,wait(a0)
+		jsr		FindFreeObj
+		move.l	#Obj_FireTellyFlame,(a1)
+		move.w	x_pos(a0),x_pos(a1)
+		move.w	y_pos(a0),y_pos(a1)
+		sfx		sfx_Fireball,1
 ; ===========================================================================
 
 Ani_FireTelly:	offsetTable

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ObjDef xmlns="http://www.sonicretro.org" Name="Fire Telly" Image="ftelly" RememberState="true">
+  <Images>
+    <ImageFromMappings id="ftelly">
+      <ArtFile filename="../Objects/Enemies/Fire Telly/KosinskiM Art/Fire Telly.bin" compression="KosinskiM" />
+      <MapFile type="Binary" filename="../Objects/Enemies/Fire Telly/Object Data/Map - Fire Telly.bin" frame="1" startpal="0" />
+    </ImageFromMappings>
+    <ImageFromMappings id="fdropper">
+      <ArtFile filename="../Objects/Enemies/Fire Telly/KosinskiM Art/Fire Telly.bin" compression="KosinskiM" />
+      <MapFile type="Binary" filename="../Objects/Enemies/Fire Telly/Object Data/Map - Fire Telly.bin" frame="7" startpal="0" />
+    </ImageFromMappings>
+  </Images>
+  <Subtypes>
+    <Subtype id="00" name="Fire Telly" image="ftelly" />
+    <Subtype id="01" name="Infinite Fire Dropper" image="fdropper" />
+  </Subtypes>
+</ObjDef>
