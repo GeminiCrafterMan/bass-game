@@ -143,6 +143,7 @@ frB_Tele7:	ds.b 1
 frB_Tele8:	ds.b 1
 frB_Tele9:	ds.b 1
 frB_Hurt:	ds.b 1
+frB_Stun:	ds.b 1
 frB_Victory1:	ds.b 1
 frB_Victory2:	ds.b 1
 frB_Death1:	ds.b 1
