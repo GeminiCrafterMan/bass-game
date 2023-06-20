@@ -12,6 +12,7 @@ ptr_mus_air:		SMPS_MUSIC_METADATA Music_AirMan, s3TempotoS1($FF), 0		; Air Man
 
 ; Misc
 ptr_mus_capcom:		SMPS_MUSIC_METADATA Music_CAPCOM, s3TempotoS1($FF), 0		; CAPCOM
+ptr_mus_title:		SMPS_MUSIC_METADATA Music_Title, s3TempotoS1($FF), 0		; Title screen (MID2SMPS MM9 for now)
 ptr_mus_stagesel:	SMPS_MUSIC_METADATA Music_StageSel, s3TempotoS1($FF), 0		; Stage select (MM3 for now)
 ptr_mus_stageclear:	SMPS_MUSIC_METADATA Music_StageClear, s3TempotoS1($FF), 0	; Stage clear (MM2 for now)
 ptr_mus_gameover:	SMPS_MUSIC_METADATA Music_GameOver, s3TempotoS1($FF), 0		; Game over (MM2 for now)
@@ -30,7 +31,10 @@ Music_ShadowMan:	include "Sound/Music/Mus - Shadow Man.asm"
 	even
 Music_AirMan:		include "Sound/Music/Mus - Air Man.asm"
 	even
+
 Music_CAPCOM:		include "Sound/Music/Mus - CAPCOM.asm"
+	even
+Music_Title:		include	"Sound/Music/Mus - MM9 Title.asm"
 	even
 Music_StageSel:		include	"Sound/Music/Mus - MM3 Stage Select.asm"
 	even

@@ -18,6 +18,7 @@ mus_Air =			SMPS_id(ptr_mus_air)
 
 ; Misc
 mus_CAPCOM =		SMPS_id(ptr_mus_capcom)
+mus_Title =			SMPS_id(ptr_mus_title)
 mus_StageSelect =	SMPS_id(ptr_mus_stagesel)
 mus_StageClear =	SMPS_id(ptr_mus_stageclear)
 mus_GameOver =		SMPS_id(ptr_mus_gameover)
