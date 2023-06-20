@@ -55,5 +55,19 @@ ArtKosM_SniperJoe:				binclude "Objects/Enemies/Sniper Joe/KosinskiM Art/Sniper 
 	even
 ArtKosM_Metall:					binclude "Objects/Enemies/Metall/KosinskiM Art/Metall.bin"
 	even
+
+; ===========================================================================
+; Kosinski Module compressed Blaze Man stage graphics
+; ===========================================================================
+
 ArtKosM_FireTelly:				binclude "Objects/Enemies/Fire Telly/KosinskiM Art/Fire Telly.bin"
+	even
+
+; ===========================================================================
+; Kosinski Module compressed menu graphics
+; ===========================================================================
+
+ArtKosM_StageSelObjects:		binclude "Data/Screens/Stage Select/KosinskiM Art/Stage Select Objects.bin"
+	even
+ArtKosM_StageSelTiles:			binclude "Data/Screens/Stage Select/KosinskiM Art/Stage Select Tiles.bin"
 	even

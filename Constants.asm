@@ -56,7 +56,6 @@ Security_addr =				$A14000
 ; Level Misc
 ; ---------------------------------------------------------------------------
 
-RingTable_Count =			512	; The maximum rings on the level. Even addresses only
 ObjectTable_Count =			768	; The maximum objects on the level. Even addresses only
 
 ; ---------------------------------------------------------------------------

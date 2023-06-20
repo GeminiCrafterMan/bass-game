@@ -50,39 +50,26 @@ Test1_Transition:
 ; ---------------------------------------------------------------------------
 
 Test1_BGDeformArray:
-	rept 15
-		dc.w 16
-	endr
 		dc.w $7FFF
 ; ---------------------------------------------------------------------------
 
 Test1_Deform:
+	; Vertical scrolling!!
+		move.w	(Camera_Y_pos_copy).w,d0
+;		andi.w	#$7FF,d0	; used to be $7FF
+;		lsr.w	#5,d0
+;		neg.w	d0
+;		addi.w	#$20,d0
+;		bpl.s	.limitY
+;		moveq	#0,d0
+;	.limitY:
+;		move.w	d0,d4
+		move.w	d0,(Camera_Y_pos_BG_copy).w
+	; It's good!!
 		lea	(H_scroll_table).w,a1
 		move.l	(Camera_X_pos_copy).w,d0
-		neg.l	d0
-		move.w	(Level_frame_counter).w,d1
-		swap	d1
-		clr.w	d1
-
-	rept 16/2
-
-; Star 1
 		move.l	d0,d2
-		move.l	d1,d3
-		asr.l	#7,d2
-		asr.l	#1,d3
-		add.l	d3,d2
 		swap	d2
+		asr.l	#1,d2
 		move.w	d2,(a1)+
-
-; Star 2
-		swap	d2
-		asr.l	#3,d2
-		asr.l	#1,d3
-		add.l	d3,d2
-		swap	d2
-		move.w	d2,(a1)+
-
-	endr
-
 		rts

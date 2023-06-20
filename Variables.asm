@@ -39,8 +39,6 @@ V_scroll_buffer_end					= *
 
 Collision_response_list:			ds.b 128				; Only objects in this list are processed by the collision response routines
 Pos_table:							ds.l 64					; Recorded player XY position buffer
-Ring_status_table:					ds.w RingTable_Count	; Ring status table(1 word)
-Ring_status_table_end				= *
 Object_respawn_table:				ds.b ObjectTable_Count	; Object respawn table(1 byte)
 Object_respawn_table_end			= *
 Sprite_table_buffer:				ds.b 80*8

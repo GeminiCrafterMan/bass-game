@@ -245,8 +245,9 @@ Touch_Enemy:
 		beq.w	Touch_ChkHurt
 	; Boss related? Could be special enemies in general
 	; todo: rewrite this later or at least clean it up please
-		move.b	collision_flags(a1),collision_restore_flags(a1)	; save current collision
-		clr.b	collision_flags(a1)
+;		move.b	collision_flags(a1),collision_restore_flags(a1)	; save current collision
+;		clr.b	collision_flags(a1)
+		bset	#5,status(a1)
 		move.b	damage(a0),d0
 		subi.b	d0,boss_hitcount2(a1)	; subtract buster shot HP from enemy's...
 		beq.s	.killBoth				; and break the enemy if it's 0
@@ -507,27 +508,25 @@ GenericEnemy_Hurt:
 		tst.b	boss_hitcount2(a0)
 		beq.s	.die
 		bmi.s	.die
-		tst.b	collision_flags(a0)			; if collision flags aren't empty, act normal
-		bne.s	.nopain
-		btst	#6,status(a0)				; if you're supposed to be flashing already, then do it
-		bne.s	.flashy
-		move.b	#2,boss_invulnerable_time(a0)	; set the time to 4 frames and make the boss hit sound
-		bset	#6,status(a0)
-		sfx		sfx_BossHit,1
 	.flashy:
+		btst	#5,status(a0)				; if you're supposed to be flashing already, then do it
+		beq.s	.nopain
+		tst.w	boss_invulnerable_time(a0)
+		bne.s	.continueflash
+		move.b	#2,boss_invulnerable_time(a0)	; set the time to 4 frames and make the boss hit sound
+		sfx		sfx_BossHit,1
+	.continueflash:
 		subq.b	#1,boss_invulnerable_time(a0)
 		beq.s	.restore
 		btst	#0,boss_invulnerable_time(a0)
 		bne.s	.ret
-		jmp		RememberState
+		jmp		RememberState_Collision	; RememberState_XY
 	.restore:
-		move.b	collision_restore_flags(a0),collision_flags(a0)
-		bclr	#6,status(a0)
+		bclr	#5,status(a0)
 	.ret:
 		rts
 	.die:
 		move.l	a0,a1
 		jmp		Touch_EnemyNormal
 	.nopain:
-		jsr		Add_SpriteToCollisionResponseList
-		jmp		RememberState
+		jmp		RememberState_Collision

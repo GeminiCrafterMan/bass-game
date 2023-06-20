@@ -15,13 +15,12 @@ mus_Shadow =		SMPS_id(ptr_mus_shadow)
 mus_Air =			SMPS_id(ptr_mus_air)
 
 ; Bosses
-mus_MidBoss =		SMPS_id(ptr_mus_boss)
-mus_ZoneBoss =		SMPS_id(ptr_mus_boss2)
 
 ; Misc
-mus_Invincible =	SMPS_id(ptr_mus_invin)
-mus_GotThrough =	SMPS_id(ptr_mus_through)
-mus_Drowning =		SMPS_id(ptr_mus_drowning)
+mus_CAPCOM =		SMPS_id(ptr_mus_capcom)
+mus_StageSelect =	SMPS_id(ptr_mus_stagesel)
+mus_StageClear =	SMPS_id(ptr_mus_stageclear)
+mus_GameOver =		SMPS_id(ptr_mus_gameover)
 
 mus__Last =			SMPS_id(ptr_musend)-1
 
