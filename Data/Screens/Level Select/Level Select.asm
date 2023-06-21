@@ -392,7 +392,7 @@ LevelSelect_ActTextIndex: offsetTable
 		offsetTableEntry.w LevelSelect_SmogMan		; DEZ3
 		offsetTableEntry.w LevelSelect_SharkMan		; DEZ4
 
-		offsetTableEntry.w LevelSelect_LoadAct1		; DEZ1
+		offsetTableEntry.w LevelSelect_OrigamiMan	; DEZ1
 		offsetTableEntry.w LevelSelect_LoadAct2		; DEZ2
 		offsetTableEntry.w LevelSelect_LoadAct3		; DEZ3
 		offsetTableEntry.w LevelSelect_LoadAct4		; DEZ4
@@ -401,21 +401,23 @@ LevelSelect_ActTextIndex: offsetTable
 ; --------------------------------------------------------------------------
 
 LevelSelect_LoadAct1:
-		levselstr "ACT 1    "
+		levselstr "ACT 1      "
 LevelSelect_LoadAct2:
-		levselstr "ACT 2    "
+		levselstr "ACT 2      "
 LevelSelect_LoadAct3:
-		levselstr "ACT 3    "
+		levselstr "ACT 3      "
 LevelSelect_LoadAct4:
-		levselstr "ACT 4    "
+		levselstr "ACT 4      "
 LevelSelect_BlazeMan:
-		levselstr "BLAZE MAN"
+		levselstr "BLAZE MAN  "
 LevelSelect_VideoMan:
-		levselstr "VIDEO MAN"
+		levselstr "VIDEO MAN  "
 LevelSelect_SmogMan:
-		levselstr "SMOG MAN "
+		levselstr "SMOG MAN   "
 LevelSelect_SharkMan:
-		levselstr "SHARK MAN"
+		levselstr "SHARK MAN  "
+LevelSelect_OrigamiMan:
+		levselstr "ORIGAMI MAN"
 LevelSelect_MainText:
 		levselstr "BASS GAME - *** DEBUG MODE ***                                  "
 	even
@@ -587,7 +589,7 @@ LevelSelect_MappingOffsets:
 LevelSelect_Text:
 		levselstr "   DEATH EGG          - ACT 1           "
 		levselstr "   RM STAGES - PART 1 - BLAZE MAN       "
-		levselstr "   RM STAGES - PART 2 - ACT 1           "
+		levselstr "   RM STAGES - PART 2 - ORIGAMI MAN     "
 		levselstr "   UNKNOWN LEVEL      - UNKNOWN         "
 		levselstr "   UNKNOWN LEVEL      - UNKNOWN         "
 		levselstr "   UNKNOWN LEVEL      - UNKNOWN         "

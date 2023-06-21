@@ -36,9 +36,9 @@ Pal_CopyRobotChargeShot:	binclude "Objects/Player Characters/Copy Robot/Palettes
 
 Pal_LevelSelect:	binclude "Data/Screens/Level Select/Palettes/1.bin"
 	even
-Pal_Test1:			binclude "Levels/Test/Palettes/Level 1.bin"
+Pal_GenericLevel:			binclude "Levels/Test/Palettes/Level 1.bin"
 	even
-Pal_Test2:			binclude "Levels/Test/Palettes/Level 2.bin"
+Pal_Air:			binclude "Levels/Test/Palettes/Level 2.bin"
 	even
 
 Pal_Blaze:			binclude "Levels/Robot Master stages/Palettes/Blaze Man stage.bin"
@@ -48,4 +48,6 @@ Pal_Video:			binclude "Levels/Robot Master stages/Palettes/Video Man stage.bin"
 Pal_Smog:			binclude "Levels/Robot Master stages/Palettes/Smog Man stage.bin"
 	even
 Pal_Shark:			binclude "Levels/Robot Master stages/Palettes/Shark Man stage.bin"
+	even
+Pal_Origami:		binclude "Levels/Robot Master stages/Palettes/Origami Man stage.bin"
 	even

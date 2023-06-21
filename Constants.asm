@@ -458,6 +458,10 @@ Status_ObjDefeated =		7
 ; ---------------------------------------------------------------------------
 
 ArtTile_Monitors =			$4AC
+ArtTile_HammerJoe =			$4C7
+ArtTile_SniperJoe =			$50E
+ArtTile_Metall =			$53C
+ArtTile_FireTelly =			$56D
 ArtTile_Pickups =			$581
 ArtTile_StarPost =			$5E4
 ArtTile_HUD =				$6C4
@@ -465,10 +469,6 @@ ArtTile_BusterShots =		$79C
 ArtTile_Sonic =				$79E
 ArtTile_WeaponStuff =		$7B0
 ArtTile_DashDust =			$7F0
-ArtTile_HammerJoe =			$4D7
-ArtTile_SniperJoe =			$52E
-ArtTile_Metall =			$54A
-ArtTile_FireTelly =			$55B
 
 ; ---------------------------------------------------------------------------
 ; VRAM data

@@ -55,7 +55,7 @@ CopyAni_Death:
 		endr
 		dc.b  frC_Null, frC_Null, frC_Null, afEnd
 CopyAni_Hurt:
-		dc.b  $77, frC_Hurt, afEnd
+		dc.b  $77, frC_Hurt, frC_Stun, afBack, 1
 CopyAni_Blank:
 		dc.b  $77, frC_Null, afEnd
 CopyAni_FireStanding:
@@ -117,6 +117,7 @@ frC_Tele7:	ds.b 1
 frC_Tele8:	ds.b 1
 frC_Tele9:	ds.b 1
 frC_Hurt:	ds.b 1
+frC_Stun:	ds.b 1
 frC_Victory1:	ds.b 1
 frC_Victory2:	ds.b 1
 frC_Death1:	ds.b 1

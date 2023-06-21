@@ -124,8 +124,8 @@ StartingWaterHeights:
 ; ---------------------------------------------------------------------------
 
 WaterPalette_Index:
-		dc.b	palid_Test1,	palid_Test2,	palid_Test1,	palid_Test1		; DEZ 1,2,3,4
+		dc.b	palid_GenericLevel,	palid_Air,	palid_GenericLevel,	palid_GenericLevel		; DEZ 1,2,3,4
 		dc.b	palid_Blaze,	palid_Video,	palid_Smog,		palid_Shark
-		dc.b	palid_Test1,	palid_Test1,	palid_Test1,	palid_Test1		; DEZ 1,2,3,4
+		dc.b	palid_Origami,	palid_GenericLevel,	palid_GenericLevel,	palid_GenericLevel		; DEZ 1,2,3,4
 
 		zonewarning WaterPalette_Index,(1*4)

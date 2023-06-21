@@ -57,7 +57,8 @@ BassAni_Death:
 		endr
 		dc.b  frB_Null, frB_Null, frB_Null, afEnd
 BassAni_Hurt:
-		dc.b  $77, frB_Hurt, afEnd
+;		dc.b  $77, frB_Hurt, afEnd
+		dc.b  $77, frB_Hurt, frB_Stun, afBack, 1
 BassAni_Blank:
 		dc.b  $77, frB_Null, afEnd
 BassAni_FireStanding:

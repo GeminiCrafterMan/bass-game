@@ -83,12 +83,12 @@ Obj_SniperJoe_Fire:
 		move.w	x_pos(a0),x_pos(a1)
 		move.w	y_pos(a0),y_pos(a1)
 		move.w	#$200,d0
-		addq.w	#4,x_pos(a1)
-		addq.w	#6,y_pos(a1)
+		addi.w	#16,x_pos(a1)
+		addq.w	#3,y_pos(a1)
 		btst	#Status_Facing,status(a0)
 		bne.s	.noFlip
 		bset	#Status_Facing,status(a1)
-		subq.w	#8,x_pos(a1)
+		subi.w	#32,x_pos(a1)
 		neg.w	d0
 	.noFlip:
 		move.w	d0,x_vel(a1)
@@ -133,7 +133,7 @@ Obj_SniperJoeShield:
 ChildObjDat_SniperJoeShield:
 		dc.w	0	; amount to create -1
 		dc.l	Obj_SniperJoeShield	; object pointer
-		dc.b	-8, -3	; X/Y offsets
+		dc.b	-10, -4	; X/Y offsets
 
 ; ===========================================================================
 ; wait for player to get near, lower shield, then shoot 3 bullets, then raise the shield
@@ -147,7 +147,7 @@ Ani_SniperJoe:	offsetTable
 
 	.wait:		dc.b 59, 1, afRoutine	; one whole second
 	.lower:		dc.b 3, 2, 3, afRoutine
-	.shoot:		dc.b 3, 2, 3
+	.shoot:		dc.b 3, 3, 4
 				rept 11
 					dc.b 3
 				endr

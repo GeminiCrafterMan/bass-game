@@ -4,20 +4,20 @@
 
 		;		1st 8x8 data		1st 16x16 data		1st 128x128 data	palette
 LevelLoadBlock:
-		levartptrs Test1_8x8_KosM,	Test1_16x16_Unc,Test1_128x128_Kos,palid_Test1		; Test1
-		levartptrs Test2_8x8_KosM,	Test2_16x16_Unc,Test2_128x128_Kos,palid_Test2		; Test2
-		levartptrs Test1_8x8_KosM,	Test1_16x16_Unc,Test1_128x128_Kos,palid_Test1		; Test3
-		levartptrs Test1_8x8_KosM,	Test1_16x16_Unc,Test1_128x128_Kos,palid_Test1		; Test4
+		levartptrs GenericLevel_8x8_KosM,	GenericLevel_16x16_Unc,GenericLevel_128x128_Kos,palid_GenericLevel		; GenericLevel
+		levartptrs Air_8x8_KosM,	Air_16x16_Unc,Air_128x128_Kos,palid_Air		; Air Man
+		levartptrs GenericLevel_8x8_KosM,	GenericLevel_16x16_Unc,GenericLevel_128x128_Kos,palid_GenericLevel		; Test3
+		levartptrs GenericLevel_8x8_KosM,	GenericLevel_16x16_Unc,GenericLevel_128x128_Kos,palid_GenericLevel		; Test4
 
 		levartptrs Blaze_8x8_KosM,	Blaze_16x16_Unc,Blaze_128x128_Kos,	palid_Blaze		; Blaze Man
 		levartptrs Video_8x8_KosM,	Video_16x16_Unc,Video_128x128_Kos,	palid_Video		; Video Man
 		levartptrs Smog_8x8_KosM,	Smog_16x16_Unc,	Smog_128x128_Kos,	palid_Smog		; Smog Man
 		levartptrs Shark_8x8_KosM,	Shark_16x16_Unc,Shark_128x128_Kos,	palid_Shark		; Shark Man
 
-		levartptrs Test1_8x8_KosM,	Test1_16x16_Unc,Test1_128x128_Kos,palid_Test1		; Test
-		levartptrs Test1_8x8_KosM,	Test1_16x16_Unc,Test1_128x128_Kos,palid_Test1		; Test
-		levartptrs Test1_8x8_KosM,	Test1_16x16_Unc,Test1_128x128_Kos,palid_Test1		; Test
-		levartptrs Test1_8x8_KosM,	Test1_16x16_Unc,Test1_128x128_Kos,palid_Test1		; Test
+		levartptrs Origami_8x8_KosM,Origami_16x16_Unc,Origami_128x128_Kos,palid_Origami	; Origami Man
+		levartptrs GenericLevel_8x8_KosM,	GenericLevel_16x16_Unc,GenericLevel_128x128_Kos,palid_GenericLevel		; Test
+		levartptrs GenericLevel_8x8_KosM,	GenericLevel_16x16_Unc,GenericLevel_128x128_Kos,palid_GenericLevel		; Test
+		levartptrs GenericLevel_8x8_KosM,	GenericLevel_16x16_Unc,GenericLevel_128x128_Kos,palid_GenericLevel		; Test
 
 		zonewarning LevelLoadBlock,(12*4)
 
@@ -28,24 +28,45 @@ LevelLoadBlock:
 LevelLoadPointer:
 
 	rept 4
-; Test1
+; GenericLevel
 		dc.l LevelPointer_Null, LevelPointer_Null, LevelPointer_Null, LevelPointer_Null					; Animate Palette, Resize, WaterResize, AfterBoss
-		dc.l Test1_ScreenInit, Test1_BackgroundInit, Test1_ScreenEvent, Test1_BackgroundEvent	; ScreenInit, BackgroundInit, ScreenEvent, BackgroundEvent
+		dc.l GenericLevel_ScreenInit, GenericLevel_BackgroundInit, GenericLevel_ScreenEvent, GenericLevel_BackgroundEvent	; ScreenInit, BackgroundInit, ScreenEvent, BackgroundEvent
 		dc.l LevelPointer_Null, LevelPointer_Null											; Animate tiles main code, Animate tiles PLC scripts
 	endr
 
-	rept 4
-; Test1
+; Blaze Man
 		dc.l LevelPointer_Null, LevelPointer_Null, LevelPointer_Null, LevelPointer_Null					; Animate Palette, Resize, WaterResize, AfterBoss
-		dc.l Test1_ScreenInit, Test1_BackgroundInit, Test1_ScreenEvent, Test1_BackgroundEvent	; ScreenInit, BackgroundInit, ScreenEvent, BackgroundEvent
+		dc.l BlazeMan_ScreenInit, BlazeMan_BackgroundInit, BlazeMan_ScreenEvent, BlazeMan_BackgroundEvent	; ScreenInit, BackgroundInit, ScreenEvent, BackgroundEvent
 		dc.l LevelPointer_Null, LevelPointer_Null											; Animate tiles main code, Animate tiles PLC scripts
-	endr
-	rept 4
-; Test1
+; Video Man
 		dc.l LevelPointer_Null, LevelPointer_Null, LevelPointer_Null, LevelPointer_Null					; Animate Palette, Resize, WaterResize, AfterBoss
-		dc.l Test1_ScreenInit, Test1_BackgroundInit, Test1_ScreenEvent, Test1_BackgroundEvent	; ScreenInit, BackgroundInit, ScreenEvent, BackgroundEvent
+		dc.l VideoMan_ScreenInit, VideoMan_BackgroundInit, VideoMan_ScreenEvent, VideoMan_BackgroundEvent	; ScreenInit, BackgroundInit, ScreenEvent, BackgroundEvent
 		dc.l LevelPointer_Null, LevelPointer_Null											; Animate tiles main code, Animate tiles PLC scripts
-	endr
+; Smog Man
+		dc.l LevelPointer_Null, LevelPointer_Null, LevelPointer_Null, LevelPointer_Null					; Animate Palette, Resize, WaterResize, AfterBoss
+		dc.l SmogMan_ScreenInit, SmogMan_BackgroundInit, SmogMan_ScreenEvent, SmogMan_BackgroundEvent	; ScreenInit, BackgroundInit, ScreenEvent, BackgroundEvent
+		dc.l LevelPointer_Null, LevelPointer_Null											; Animate tiles main code, Animate tiles PLC scripts
+; Shark Man
+		dc.l LevelPointer_Null, LevelPointer_Null, LevelPointer_Null, LevelPointer_Null					; Animate Palette, Resize, WaterResize, AfterBoss
+		dc.l SharkMan_ScreenInit, SharkMan_BackgroundInit, SharkMan_ScreenEvent, SharkMan_BackgroundEvent	; ScreenInit, BackgroundInit, ScreenEvent, BackgroundEvent
+		dc.l LevelPointer_Null, LevelPointer_Null											; Animate tiles main code, Animate tiles PLC scripts
+
+; Origami Man
+		dc.l LevelPointer_Null, LevelPointer_Null, LevelPointer_Null, LevelPointer_Null					; Animate Palette, Resize, WaterResize, AfterBoss
+		dc.l OrigamiMan_ScreenInit, OrigamiMan_BackgroundInit, OrigamiMan_ScreenEvent, OrigamiMan_BackgroundEvent	; ScreenInit, BackgroundInit, ScreenEvent, BackgroundEvent
+		dc.l LevelPointer_Null, LevelPointer_Null											; Animate tiles main code, Animate tiles PLC scripts
+; GenericLevel
+		dc.l LevelPointer_Null, LevelPointer_Null, LevelPointer_Null, LevelPointer_Null					; Animate Palette, Resize, WaterResize, AfterBoss
+		dc.l GenericLevel_ScreenInit, GenericLevel_BackgroundInit, GenericLevel_ScreenEvent, GenericLevel_BackgroundEvent	; ScreenInit, BackgroundInit, ScreenEvent, BackgroundEvent
+		dc.l LevelPointer_Null, LevelPointer_Null											; Animate tiles main code, Animate tiles PLC scripts
+; GenericLevel
+		dc.l LevelPointer_Null, LevelPointer_Null, LevelPointer_Null, LevelPointer_Null					; Animate Palette, Resize, WaterResize, AfterBoss
+		dc.l GenericLevel_ScreenInit, GenericLevel_BackgroundInit, GenericLevel_ScreenEvent, GenericLevel_BackgroundEvent	; ScreenInit, BackgroundInit, ScreenEvent, BackgroundEvent
+		dc.l LevelPointer_Null, LevelPointer_Null											; Animate tiles main code, Animate tiles PLC scripts
+; GenericLevel
+		dc.l LevelPointer_Null, LevelPointer_Null, LevelPointer_Null, LevelPointer_Null					; Animate Palette, Resize, WaterResize, AfterBoss
+		dc.l GenericLevel_ScreenInit, GenericLevel_BackgroundInit, GenericLevel_ScreenEvent, GenericLevel_BackgroundEvent	; ScreenInit, BackgroundInit, ScreenEvent, BackgroundEvent
+		dc.l LevelPointer_Null, LevelPointer_Null											; Animate tiles main code, Animate tiles PLC scripts
 
 		zonewarning LevelLoadPointer,(40*4)
 
@@ -54,20 +75,20 @@ LevelLoadPointer:
 ; ===========================================================================
 
 SolidIndexes:
-		dc.l Test1_Solid	; Test1
-		dc.l Test2_Solid	; Test2
-		dc.l Test1_Solid	; Test3
-		dc.l Test1_Solid	; Test4
+		dc.l GenericLevel_Solid	; GenericLevel
+		dc.l Air_Solid	; Air Man
+		dc.l GenericLevel_Solid	; Test3
+		dc.l GenericLevel_Solid	; Test4
 
 		dc.l Blaze_Solid	; Blaze Man
 		dc.l Video_Solid	; Video Man
 		dc.l Smog_Solid		; Smog Man
 		dc.l Shark_Solid	; Shark Man
 
-		dc.l Test1_Solid	; Test1
-		dc.l Test1_Solid	; Test1
-		dc.l Test1_Solid	; Test1
-		dc.l Test1_Solid	; Test1
+		dc.l Origami_Solid	; Origami Man
+		dc.l GenericLevel_Solid	; GenericLevel
+		dc.l GenericLevel_Solid	; GenericLevel
+		dc.l GenericLevel_Solid	; GenericLevel
 
 		zonewarning SolidIndexes,(4*4)
 
@@ -76,20 +97,20 @@ SolidIndexes:
 ; ===========================================================================
 
 LevelPtrs:
-		dc.l Test1_Layout	; Test1
-		dc.l Test2_Layout	; Test2
-		dc.l Test1_Layout	; Test3
-		dc.l Test1_Layout	; Test4
+		dc.l GenericLevel_Layout	; GenericLevel
+		dc.l Air_Layout	; Air Man
+		dc.l GenericLevel_Layout	; Test3
+		dc.l GenericLevel_Layout	; Test4
 
 		dc.l Blaze_Layout	; Blaze Man
 		dc.l Video_Layout	; Video Man
 		dc.l Smog_Layout	; Smog Man
 		dc.l Shark_Layout	; Shark Man
 
-		dc.l Test1_Layout	; Test1
-		dc.l Test1_Layout	; Test1
-		dc.l Test1_Layout	; Test1
-		dc.l Test1_Layout	; Test1
+		dc.l Origami_Layout	; Origami Man
+		dc.l GenericLevel_Layout	; GenericLevel
+		dc.l GenericLevel_Layout	; GenericLevel
+		dc.l GenericLevel_Layout	; GenericLevel
 
 		zonewarning LevelPtrs,(4*4)
 
@@ -98,20 +119,20 @@ LevelPtrs:
 ; ===========================================================================
 
 SpriteLocPtrs:
-		dc.l Test1_Sprites	; Test1
-		dc.l Test2_Sprites	; Test2
-		dc.l Test1_Sprites	; Test3
-		dc.l Test1_Sprites	; Test4
+		dc.l GenericLevel_Sprites	; GenericLevel
+		dc.l Air_Sprites	; Air Man
+		dc.l GenericLevel_Sprites	; Test3
+		dc.l GenericLevel_Sprites	; Test4
 
 		dc.l Blaze_Sprites	; Blaze Man
 		dc.l Video_Sprites	; Video Man
 		dc.l Smog_Sprites	; Smog Man
 		dc.l Shark_Sprites	; Shark Man
 
-		dc.l Test1_Sprites	; Test1
-		dc.l Test1_Sprites	; Test1
-		dc.l Test1_Sprites	; Test1
-		dc.l Test1_Sprites	; Test1
+		dc.l Origami_Sprites; Origami Man
+		dc.l GenericLevel_Sprites	; GenericLevel
+		dc.l GenericLevel_Sprites	; GenericLevel
+		dc.l GenericLevel_Sprites	; GenericLevel
 
 		zonewarning SpriteLocPtrs,(4*4)
 
@@ -119,17 +140,17 @@ SpriteLocPtrs:
 ; Compressed level graphics - tile, primary patterns and block mappings
 ; ===========================================================================
 
-Test1_8x8_KosM:		binclude "Levels/Test/Tiles/Primary.bin"
+GenericLevel_8x8_KosM:		binclude "Levels/Test/Tiles/Primary.bin"
 	even
-Test1_16x16_Unc:	binclude "Levels/Test/Blocks/Primary.bin"
+GenericLevel_16x16_Unc:	binclude "Levels/Test/Blocks/Primary.bin"
 	even
-Test1_128x128_Kos:	binclude "Levels/Test/Chunks/Primary.bin"
+GenericLevel_128x128_Kos:	binclude "Levels/Test/Chunks/Primary.bin"
 	even
-Test2_8x8_KosM:		binclude "Levels/Test/Tiles/Secondary.bin"
+Air_8x8_KosM:		binclude "Levels/Test/Tiles/Secondary.bin"
 	even
-Test2_16x16_Unc:	binclude "Levels/Test/Blocks/Secondary.bin"
+Air_16x16_Unc:	binclude "Levels/Test/Blocks/Secondary.bin"
 	even
-Test2_128x128_Kos:	binclude "Levels/Test/Chunks/Secondary.bin"
+Air_128x128_Kos:	binclude "Levels/Test/Chunks/Secondary.bin"
 	even
 
 Blaze_8x8_KosM:		binclude "Levels/Robot Master stages/Tiles/Blaze Man.bin"
@@ -160,6 +181,13 @@ Shark_16x16_Unc:		binclude "Levels/Robot Master stages/Blocks/Shark Man.bin"
 Shark_128x128_Kos:	binclude "Levels/Robot Master stages/Chunks/Shark Man.bin"
 	even
 
+Origami_8x8_KosM:		binclude "Levels/Robot Master stages/Tiles/Origami Man.bin"
+	even
+Origami_16x16_Unc:		binclude "Levels/Robot Master stages/Blocks/Origami Man.bin"
+	even
+Origami_128x128_Kos:	binclude "Levels/Robot Master stages/Chunks/Origami Man.bin"
+	even
+
 ; ===========================================================================
 ; Collision data
 ; ===========================================================================
@@ -175,9 +203,9 @@ HeightMapsRot:		binclude "Misc Data/Height Maps Rotated.bin"
 ; Level collision data
 ; ===========================================================================
 
-Test1_Solid:			binclude "Levels/Test/Collision/1.bin"
+GenericLevel_Solid:			binclude "Levels/Test/Collision/1.bin"
 	even
-Test2_Solid:			binclude "Levels/Test/Collision/2.bin"
+Air_Solid:			binclude "Levels/Test/Collision/2.bin"
 	even
 
 Blaze_Solid:			binclude "Levels/Robot Master stages/Collision/Blaze Man.bin"
@@ -186,7 +214,9 @@ Video_Solid:			binclude "Levels/Robot Master stages/Collision/Video Man.bin"
 	even
 Smog_Solid:				binclude "Levels/Robot Master stages/Collision/Smog Man.bin"
 	even
-Shark_Solid:				binclude "Levels/Robot Master stages/Collision/Shark Man.bin"
+Shark_Solid:			binclude "Levels/Robot Master stages/Collision/Shark Man.bin"
+	even
+Origami_Solid:			binclude "Levels/Robot Master stages/Collision/Origami Man.bin"
 	even
 
 ; ===========================================================================
@@ -195,9 +225,9 @@ Shark_Solid:				binclude "Levels/Robot Master stages/Collision/Shark Man.bin"
 
 		align $8000
 
-Test1_Layout:		binclude "Levels/Test/Layout/1.bin"
+GenericLevel_Layout:		binclude "Levels/Test/Layout/1.bin"
 	even
-Test2_Layout:		binclude "Levels/Test/Layout/2.bin"
+Air_Layout:		binclude "Levels/Test/Layout/2.bin"
 	even
 
 Blaze_Layout:		binclude "Levels/Robot Master stages/Layout/Blaze Man.bin"
@@ -208,15 +238,17 @@ Smog_Layout:		binclude "Levels/Robot Master stages/Layout/Smog Man.bin"
 	even
 Shark_Layout:		binclude "Levels/Robot Master stages/Layout/Shark Man.bin"
 	even
+Origami_Layout:		binclude "Levels/Robot Master stages/Layout/Origami Man.bin"
+	even
 
 ; ===========================================================================
 ; Level object data
 ; ===========================================================================
 
 	ObjectLayoutBoundary
-Test1_Sprites:		binclude "Levels/Test/Object Pos/1.bin"
+GenericLevel_Sprites:		binclude "Levels/Test/Object Pos/1.bin"
 	ObjectLayoutBoundary
-Test2_Sprites:		binclude "Levels/Test/Object Pos/2.bin"
+Air_Sprites:		binclude "Levels/Test/Object Pos/2.bin"
 	ObjectLayoutBoundary
 Blaze_Sprites:		binclude "Levels/Robot Master stages/Object Pos/Blaze Man.bin"
 	ObjectLayoutBoundary
@@ -225,5 +257,7 @@ Video_Sprites:		binclude "Levels/Robot Master stages/Object Pos/Video Man.bin"
 Smog_Sprites:		binclude "Levels/Robot Master stages/Object Pos/Smog Man.bin"
 	ObjectLayoutBoundary
 Shark_Sprites:		binclude "Levels/Robot Master stages/Object Pos/Shark Man.bin"
+	ObjectLayoutBoundary
+Origami_Sprites:	binclude "Levels/Robot Master stages/Object Pos/Origami Man.bin"
 	ObjectLayoutBoundary
 	even
