@@ -434,7 +434,7 @@ Kill_Character:
 		bne.w	.dontdie						; if yes, branch
 		clr.b	(v_health).w
 		move.b	#$80,(Update_HUD_ring_count).w
-		moveq	#12-1,d1						; 8 total, counting the first
+		moveq	#12-1,d1						; 12 total, counting the first
 		lea		(DeathOrbs_VelTbl).l,a3
 
 	.spawnOrbs:

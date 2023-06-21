@@ -265,7 +265,7 @@ Pal_fade_delay:						ds.w 1
 Pal_fade_delay2:					ds.w 1
 Hyper_Sonic_flash_timer:			ds.b 1
 Negative_flash_timer:				ds.b 1
-									ds.b 1					; even
+Robot_Masters_Beaten:				ds.b 1	; bitfield
 Palette_rotation_disable:			ds.b 1
 Palette_rotation_custom:			ds.l 1
 Palette_rotation_data:				ds.w 9
@@ -373,7 +373,7 @@ Apparent_zone_and_act:				ds.b 1
 a_act:								= *
 Apparent_act:						ds.b 1
 Player_mode:						ds.b 1
-									ds.b 1		; even
+RM_Stage_Selected:					ds.b 1
 f_timeover:							= *
 Time_over_flag:						ds.b 1
 f_ringcount:						= *

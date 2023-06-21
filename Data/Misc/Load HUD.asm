@@ -40,8 +40,8 @@ Render_HUD:
 		moveq	#0,d4								; frame #0
 		btst	#3,(Level_frame_counter+1).w
 		bne.s	.draw
-		tst.w	(Ring_count).w						; do you have any rings?
-		bne.s	.time								; if yes, branch
+		cmpi.b	#9,(v_health).w						; do you have 10 or more health?
+		bgt.s	.time								; if yes, branch
 		addq.w	#1*2,d4								; hide rings counter
 
 .time

@@ -9,6 +9,7 @@ ptr_mus_shadow:		SMPS_MUSIC_METADATA Music_ShadowMan, s3TempotoS1($FF), 0	; Shad
 ptr_mus_air:		SMPS_MUSIC_METADATA Music_AirMan, s3TempotoS1($FF), 0		; Air Man
 
 ; Boss
+ptr_mus_protowhistle:	SMPS_MUSIC_METADATA Music_ProtoWhistle, s3TempotoS1($FF), 0	; Proto Man's entrance whistle
 
 ; Misc
 ptr_mus_capcom:		SMPS_MUSIC_METADATA Music_CAPCOM, s3TempotoS1($FF), 0		; CAPCOM
@@ -30,6 +31,9 @@ Music_SnakeMan:		include "Sound/Music/Mus - Snake Man.asm"
 Music_ShadowMan:	include "Sound/Music/Mus - Shadow Man.asm"
 	even
 Music_AirMan:		include "Sound/Music/Mus - Air Man.asm"
+	even
+
+Music_ProtoWhistle:	include	"Sound/Music/Mus - Proto Man Whistle.asm"
 	even
 
 Music_CAPCOM:		include "Sound/Music/Mus - CAPCOM.asm"

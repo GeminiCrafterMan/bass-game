@@ -15,6 +15,7 @@ mus_Shadow =		SMPS_id(ptr_mus_shadow)
 mus_Air =			SMPS_id(ptr_mus_air)
 
 ; Bosses
+mus_ProtoWhistle =	SMPS_id(ptr_mus_protowhistle)
 
 ; Misc
 mus_CAPCOM =		SMPS_id(ptr_mus_capcom)

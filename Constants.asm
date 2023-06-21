@@ -72,9 +72,10 @@ offset :=	Game_Modes
 ptrsize :=	1
 idstart :=	0
 
-id_TitleScreen =			id(ptr_Title)				; 0
-id_LevelSelectScreen =		id(ptr_LevelSelect)			; 4
-id_LevelScreen =			id(ptr_Level)				; 8
+id_TitleScreen =			id(ptr_Title)				; $0
+id_StageSelectScreen =		id(ptr_StageSelect)			; $4
+id_LevelSelectScreen =		id(ptr_LevelSelect)			; $8
+id_LevelScreen =			id(ptr_Level)				; $A
 
 GameModeFlag_TitleCard =	7							; flag bit
 GameModeID_TitleCard =		1<<GameModeFlag_TitleCard	; flag mask

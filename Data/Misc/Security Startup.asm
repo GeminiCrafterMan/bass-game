@@ -214,5 +214,6 @@ Game_Program:
 
 Game_Modes:
 ptr_Title:		dc.l Title_Screen			; Title ($00)
-ptr_LevelSelect:	dc.l LevelSelect_Screen		; Level Select ($04)
-ptr_Level:		dc.l Level_Screen			; Level ($08)
+ptr_StageSelect:	dc.l StageSelect_Screen		; Stage Select (MM-style) ($04)
+ptr_LevelSelect:	dc.l LevelSelect_Screen		; Level Select ($08)
+ptr_Level:		dc.l Level_Screen			; Level ($0A)

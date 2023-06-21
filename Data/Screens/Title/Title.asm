@@ -18,18 +18,11 @@ Title_Screen:
 		clearRAM Camera_RAM, Camera_RAM_end
 		clearRAM Oscillating_variables, Oscillating_variables_end
 		moveq	#0,d0
-;		move.w	#2,(Current_zone_and_act).w	; GHZ EX
-;		move.w	#2,(Apparent_zone_and_act).w; GHZ EX
+		move.w	d0,(Current_zone_and_act).w
+		move.w	d0,(Apparent_zone_and_act).w
 		move.b	d0,(Last_star_post_hit).w
 		move.b	d0,(Level_started_flag).w
 		ResetDMAQueue
-;		jsr	(LoadLevelPointer).w
-;		jsr	(Get_LevelSizeStart).l
-;		jsr	(LoadLevelLoadBlock).w
-;		jsr	(LoadLevelLoadBlock2).w
-;		disableInts
-;		jsr	(LevelSetup_BG_Only).l
-;		enableInts
 		lea	(ArtKosM_TitleTiles).l,a1
 		move.w	#0,d2
 		jsr	(Queue_Kos_Module).w
@@ -42,7 +35,7 @@ Title_Screen:
 		moveq	#0,d0
 		jsr	(EniDec).w
 
-		copyTilemap	$C000,320,224
+		copyTilemap	vram_fg,320,224
 
 		music	mus_Title
 
@@ -68,5 +61,10 @@ Title_Screen:
 		jsr	(Render_Sprites).w
 		btst	#bitStart,(Ctrl_1_pressed).w
 		beq.s	.loop
+		btst	#bitA,(Ctrl_1_held).w
+		bne.s	.levsel
+		move.b	#id_StageSelectScreen,(Game_mode).w	; set game mode
+		rts
+	.levsel:
 		move.b	#id_LevelSelectScreen,(Game_mode).w	; set game mode
 		rts

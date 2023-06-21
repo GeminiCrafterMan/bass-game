@@ -38,6 +38,17 @@ Pal_Title:			binclude "Data/Screens/Title/Palettes/Title.bin"
 	even
 Pal_LevelSelect:	binclude "Data/Screens/Level Select/Palettes/1.bin"
 	even
+Pal_StageSelect:	binclude "Data/Screens/Stage Select/Palettes/Stage Select.bin"
+	even
+Pal_SSelectBass:	binclude "Data/Screens/Stage Select/Palettes/Bass.bin"
+	even
+Pal_SSelectCRobo:	binclude "Data/Screens/Stage Select/Palettes/Copy Robot.bin"
+	even
+
+; ===========================================================================
+; Other palettes
+; ===========================================================================
+
 Pal_GenericLevel:	binclude "Levels/Test/Palettes/Level 1.bin"
 	even
 Pal_Air:			binclude "Levels/Test/Palettes/Level 2.bin"
