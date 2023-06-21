@@ -226,14 +226,20 @@ LevelSelect_LoadSoundNumber:
 		move.w	#LevelSelect_MaxSoundNumber,d2
 		move.w	(vLevelSelect_SoundCount).w,d3
 		lea	(vLevelSelect_CtrlTimer).w,a3
-		bsr.s	LevelSelect_FindLeftRightControls
+		bsr.w	LevelSelect_FindLeftRightControls
 		move.w	d3,(vLevelSelect_SoundCount).w
 		move.b	(Ctrl_1_pressed).w,d1
+		btst	#bitStart,d1
+		bne.s	LevelSelect_ToStageSelect
 		andi.b	#btnABC,d1
 		beq.w	LevelSelect_LoadLevel_Return
 		move.w	d3,d0
 		addi.w	#sfx__First,d0
 		jmp	(SMPS_QueueSound2).w	; play sfx
+
+LevelSelect_ToStageSelect:
+		move.b	#id_StageSelectScreen,(Game_mode).w	; set game mode
+		jmp		StageSelect_Screen
 
 ; ---------------------------------------------------------------------------
 ; Load Sample
