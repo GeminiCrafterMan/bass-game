@@ -34,9 +34,11 @@ Pal_CopyRobotChargeShot:	binclude "Objects/Player Characters/Copy Robot/Palettes
 ; Other palettes
 ; ===========================================================================
 
+Pal_Title:			binclude "Data/Screens/Title/Palettes/Title.bin"
+	even
 Pal_LevelSelect:	binclude "Data/Screens/Level Select/Palettes/1.bin"
 	even
-Pal_GenericLevel:			binclude "Levels/Test/Palettes/Level 1.bin"
+Pal_GenericLevel:	binclude "Levels/Test/Palettes/Level 1.bin"
 	even
 Pal_Air:			binclude "Levels/Test/Palettes/Level 2.bin"
 	even

@@ -44,6 +44,7 @@ ptr_Pal_Origami:		palp	Pal_Origami, Normal_palette_line_2, 48		; Origami Man
 ; Misc
 ptr_Pal_Bass_LS:		palp	Pal_Bass, Normal_palette_line_3, 16			; Bass
 ptr_Pal_CopyRobot_LS:	palp	Pal_CopyRobot, Normal_palette_line_3, 16	; CopyRobot
+ptr_Pal_Title:			palp	Pal_Title, Normal_palette_line_1, 64		; Title screen
 ; ---------------------------------------------------------------------------
 
 ; Main
@@ -84,3 +85,4 @@ palid_Origami:			equ (ptr_Pal_Origami-PalPointers)/8				; Origami Man
 ; Misc
 palid_Bass_LS:			equ (ptr_Pal_Bass_LS-PalPointers)/8				; Bass
 palid_CopyRobot_LS:		equ (ptr_Pal_CopyRobot_LS-PalPointers)/8		; CopyRobot
+palid_Title:			equ	(ptr_Pal_Title-PalPointers)/8				; Title screen
