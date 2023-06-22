@@ -13,6 +13,8 @@ Pal_BassToxicCloud:		binclude "Objects/Player Characters/Bass/Palettes/Toxic Clo
 	even
 Pal_BassFinShredder:	binclude "Objects/Player Characters/Bass/Palettes/Fin Shredder.bin"
 	even
+Pal_BassOrigami:		binclude "Objects/Player Characters/Bass/Palettes/Origami.bin"
+	even
 Pal_BassMetalBlade:		binclude "Objects/Player Characters/Bass/Palettes/Metal Blade.bin"
 	even
 Pal_BassTreble:			binclude "Objects/Player Characters/Bass/Palettes/Treble Boost.bin"

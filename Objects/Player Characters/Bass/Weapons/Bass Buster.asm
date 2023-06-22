@@ -1,4 +1,6 @@
 Weapon_BassBuster:	; Rapid-fire buster shot that holds you in place
+		tst.b	double_jump_flag(a0)
+		bne.w	Weapon_NoAmmo
 		cmpi.b	#id_Dash,anim(a0)
 		beq.w	.ret
 		btst	#bitB,(Ctrl_1_held_logical).w	; Holding B?

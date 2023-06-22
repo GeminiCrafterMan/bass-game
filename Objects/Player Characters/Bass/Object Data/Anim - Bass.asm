@@ -26,6 +26,17 @@ Ani_Bass: offsetTable
 		offsetTableEntry.w BassAni_FireSteadyDiagDown
 		offsetTableEntry.w BassAni_ThrowStanding
 		offsetTableEntry.w BassAni_ThrowJumping
+		offsetTableEntry.w BassAni_ShieldStanding
+		offsetTableEntry.w BassAni_ShieldJumping
+		offsetTableEntry.w BassAni_AquaUp
+		offsetTableEntry.w BassAni_AquaDiagUp
+		offsetTableEntry.w BassAni_AquaNeutral
+		offsetTableEntry.w BassAni_AquaFwd
+		offsetTableEntry.w BassAni_AquaDiagDown
+		offsetTableEntry.w BassAni_AquaDown
+		offsetTableEntry.w BassAni_FireAqua
+		offsetTableEntry.w BassAni_ThrowAqua
+		offsetTableEntry.w BassAni_ShieldAqua
 
 BassAni_Step:
 		dc.b	8, frB_Step,  afChange,  id_Run
@@ -62,29 +73,51 @@ BassAni_Hurt:
 BassAni_Blank:
 		dc.b  $77, frB_Null, afEnd
 BassAni_FireStanding:
-		dc.b    1, frB_Fire, afEnd
+		dc.b	1, frB_Fire, afEnd
 BassAni_FireWalking:
 		dc.b	6, frB_Walk1F, frB_Walk2F, frB_Walk3F, frB_Walk4F, frB_Walk5F, frB_Walk6F, afEnd
 BassAni_FireJumpingUp:
-		dc.b  $77, frB_FireJUp, afEnd
+		dc.b	1, frB_FireJUp, afEnd
 BassAni_FireJumpingDiagUp:
-		dc.b  $77, frB_FireJDiagUp, afEnd
+		dc.b	1, frB_FireJDiagUp, afEnd
 BassAni_FireJumpingStraight:
-		dc.b  $77, frB_FireJStraight, afEnd
+		dc.b	1, frB_FireJStraight, afEnd
 BassAni_FireJumpingDiagDown:
-		dc.b  $77, frB_FireJDiagDown, afEnd
+		dc.b	1, frB_FireJDiagDown, afEnd
 BassAni_FireSteadyUp:
-		dc.b  $77, frB_FireSUp, afEnd
+		dc.b	1, frB_FireSUp, afEnd
 BassAni_FireSteadyDiagUp:
-		dc.b  $77, frB_FireSDiagUp, afEnd
+		dc.b	1, frB_FireSDiagUp, afEnd
 BassAni_FireSteadyStraight:
-		dc.b  $77, frB_FireSStraight, afEnd
+		dc.b	1, frB_FireSStraight, afEnd
 BassAni_FireSteadyDiagDown:
-		dc.b  $77, frB_FireSDiagDown, afEnd
+		dc.b	1, frB_FireSDiagDown, afEnd
 BassAni_ThrowStanding:
-		dc.b  $77, frB_ThrowS, afEnd
+		dc.b	1, frB_ThrowS, afEnd
 BassAni_ThrowJumping:
-		dc.b  $77, frB_ThrowJ, afEnd
+		dc.b	1, frB_ThrowJ, afEnd
+BassAni_ShieldStanding:
+		dc.b	4, frB_ShieldS1, frB_ShieldS2, frB_ShieldS3, afBack, 1
+BassAni_ShieldJumping:
+		dc.b	4, frB_ShieldJ1, frB_ShieldJ2, frB_ShieldJ3, afBack, 1
+BassAni_AquaUp:
+		dc.b	1, frB_AquaDriveU1, afEnd
+BassAni_AquaDiagUp:
+		dc.b	1, frB_AquaDriveU2, afEnd
+BassAni_AquaNeutral:
+		dc.b	1, frB_AquaDriveF1, afEnd
+BassAni_AquaFwd:
+		dc.b	1, frB_AquaDriveF2, afEnd
+BassAni_AquaDiagDown:
+		dc.b	1, frB_AquaDriveD1, afEnd
+BassAni_AquaDown:
+		dc.b	1, frB_AquaDriveD2, afEnd
+BassAni_FireAqua:
+		dc.b	1, frB_FireA, afEnd
+BassAni_ThrowAqua:
+		dc.b	1, frB_ThrowA, afEnd
+BassAni_ShieldAqua:
+		dc.b	4, frB_ShieldA1, frB_ShieldA2, frB_ShieldA3, afBack, 1
 	even
 
 ; Animation IDs
@@ -112,50 +145,61 @@ id_FireSteadyStraight:	ds.b 1
 id_FireSteadyDiagDown:	ds.b 1
 id_ThrowStanding:		ds.b 1
 id_ThrowJumping:		ds.b 1
+id_ShieldStanding:		ds.b 1
+id_ShieldJumping:		ds.b 1
+id_AquaUp:				ds.b 1
+id_AquaDiagUp:			ds.b 1
+id_AquaNeutral:			ds.b 1
+id_AquaFwd:				ds.b 1
+id_AquaDiagDown:		ds.b 1
+id_AquaDown:			ds.b 1
+id_FireAqua:			ds.b 1
+id_ThrowAqua:			ds.b 1
+id_ShieldAqua:			ds.b 1
 	even
 	dephase
 
 ; Frame IDs
 	phase 0 ; Reset ds.b value to 0
-frB_Null:	ds.b 1
-frB_Idle1:	ds.b 1
-frB_Idle2:	ds.b 1
-frB_Step:	ds.b 1
-frB_Walk1:	ds.b 1
-frB_Walk2:	ds.b 1
-frB_Walk3:	ds.b 1
-frB_Walk4:	ds.b 1
-frB_Walk5:	ds.b 1
-frB_Walk6:	ds.b 1
-frB_Fire:	ds.b 1
-frB_Walk1F:	ds.b 1
-frB_Walk2F:	ds.b 1
-frB_Walk3F:	ds.b 1
-frB_Walk4F:	ds.b 1
-frB_Walk5F:	ds.b 1
-frB_Walk6F:	ds.b 1
-frB_Tele1:	ds.b 1
-frB_Tele2:	ds.b 1
-frB_Tele3:	ds.b 1
-frB_Tele4:	ds.b 1
-frB_Tele5:	ds.b 1
-frB_Tele6:	ds.b 1
-frB_Tele7:	ds.b 1
-frB_Tele8:	ds.b 1
-frB_Tele9:	ds.b 1
-frB_Hurt:	ds.b 1
-frB_Stun:	ds.b 1
+frB_Null:		ds.b 1
+frB_Idle1:		ds.b 1
+frB_Idle2:		ds.b 1
+frB_Step:		ds.b 1
+frB_Walk1:		ds.b 1
+frB_Walk2:		ds.b 1
+frB_Walk3:		ds.b 1
+frB_Walk4:		ds.b 1
+frB_Walk5:		ds.b 1
+frB_Walk6:		ds.b 1
+frB_Fire:		ds.b 1
+frB_Walk1F:		ds.b 1
+frB_Walk2F:		ds.b 1
+frB_Walk3F:		ds.b 1
+frB_Walk4F:		ds.b 1
+frB_Walk5F:		ds.b 1
+frB_Walk6F:		ds.b 1
+frB_Tele1:		ds.b 1
+frB_Tele2:		ds.b 1
+frB_Tele3:		ds.b 1
+frB_Tele4:		ds.b 1
+frB_Tele5:		ds.b 1
+frB_Tele6:		ds.b 1
+frB_Tele7:		ds.b 1
+frB_Tele8:		ds.b 1
+frB_Tele9:		ds.b 1
+frB_Hurt:		ds.b 1
+frB_Stun:		ds.b 1
 frB_Victory1:	ds.b 1
 frB_Victory2:	ds.b 1
-frB_Death1:	ds.b 1
-frB_Death2:	ds.b 1
-frB_Death3:	ds.b 1
-frB_Death4:	ds.b 1
-frB_Death5:	ds.b 1
-frB_Dash:	ds.b 1
-frB_Jump:	ds.b 1
-frB_JumpT:	ds.b 1
-frB_Fall:	ds.b 1
+frB_Death1:		ds.b 1
+frB_Death2:		ds.b 1
+frB_Death3:		ds.b 1
+frB_Death4:		ds.b 1
+frB_Death5:		ds.b 1
+frB_Dash:		ds.b 1
+frB_Jump:		ds.b 1
+frB_JumpT:		ds.b 1
+frB_Fall:		ds.b 1
 frB_FireSUp:		ds.b 1
 frB_FireSDiagUp:	ds.b 1
 frB_FireSStraight:	ds.b 1
@@ -164,8 +208,25 @@ frB_FireJUp:		ds.b 1
 frB_FireJDiagUp:	ds.b 1
 frB_FireJStraight:	ds.b 1
 frB_FireJDiagDown:	ds.b 1
-frB_ThrowJ:			ds.b 1
 frB_ThrowS:			ds.b 1
-frB_Last:	ds.b 0
+frB_ThrowJ:			ds.b 1
+frB_ShieldS1:		ds.b 1
+frB_ShieldS2:		ds.b 1
+frB_ShieldS3:		ds.b 1
+frB_ShieldJ1:		ds.b 1
+frB_ShieldJ2:		ds.b 1
+frB_ShieldJ3:		ds.b 1
+frB_AquaDriveU1:	ds.b 1
+frB_AquaDriveU2:	ds.b 1
+frB_AquaDriveF1:	ds.b 1
+frB_AquaDriveF2:	ds.b 1
+frB_AquaDriveD1:	ds.b 1
+frB_AquaDriveD2:	ds.b 1
+frB_FireA:			ds.b 1
+frB_ThrowA:			ds.b 1
+frB_ShieldA1:		ds.b 1
+frB_ShieldA2:		ds.b 1
+frB_ShieldA3:		ds.b 1
+frB_Last:			ds.b 0
 	even
 	dephase

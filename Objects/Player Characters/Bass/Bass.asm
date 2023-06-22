@@ -153,6 +153,14 @@ Bass_MdNormal:
 ; Called if Sonic is airborne, but not in a ball (thus, probably not jumping)
 ; Bass_Stand_Freespace:
 Bass_MdAir:
+		btst	#Status_Underwater,status(a0)	; is Sonic underwater?
+		beq.s	.notUW
+		btst	#0,double_jump_flag(a0)
+		bne.s	Bass_MdAquaDrive
+		bra.s	.cont
+	.notUW:
+		bclr	#0,double_jump_flag(a0)	; clear Aqua Drive
+	.cont:
 		bsr.w	Player_WeaponSwitch
 		bsr.w	Player_Shoot
 		bsr.w	Player_HandleAirAnimations
@@ -165,10 +173,153 @@ Bass_MdAir:
 		btst	#Status_Underwater,status(a0)	; is Sonic underwater?
 		beq.s	loc_10FD6				; if not, branch
 		subi.w	#$28,y_vel(a0)			; reduce gravity by $28 ($38-$28=$10)
+		btst	#bitC,(Ctrl_1_pressed_logical).w	; is C pressed, not held?
+		beq.s	loc_10FD6							; if not, skip
+		bset	#0,double_jump_flag(a0)				; enable Aqua Drive
 
 loc_10FD6:
 		bsr.w	Player_JumpAngle
 		bra.w	Player_DoLevelCollision
+; ---------------------------------------------------------------------------
+; Start of subroutine Bass_MdAquaDrive
+; Called if Bass is swimming with the Aqua Drive module
+Bass_MdAquaDrive:
+		bsr.w	Player_WeaponSwitch
+		bsr.w	Player_Shoot
+		bsr.s	Bass_AquaDrive
+		bsr.w	Bass_HandleAquaDriveAnimations
+		bsr.w	Player_LevelBound
+		jsr		(MoveSprite).w
+		bra.w	Player_DoLevelCollision
+
+Bass_AquaDrive:	; bro he actually is a fish!!!! wow!!!!
+		btst	#bitC,(Ctrl_1_pressed_logical).w	; is C pressed, not held?
+		beq.s	.skip								; if not, skip
+		bclr	#0,double_jump_flag(a0)				; Disable Aqua Drive
+		rts											; return
+	.skip:
+		tst.b	shoottimer(a0)	; is the player currently shooting?
+		beq.s	.skip2			; if not, skip
+		clr.w	x_vel(a0)
+		clr.w	y_vel(a0)
+		rts						; return
+	.skip2:
+		btst	#bitUp,(Ctrl_1_held_logical).w
+		bne.s	Bass_AquaDrive_Up
+		btst	#bitDn,(Ctrl_1_held_logical).w
+		bne.s	Bass_AquaDrive_Down
+		clr.w	y_vel(a0)
+		btst	#bitL,(Ctrl_1_held_logical).w
+		bne.s	.left
+		btst	#bitR,(Ctrl_1_held_logical).w
+		bne.s	.right
+		clr.w	x_vel(a0)
+		rts
+	.right:
+		move.w	#$400,x_vel(a0)
+		bclr	#Status_Facing,status(a0)
+		rts
+	.left:
+		move.w	#-$400,x_vel(a0)
+		bset	#Status_Facing,status(a0)
+		rts
+
+Bass_AquaDrive_Up:
+		move.w	#-$400,y_vel(a0)
+		btst	#bitR,(Ctrl_1_held_logical).w
+		bne.s	.right
+		btst	#bitL,(Ctrl_1_held_logical).w
+		bne.s	.left
+		clr.w	x_vel(a0)
+		rts
+	.right:
+		move.w	#$400,x_vel(a0)
+		bclr	#Status_Facing,status(a0)
+		rts
+	.left:
+		move.w	#-$400,x_vel(a0)
+		bset	#Status_Facing,status(a0)
+		rts
+
+Bass_AquaDrive_Down:
+		move.w	#$400,y_vel(a0)
+		btst	#bitR,(Ctrl_1_held_logical).w
+		bne.s	.right
+		btst	#bitL,(Ctrl_1_held_logical).w
+		bne.s	.left
+		clr.w	x_vel(a0)
+		rts
+	.right:
+		move.w	#$400,x_vel(a0)
+		bclr	#Status_Facing,status(a0)
+		rts
+	.left:
+		move.w	#-$400,x_vel(a0)
+		bset	#Status_Facing,status(a0)
+		rts
+
+Bass_HandleAquaDriveAnimations:
+		tst.b	shoottimer(a0)
+		beq.s	.notShooting
+		moveq	#0,d0
+		move.b	(v_shottype).w,d0
+		add.w	d0,d0
+		add.w	d0,d0
+		movea.l	.typesLUT(pc,d0.w),a2
+		jmp		(a2)
+	.typesLUT:
+		dc.l	AnimType_AquaNormalFire
+		dc.l	AnimType_AquaNormalFire
+		dc.l	AnimType_AquaThrow
+		dc.l	AnimType_AquaShield
+
+	.notShooting:
+		btst	#bitUp,(Ctrl_1_held_logical).w
+		bne.s	.up
+		btst	#bitDn,(Ctrl_1_held_logical).w
+		bne.s	.down
+		btst	#bitL,(Ctrl_1_held_logical).w
+		bne.s	.fwd
+		btst	#bitR,(Ctrl_1_held_logical).w
+		bne.s	.fwd
+		move.b	#id_AquaNeutral,anim(a0)
+		rts
+	.fwd:
+		move.b	#id_AquaFwd,anim(a0)
+		rts
+	.up:
+		btst	#bitR,(Ctrl_1_held_logical).w
+		bne.s	.diagup
+		btst	#bitL,(Ctrl_1_held_logical).w
+		bne.s	.diagup
+		move.b	#id_AquaUp,anim(a0)
+		rts
+	.diagup:
+		move.b	#id_AquaDiagUp,anim(a0)
+		rts
+	.down:
+		btst	#bitR,(Ctrl_1_held_logical).w
+		bne.s	.diagdown
+		btst	#bitL,(Ctrl_1_held_logical).w
+		bne.s	.diagdown
+		move.b	#id_AquaDown,anim(a0)
+		rts
+	.diagdown:
+		move.b	#id_AquaDiagDown,anim(a0)
+		rts
+
+AnimType_AquaNormalFire:
+		move.b	#id_FireAqua,anim(a0)
+		rts
+
+AnimType_AquaThrow:
+		move.b	#id_ThrowAqua,anim(a0)
+		rts
+
+AnimType_AquaShield:
+		move.b	#id_ShieldAqua,anim(a0)
+		rts
+
 ; ---------------------------------------------------------------------------
 ; Start of subroutine Bass_MdRoll
 ; Called if Bass is dashing
@@ -344,7 +495,7 @@ loc_113FE:
 loc_11412:
 		cmpi.b	#id_FireSteadyUp,anim(a0)
 		blt.s	.cont
-		cmpi.b	#id_ThrowStanding,anim(a0)
+		cmpi.b	#id_ShieldStanding,anim(a0)
 		bgt.s	.cont
 		rts
 	.cont:

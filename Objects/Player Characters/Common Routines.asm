@@ -660,6 +660,7 @@ Player_HandleGroundAnimations:
 		dc.l	AnimType_GroundNormalFire
 		dc.l	AnimType_GroundSemiCardinalFire
 		dc.l	AnimType_GroundThrow
+		dc.l	AnimType_GroundShield
 
 	.notShooting:
 		mvabs.w	ground_vel(a0),d0	; Standing still?
@@ -710,6 +711,10 @@ AnimType_GroundThrow:
 		move.b	#id_ThrowStanding,anim(a0)
 		rts
 
+AnimType_GroundShield:
+		move.b	#id_ShieldStanding,anim(a0)
+		rts
+
 Player_HandleAirAnimations:
 		tst.b	shoottimer(a0)
 		beq.s	.notShooting
@@ -723,6 +728,7 @@ Player_HandleAirAnimations:
 		dc.l	AnimType_JumpNormalFire
 		dc.l	AnimType_JumpSemiCardinalFire
 		dc.l	AnimType_JumpThrow
+		dc.l	AnimType_JumpShield
 	.notShooting:
 		tst.w	y_vel(a0)
 		bmi.s	.rising
@@ -765,4 +771,8 @@ AnimType_JumpSemiCardinalFire:
 
 AnimType_JumpThrow:
 		move.b	#id_ThrowJumping,anim(a0)
+		rts
+
+AnimType_JumpShield:
+		move.b	#id_ShieldJumping,anim(a0)
 		rts

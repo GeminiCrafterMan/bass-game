@@ -22,9 +22,9 @@ DebugMode:
 		bclr	#Status_Underwater,status(a0)
 		beq.s	.select
 		movea.w	a0,a1
-		move.w	#$600,(Sonic_Knux_top_speed).w
+		move.w	#$300,(Sonic_Knux_top_speed).w
 		move.w	#$C,(Sonic_Knux_acceleration).w
-		move.w	#$80,(Sonic_Knux_deceleration).w
+		move.w	#$E0,(Sonic_Knux_deceleration).w
 
 .select
 		moveq	#0,d0
