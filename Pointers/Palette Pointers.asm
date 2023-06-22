@@ -20,7 +20,7 @@ ptr_Pal_BassUtil2:		palp	Pal_BassTreble, Normal_palette_line_1, 16		; Bass
 ptr_Pal_CopyRobot:		palp	Pal_CopyRobot, Normal_palette_line_1, 16			; CopyRobot
 ptr_Pal_CopyRobotWep1:	palp	Pal_CopyRobot, Normal_palette_line_1, 16			; CopyRobot
 ptr_Pal_CopyRobotWep2:	palp	Pal_CopyRobot, Normal_palette_line_1, 16			; CopyRobot
-ptr_Pal_CopyRobotWep3:	palp	Pal_CopyRobot, Normal_palette_line_1, 16			; CopyRobot
+ptr_Pal_CopyRobotWep3:	palp	Pal_CopyRobotToxicCloud, Normal_palette_line_1, 16	; CopyRobot
 ptr_Pal_CopyRobotWep4:	palp	Pal_CopyRobot, Normal_palette_line_1, 16			; CopyRobot
 ptr_Pal_CopyRobotWep5:	palp	Pal_CopyRobot, Normal_palette_line_1, 16			; CopyRobot
 ptr_Pal_CopyRobotWep6:	palp	Pal_CopyRobot, Normal_palette_line_1, 16			; CopyRobot
@@ -28,8 +28,6 @@ ptr_Pal_CopyRobotWep7:	palp	Pal_CopyRobot, Normal_palette_line_1, 16			; CopyRob
 ptr_Pal_CopyRobotWep8:	palp	Pal_CopyRobotMetalBlade, Normal_palette_line_1, 16	; CopyRobot
 ptr_Pal_CopyRobotUtil1:	palp	Pal_CopyRobotCarry, Normal_palette_line_1, 16		; CopyRobot
 ptr_Pal_CopyRobotUtil2:	palp	Pal_CopyRobot, Normal_palette_line_1, 16			; CopyRobot
-
-ptr_Pal_WaterSonic:		palp	Pal_WaterSonic, Water_palette_line_1, 16	; Water Sonic	; get rid of this shit later
 
 ; Levels
 ptr_Pal_GenericLevel:	palp	Pal_GenericLevel, Normal_palette_line_2, 48		; GenericLevel
@@ -39,6 +37,7 @@ ptr_Pal_Blaze:			palp	Pal_Blaze, Normal_palette_line_2, 48		; Blaze Man
 ptr_Pal_Video:			palp	Pal_Video, Normal_palette_line_2, 48		; Video Man
 ptr_Pal_Smog:			palp	Pal_Smog, Normal_palette_line_2, 48			; Smog Man
 ptr_Pal_Shark:			palp	Pal_Shark, Normal_palette_line_2, 48		; Shark Man
+ptr_Pal_SharkUW:		palp	Pal_SharkUW, Water_palette_line_2, 48		; Shark Man (underwater)
 ptr_Pal_Origami:		palp	Pal_Origami, Normal_palette_line_2, 48		; Origami Man
 
 ; Misc
@@ -61,6 +60,7 @@ palid_BassWep6:			equ (ptr_Pal_BassWep6-PalPointers)/8			; Bass
 palid_BassWep7:			equ (ptr_Pal_BassWep7-PalPointers)/8			; Bass
 palid_BassWep8:			equ (ptr_Pal_BassWep8-PalPointers)/8			; Bass
 palid_BassUtil1:		equ (ptr_Pal_BassUtil1-PalPointers)/8			; Bass
+palid_BassUtil2:		equ (ptr_Pal_BassUtil2-PalPointers)/8			; Bass
 
 palid_CopyRobot:		equ (ptr_Pal_CopyRobot-PalPointers)/8			; CopyRobot
 palid_CopyRobotWep1:	equ (ptr_Pal_CopyRobotWep1-PalPointers)/8		; CopyRobot
@@ -72,8 +72,7 @@ palid_CopyRobotWep6:	equ (ptr_Pal_CopyRobotWep6-PalPointers)/8		; CopyRobot
 palid_CopyRobotWep7:	equ (ptr_Pal_CopyRobotWep7-PalPointers)/8		; CopyRobot
 palid_CopyRobotWep8:	equ (ptr_Pal_CopyRobotWep8-PalPointers)/8		; CopyRobot
 palid_CopyRobotUtil1:	equ (ptr_Pal_CopyRobotUtil1-PalPointers)/8		; CopyRobot
-
-palid_WaterSonic:		equ (ptr_Pal_WaterSonic-PalPointers)/8			; Water Sonic
+palid_CopyRobotUtil2:	equ (ptr_Pal_CopyRobotUtil2-PalPointers)/8		; CopyRobot
 
 ; Levels
 palid_GenericLevel:		equ (ptr_Pal_GenericLevel-PalPointers)/8				; GenericLevel
@@ -83,6 +82,7 @@ palid_Blaze:			equ (ptr_Pal_Blaze-PalPointers)/8				; Blaze Man
 palid_Video:			equ (ptr_Pal_Video-PalPointers)/8				; Video Man
 palid_Smog:				equ (ptr_Pal_Smog-PalPointers)/8				; Smog Man
 palid_Shark:			equ (ptr_Pal_Shark-PalPointers)/8				; Shark Man
+palid_SharkUW:			equ (ptr_Pal_SharkUW-PalPointers)/8				; Shark Man (underwater)
 palid_Origami:			equ (ptr_Pal_Origami-PalPointers)/8				; Origami Man
 
 ; Misc

@@ -896,7 +896,7 @@ Restart_LevelData:
 		bsr.s	Clear_Switches
 		bsr.w	Load_Level
 		bsr.w	Load_Solids
-		bra.w	CheckLevelForWater
+		bra.w	StartLevelWater
 
 ; =============== S U B R O U T I N E =======================================
 

@@ -374,6 +374,7 @@ a_act:								= *
 Apparent_act:						ds.b 1
 Player_mode:						ds.b 1
 RM_Stage_Selected:					ds.b 1
+waterValues:						ds.l 1
 f_timeover:							= *
 Time_over_flag:						ds.b 1
 f_ringcount:						= *

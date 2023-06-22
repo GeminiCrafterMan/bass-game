@@ -67,27 +67,17 @@ No_WaterResize:
 
 ; =============== S U B R O U T I N E =======================================
 
-CheckLevelForWater:
-		move.w	#$1000,d0
-		move.w	d0,(Water_level).w
-		move.w	d0,(Mean_water_level).w
-		move.w	d0,(Target_water_level).w
-		clr.b	(Water_flag).w
-
-CheckLevelForWater_Return:
-		rts
-; ---------------------------------------------------------------------------
-
 StartLevelWater:
 		st	(Water_flag).w
-
-		tst.b	(Water_flag).w
-		beq.s	LoadWaterPalette
 		moveq	#0,d0
 		move.w	(Current_zone_and_act).w,d0
 		ror.b	#2,d0
 		lsr.w	#5,d0
 		move.w	StartingWaterHeights(pc,d0.w),d0
+		cmpi.w	#$FFFF,d0
+		bne.s	.keepWaterOn
+		clr.b	(Water_flag).w
+	.keepWaterOn:
 		move.w	d0,(Water_level).w
 		move.w	d0,(Mean_water_level).w
 		move.w	d0,(Target_water_level).w
@@ -97,7 +87,7 @@ StartLevelWater:
 
 LoadWaterPalette:
 		tst.b	(Water_flag).w
-		beq.s	CheckLevelForWater_Return
+		beq.s	.ret
 		moveq	#0,d0
 		move.w	(Current_zone_and_act).w,d0
 		ror.b	#2,d0
@@ -107,17 +97,20 @@ LoadWaterPalette:
 		jsr	(LoadPalette2).w
 		move.w	d1,d0
 		jmp	(LoadPalette2_Immediate).w
+	.ret:
+		rts
 ; ---------------------------------------------------------------------------
 
 StartingWaterHeights:
 	rept 4
-		dc.w $400	; DEZ 1
+		dc.w $FFFF
 	endr
+		dc.w $FFFF	; Blaze Man
+		dc.w $FFFF	; Video Man
+		dc.w $FFFF	; Smog Man
+		dc.w $200	; Shark Man
 	rept 4
-		dc.w $400	; DEZ 1
-	endr
-	rept 4
-		dc.w $400	; DEZ 1
+		dc.w $FFFF
 	endr
 
 		zonewarning StartingWaterHeights,(2*4)
@@ -125,7 +118,7 @@ StartingWaterHeights:
 
 WaterPalette_Index:
 		dc.b	palid_GenericLevel,	palid_Air,	palid_GenericLevel,	palid_GenericLevel		; DEZ 1,2,3,4
-		dc.b	palid_Blaze,	palid_Video,	palid_Smog,		palid_Shark
+		dc.b	palid_Blaze,	palid_Video,	palid_Smog,		palid_SharkUW
 		dc.b	palid_Origami,	palid_GenericLevel,	palid_GenericLevel,	palid_GenericLevel		; DEZ 1,2,3,4
 
 		zonewarning WaterPalette_Index,(1*4)

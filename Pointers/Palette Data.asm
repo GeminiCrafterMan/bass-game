@@ -17,11 +17,11 @@ Pal_BassMetalBlade:		binclude "Objects/Player Characters/Bass/Palettes/Metal Bla
 	even
 Pal_BassTreble:			binclude "Objects/Player Characters/Bass/Palettes/Treble Boost.bin"
 	even
-Pal_WaterSonic:			binclude "Objects/Player Characters/Bass/Palettes/Water Sonic.bin"
-	even
 
 ; Copy Robot
 Pal_CopyRobot:				binclude "Objects/Player Characters/Copy Robot/Palettes/Copy Robot.bin"
+	even
+Pal_CopyRobotToxicCloud:	binclude "Objects/Player Characters/Copy Robot/Palettes/Toxic Cloud.bin"
 	even
 Pal_CopyRobotMetalBlade:	binclude "Objects/Player Characters/Copy Robot/Palettes/Metal Blade.bin"
 	even
@@ -61,6 +61,8 @@ Pal_Video:			binclude "Levels/Robot Master stages/Palettes/Video Man stage.bin"
 Pal_Smog:			binclude "Levels/Robot Master stages/Palettes/Smog Man stage.bin"
 	even
 Pal_Shark:			binclude "Levels/Robot Master stages/Palettes/Shark Man stage.bin"
+	even
+Pal_SharkUW:		binclude "Levels/Robot Master stages/Palettes/Shark Man stage water.bin"
 	even
 Pal_Origami:		binclude "Levels/Robot Master stages/Palettes/Origami Man stage.bin"
 	even

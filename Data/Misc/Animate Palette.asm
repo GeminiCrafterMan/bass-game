@@ -15,7 +15,8 @@ Animate_Palette:
 
 AnPal_Load:
 		movea.l	(Level_data_addr_RAM.AnPal).w,a0
-		jmp	(a0)
+		jsr	(a0)
+		jmp		updateWaterShift
 ; ---------------------------------------------------------------------------
 
 AnPal_CopyChargeShot:
