@@ -1,7 +1,7 @@
 {
     "Flex": 2,
     "name": "",
-    "node": "0c7872ed-187e-4c57-9b1c-7531db1bfa0d",
+    "node": "f84f415b-2482-4150-b10e-809f34fe030c",
     "objects": [
         {
             "format": "Sonic 3&K Player.js",
@@ -253,6 +253,31 @@
                     },
                     "uuid": "d0f213b2-03de-42a0-abc5-cdf2406ea05a",
                     "expanded": true
+                },
+                {
+                    "format": "Sonic 3&K Object.js",
+                    "name": "Carry platform",
+                    "palettes": [
+                        {
+                            "path": "Objects/Player Characters/Copy Robot/Palettes/Carry.bin",
+                            "length": 1
+                        }
+                    ],
+                    "art": {
+                        "path": "Objects/Player Projectiles/KosinskiM Art/Carry Platform.bin",
+                        "compression": "Kosinski-M",
+                        "offset": 0
+                    },
+                    "mappings": {
+                        "path": "Objects/Player Projectiles/Object Data/Map - Carry Platform.bin",
+                        "label": ""
+                    },
+                    "dplcs": {
+                        "enabled": false,
+                        "path": "",
+                        "label": ""
+                    },
+                    "uuid": "f84f415b-2482-4150-b10e-809f34fe030c"
                 }
             ],
             "isDirectory": true,

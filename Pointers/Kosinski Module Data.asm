@@ -35,6 +35,8 @@ ArtKosM_BusterShots:			binclude "Objects/Player Projectiles/KosinskiM Art/Buster
 	even
 ArtKosM_MetalBlade:				binclude "Objects/Player Projectiles/KosinskiM Art/Metal Blade.bin"
 	even
+ArtKosM_CarryPlatform:			binclude "Objects/Player Projectiles/KosinskiM Art/Carry Platform.bin"
+	even
 
 ; ===========================================================================
 ; Kosinski Module compressed title card graphics

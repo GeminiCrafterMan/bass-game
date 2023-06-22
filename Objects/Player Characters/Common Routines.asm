@@ -137,7 +137,7 @@ Player_Shoot:
 		dc.l	Weapon_NoAmmo		; Master Wep 6
 		dc.l	Weapon_NoAmmo		; Master Wep 7
 		dc.l	Weapon_MetalBlade	; Master Wep 8
-		dc.l	Weapon_NoAmmo		; Utility 1
+		dc.l	Utility_Carry		; Utility 1
 		dc.l	Weapon_NoAmmo		; Utility 2
 
 FireWeapon:
