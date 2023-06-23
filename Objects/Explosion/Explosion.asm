@@ -29,7 +29,7 @@ loc_1E626:
 		move.l	#Map_Explosion,mappings(a0)
 		move.w	art_tile(a0),d0
 		andi.w	#$8000,d0
-		ori.w	#$5A0,d0
+		ori.w	#ArtTile_Explosion,d0
 		move.w	d0,art_tile(a0)
 		move.b	#4,render_flags(a0)
 		move.w	#$80,priority(a0)
@@ -55,7 +55,7 @@ loc_1E66E:
 
 Obj_FireShield_Dissipate:
 		move.l	#Map_Explosion,mappings(a0)
-		move.w	#$5A0,art_tile(a0)
+		move.w	#make_art_tile(ArtTile_Explosion,0,0),art_tile(a0)
 		move.b	#4,render_flags(a0)
 		move.w	#$280,priority(a0)
 		move.w	#bytes_to_word(24/2,24/2),height_pixels(a0)		; set height and width
@@ -78,7 +78,7 @@ Obj_FireShield_Dissipate:
 
 sub_1E6EC:
 		move.l	#Map_Explosion,mappings(a0)
-		move.w	#$85A0,art_tile(a0)
+		move.w	#make_art_tile(ArtTile_Explosion,0,1),art_tile(a0)
 		move.b	#4,render_flags(a0)
 		move.w	#$100,priority(a0)
 		move.w	#bytes_to_word(24/2,24/2),height_pixels(a0)		; set height and width
@@ -102,26 +102,6 @@ sub_1E6EC:
 
 loc_1E758:
 		jmp	(Delete_Current_Sprite).w
-; ---------------------------------------------------------------------------
-; Enemy score (Object)
-; ---------------------------------------------------------------------------
-
-; =============== S U B R O U T I N E =======================================
-
-Obj_EnemyScore:
-		move.l	#Map_EnemyScore,mappings(a0)
-		move.w	#make_art_tile(ArtTile_StarPost,0,1),art_tile(a0)
-		move.b	#4,render_flags(a0)
-		move.w	#$80,priority(a0)
-		move.b	#16/2,width_pixels(a0)
-		move.w	#-$300,y_vel(a0)
-		move.l	#.main,address(a0)
-
-.main
-		jsr	(MoveSprite2).w
-		addi.w	#$18,y_vel(a0)
-		bpl.s	loc_1E758
-		jmp	(Draw_Sprite).w
 ; ---------------------------------------------------------------------------
 
 Map_Explosion:		binclude "Objects/Explosion/Object Data/Map - Explosion.bin"

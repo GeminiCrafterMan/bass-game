@@ -459,13 +459,14 @@ Status_ObjDefeated =		7
 ; Universal (used on all standard levels)
 ; ---------------------------------------------------------------------------
 
-ArtTile_Monitors =			$4AC
-ArtTile_HammerJoe =			$4C7
-ArtTile_SniperJoe =			$50E
-ArtTile_Metall =			$53C
-ArtTile_FireTelly =			$56D
-ArtTile_Pickups =			$581
-ArtTile_StarPost =			$5E4
+ArtTile_Target =			$484
+ArtTile_HammerJoe =			$491
+ArtTile_SniperJoe =			$4E2
+ArtTile_Metall =			$519
+ArtTile_FireTelly =			$540
+ArtTile_Pickups =			$5C0
+ArtTile_Explosion =			$5DF
+ArtTile_StarPost =			$5F2
 ArtTile_HUD =				$6C4
 ArtTile_BusterShots =		$79C
 ArtTile_Sonic =				$79E

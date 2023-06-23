@@ -8,7 +8,7 @@ ArtKosM_Pickups:				binclude "Objects/Pickups/KosinskiM Art/Pickups.bin"
 	even
 ArtKosM_Explosion:				binclude "Objects/Explosion/KosinskiM Art/Explosion.bin"
 	even
-ArtKosM_EnemyPtsStarPost:		binclude "Objects/StarPost/KosinskiM Art/Enemy points.bin"
+ArtKosM_StarPost:				binclude "Objects/StarPost/KosinskiM Art/Starpost.bin"
 	even
 ArtKosM_GrayButton:				binclude "Objects/Button/KosinskiM Art/Gray Button.bin"
 	even

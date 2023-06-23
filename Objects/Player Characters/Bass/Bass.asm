@@ -216,16 +216,16 @@ Bass_AquaDrive:	; bro he actually is a fish!!!! wow!!!!
 		clr.w	x_vel(a0)
 		rts
 	.right:
-		move.w	#$400,x_vel(a0)
+		move.w	#$200,x_vel(a0)
 		bclr	#Status_Facing,status(a0)
 		rts
 	.left:
-		move.w	#-$400,x_vel(a0)
+		move.w	#-$200,x_vel(a0)
 		bset	#Status_Facing,status(a0)
 		rts
 
 Bass_AquaDrive_Up:
-		move.w	#-$400,y_vel(a0)
+		move.w	#-$200,y_vel(a0)
 		btst	#bitR,(Ctrl_1_held_logical).w
 		bne.s	.right
 		btst	#bitL,(Ctrl_1_held_logical).w
@@ -233,16 +233,16 @@ Bass_AquaDrive_Up:
 		clr.w	x_vel(a0)
 		rts
 	.right:
-		move.w	#$400,x_vel(a0)
+		move.w	#$200,x_vel(a0)
 		bclr	#Status_Facing,status(a0)
 		rts
 	.left:
-		move.w	#-$400,x_vel(a0)
+		move.w	#-$200,x_vel(a0)
 		bset	#Status_Facing,status(a0)
 		rts
 
 Bass_AquaDrive_Down:
-		move.w	#$400,y_vel(a0)
+		move.w	#$200,y_vel(a0)
 		btst	#bitR,(Ctrl_1_held_logical).w
 		bne.s	.right
 		btst	#bitL,(Ctrl_1_held_logical).w
@@ -250,11 +250,11 @@ Bass_AquaDrive_Down:
 		clr.w	x_vel(a0)
 		rts
 	.right:
-		move.w	#$400,x_vel(a0)
+		move.w	#$200,x_vel(a0)
 		bclr	#Status_Facing,status(a0)
 		rts
 	.left:
-		move.w	#-$400,x_vel(a0)
+		move.w	#-$200,x_vel(a0)
 		bset	#Status_Facing,status(a0)
 		rts
 
@@ -894,6 +894,10 @@ Bass_StartDash:
 		beq.s	.noFlip
 		neg.w	d0
 	.noFlip:
+		btst	#Status_Underwater,status(a0)
+		beq.s	.notUnderwater
+		asr.w	d0
+	.notUnderwater:
 		move.w	d0,ground_vel(a0)	; set ground vel
 		move.b	#id_Dash,anim(a0)
 		move.b	#30,dashtimer(a0)

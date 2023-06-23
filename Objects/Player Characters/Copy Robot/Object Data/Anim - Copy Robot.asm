@@ -32,25 +32,25 @@ CopyAni_Step:
 CopyAni_Walk:
 		dc.b	6, frC_Walk1, frC_Walk2, frC_Walk3, frC_Walk4, frC_Walk5, frC_Walk6, afEnd
 CopyAni_Jump:
-		dc.b    4, frC_Jump1, frC_Jump2, afEnd
+		dc.b	4, frC_Jump1, frC_Jump2, afEnd
 CopyAni_JumpTransition:
-		dc.b    6, frC_JumpT, afEnd
+		dc.b	6, frC_JumpT, afEnd
 CopyAni_Fall:
-		dc.b    4, frC_Fall1, frC_Fall2, afEnd
+		dc.b	4, frC_Fall1, frC_Fall2, afEnd
 CopyAni_Wait:
 		dc.b	4
-		rept   8
+		rept	8
 			dc.b	frC_Idle1, frC_Idle2
 		endr
 			dc.b	frC_Idle3, frC_Idle4
 		dc.b	afEnd
 CopyAni_Slide:
-		dc.b    4, frC_Slide1, frC_Slide2, afEnd
+		dc.b	4, frC_Slide1, frC_Slide2, afEnd
 CopyAni_Victory:
-		dc.b    3, frC_Victory1, frC_Victory2, afEnd
+		dc.b	3, frC_Victory1, frC_Victory2, afEnd
 CopyAni_Death:
-		dc.b  1
-		rept  6
+		dc.b	1
+		rept	6
 			dc.b	frC_Death1, frC_Death2, frC_Death2, frC_Death3, frC_Death4, frC_Death4, frC_Death5
 		endr
 		dc.b  frC_Null, frC_Null, frC_Null, afEnd
@@ -59,29 +59,29 @@ CopyAni_Hurt:
 CopyAni_Blank:
 		dc.b  $77, frC_Null, afEnd
 CopyAni_FireStanding:
-		dc.b    4, frC_Fire1, frC_Fire2, afEnd
+		dc.b	4, frC_Fire1, frC_Fire2, afEnd
 CopyAni_FireWalking:
 		dc.b	6, frC_Walk1F, frC_Walk2F, frC_Walk3F, frC_Walk4F, frC_Walk5F, frC_Walk6F, afEnd
 CopyAni_FireJumpingUp:
-		dc.b  $77, frC_FireJUp, afEnd
+		dc.b	1, frC_FireJUp, afEnd
 CopyAni_FireJumpingDiagUp:
-		dc.b  $77, frC_FireJDiagUp, afEnd
+		dc.b	1, frC_FireJDiagUp, afEnd
 CopyAni_FireJumpingStraight:
-		dc.b  4, frC_FireJStraight1, frC_FireJStraight2, afEnd
+		dc.b	4, frC_FireJStraight1, frC_FireJStraight2, afEnd
 CopyAni_FireJumpingDiagDown:
-		dc.b  $77, frC_FireJDiagDown, afEnd
+		dc.b	1, frC_FireJDiagDown, afEnd
 CopyAni_FireSteadyUp:
-		dc.b  $77, frC_FireSUp, afEnd
+		dc.b	1, frC_FireSUp, afEnd
 CopyAni_FireSteadyDiagUp:
-		dc.b  $77, frC_FireSDiagUp, afEnd
+		dc.b	1, frC_FireSDiagUp, afEnd
 CopyAni_FireSteadyStraight:
-		dc.b  $77, frC_FireSStraight, afEnd
+		dc.b	1, frC_FireSStraight, afEnd
 CopyAni_FireSteadyDiagDown:
-		dc.b  $77, frC_FireSDiagDown, afEnd
+		dc.b	1, frC_FireSDiagDown, afEnd
 CopyAni_ThrowStanding:
-		dc.b  $77, frC_ThrowS, afEnd
+		dc.b	1, frC_ThrowS, afEnd
 CopyAni_ThrowJumping:
-		dc.b  4, frC_ThrowJ1, frC_ThrowJ2, afEnd
+		dc.b	4, frC_ThrowJ1, frC_ThrowJ2, afEnd
 	even
 
 ; Frame IDs

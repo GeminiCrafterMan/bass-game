@@ -177,7 +177,7 @@ Obj_BossExplosionSpecial:
 ; =============== S U B R O U T I N E =======================================
 
 Obj_BossExplosion1:
-		lea	ObjDat_BossExplosion1(pc),a1
+		lea	ObjDat_BossExplosion(pc),a1
 		jsr	(SetUp_ObjAttributes).w
 
 loc_83F52:
@@ -193,14 +193,14 @@ Obj_BossExplosionAnim:
 ; =============== S U B R O U T I N E =======================================
 
 Obj_BossExplosion2:
-		lea	ObjDat_BossExplosion2(pc),a1
+		lea	ObjDat_BossExplosion(pc),a1
 		jsr	(SetUp_ObjAttributes).w
 		bra.s	loc_83F52
 
 ; =============== S U B R O U T I N E =======================================
 
 Obj_BossExplosionOffset:
-		lea	ObjDat_BossExplosion1(pc),a1
+		lea	ObjDat_BossExplosion(pc),a1
 		jsr	(SetUp_ObjAttributes).w
 		move.l	#Obj_BossExplosionOffsetAnim,address(a0)
 		move.l	#Go_Delete_Sprite,$34(a0)
@@ -213,17 +213,9 @@ Obj_BossExplosionOffsetAnim:
 
 ; =============== S U B R O U T I N E =======================================
 
-ObjDat_BossExplosion1:
+ObjDat_BossExplosion:
 		dc.l Map_BossExplosion
-		dc.w $8500
-		dc.w 0
-		dc.b 24/2
-		dc.b 24/2
-		dc.b 0
-		dc.b 0
-ObjDat_BossExplosion2:
-		dc.l Map_BossExplosion
-		dc.w $84D2
+		dc.w make_art_tile(ArtTile_Explosion,0,1)
 		dc.w 0
 		dc.b 24/2
 		dc.b 24/2
@@ -248,13 +240,15 @@ ChildObjDat_ExplosionSpecial:
 		dc.w 1-1
 		dc.l Obj_BossExplosionSpecial
 AniRaw_BossExplosion:
-		dc.b	0, 0
-		dc.b	0, 1
-		dc.b	1, 1
+		dc.b	0, 2
+		dc.b	1, 2
 		dc.b	2, 2
-		dc.b	3, 3
-		dc.b	4, 4
-		dc.b	5, 4
+		dc.b	3, 2
+		dc.b	4, 2
+		dc.b	5, 2
+		dc.b	6, 2
+		dc.b	7, 2
+		dc.b	8, 2
 		dc.b arfJump
 	even
 ; ---------------------------------------------------------------------------

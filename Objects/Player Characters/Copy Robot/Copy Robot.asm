@@ -216,11 +216,15 @@ CopyRobot_KeepSliding:
 CopyRobot_StartSlide:
 		bset	#Status_Dash,status(a0)
 		moveq	#0,d0
-		move.w	#$500,d0
+		move.w	#$480,d0
 		btst	#Status_Facing,status(a0)
 		beq.s	.noFlip
 		neg.w	d0
 	.noFlip:
+		btst	#Status_Underwater,status(a0)
+		beq.s	.notUnderwater
+		asr.w	d0
+	.notUnderwater:
 		move.w	d0,ground_vel(a0)	; set ground vel
 		move.b	#id_Dash,anim(a0)
 		move.b	#30,dashtimer(a0)

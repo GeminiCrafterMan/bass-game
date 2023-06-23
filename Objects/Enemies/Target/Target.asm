@@ -1,6 +1,6 @@
 Obj_Target:
 		move.l	#Map_Target,mappings(a0)
-		move.w	#make_art_tile(ArtTile_Monitors,0,0),art_tile(a0)
+		move.w	#make_art_tile(ArtTile_Target,0,0),art_tile(a0)
 		move.b	#4,render_flags(a0)
 		move.w	#$100,priority(a0)
 		move.b	#$B,collision_flags(a0)

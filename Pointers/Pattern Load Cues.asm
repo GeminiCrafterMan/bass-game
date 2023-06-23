@@ -24,9 +24,9 @@ Offs_PLC: offsetTable
 ; ===========================================================================
 
 PLC_Main: plrlistheader
-		plreq ArtTile_StarPost, ArtKosM_EnemyPtsStarPost	; StarPost
+		plreq ArtTile_StarPost, ArtKosM_StarPost		; StarPost
 		plreq ArtTile_HUD, ArtKosM_Hud					; HUD
-		plreq $79C, ArtKosM_BusterShots					; Buster shots
+		plreq ArtTile_BusterShots, ArtKosM_BusterShots	; Buster shots
 PLC_Main_end
 
 ; ===========================================================================
@@ -36,8 +36,8 @@ PLC_Main_end
 PLC_Main2: plrlistheader
 		plreq $47E, ArtKosM_GrayButton						; Button
 		plreq ArtTile_Pickups, ArtKosM_Pickups				; Items
-		plreq $5A0, ArtKosM_Explosion						; Explosion
-		plreq ArtTile_Monitors,	ArtKosM_Target
+		plreq ArtTile_Explosion, ArtKosM_Explosion			; Explosion
+		plreq ArtTile_Target,	ArtKosM_Target
 PLC_Main2_end
 
 ; ===========================================================================
