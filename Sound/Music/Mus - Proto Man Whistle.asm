@@ -1,116 +1,58 @@
-ProtoManWhistle_Header:
+Blues_Whistle_Header:
 	smpsHeaderStartSong 1
-	smpsHeaderVoice     ProtoManWhistle_Voices
-	smpsHeaderChan      $00, $01
-	smpsHeaderTempo     $01, $00
+	smpsHeaderVoice     Blues_Whistle_Voices
+	smpsHeaderChan      $05, $02
+	smpsHeaderTempo     $01, $04
 
-	smpsHeaderPSG       ProtoManWhistle_PSG1,	$00, $05, $00, fTone_06
+	smpsHeaderDAC       Blues_Whistle_DAC
+	smpsHeaderFM        Blues_Whistle_FM1,	$00, $03
+	smpsHeaderFM        Blues_Whistle_FM2,	$0C, $03
+	smpsHeaderFM        Blues_Whistle_FM3,	$0C, $03
+	smpsHeaderFM        Blues_Whistle_FM4,	$00, $00
+	smpsHeaderPSG       Blues_Whistle_PSG1,	$F4, $03, $00, $00
+	smpsHeaderPSG       Blues_Whistle_PSG2,	$F4, $06, $00, fTone_06
+
+; FM1 Data
+Blues_Whistle_FM1:
+	smpsStop
+
+; FM2 Data
+Blues_Whistle_FM2:
+	smpsStop
+
+; FM3 Data
+Blues_Whistle_FM3:
+	smpsStop
+
+; FM4 Data
+Blues_Whistle_FM4:
+	smpsStop
+
+; DAC Data
+Blues_Whistle_DAC:
+	smpsStop
 
 ; PSG1 Data
-ProtoManWhistle_PSG1:
-	smpsPSGAlterVol     $03
-	dc.b	nG3, $01
-	smpsPSGAlterVol     $FE
+Blues_Whistle_PSG1:
+	smpsModSet          $11, $02, $01, $01
+	dc.b	nG4, $0C, nBb4, nC5, $3C, nBb4, $07, smpsNoAttack, nBb4, nD5, $28, nRst, $03
+	;dc.b	$06, nG4, $0C, nBb4, $09, smpsNoAttack, nBb4, nCs5, $18, nC5, nBb4, $0C
+	;dc.b	nF4, nG4, $24, nRst, $0C, nG4, nBb4, nC5, $3C, nBb4, $09, smpsNoAttack
+	;dc.b	nBb4, nD5, $28, nRst, $06, nG4, $0C, nBb4, $09, smpsNoAttack, nBb4, nCs5
+	;dc.b	$18, nC5, nBb4, $0C, nF4, nG4, $24, nBb4, $30, nC5, nRst, $09
+	;dc.b	nRst, $03
+	smpsStop
 
-ProtoManWhistle_Loop00:
-	dc.b	$01
-	smpsPSGAlterVol     $FF
-	smpsLoop            $00, $03, ProtoManWhistle_Loop00
-	dc.b	$0C
-	smpsPSGAlterVol     $05
-	dc.b	nBb3, $01
-	smpsPSGAlterVol     $FE
-
-ProtoManWhistle_Loop01:
-	dc.b	$01
-	smpsPSGAlterVol     $FF
-	smpsLoop            $00, $03, ProtoManWhistle_Loop01
-	dc.b	$0C
-	smpsPSGAlterVol     $05
-	dc.b	nC4, $01
-	smpsPSGAlterVol     $FE
-
-ProtoManWhistle_Loop02:
-	dc.b	$01
-	smpsPSGAlterVol     $FF
-	smpsLoop            $00, $03, ProtoManWhistle_Loop02
-	smpsAlterNote       $01
-
-ProtoManWhistle_Loop03:
-	dc.b	$04
-	smpsAlterNote       $00
-	dc.b	smpsNoAttack, $04
-	smpsAlterNote       $01
-	dc.b	smpsNoAttack
-	smpsLoop            $00, $02, ProtoManWhistle_Loop03
-	dc.b	$04
-	smpsAlterNote       $00
-	dc.b	smpsNoAttack, $08
-	smpsAlterNote       $FF
-	dc.b	smpsNoAttack, nD4
-
-ProtoManWhistle_Loop04:
-	dc.b	$04
-	smpsAlterNote       $01
-	dc.b	smpsNoAttack, nC4, $04
-	smpsAlterNote       $00
-	dc.b	smpsNoAttack
-	smpsLoop            $00, $04, ProtoManWhistle_Loop04
-	dc.b	$10
-	smpsPSGAlterVol     $05
-	dc.b	nBb3, $01
-	smpsPSGAlterVol     $FE
-
-ProtoManWhistle_Loop05:
-	dc.b	$01
-	smpsPSGAlterVol     $FF
-	smpsLoop            $00, $03, ProtoManWhistle_Loop05
-	dc.b	$0C
-	smpsPSGAlterVol     $05
-	dc.b	nD4, $01
-	smpsPSGAlterVol     $FE
-
-ProtoManWhistle_Loop06:
-	dc.b	$01
-	smpsPSGAlterVol     $FF
-	smpsLoop            $00, $03, ProtoManWhistle_Loop06
-	smpsAlterNote       $FF
-
-ProtoManWhistle_Loop07:
-	dc.b	$03
-	smpsAlterNote       $00
-	dc.b	smpsNoAttack, $04
-	smpsAlterNote       $FF
-	dc.b	smpsNoAttack
-	smpsLoop            $00, $02, ProtoManWhistle_Loop07
-
-ProtoManWhistle_Loop08:
-	dc.b	$02
-	smpsAlterNote       $00
-	dc.b	smpsNoAttack, $03
-	smpsAlterNote       $FF
-	dc.b	smpsNoAttack
-	smpsLoop            $00, $04, ProtoManWhistle_Loop08
-	dc.b	$01
-	smpsAlterNote       $00
-	dc.b	smpsNoAttack, $03
-	smpsAlterNote       $FF
-	dc.b	smpsNoAttack, $01
-	smpsAlterNote       $00
-	dc.b	smpsNoAttack, $02
-	smpsAlterNote       $FF
-	dc.b	smpsNoAttack, $02
-
-ProtoManWhistle_Loop09:
-	smpsAlterNote       $00
-	dc.b	smpsNoAttack, $02
-	smpsAlterNote       $FF
-	dc.b	smpsNoAttack, $01
-	smpsLoop            $00, $02, ProtoManWhistle_Loop09
-	smpsAlterNote       $00
-	dc.b	smpsNoAttack, $1B, nRst, $30
-	smpsPSGvoice        fTone_06
+; PSG2 Data
+Blues_Whistle_PSG2:
+	dc.b	nRst, $06
+	smpsPSGAlterVol     $01
+	dc.b	nG4, $0C, nBb4, nC5, $3C, nBb4, $07, smpsNoAttack, nBb4, nD5, $28, nRst, $03
+	;dc.b	nBb4, $09, smpsNoAttack, $18, nC5, nBb4, $0C, nF4, nG4, $24, nRst, $0C
+	;dc.b	nG4, nBb4, nC5, $3C, nBb4, $09, smpsNoAttack, nRst, $06, nG4, $0C, nBb4
+	;dc.b	$09, smpsNoAttack, $18, nC5, nBb4, $0C, nF4, nG4, $24, nBb4, $30, nC5
+	;dc.b	nRst, $09, nRst, $03
 	smpsStop
 
 ; Song seems to not use any FM voices
-ProtoManWhistle_Voices:
+Blues_Whistle_Voices:
