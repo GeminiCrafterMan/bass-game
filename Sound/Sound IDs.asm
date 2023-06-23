@@ -10,9 +10,10 @@ idstart :=	1
 mus__First = idstart
 ; Levels
 mus_WT3 =			SMPS_id(ptr_mus_wt3)
-mus_Snake =			SMPS_id(ptr_mus_snake)
-mus_Shadow =		SMPS_id(ptr_mus_shadow)
 mus_Air =			SMPS_id(ptr_mus_air)
+mus_MSLabyrinth =	SMPS_id(ptr_mus_mslabyrinth)
+mus_Shadow =		SMPS_id(ptr_mus_shadow)
+mus_Snake =			SMPS_id(ptr_mus_snake)
 mus_MWater =		SMPS_id(ptr_mus_mwater)
 mus_BRodG =			SMPS_id(ptr_mus_brodg)
 

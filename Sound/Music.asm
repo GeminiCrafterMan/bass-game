@@ -4,11 +4,13 @@
 MusicIndex:
 ; Levels
 ptr_mus_wt3:		SMPS_MUSIC_METADATA Music_WilyTower3, s3TempotoS1($FF), 0	; Wily Tower stage 3 (for test stages)
-ptr_mus_snake:		SMPS_MUSIC_METADATA Music_SnakeMan, s3TempotoS1($FF), 0		; Snake Man
-ptr_mus_shadow:		SMPS_MUSIC_METADATA Music_ShadowMan, s3TempotoS1($FF), 0	; Shadow Man
 ptr_mus_air:		SMPS_MUSIC_METADATA Music_AirMan, s3TempotoS1($FF), 0		; Air Man
+ptr_mus_mslabyrinth:SMPS_MUSIC_METADATA Music_MSLabyrinth, s3TempotoS1($FF), 0	; 8-bit Labyrinth
+
+ptr_mus_shadow:		SMPS_MUSIC_METADATA Music_ShadowMan, s3TempotoS1($FF), 0	; Shadow Man
+ptr_mus_snake:		SMPS_MUSIC_METADATA Music_SnakeMan, s3TempotoS1($FF), 0		; Snake Man
 ptr_mus_mwater:		SMPS_MUSIC_METADATA Music_MWater, s3TempotoS1($FF), 0		; Mega Water S
-ptr_mus_brodg		SMPS_MUSIC_METADATA Music_BRodG, s3TempotoS1($FF), 0		; Buster Rod G
+ptr_mus_brodg:		SMPS_MUSIC_METADATA Music_BRodG, s3TempotoS1($FF), 0		; Buster Rod G
 
 ; Boss
 ptr_mus_protowhistle:	SMPS_MUSIC_METADATA Music_ProtoWhistle, s3TempotoS1($FF), 0	; Proto Man's entrance whistle
@@ -28,11 +30,14 @@ ptr_musend
 
 Music_WilyTower3:	include "Sound/Music/Mus - WT Stage 3.asm"
 	even
-Music_SnakeMan:		include "Sound/Music/Mus - Snake Man.asm"
+Music_AirMan:		include "Sound/Music/Mus - Air Man.asm"
 	even
+Music_MSLabyrinth:	include	"Sound/Music/Mus - 8-bit Labyrinth Zone.asm"
+	even
+
 Music_ShadowMan:	include "Sound/Music/Mus - Shadow Man.asm"
 	even
-Music_AirMan:		include "Sound/Music/Mus - Air Man.asm"
+Music_SnakeMan:		include "Sound/Music/Mus - Snake Man.asm"
 	even
 Music_MWater:		include "Sound/Music/Mus - Mega Water S.asm"
 	even
