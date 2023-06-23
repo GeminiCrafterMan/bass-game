@@ -5,7 +5,7 @@
 ; Bass
 Pal_Bass:				binclude "Objects/Player Characters/Bass/Palettes/Bass.bin"
 	even
-Pal_BassScorchShield:	binclude "Objects/Player Characters/Bass/Palettes/Scorch Shield.bin"
+Pal_BassScorchBarrier:	binclude "Objects/Player Characters/Bass/Palettes/Scorch Barrier.bin"
 	even
 Pal_BassFreezeFrame:	binclude "Objects/Player Characters/Bass/Palettes/Freeze Frame.bin"
 	even
@@ -23,11 +23,19 @@ Pal_BassTreble:			binclude "Objects/Player Characters/Bass/Palettes/Treble Boost
 ; Copy Robot
 Pal_CopyRobot:				binclude "Objects/Player Characters/Copy Robot/Palettes/Copy Robot.bin"
 	even
+Pal_CopyRobotScorchBarrier:	binclude "Objects/Player Characters/Copy Robot/Palettes/Scorch Barrier.bin"
+	even
+Pal_CopyRobotFreezeFrame:	binclude "Objects/Player Characters/Copy Robot/Palettes/Freeze Frame.bin"
+	even
 Pal_CopyRobotToxicCloud:	binclude "Objects/Player Characters/Copy Robot/Palettes/Toxic Cloud.bin"
+	even
+Pal_CopyRobotFinShredder:	binclude "Objects/Player Characters/Copy Robot/Palettes/Fin Shredder.bin"
 	even
 Pal_CopyRobotMetalBlade:	binclude "Objects/Player Characters/Copy Robot/Palettes/Metal Blade.bin"
 	even
 Pal_CopyRobotCarry:			binclude "Objects/Player Characters/Copy Robot/Palettes/Carry.bin"
+	even
+Pal_CopyRobotSuperArrow:	binclude "Objects/Player Characters/Copy Robot/Palettes/Super Arrow.bin"
 	even
 Pal_CopyRobotChargeShot:	binclude "Objects/Player Characters/Copy Robot/Palettes/Charge Cycle.bin"
 	even
@@ -54,6 +62,10 @@ Pal_SSelectCRobo:	binclude "Data/Screens/Stage Select/Palettes/Copy Robot.bin"
 Pal_GenericLevel:	binclude "Levels/Test/Palettes/Level 1.bin"
 	even
 Pal_Air:			binclude "Levels/Test/Palettes/Level 2.bin"
+	even
+Pal_MSLabyrinth:	binclude "Levels/Test/Palettes/Level 3.bin"
+	even
+Pal_MSLabyrinthUW:	binclude "Levels/Test/Palettes/Level 3 water.bin"
 	even
 
 Pal_Blaze:			binclude "Levels/Robot Master stages/Palettes/Blaze Man stage.bin"

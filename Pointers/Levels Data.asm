@@ -6,7 +6,7 @@
 LevelLoadBlock:
 		levartptrs GenericLevel_8x8_KosM,	GenericLevel_16x16_Unc,GenericLevel_128x128_Kos,palid_GenericLevel		; GenericLevel
 		levartptrs Air_8x8_KosM,	Air_16x16_Unc,Air_128x128_Kos,palid_Air		; Air Man
-		levartptrs GenericLevel_8x8_KosM,	GenericLevel_16x16_Unc,GenericLevel_128x128_Kos,palid_GenericLevel		; Test3
+		levartptrs MSLabyrinth_8x8_KosM,	MSLabyrinth_16x16_Unc,MSLabyrinth_128x128_Kos,palid_MSLabyrinth			; Test3
 		levartptrs GenericLevel_8x8_KosM,	GenericLevel_16x16_Unc,GenericLevel_128x128_Kos,palid_GenericLevel		; Test4
 
 		levartptrs Blaze_8x8_KosM,	Blaze_16x16_Unc,Blaze_128x128_Kos,	palid_Blaze		; Blaze Man
@@ -77,7 +77,7 @@ LevelLoadPointer:
 SolidIndexes:
 		dc.l GenericLevel_Solid	; GenericLevel
 		dc.l Air_Solid	; Air Man
-		dc.l GenericLevel_Solid	; Test3
+		dc.l MSLabyrinth_Solid	; MS Labyrinth
 		dc.l GenericLevel_Solid	; Test4
 
 		dc.l Blaze_Solid	; Blaze Man
@@ -99,7 +99,7 @@ SolidIndexes:
 LevelPtrs:
 		dc.l GenericLevel_Layout	; GenericLevel
 		dc.l Air_Layout	; Air Man
-		dc.l GenericLevel_Layout	; Test3
+		dc.l MSLabyrinth_Layout	; MS Labyrinth
 		dc.l GenericLevel_Layout	; Test4
 
 		dc.l Blaze_Layout	; Blaze Man
@@ -121,7 +121,7 @@ LevelPtrs:
 SpriteLocPtrs:
 		dc.l GenericLevel_Sprites	; GenericLevel
 		dc.l Air_Sprites	; Air Man
-		dc.l GenericLevel_Sprites	; Test3
+		dc.l MSLabyrinth_Sprites	; MS Labyrinth
 		dc.l GenericLevel_Sprites	; Test4
 
 		dc.l Blaze_Sprites	; Blaze Man
@@ -142,15 +142,21 @@ SpriteLocPtrs:
 
 GenericLevel_8x8_KosM:		binclude "Levels/Test/Tiles/Primary.bin"
 	even
-GenericLevel_16x16_Unc:	binclude "Levels/Test/Blocks/Primary.bin"
+GenericLevel_16x16_Unc:		binclude "Levels/Test/Blocks/Primary.bin"
 	even
 GenericLevel_128x128_Kos:	binclude "Levels/Test/Chunks/Primary.bin"
 	even
-Air_8x8_KosM:		binclude "Levels/Test/Tiles/Secondary.bin"
+Air_8x8_KosM:				binclude "Levels/Test/Tiles/Secondary.bin"
 	even
-Air_16x16_Unc:	binclude "Levels/Test/Blocks/Secondary.bin"
+Air_16x16_Unc:				binclude "Levels/Test/Blocks/Secondary.bin"
 	even
-Air_128x128_Kos:	binclude "Levels/Test/Chunks/Secondary.bin"
+Air_128x128_Kos:			binclude "Levels/Test/Chunks/Secondary.bin"
+	even
+MSLabyrinth_8x8_KosM:		binclude "Levels/Test/Tiles/Tertiary.bin"
+	even
+MSLabyrinth_16x16_Unc:		binclude "Levels/Test/Blocks/Tertiary.bin"
+	even
+MSLabyrinth_128x128_Kos:	binclude "Levels/Test/Chunks/Tertiary.bin"
 	even
 
 Blaze_8x8_KosM:		binclude "Levels/Robot Master stages/Tiles/Blaze Man.bin"
@@ -203,9 +209,11 @@ HeightMapsRot:		binclude "Misc Data/Height Maps Rotated.bin"
 ; Level collision data
 ; ===========================================================================
 
-GenericLevel_Solid:			binclude "Levels/Test/Collision/1.bin"
+GenericLevel_Solid:		binclude "Levels/Test/Collision/1.bin"
 	even
-Air_Solid:			binclude "Levels/Test/Collision/2.bin"
+Air_Solid:				binclude "Levels/Test/Collision/2.bin"
+	even
+MSLabyrinth_Solid:		binclude "Levels/Test/Collision/3.bin"
 	even
 
 Blaze_Solid:			binclude "Levels/Robot Master stages/Collision/Blaze Man.bin"
@@ -225,9 +233,11 @@ Origami_Solid:			binclude "Levels/Robot Master stages/Collision/Origami Man.bin"
 
 		align $8000
 
-GenericLevel_Layout:		binclude "Levels/Test/Layout/1.bin"
+GenericLevel_Layout:binclude "Levels/Test/Layout/1.bin"
 	even
-Air_Layout:		binclude "Levels/Test/Layout/2.bin"
+Air_Layout:			binclude "Levels/Test/Layout/2.bin"
+	even
+MSLabyrinth_Layout:	binclude "Levels/Test/Layout/3.bin"
 	even
 
 Blaze_Layout:		binclude "Levels/Robot Master stages/Layout/Blaze Man.bin"
@@ -246,9 +256,11 @@ Origami_Layout:		binclude "Levels/Robot Master stages/Layout/Origami Man.bin"
 ; ===========================================================================
 
 	ObjectLayoutBoundary
-GenericLevel_Sprites:		binclude "Levels/Test/Object Pos/1.bin"
+GenericLevel_Sprites:	binclude "Levels/Test/Object Pos/1.bin"
 	ObjectLayoutBoundary
-Air_Sprites:		binclude "Levels/Test/Object Pos/2.bin"
+Air_Sprites:			binclude "Levels/Test/Object Pos/2.bin"
+	ObjectLayoutBoundary
+MSLabyrinth_Sprites:	binclude "Levels/Test/Object Pos/3.bin"
 	ObjectLayoutBoundary
 Blaze_Sprites:		binclude "Levels/Robot Master stages/Object Pos/Blaze Man.bin"
 	ObjectLayoutBoundary

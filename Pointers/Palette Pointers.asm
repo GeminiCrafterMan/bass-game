@@ -6,7 +6,7 @@ PalPointers:				; palette address, RAM address, colours
 
 ; Main
 ptr_Pal_Bass:			palp	Pal_Bass, Normal_palette_line_1, 16				; Bass
-ptr_Pal_BassWep1:		palp	Pal_BassScorchShield, Normal_palette_line_1, 16	; Bass
+ptr_Pal_BassWep1:		palp	Pal_BassScorchBarrier, Normal_palette_line_1, 16; Bass
 ptr_Pal_BassWep2:		palp	Pal_BassFreezeFrame, Normal_palette_line_1, 16	; Bass
 ptr_Pal_BassWep3:		palp	Pal_BassToxicCloud, Normal_palette_line_1, 16	; Bass
 ptr_Pal_BassWep4:		palp	Pal_BassFinShredder, Normal_palette_line_1, 16	; Bass
@@ -17,21 +17,23 @@ ptr_Pal_BassWep8:		palp	Pal_BassMetalBlade, Normal_palette_line_1, 16	; Bass
 ptr_Pal_BassUtil1:		palp	Pal_BassTreble, Normal_palette_line_1, 16		; Bass
 ptr_Pal_BassUtil2:		palp	Pal_BassTreble, Normal_palette_line_1, 16		; Bass
 
-ptr_Pal_CopyRobot:		palp	Pal_CopyRobot, Normal_palette_line_1, 16			; CopyRobot
-ptr_Pal_CopyRobotWep1:	palp	Pal_CopyRobot, Normal_palette_line_1, 16			; CopyRobot
-ptr_Pal_CopyRobotWep2:	palp	Pal_CopyRobot, Normal_palette_line_1, 16			; CopyRobot
-ptr_Pal_CopyRobotWep3:	palp	Pal_CopyRobotToxicCloud, Normal_palette_line_1, 16	; CopyRobot
-ptr_Pal_CopyRobotWep4:	palp	Pal_CopyRobot, Normal_palette_line_1, 16			; CopyRobot
-ptr_Pal_CopyRobotWep5:	palp	Pal_CopyRobot, Normal_palette_line_1, 16			; CopyRobot
-ptr_Pal_CopyRobotWep6:	palp	Pal_CopyRobot, Normal_palette_line_1, 16			; CopyRobot
-ptr_Pal_CopyRobotWep7:	palp	Pal_CopyRobot, Normal_palette_line_1, 16			; CopyRobot
-ptr_Pal_CopyRobotWep8:	palp	Pal_CopyRobotMetalBlade, Normal_palette_line_1, 16	; CopyRobot
-ptr_Pal_CopyRobotUtil1:	palp	Pal_CopyRobotCarry, Normal_palette_line_1, 16		; CopyRobot
-ptr_Pal_CopyRobotUtil2:	palp	Pal_CopyRobot, Normal_palette_line_1, 16			; CopyRobot
+ptr_Pal_CopyRobot:		palp	Pal_CopyRobot, Normal_palette_line_1, 16				; CopyRobot
+ptr_Pal_CopyRobotWep1:	palp	Pal_CopyRobotScorchBarrier, Normal_palette_line_1, 16	; CopyRobot
+ptr_Pal_CopyRobotWep2:	palp	Pal_CopyRobotFreezeFrame, Normal_palette_line_1, 16		; CopyRobot
+ptr_Pal_CopyRobotWep3:	palp	Pal_CopyRobotToxicCloud, Normal_palette_line_1, 16		; CopyRobot
+ptr_Pal_CopyRobotWep4:	palp	Pal_CopyRobotFinShredder, Normal_palette_line_1, 16		; CopyRobot
+ptr_Pal_CopyRobotWep5:	palp	Pal_CopyRobot, Normal_palette_line_1, 16				; CopyRobot
+ptr_Pal_CopyRobotWep6:	palp	Pal_CopyRobot, Normal_palette_line_1, 16				; CopyRobot
+ptr_Pal_CopyRobotWep7:	palp	Pal_CopyRobot, Normal_palette_line_1, 16				; CopyRobot
+ptr_Pal_CopyRobotWep8:	palp	Pal_CopyRobotMetalBlade, Normal_palette_line_1, 16		; CopyRobot
+ptr_Pal_CopyRobotUtil1:	palp	Pal_CopyRobotCarry, Normal_palette_line_1, 16			; CopyRobot
+ptr_Pal_CopyRobotUtil2:	palp	Pal_CopyRobotSuperArrow, Normal_palette_line_1, 16		; CopyRobot
 
 ; Levels
 ptr_Pal_GenericLevel:	palp	Pal_GenericLevel, Normal_palette_line_2, 48		; GenericLevel
-ptr_Pal_Air:			palp	Pal_Air, Normal_palette_line_2, 48			; Air Man
+ptr_Pal_Air:			palp	Pal_Air, Normal_palette_line_2, 48				; Air Man
+ptr_Pal_MSLabyrinth:	palp	Pal_MSLabyrinth, Normal_palette_line_2, 48
+ptr_Pal_MSLabyrinthUW:	palp	Pal_MSLabyrinthUW, Water_palette_line_2, 48
 
 ptr_Pal_Blaze:			palp	Pal_Blaze, Normal_palette_line_2, 48		; Blaze Man
 ptr_Pal_Video:			palp	Pal_Video, Normal_palette_line_2, 48		; Video Man
@@ -77,6 +79,8 @@ palid_CopyRobotUtil2:	equ (ptr_Pal_CopyRobotUtil2-PalPointers)/8		; CopyRobot
 ; Levels
 palid_GenericLevel:		equ (ptr_Pal_GenericLevel-PalPointers)/8				; GenericLevel
 palid_Air:				equ (ptr_Pal_Air-PalPointers)/8				; Air Man
+palid_MSLabyrinth:		equ	(ptr_Pal_MSLabyrinth-PalPointers)/8
+palid_MSLabyrinthUW:	equ	(ptr_Pal_MSLabyrinthUW-PalPointers)/8
 
 palid_Blaze:			equ (ptr_Pal_Blaze-PalPointers)/8				; Blaze Man
 palid_Video:			equ (ptr_Pal_Video-PalPointers)/8				; Video Man

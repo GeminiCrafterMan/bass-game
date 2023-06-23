@@ -102,9 +102,11 @@ LoadWaterPalette:
 ; ---------------------------------------------------------------------------
 
 StartingWaterHeights:
-	rept 4
 		dc.w $FFFF
-	endr
+		dc.w $FFFF
+		dc.w $220
+		dc.w $FFFF
+
 		dc.w $FFFF	; Blaze Man
 		dc.w $FFFF	; Video Man
 		dc.w $FFFF	; Smog Man
@@ -117,7 +119,7 @@ StartingWaterHeights:
 ; ---------------------------------------------------------------------------
 
 WaterPalette_Index:
-		dc.b	palid_GenericLevel,	palid_Air,	palid_GenericLevel,	palid_GenericLevel		; DEZ 1,2,3,4
+		dc.b	palid_GenericLevel,	palid_Air,	palid_MSLabyrinthUW,	palid_GenericLevel		; DEZ 1,2,3,4
 		dc.b	palid_Blaze,	palid_Video,	palid_Smog,		palid_SharkUW
 		dc.b	palid_Origami,	palid_GenericLevel,	palid_GenericLevel,	palid_GenericLevel		; DEZ 1,2,3,4
 
