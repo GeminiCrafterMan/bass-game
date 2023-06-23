@@ -32,7 +32,7 @@ Pickups_Init:	; Routine 0
 	.copy:
 		move.b	#10,anim(a0)	; Copy Robot 1up head thing.
 	.not1up:
-		move.b	#4*60,invulnerability_timer(a0)
+		move.b	#4*60,boss_invulnerable_time(a0)
 		cmpi.b	#5,anim(a0)	; Small health
 		beq.s	.small
 		cmpi.b	#7,anim(a0)	; Small energy
@@ -61,15 +61,13 @@ Pickups_Main:	; Routine 2
 
 	.notOnFloor:
 		tst.w	respawn_addr(a0)
-		bne.s	.justDisplay		; .wasPlaced in the original code, but something up there is handling respawning the item
-	; todo: fix the flashing to actually work again...
-		move.b	invulnerability_timer(a0),d0
+		bne.s	.justDisplay					; .wasPlaced in the original code, but something up there is handling respawning the item
+		subq.b	#1,boss_invulnerable_time(a0)	; subtract 1 from the flash time
 		beq.s	Pickups_Delete					; if 0, delete
-		subq.b	#1,invulnerability_timer(a0)	; subtract 1 from the flash time
-		cmpi.b	#60,invulnerability_timer(a0)	; if 1 second or less is left, start flashing
+		cmpi.b	#60,boss_invulnerable_time(a0)	; if 1 second or less is left, start flashing
 		bhi.s	.justDisplay					; if not, just display
-		lsr.b	#2,d0							; flash on and off 2 frames each
-		bcs.s	.justDisplay					; display if carry is clear (2 of every 4 frames)
+		btst	#1,boss_invulnerable_time(a0)	; flash on and off 2 frames each
+		bne.s	.justDisplay					; display if the previous test returns true (2 of every 4 frames)
 		rts										; don't display
 	.justDisplay:
 		jmp		DisplaySprite

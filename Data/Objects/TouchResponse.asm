@@ -511,7 +511,7 @@ GenericEnemy_Hurt:
 	.flashy:
 		btst	#5,status(a0)				; if you're supposed to be flashing already, then do it
 		beq.s	.nopain
-		tst.w	boss_invulnerable_time(a0)
+		tst.b	boss_invulnerable_time(a0)
 		bne.s	.continueflash
 		move.b	#2,boss_invulnerable_time(a0)	; set the time to 4 frames and make the boss hit sound
 		sfx		sfx_BossHit,1
