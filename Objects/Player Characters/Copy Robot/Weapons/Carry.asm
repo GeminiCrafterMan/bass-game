@@ -38,11 +38,11 @@ Utility_Carry:	; Carry from MM1 GB.
 	.right:
 		btst	#bitR,d0
 		beq.s	.left
-		addi.w	#$18,x_pos(a1)
+		addi.w	#$12,x_pos(a1)
 	.left:
 		btst	#bitL,d0
 		beq.s	.none
-		subi.w	#$18,x_pos(a1)
+		subi.w	#$12,x_pos(a1)
 	.ret:
 		rts
 	.none:
@@ -50,10 +50,10 @@ Utility_Carry:	; Carry from MM1 GB.
 		bne.s	.ret
 		btst	#Status_Facing,status(a0)
 		bne.s	.moveL
-		addi.w	#$18,x_pos(a1)
+		addi.w	#$12,x_pos(a1)
 		rts
 	.moveL:
-		subi.w	#$18,x_pos(a1)
+		subi.w	#$12,x_pos(a1)
 		rts
 
 ; ---------------------------------------------------------------------------
