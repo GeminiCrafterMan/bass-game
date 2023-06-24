@@ -20,8 +20,8 @@ Weapon_MetalBlade:	; ...It's the Metal Blade. There's no explanation here.
 		jsr		FindFreeObj
 		move.l	#Obj_MetalBlade,address(a1)
 		move.b	#2,(v_shottype).w
-		move.b	#13,shoottimer(a0)
-		move.w	#$800,ground_vel(a1)
+		move.b	#10,shoottimer(a0)
+		move.w	#$700,ground_vel(a1)
 		subq.b	#1,(v_weapon8energy).w	; -1
 	.objectLoadedJumpPoint:
 		jmp		FireWeapon

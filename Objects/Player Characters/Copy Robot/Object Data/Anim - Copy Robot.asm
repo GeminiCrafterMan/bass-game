@@ -26,6 +26,8 @@ Ani_CopyRobot: offsetTable
 		offsetTableEntry.w CopyAni_FireSteadyDiagDown
 		offsetTableEntry.w CopyAni_ThrowStanding
 		offsetTableEntry.w CopyAni_ThrowJumping
+		offsetTableEntry.w CopyAni_ShieldStanding
+		offsetTableEntry.w CopyAni_ShieldJumping
 
 CopyAni_Step:
 		dc.b	4, frC_Step1, frC_Step2, afChange,  id_Run
@@ -79,9 +81,13 @@ CopyAni_FireSteadyStraight:
 CopyAni_FireSteadyDiagDown:
 		dc.b	1, frC_FireSDiagDown, afEnd
 CopyAni_ThrowStanding:
-		dc.b	1, frC_ThrowS, afEnd
+		dc.b	2, frC_ThrowS1, frC_ThrowS2, frC_ThrowS3, afBack, 1
 CopyAni_ThrowJumping:
-		dc.b	4, frC_ThrowJ1, frC_ThrowJ2, afEnd
+		dc.b	2, frC_ThrowJ1, frC_ThrowJ2, frC_ThrowJ3, afBack, 1
+CopyAni_ShieldStanding:
+		dc.b	2, frC_ShieldS1, frC_ShieldS2, frC_ShieldS3, afBack, 1
+CopyAni_ShieldJumping:
+		dc.b	2, frC_ShieldJ1, frC_ShieldJ2, frC_ShieldJ3, afBack, 1
 	even
 
 ; Frame IDs
@@ -141,9 +147,18 @@ frC_FireJDiagUp:	ds.b 1
 frC_FireJStraight1:	ds.b 1
 frC_FireJStraight2:	ds.b 1
 frC_FireJDiagDown:	ds.b 1
+frC_ThrowS1:		ds.b 1
+frC_ThrowS2:		ds.b 1
+frC_ThrowS3:		ds.b 1
 frC_ThrowJ1:		ds.b 1
 frC_ThrowJ2:		ds.b 1
-frC_ThrowS:			ds.b 1
+frC_ThrowJ3:		ds.b 1
+frC_ShieldS1:		ds.b 1
+frC_ShieldS2:		ds.b 1
+frC_ShieldS3:		ds.b 1
+frC_ShieldJ1:		ds.b 1
+frC_ShieldJ2:		ds.b 1
+frC_ShieldJ3:		ds.b 1
 frC_Last:	ds.b 0
 	even
 	dephase

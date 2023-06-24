@@ -93,13 +93,13 @@ BassAni_FireSteadyStraight:
 BassAni_FireSteadyDiagDown:
 		dc.b	1, frB_FireSDiagDown, afEnd
 BassAni_ThrowStanding:
-		dc.b	1, frB_ThrowS, afEnd
+		dc.b	2, frB_ThrowS1, frB_ThrowS2, frB_ThrowS3, afBack, 1
 BassAni_ThrowJumping:
-		dc.b	1, frB_ThrowJ, afEnd
+		dc.b	2, frB_ThrowJ1, frB_ThrowJ2, frB_ThrowJ3, afBack, 1
 BassAni_ShieldStanding:
-		dc.b	4, frB_ShieldS1, frB_ShieldS2, frB_ShieldS3, afBack, 1
+		dc.b	2, frB_ShieldS1, frB_ShieldS2, frB_ShieldS3, afBack, 1
 BassAni_ShieldJumping:
-		dc.b	4, frB_ShieldJ1, frB_ShieldJ2, frB_ShieldJ3, afBack, 1
+		dc.b	2, frB_ShieldJ1, frB_ShieldJ2, frB_ShieldJ3, afBack, 1
 BassAni_AquaUp:
 		dc.b	1, frB_AquaDriveU1, afEnd
 BassAni_AquaDiagUp:
@@ -115,9 +115,9 @@ BassAni_AquaDown:
 BassAni_FireAqua:
 		dc.b	1, frB_FireA, afEnd
 BassAni_ThrowAqua:
-		dc.b	1, frB_ThrowA, afEnd
+		dc.b	2, frB_ThrowA1, frB_ThrowA2, frB_ThrowA3, afBack, 1
 BassAni_ShieldAqua:
-		dc.b	4, frB_ShieldA1, frB_ShieldA2, frB_ShieldA3, afBack, 1
+		dc.b	2, frB_ShieldA1, frB_ShieldA2, frB_ShieldA3, afBack, 1
 	even
 
 ; Animation IDs
@@ -208,8 +208,12 @@ frB_FireJUp:		ds.b 1
 frB_FireJDiagUp:	ds.b 1
 frB_FireJStraight:	ds.b 1
 frB_FireJDiagDown:	ds.b 1
-frB_ThrowS:			ds.b 1
-frB_ThrowJ:			ds.b 1
+frB_ThrowS1:		ds.b 1
+frB_ThrowS2:		ds.b 1
+frB_ThrowS3:		ds.b 1
+frB_ThrowJ1:		ds.b 1
+frB_ThrowJ2:		ds.b 1
+frB_ThrowJ3:		ds.b 1
 frB_ShieldS1:		ds.b 1
 frB_ShieldS2:		ds.b 1
 frB_ShieldS3:		ds.b 1
@@ -223,7 +227,9 @@ frB_AquaDriveF2:	ds.b 1
 frB_AquaDriveD1:	ds.b 1
 frB_AquaDriveD2:	ds.b 1
 frB_FireA:			ds.b 1
-frB_ThrowA:			ds.b 1
+frB_ThrowA1:		ds.b 1
+frB_ThrowA2:		ds.b 1
+frB_ThrowA3:		ds.b 1
 frB_ShieldA1:		ds.b 1
 frB_ShieldA2:		ds.b 1
 frB_ShieldA3:		ds.b 1
