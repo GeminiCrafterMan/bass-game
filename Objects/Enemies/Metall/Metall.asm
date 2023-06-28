@@ -125,13 +125,13 @@ Obj_Metall_Shoot:
 		rts
 ; ---------------------------------------------------------------------------
 
-Obj_Metall_Run:
+Obj_Metall_Run:	; todo: fix further
 		subq.w	#1,wait(a0)
 		beq.s	.mm1
 		tst.b	subtype(a0)
 		beq.s	.done
 		move.b	#4,anim(a0)
-		move.w	#-$200,x_vel(a0)
+		move.w	#-$180,x_vel(a0)
 		btst	#Status_Facing,status(a0)
 		beq.s	.noFlip
 		neg.w	x_vel(a0)
@@ -144,10 +144,13 @@ Obj_Metall_Run:
 		clr.w	y_vel(a0)
 	.notonfloor:
 		move.l	#.reverse,jump(a0)
-		jsr	(ObjHitWall_DoRoutine).l
-		jsr	(ObjHitWall2_DoRoutine).l
-
-		bra.s	Obj_Metall_AnimateAndTouch
+		btst	#Status_Facing,status(a0)
+		beq.s	.right
+		jsr	(ObjHitWall2_DoRoutine_NoMove).l
+		bra.s	.done
+	.right:
+		jsr	(ObjHitWall_DoRoutine_NoMove).l
+		bra.s	.done
 	.mm1:
 		addq.b	#2,routine(a0)
 		bra.s	Obj_Metall_AnimateAndTouch
@@ -166,23 +169,25 @@ Obj_Metall_GetIntoHelmet:
 		tst.b	subtype(a0)
 		bne.s	.mm2
 		clr.w	anim(a0)
-		addq.b	#2,routine(a0)
 		bra.s	.done
 	.mm2:
 		move.b	#5,anim(a0)
 	.done:
+		addq.b	#2,routine(a0)
 		move.w	#$30,wait(a0)
 		bra.s	Obj_Metall_AnimateAndTouch
 ; ---------------------------------------------------------------------------
 
 Obj_Metall_Reset:
-		clr.w	anim(a0)
+		tst.b	anim(a0)
+		bne.s	.waitForAnim
 		move.b	#$D8,collision_flags(a0)	; 16x8, deflect
 		tst.w	wait(a0)
 		beq.s	.doneWaiting
 		subq.w	#1,wait(a0)
-		bsr.w	Obj_Metall_AnimateAndTouch
-		rts
+	.waitForAnim:
+		bra.s	Obj_Metall_AnimateAndTouch
+
 	.doneWaiting:
 		move.b	#2,routine(a0)
 		jmp		GenericEnemy_Hurt
@@ -207,7 +212,7 @@ Ani_Metall:	offsetTable
 	.out:		dc.b 3, 2, 3, afRoutine
 	.stayOut:	dc.b 4, 4, afEnd
 	.run:		dc.b 3, 5, 6, afEnd
-	.in:		dc.b 3, 3, 2, afRoutine
+	.in:		dc.b 3, 3, 2, afChange, 0
 	even
 
 Map_Metall:		binclude	"Objects/Enemies/Metall/Object Data/Map - Metall.bin"

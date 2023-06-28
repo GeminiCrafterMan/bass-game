@@ -81,6 +81,13 @@ ObjHitWall_DoRoutine:
 		movea.l	objoff_34(a0),a1
 		jmp	(a1)
 
+ObjHitWall_DoRoutine_NoMove:
+		bsr.w	ObjCheckRightWallDist
+		tst.w	d1
+		bpl.s	ObjHitFloor_DoRoutine_Return
+		movea.l	objoff_34(a0),a1
+		jmp	(a1)
+
 ; =============== S U B R O U T I N E =======================================
 
 ObjHitWall2_DoRoutine:
@@ -88,5 +95,12 @@ ObjHitWall2_DoRoutine:
 		tst.w	d1
 		bpl.s	ObjHitFloor_DoRoutine_Return
 		add.w	d1,x_pos(a0)
+		movea.l	objoff_34(a0),a1
+		jmp	(a1)
+
+ObjHitWall2_DoRoutine_NoMove:
+		bsr.w	ObjCheckLeftWallDist
+		tst.w	d1
+		bpl.w	ObjHitFloor_DoRoutine_Return
 		movea.l	objoff_34(a0),a1
 		jmp	(a1)
