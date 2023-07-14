@@ -68,7 +68,7 @@ Obj_HammerJoe_Throw:
 		move.l	#Obj_HammerJoe_Hammer,(a1)
 		move.w	x_pos(a0),x_pos(a1)
 		move.w	y_pos(a0),y_pos(a1)
-		addq.w	#6,y_pos(a1)
+		subq.w	#2,y_pos(a1)
 		move.w	#$600,d0
 		bset	#Status_Facing,status(a1)
 		btst	#Status_Facing,status(a0)
