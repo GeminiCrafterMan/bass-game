@@ -4,7 +4,10 @@
 ; a1 = free position in object RAM
 ; ---------------------------------------------------------------------------
 
-; =============== S U B R O U T I N E =======================================
+FindFreeProjectile:
+	lea	(Projectile_RAM).w,a1	; start address for object RAM
+	moveq	#((Reserved_object_3-Projectile_RAM)/object_size)-1,d0
+	bra.s	Create_New_Sprite3.loop
 
 FindFreeObj:
 SingleObjLoad:

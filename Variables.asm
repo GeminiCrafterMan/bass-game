@@ -12,21 +12,12 @@ Player_1:							= *						; Main character in 1 player mode
 v_player:							= *
 Object_RAM:							ds.b object_size
 									ds.b object_size
+Projectile_RAM:						ds.b object_size*8
 Reserved_object_3:					ds.b object_size		; During a level, an object whose sole purpose is to clear the collision response list is stored here
 Dynamic_object_RAM:					ds.b object_size*90		; 90 objects
 Dynamic_object_RAM_end				= *
-									ds.b object_size
 v_Dust:								ds.b object_size
-v_Breathing_bubbles:				ds.b object_size
-									ds.b object_size
-									ds.b object_size
-									ds.b object_size
-									ds.b object_size
-									ds.b object_size
-									ds.b object_size
-									ds.b object_size
 v_WaterWave:						ds.b object_size
-									ds.b $34				; null
 Object_RAM_end						= *
 
 Kos_decomp_buffer:					ds.b $1000				; Each module in a KosM archive is decompressed here and then DMAed to VRAM

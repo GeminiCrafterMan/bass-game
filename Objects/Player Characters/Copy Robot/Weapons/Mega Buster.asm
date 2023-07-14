@@ -40,7 +40,7 @@ Weapon_MegaBuster:	; The usual Mega Buster.
 	.fireLemon:
 		addq.b	#1,(v_bulletsonscreen).w
 		sfx		sfx_BusterShot
-		jsr		FindFreeObj
+		jsr		FindFreeProjectile
 		move.l	#Obj_PlayerLemon,(a1)	; load missile object
 		move.b	#13,shoottimer(a0)
 		move.w	#$700,ground_vel(a1)
@@ -48,7 +48,7 @@ Weapon_MegaBuster:	; The usual Mega Buster.
 	.fireMediumCharge:
 		addq.b	#1,(v_bulletsonscreen).w
 		sfx		sfx_BusterShot
-		jsr		FindFreeObj
+		jsr		FindFreeProjectile
 		move.l	#Obj_MegaMidCharge,(a1)	; load missile object
 		move.b	#13,shoottimer(a0)
 		move.w	#$740,ground_vel(a1)
@@ -56,7 +56,7 @@ Weapon_MegaBuster:	; The usual Mega Buster.
 	.fireFullCharge:
 		addq.b	#3,(v_bulletsonscreen).w
 		sfx		sfx_BusterShot
-		jsr		FindFreeObj
+		jsr		FindFreeProjectile
 ;		lea		(o_objectsmashingshot).w,a1
 		move.l	#Obj_MegaFullCharge,(a1)	; load missile object
 		move.b	#13,shoottimer(a0)

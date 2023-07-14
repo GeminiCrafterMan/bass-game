@@ -508,6 +508,7 @@ GenericEnemy_Hurt:
 		tst.b	boss_hitcount2(a0)
 		beq.s	.die
 		bmi.s	.die
+		jmp		RememberState_Collision
 	.flashy:
 		btst	#5,status(a0)				; if you're supposed to be flashing already, then do it
 		beq.s	.nopain

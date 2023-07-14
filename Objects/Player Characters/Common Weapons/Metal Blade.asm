@@ -17,7 +17,7 @@ Weapon_MetalBlade:	; ...It's the Metal Blade. There's no explanation here.
 		jeq		Weapon_NoAmmo.fireLemon
 		addq.b	#1,(v_bulletsonscreen).w
 		sfx		sfx_BusterShot
-		jsr		FindFreeObj
+		jsr		FindFreeProjectile
 		move.l	#Obj_MetalBlade,address(a1)
 		move.b	#2,(v_shottype).w
 		move.b	#10,shoottimer(a0)

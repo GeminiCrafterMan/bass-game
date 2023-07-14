@@ -12,7 +12,7 @@ Weapon_BassBuster:	; Rapid-fire buster shot that holds you in place
 	.fireBall:
 		addq.b	#1,(v_bulletsonscreen).w
 		sfx		sfx_BusterShot
-		jsr		FindFreeObj
+		jsr		FindFreeProjectile
 		move.l	#Obj_PlayerBall,address(a1)
 		move.b	#1,(v_shottype).w	; Semi-Cardinal, but Normal for now because I wanna snooze
 		move.b	#13,shoottimer(a0)

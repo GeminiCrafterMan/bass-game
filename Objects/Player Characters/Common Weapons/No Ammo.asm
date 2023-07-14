@@ -8,7 +8,7 @@ Weapon_NoAmmo:	; Standard Buster weapon. Will be used when out of ammo for any g
 	.fireLemon:
 		addq.b	#1,(v_bulletsonscreen).w
 		sfx		sfx_BusterShot
-		jsr		FindFreeObj
+		jsr		FindFreeProjectile
 		move.l	#Obj_PlayerLemon,address(a1)
 		move.b	#0,(v_shottype).w
 		move.b	#13,shoottimer(a0)
