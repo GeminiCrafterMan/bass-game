@@ -119,7 +119,7 @@ Player_Shoot:
 		dc.l	Weapon_NoAmmo		; Master Wep 1
 		dc.l	Weapon_NoAmmo		; Master Wep 2
 		dc.l	Weapon_NoAmmo		; Master Wep 3
-		dc.l	Weapon_NoAmmo		; Master Wep 4
+		dc.l	Weapon_FinShredder	; Master Wep 4
 		dc.l	Weapon_NoAmmo		; Master Wep 5
 		dc.l	Weapon_NoAmmo		; Master Wep 6
 		dc.l	Weapon_NoAmmo		; Master Wep 7
@@ -132,7 +132,7 @@ Player_Shoot:
 		dc.l	Weapon_NoAmmo		; Master Wep 1
 		dc.l	Weapon_NoAmmo		; Master Wep 2
 		dc.l	Weapon_NoAmmo		; Master Wep 3
-		dc.l	Weapon_NoAmmo		; Master Wep 4
+		dc.l	Weapon_FinShredder	; Master Wep 4
 		dc.l	Weapon_NoAmmo		; Master Wep 5
 		dc.l	Weapon_NoAmmo		; Master Wep 6
 		dc.l	Weapon_NoAmmo		; Master Wep 7
@@ -151,7 +151,9 @@ FireWeapon:
 		dc.l	WepType_Normal			; 2 of 8 cardinal directions, Mega Buster
 		dc.l	WepType_SemiCardinal	; 7 of 8 cardinal directions, Bass Buster
 		dc.l	WepType_Cardinal		; 8 of 8 cardinal directions, Metal Blade
-	
+		dc.l	WepType_Normal			; Shield, set up later
+		dc.l	WepType_Normal			; Reppuken
+
 WepType_Normal:
 		move.w	x_pos(a0),x_pos(a1)
 		move.w	y_pos(a0),y_pos(a1)
@@ -341,6 +343,7 @@ WepType_Cardinal_down:
 		rts
 
 		include	"Objects/Player Characters/Common Weapons/No Ammo.asm"
+		include	"Objects/Player Characters/Common Weapons/Fin Shredder.asm"
 		include	"Objects/Player Characters/Common Weapons/Metal Blade.asm"
 
 ; =============== S U B R O U T I N E =======================================
@@ -661,6 +664,7 @@ Player_HandleGroundAnimations:
 		dc.l	AnimType_GroundSemiCardinalFire
 		dc.l	AnimType_GroundThrow
 		dc.l	AnimType_GroundShield
+		dc.l	AnimType_GroundReppuken
 
 	.notShooting:
 		mvabs.w	ground_vel(a0),d0	; Standing still?
@@ -715,6 +719,10 @@ AnimType_GroundShield:
 		move.b	#id_ShieldStanding,anim(a0)
 		rts
 
+AnimType_GroundReppuken:
+		move.b	#id_Reppuken,anim(a0)
+		rts
+
 Player_HandleAirAnimations:
 		tst.b	shoottimer(a0)
 		beq.s	.notShooting
@@ -729,6 +737,7 @@ Player_HandleAirAnimations:
 		dc.l	AnimType_JumpSemiCardinalFire
 		dc.l	AnimType_JumpThrow
 		dc.l	AnimType_JumpShield
+		dc.l	.notShooting
 	.notShooting:
 		tst.w	y_vel(a0)
 		bmi.s	.rising

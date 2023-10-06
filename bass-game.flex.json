@@ -1,7 +1,7 @@
 {
     "Flex": 2,
     "name": "",
-    "node": "6bc1ef2b-a20d-416c-b872-5b637d483d0d",
+    "node": "59cf272d-439f-4f7a-84ca-696259b7c962",
     "objects": [
         {
             "format": "Sonic 3&K Player.js",
@@ -202,6 +202,26 @@
                                 "label": ""
                             },
                             "uuid": "59cf272d-439f-4f7a-84ca-696259b7c962"
+                        },
+                        {
+                            "format": "Sonic 3&K Object.js",
+                            "name": "Fin Shredder",
+                            "palettes": [],
+                            "art": {
+                                "path": "Objects/Player Projectiles/Uncompressed Art/Fin Shredder.bin",
+                                "compression": "Uncompressed",
+                                "offset": 0
+                            },
+                            "mappings": {
+                                "path": "Objects/Player Projectiles/Object Data/Map - Fin Shredder.bin",
+                                "label": ""
+                            },
+                            "dplcs": {
+                                "enabled": true,
+                                "path": "Objects/Player Projectiles/Object Data/PLC - Fin Shredder.bin",
+                                "label": ""
+                            },
+                            "uuid": "0c260768-05d1-469b-896d-482e25972c40"
                         },
                         {
                             "format": "Sonic 3&K Object.js",

@@ -28,6 +28,7 @@ Ani_Bass: offsetTable
 		offsetTableEntry.w BassAni_ThrowJumping
 		offsetTableEntry.w BassAni_ShieldStanding
 		offsetTableEntry.w BassAni_ShieldJumping
+		offsetTableEntry.w BassAni_Reppuken
 		offsetTableEntry.w BassAni_AquaUp
 		offsetTableEntry.w BassAni_AquaDiagUp
 		offsetTableEntry.w BassAni_AquaNeutral
@@ -68,7 +69,6 @@ BassAni_Death:
 		endr
 		dc.b  frB_Null, frB_Null, frB_Null, afEnd
 BassAni_Hurt:
-;		dc.b  $77, frB_Hurt, afEnd
 		dc.b  $77, frB_Hurt, frB_Stun, afBack, 1
 BassAni_Blank:
 		dc.b  $77, frB_Null, afEnd
@@ -100,6 +100,8 @@ BassAni_ShieldStanding:
 		dc.b	2, frB_ShieldS1, frB_ShieldS2, frB_ShieldS3, afBack, 1
 BassAni_ShieldJumping:
 		dc.b	2, frB_ShieldJ1, frB_ShieldJ2, frB_ShieldJ3, afBack, 1
+BassAni_Reppuken:
+		dc.b	2, frB_Reppuken1, frB_Reppuken2, frB_Reppuken3, frB_Reppuken4, afBack, 1
 BassAni_AquaUp:
 		dc.b	1, frB_AquaDriveU1, afEnd
 BassAni_AquaDiagUp:
@@ -147,6 +149,7 @@ id_ThrowStanding:		ds.b 1
 id_ThrowJumping:		ds.b 1
 id_ShieldStanding:		ds.b 1
 id_ShieldJumping:		ds.b 1
+id_Reppuken:			ds.b 1
 id_AquaUp:				ds.b 1
 id_AquaDiagUp:			ds.b 1
 id_AquaNeutral:			ds.b 1
@@ -220,6 +223,10 @@ frB_ShieldS3:		ds.b 1
 frB_ShieldJ1:		ds.b 1
 frB_ShieldJ2:		ds.b 1
 frB_ShieldJ3:		ds.b 1
+frB_Reppuken1:		ds.b 1
+frB_Reppuken2:		ds.b 1
+frB_Reppuken3:		ds.b 1
+frB_Reppuken4:		ds.b 1
 frB_AquaDriveU1:	ds.b 1
 frB_AquaDriveU2:	ds.b 1
 frB_AquaDriveF1:	ds.b 1

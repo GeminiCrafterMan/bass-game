@@ -8,6 +8,8 @@ ArtUnc_CopyRobot:		binclude "Objects/Player Characters/Copy Robot/Uncompressed A
 	even
 ArtUnc_MegaBuster:		binclude "Objects/Player Projectiles/Uncompressed Art/Mega Buster Charge Shots.bin"
 	even
+ArtUnc_FinShredder:		binclude "Objects/Player Projectiles/Uncompressed Art/Fin Shredder.bin"
+	even
 ArtUnc_DashDust:		binclude "Objects/Spin Dust/Uncompressed Art/Dash Dust.bin"
 	even
 ArtUnc_SplashDrown:		binclude "Objects/Spin Dust/Uncompressed Art/Splash Drown.bin"

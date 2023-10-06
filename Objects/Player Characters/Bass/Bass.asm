@@ -272,6 +272,7 @@ Bass_HandleAquaDriveAnimations:
 		dc.l	AnimType_AquaNormalFire
 		dc.l	AnimType_AquaThrow
 		dc.l	AnimType_AquaShield
+		dc.l	.notShooting
 
 	.notShooting:
 		btst	#bitUp,(Ctrl_1_held_logical).w
@@ -495,7 +496,7 @@ loc_113FE:
 loc_11412:
 		cmpi.b	#id_FireSteadyUp,anim(a0)
 		blt.s	.cont
-		cmpi.b	#id_ShieldStanding,anim(a0)
+		cmpi.b	#id_Reppuken,anim(a0)
 		bgt.s	.cont
 		rts
 	.cont:
@@ -549,7 +550,7 @@ sub_11482:
 loc_1149C:
 		cmpi.b	#id_FireSteadyUp,anim(a0)
 		blt.s	.cont
-		cmpi.b	#id_FireSteadyDiagDown,anim(a0)
+		cmpi.b	#id_Reppuken,anim(a0)
 		bgt.s	.cont
 		rts
 	.cont:

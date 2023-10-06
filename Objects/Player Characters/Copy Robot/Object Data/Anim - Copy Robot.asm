@@ -28,6 +28,7 @@ Ani_CopyRobot: offsetTable
 		offsetTableEntry.w CopyAni_ThrowJumping
 		offsetTableEntry.w CopyAni_ShieldStanding
 		offsetTableEntry.w CopyAni_ShieldJumping
+		offsetTableEntry.w CopyAni_Reppuken
 
 CopyAni_Step:
 		dc.b	4, frC_Step1, frC_Step2, afChange,  id_Run
@@ -88,6 +89,8 @@ CopyAni_ShieldStanding:
 		dc.b	2, frC_ShieldS1, frC_ShieldS2, frC_ShieldS3, afBack, 1
 CopyAni_ShieldJumping:
 		dc.b	2, frC_ShieldJ1, frC_ShieldJ2, frC_ShieldJ3, afBack, 1
+CopyAni_Reppuken:
+		dc.b	2, frC_Reppuken1, frC_Reppuken2, frC_Reppuken3, frC_Reppuken4, afBack, 1
 	even
 
 ; Frame IDs
@@ -159,6 +162,10 @@ frC_ShieldS3:		ds.b 1
 frC_ShieldJ1:		ds.b 1
 frC_ShieldJ2:		ds.b 1
 frC_ShieldJ3:		ds.b 1
+frC_Reppuken1:		ds.b 1
+frC_Reppuken2:		ds.b 1
+frC_Reppuken3:		ds.b 1
+frC_Reppuken4:		ds.b 1
 frC_Last:	ds.b 0
 	even
 	dephase

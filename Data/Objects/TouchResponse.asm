@@ -508,7 +508,7 @@ GenericEnemy_Hurt:
 		tst.b	boss_hitcount2(a0)
 		beq.s	.die
 		bmi.s	.die
-		jmp		RememberState_Collision
+;		jmp		RememberState_Collision
 	.flashy:
 		btst	#5,status(a0)				; if you're supposed to be flashing already, then do it
 		beq.s	.nopain
@@ -521,7 +521,8 @@ GenericEnemy_Hurt:
 		beq.s	.restore
 		btst	#0,boss_invulnerable_time(a0)
 		bne.s	.ret
-		jmp		RememberState_Collision	; RememberState_XY
+	.nopain:
+		jmp		RememberState_Collision
 	.restore:
 		bclr	#5,status(a0)
 	.ret:
@@ -529,5 +530,3 @@ GenericEnemy_Hurt:
 	.die:
 		move.l	a0,a1
 		jmp		Touch_EnemyNormal
-	.nopain:
-		jmp		RememberState_Collision
