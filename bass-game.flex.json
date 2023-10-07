@@ -1,7 +1,7 @@
 {
     "Flex": 2,
     "name": "",
-    "node": "59cf272d-439f-4f7a-84ca-696259b7c962",
+    "node": "0c260768-05d1-469b-896d-482e25972c40",
     "objects": [
         {
             "format": "Sonic 3&K Player.js",
@@ -226,7 +226,16 @@
                         {
                             "format": "Sonic 3&K Object.js",
                             "name": "Metal Blade",
-                            "palettes": [],
+                            "palettes": [
+                                {
+                                    "path": "Objects/Player Characters/Bass/Palettes/Fin Shredder.bin",
+                                    "length": 1
+                                },
+                                {
+                                    "path": "Objects/Player Characters/Copy Robot/Palettes/Fin Shredder.bin",
+                                    "length": 1
+                                }
+                            ],
                             "art": {
                                 "path": "Objects/Player Projectiles/KosinskiM Art/Metal Blade.bin",
                                 "compression": "Kosinski-M",
