@@ -923,6 +923,7 @@ Bass_StopDashing:
 		rts
 
 		include	"Objects/Player Characters/Bass/Weapons/Bass Buster.asm"
+		include	"Objects/Player Characters/Bass/Weapons/Spread Buster.asm"
 
 ; ---------------------------------------------------------------------------
 ; Subroutine allowing Sonic to jump
