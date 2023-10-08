@@ -38,16 +38,17 @@ Render_HUD:
 
 .process
 		moveq	#0,d4								; frame #0
+.time
+		tst.b	(v_weapon).w						; Is the player using their default weapon?
+		bne.s	.health								; if not, branch
+		addq.w	#2*2,d4								; hide time counter
+.health
 		btst	#3,(Level_frame_counter+1).w
 		bne.s	.draw
 		cmpi.b	#9,(v_health).w						; do you have 10 or more health?
-		bgt.s	.time								; if yes, branch
+		bgt.s	.draw								; if yes, branch
 		addq.w	#1*2,d4								; hide rings counter
 
-.time
-		cmpi.b	#9,(Timer_minute).w					; have 9 minutes elapsed?
-		bne.s	.draw								; if not, branch
-		addq.w	#2*2,d4								; hide time counter
 
 .draw
 		move.w	HUD_RAM.Xpos-HUD_RAM(a1),d0		; Xpos

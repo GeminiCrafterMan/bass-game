@@ -159,11 +159,13 @@ WepType_Normal:
 		move.w	y_pos(a0),y_pos(a1)
 		btst	#Status_Facing,status(a0)
 		beq.s	.notFlipped
+		bset	#Status_Facing,status(a1)
 		bset	#rbXFlip,render_flags(a1)
 		subi.w	#10,x_pos(a1)
 		neg.w	ground_vel(a1)
 		bra.s	.doneFlip
 	.notFlipped:
+		bclr	#Status_Facing,status(a1)
 		bclr	#rbXFlip,render_flags(a1)
 		addi.w	#10,x_pos(a1)
 	.doneFlip:
