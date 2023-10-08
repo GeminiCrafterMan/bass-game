@@ -116,7 +116,7 @@ Player_Shoot:
 		jmp		(a1)
 	.weaponLUT:
 		dc.l	Weapon_BassBuster
-		dc.l	Weapon_NoAmmo		; Master Wep 1
+		dc.l	Weapon_ScorchBarrier; Master Wep 1
 		dc.l	Weapon_NoAmmo		; Master Wep 2
 		dc.l	Weapon_NoAmmo		; Master Wep 3
 		dc.l	Weapon_FinShredder	; Master Wep 4
@@ -129,7 +129,7 @@ Player_Shoot:
 
 	.cRobotWeaponLUT:
 		dc.l	Weapon_MegaBuster
-		dc.l	Weapon_NoAmmo		; Master Wep 1
+		dc.l	Weapon_ScorchBarrier; Master Wep 1
 		dc.l	Weapon_NoAmmo		; Master Wep 2
 		dc.l	Weapon_NoAmmo		; Master Wep 3
 		dc.l	Weapon_FinShredder	; Master Wep 4
@@ -151,8 +151,11 @@ FireWeapon:
 		dc.l	WepType_Normal			; 2 of 8 cardinal directions, Mega Buster
 		dc.l	WepType_SemiCardinal	; 7 of 8 cardinal directions, Bass Buster
 		dc.l	WepType_Cardinal		; 8 of 8 cardinal directions, Metal Blade
-		dc.l	WepType_Normal			; Shield, set up later
+		dc.l	WepType_None			; Shield, since there's only one it's set up in the weapon itself...
 		dc.l	WepType_Normal			; Reppuken
+
+WepType_None:
+		rts
 
 WepType_Normal:
 		move.w	x_pos(a0),x_pos(a1)
@@ -345,6 +348,7 @@ WepType_Cardinal_down:
 		rts
 
 		include	"Objects/Player Characters/Common Weapons/No Ammo.asm"
+		include "Objects/Player Characters/Common Weapons/Scorch Barrier.asm"
 		include	"Objects/Player Characters/Common Weapons/Fin Shredder.asm"
 		include	"Objects/Player Characters/Common Weapons/Origami Star.asm"
 		include	"Objects/Player Characters/Common Weapons/Metal Blade.asm"

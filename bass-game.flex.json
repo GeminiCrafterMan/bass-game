@@ -1,8 +1,33 @@
 {
     "Flex": 2,
     "name": "",
-    "node": "59cf272d-439f-4f7a-84ca-696259b7c962",
+    "node": "0b212717-51b4-4ae9-85ee-7953ce4809f1",
     "objects": [
+        {
+            "format": "Sonic 3&K Object.js",
+            "name": "Scorch Barrier C",
+            "palettes": [
+                {
+                    "path": "Objects/Player Characters/Copy Robot/Palettes/Scorch Barrier.bin",
+                    "length": 1
+                }
+            ],
+            "art": {
+                "path": "Objects/Player Projectiles/KosinskiM Art/Scorch Barrier C.bin",
+                "compression": "Kosinski-M",
+                "offset": 0
+            },
+            "mappings": {
+                "path": "Objects/Player Projectiles/Object Data/Map - Scorch Barrier C.bin",
+                "label": ""
+            },
+            "dplcs": {
+                "enabled": false,
+                "path": "",
+                "label": ""
+            },
+            "uuid": "0b212717-51b4-4ae9-85ee-7953ce4809f1"
+        },
         {
             "format": "Sonic 3&K Player.js",
             "name": "Character Select",
