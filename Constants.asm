@@ -478,7 +478,7 @@ ArtTile_DashDust =			$7F0
 ; ---------------------------------------------------------------------------
 
 vram_fg =					$C000	; foreground namespace
-vram_window =				$C000	; window namespace
+vram_window =				$8000	; window namespace
 vram_bg =					$E000	; background namespace
 vram_sprites =				$D400	; sprite table
 vram_hscroll =				$F000	; horizontal scroll table

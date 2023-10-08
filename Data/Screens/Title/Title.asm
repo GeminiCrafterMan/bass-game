@@ -35,8 +35,7 @@ Title_Screen:
 		moveq	#0,d0
 		jsr	(EniDec).w
 
-		copyTilemap	vram_fg,320,224
-
+		copyTilemap    vram_fg, 320, 224
 		music	mus_Title
 
 .waitplc

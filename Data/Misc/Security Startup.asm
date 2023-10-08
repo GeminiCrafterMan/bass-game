@@ -91,7 +91,7 @@ VDPInitValues:		; values for VDP registers
 		dc.b 4		; Command $8004 - HInt off, Enable HV counter read
 		dc.b $14		; Command $8114 - Display off, VInt off, DMA on, PAL off
 		dc.b $30		; Command $8230 - Scroll A Address $C000
-		dc.b $3C		; Command $833C - Window Address $F000
+		dc.b (vram_window>>10)		; Command $833C - Window Address $F000
 		dc.b 7		; Command $8407 - Scroll B Address $E000
 		dc.b $6C		; Command $856C - Sprite Table Addres $D800
 		dc.b 0		; Command $8600 - Null
@@ -105,8 +105,8 @@ VDPInitValues:		; values for VDP registers
 		dc.b 0		; Command $8E00 - Null
 		dc.b 1		; Command $8F01 - VDP auto increment 1 byte
 		dc.b 1		; Command $9001 - 64x32 cell scroll size
-		dc.b 0		; Command $9100 - Window H left side, Base Point 0
-		dc.b 0		; Command $9200 - Window V upside, Base Point 0
+		dc.b 3		; Command $9100 - Window H left side, Base Point 0
+		dc.b 3		; Command $9200 - Window V upside, Base Point 0
 		dc.b $FF		; Command $93FF - DMA Length Counter $FFFF
 		dc.b $FF		; Command $94FF - See above
 		dc.b 0		; Command $9500 - DMA Source Address $0

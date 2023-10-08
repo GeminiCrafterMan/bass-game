@@ -11,8 +11,8 @@ Level_VDP:
 		dc.w $8B03					; line scroll mode
 		dc.w $8C81					; set 40cell screen size, no interlacing, no s/h
 		dc.w $9001					; 64x32 cell nametable area
-		dc.w $9100					; set window H position at default
-		dc.w $9200					; set window V position at default
+		dc.w $9103					; set window H position at default
+		dc.w $921F					; set window V position at default
 		dc.w 0						; end
 
 ; =============== S U B R O U T I N E =======================================
@@ -141,6 +141,9 @@ Level_Screen:
 		bclr	#GameModeFlag_TitleCard,(Game_mode).w		; subtract $80 from mode to end pre-level stuff
 
 .loop
+		locVRAM vram_window
+		move.w  #$0001, (VDP_data_port)
+
 		jsr	(Pause_Game).w
 		move.b	#VintID_Level,(V_int_routine).w
 		jsr	(Process_Kos_Queue).w
