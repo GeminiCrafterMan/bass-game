@@ -78,24 +78,30 @@ loc_DD64:
 loc_DD9E:
 		locVRAM	tiles_to_bytes(ArtTile_HUD+$28),d0
 		moveq	#0,d1
-		move.b	(Timer_minute).w,d1 							; load minutes
-		bsr.w	DrawSingleDigitNumber
-		locVRAM	tiles_to_bytes(ArtTile_HUD+$2C),d0
+		moveq	#0,d5
+		move.b	(v_weapon).w,d1	; move weapon into d1
+		beq.s	.noWep
+		lsl.b	d1				; weapon id * 2
+		lea		(v_chargecycnum).w,a4 	; load energy address into a4
+		add.l	d1,a4			; (weapon_id*2)+addr(a4)
+		move.b	(a4)+,d1			; move contents of a4 to d1
+		move.b	(a4)+,d5		; move contents of a4+ to d2
+	.noWep:
+		bsr.w	DrawThreeDigitNumber
+		locVRAM	tiles_to_bytes(ArtTile_HUD+$2E),d0
+		bsr.w	DrawSlash
+		locVRAM	tiles_to_bytes(ArtTile_HUD+$30),d0
 		moveq	#0,d1
-		move.b	(Timer_second).w,d1 							; load seconds
-		bsr.w	DrawTwoDigitNumber
-		locVRAM	tiles_to_bytes(ArtTile_HUD+$32),d0
-		moveq	#0,d1
-		move.b	(Timer_frame).w,d1 							; load centisecond
-		mulu.w	#100,d1
-		divu.w	#60,d1
-		swap	d1
-		clr.w	d1
-		swap	d1
-		cmpi.l	#(9*$10000)+(59*$100)+59,(Timer).w
-		bne.s	+
-		moveq	#99,d1
-+		bra.w	DrawTwoDigitNumber
+		move.b	d5,d1
+;		mulu.w	#100,d1
+;		divu.w	#60,d1
+;		swap	d1
+;		clr.w	d1
+;		swap	d1
+;		cmpi.l	#(9*$10000)+(59*$100)+59,(Timer).w
+;		bne.s	+
+;		moveq	#99,d1
++		bra.w	DrawThreeDigitNumber
 ; ---------------------------------------------------------------------------
 
 UpdateHUD_TimeOver:
@@ -225,7 +231,7 @@ HUD_DrawInitial:
 
 HUD_Initial_Parts:
 		dc.b "E      0"
-		dc.b "0*00:00"
+		dc.b "  0:  0"
 HUD_Zero_Rings:
 		dc.b "  0"		; (zero rings)
 HUD_Initial_Parts_end
@@ -349,6 +355,13 @@ DrawSingleDigitNumber:
 		lea	Hud_1(pc),a2
 		moveq	#1-1,d6
 		bra.s	loc_1C9BA
+
+DrawSlash:
+		lea	Hud_1(pc),a2
+		moveq	#1-1,d6
+		moveq	#0,d4
+		lea	(ArtUnc_HudSlash).l,a1
+		bra.s	Hud_TimeLoop
 
 ; =============== S U B R O U T I N E =======================================
 

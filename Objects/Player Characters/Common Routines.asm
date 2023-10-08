@@ -120,7 +120,7 @@ Player_Shoot:
 		dc.l	Weapon_NoAmmo		; Master Wep 2
 		dc.l	Weapon_NoAmmo		; Master Wep 3
 		dc.l	Weapon_FinShredder	; Master Wep 4
-		dc.l	Weapon_NoAmmo		; Master Wep 5
+		dc.l	Weapon_OrigamiStar	; Master Wep 5
 		dc.l	Weapon_NoAmmo		; Master Wep 6
 		dc.l	Weapon_NoAmmo		; Master Wep 7
 		dc.l	Weapon_MetalBlade	; Master Wep 8
@@ -133,7 +133,7 @@ Player_Shoot:
 		dc.l	Weapon_NoAmmo		; Master Wep 2
 		dc.l	Weapon_NoAmmo		; Master Wep 3
 		dc.l	Weapon_FinShredder	; Master Wep 4
-		dc.l	Weapon_NoAmmo		; Master Wep 5
+		dc.l	Weapon_OrigamiStar	; Master Wep 5
 		dc.l	Weapon_NoAmmo		; Master Wep 6
 		dc.l	Weapon_NoAmmo		; Master Wep 7
 		dc.l	Weapon_MetalBlade	; Master Wep 8
@@ -344,6 +344,7 @@ WepType_Cardinal_down:
 
 		include	"Objects/Player Characters/Common Weapons/No Ammo.asm"
 		include	"Objects/Player Characters/Common Weapons/Fin Shredder.asm"
+		include	"Objects/Player Characters/Common Weapons/Origami Star.asm"
 		include	"Objects/Player Characters/Common Weapons/Metal Blade.asm"
 
 ; =============== S U B R O U T I N E =======================================

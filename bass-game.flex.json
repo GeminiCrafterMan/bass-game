@@ -1,7 +1,7 @@
 {
     "Flex": 2,
     "name": "",
-    "node": "770470d8-d723-4de1-aef5-62f2ccf77ff9",
+    "node": "59cf272d-439f-4f7a-84ca-696259b7c962",
     "objects": [
         {
             "format": "Sonic 3&K Player.js",
@@ -231,6 +231,26 @@
                                 "label": ""
                             },
                             "uuid": "0c260768-05d1-469b-896d-482e25972c40"
+                        },
+                        {
+                            "format": "Sonic 3&K Object.js",
+                            "name": "Origami Star",
+                            "palettes": [],
+                            "art": {
+                                "path": "Objects/Player Projectiles/KosinskiM Art/Origami Star.bin",
+                                "compression": "Kosinski-M",
+                                "offset": 0
+                            },
+                            "mappings": {
+                                "path": "Objects/Player Projectiles/Object Data/Map - Origami Star.bin",
+                                "label": ""
+                            },
+                            "dplcs": {
+                                "enabled": false,
+                                "path": "",
+                                "label": ""
+                            },
+                            "uuid": "e3a4c9fc-fe0d-4000-9e2f-31e9eac5edf7"
                         },
                         {
                             "format": "Sonic 3&K Object.js",

@@ -13,7 +13,7 @@ Pal_BassToxicCloud:		binclude "Objects/Player Characters/Bass/Palettes/Toxic Clo
 	even
 Pal_BassFinShredder:	binclude "Objects/Player Characters/Bass/Palettes/Fin Shredder.bin"
 	even
-Pal_BassOrigami:		binclude "Objects/Player Characters/Bass/Palettes/Origami.bin"
+Pal_BassOrigamiStar:	binclude "Objects/Player Characters/Bass/Palettes/Origami Star.bin"
 	even
 Pal_BassMetalBlade:		binclude "Objects/Player Characters/Bass/Palettes/Metal Blade.bin"
 	even
@@ -30,6 +30,8 @@ Pal_CopyRobotFreezeFrame:	binclude "Objects/Player Characters/Copy Robot/Palette
 Pal_CopyRobotToxicCloud:	binclude "Objects/Player Characters/Copy Robot/Palettes/Toxic Cloud.bin"
 	even
 Pal_CopyRobotFinShredder:	binclude "Objects/Player Characters/Copy Robot/Palettes/Fin Shredder.bin"
+	even
+Pal_CopyRobotOrigamiStar:	binclude "Objects/Player Characters/Copy Robot/Palettes/Origami Star.bin"
 	even
 Pal_CopyRobotMetalBlade:	binclude "Objects/Player Characters/Copy Robot/Palettes/Metal Blade.bin"
 	even

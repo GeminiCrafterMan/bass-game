@@ -33,6 +33,8 @@ ArtKosM_LevelSelectText:		binclude "Data/Screens/Level Select/KosinskiM Art/Text
 
 ArtKosM_BusterShots:			binclude "Objects/Player Projectiles/KosinskiM Art/Buster Shots.bin"
 	even
+ArtKosM_OrigamiStar:			binclude "Objects/Player Projectiles/KosinskiM Art/Origami Star.bin"
+	even
 ArtKosM_MetalBlade:				binclude "Objects/Player Projectiles/KosinskiM Art/Metal Blade.bin"
 	even
 ArtKosM_CarryPlatform:			binclude "Objects/Player Projectiles/KosinskiM Art/Carry Platform.bin"

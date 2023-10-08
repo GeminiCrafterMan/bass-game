@@ -58,6 +58,13 @@ Fire a spinning water blade that crawls along the ground and walls, falling off 
 (Module) Aqua Drive
 Allows you to freely move around in the water by jumping in the "air" underwater. Press jump again to fall down.
 
---==  ==--
+--== ORIGAMI MAN ==--
+
+(Weapon) Origami Star
+Sort of like Shadow Blade, but omnidirectional and you can pause it to multihit by holding B.
+
+(Module) ???
+???
+
 --==  ==--
 --==  ==--

@@ -4,6 +4,8 @@
 
 ArtUnc_Hud:			binclude "Objects/HUD/Uncompressed Art/HUD Numbers.bin"
 	even
+ArtUnc_HudSlash:	binclude "Objects/HUD/Uncompressed Art/HUD Slash.bin"
+	even
 ArtUnc_DebugText:	binclude "Objects/HUD/Uncompressed Art/Debug Numbers.bin"
 	even
 

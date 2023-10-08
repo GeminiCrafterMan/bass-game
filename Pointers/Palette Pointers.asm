@@ -10,7 +10,7 @@ ptr_Pal_BassWep1:		palp	Pal_BassScorchBarrier, Normal_palette_line_1, 16; Bass
 ptr_Pal_BassWep2:		palp	Pal_BassFreezeFrame, Normal_palette_line_1, 16	; Bass
 ptr_Pal_BassWep3:		palp	Pal_BassToxicCloud, Normal_palette_line_1, 16	; Bass
 ptr_Pal_BassWep4:		palp	Pal_BassFinShredder, Normal_palette_line_1, 16	; Bass
-ptr_Pal_BassWep5:		palp	Pal_BassOrigami, Normal_palette_line_1, 16		; Bass
+ptr_Pal_BassWep5:		palp	Pal_BassOrigamiStar, Normal_palette_line_1, 16	; Bass
 ptr_Pal_BassWep6:		palp	Pal_Bass, Normal_palette_line_1, 16				; Bass
 ptr_Pal_BassWep7:		palp	Pal_Bass, Normal_palette_line_1, 16				; Bass
 ptr_Pal_BassWep8:		palp	Pal_BassMetalBlade, Normal_palette_line_1, 16	; Bass
@@ -22,7 +22,7 @@ ptr_Pal_CopyRobotWep1:	palp	Pal_CopyRobotScorchBarrier, Normal_palette_line_1, 1
 ptr_Pal_CopyRobotWep2:	palp	Pal_CopyRobotFreezeFrame, Normal_palette_line_1, 16		; CopyRobot
 ptr_Pal_CopyRobotWep3:	palp	Pal_CopyRobotToxicCloud, Normal_palette_line_1, 16		; CopyRobot
 ptr_Pal_CopyRobotWep4:	palp	Pal_CopyRobotFinShredder, Normal_palette_line_1, 16		; CopyRobot
-ptr_Pal_CopyRobotWep5:	palp	Pal_CopyRobot, Normal_palette_line_1, 16				; CopyRobot
+ptr_Pal_CopyRobotWep5:	palp	Pal_CopyRobotOrigamiStar, Normal_palette_line_1, 16		; CopyRobot
 ptr_Pal_CopyRobotWep6:	palp	Pal_CopyRobot, Normal_palette_line_1, 16				; CopyRobot
 ptr_Pal_CopyRobotWep7:	palp	Pal_CopyRobot, Normal_palette_line_1, 16				; CopyRobot
 ptr_Pal_CopyRobotWep8:	palp	Pal_CopyRobotMetalBlade, Normal_palette_line_1, 16		; CopyRobot
