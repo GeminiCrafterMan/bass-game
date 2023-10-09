@@ -126,4 +126,6 @@ ptr_dacDE:	DAC_Entry	13610, LetsGo,			MegaPCM_pcm	; $DE	- "Let's Go!"
 ptr_dacDF:	DAC_Entry	13610, Hey,				MegaPCM_pcm	; $DF	- "Hey!"	; Clownacy | X_X Extending the DAC range is going to take some creativity...
 	endif
 
+ptr_dacChop: DAC_Entry	22050, Chop,			MegaPCM_pcm|MegaPCM_loop
+
 ptr_dacE0:	DAC_Entry2	0Bh, SegaPCM,			MegaPCM_pcm|MegaPCM_panLR	; $E0	- Sega!

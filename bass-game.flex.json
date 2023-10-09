@@ -1,8 +1,28 @@
 {
     "Flex": 2,
     "name": "",
-    "node": "0b212717-51b4-4ae9-85ee-7953ce4809f1",
+    "node": "d3baef86-16fc-4a03-bdf8-82e7ea2be6d9",
     "objects": [
+        {
+            "format": "Sonic 3&K Object.js",
+            "name": "HUD",
+            "palettes": [],
+            "art": {
+                "path": "Objects/HUD/KosinskiM Art/HUD.bin",
+                "compression": "Kosinski-M",
+                "offset": 0
+            },
+            "mappings": {
+                "path": "Objects/HUD/Object Data/Map - HUD.asm",
+                "label": "Map_HUD"
+            },
+            "dplcs": {
+                "enabled": false,
+                "path": "",
+                "label": ""
+            },
+            "uuid": "d3baef86-16fc-4a03-bdf8-82e7ea2be6d9"
+        },
         {
             "format": "Sonic 3&K Object.js",
             "name": "Scorch Barrier C",
@@ -537,7 +557,7 @@
                 }
             ],
             "isDirectory": true,
-            "expanded": true,
+            "expanded": false,
             "uuid": "0b7d2ffd-cf6b-4edf-8242-16fac01c21ca"
         }
     ]

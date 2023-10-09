@@ -87,4 +87,7 @@
 	IncludeDAC	LetsGo,		snd,		Sonic Crackers
 	IncludeDAC	Hey,		snd,		Sonic Crackers
     endif
+
+	IncludeDAC	Chop,		wav,		Custom
+
 	even
