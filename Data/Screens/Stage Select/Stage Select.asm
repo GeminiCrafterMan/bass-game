@@ -53,11 +53,11 @@ StageSelect_Screen:
 		jsr		(EniDec).w
 		copyTilemap	vram_bg,320,224
 
-		; music	mus_StageSelect
+		music	mus_StageSelect
 
-		; lol
-		move.b	#$D7, d0
-		jsr		(SMPS_PlayDACSample).w	; play sample
+	; lol
+		;move.b	#$D7, d0
+		;jsr		(SMPS_PlayDACSample).w	; play sample
 
 .waitplc
 		move.b	#VintID_Fade,(V_int_routine).w

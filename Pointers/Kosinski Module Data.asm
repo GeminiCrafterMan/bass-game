@@ -41,6 +41,8 @@ ArtKosM_MetalBlade:				binclude "Objects/Player Projectiles/KosinskiM Art/Metal 
 	even
 ArtKosM_CarryPlatform:			binclude "Objects/Player Projectiles/KosinskiM Art/Carry Platform.bin"
 	even
+ArtKosM_SuperArrow:				binclude "Objects/Player Projectiles/KosinskiM Art/Super Arrow.bin"
+	even
 
 ; ===========================================================================
 ; Kosinski Module compressed title card graphics

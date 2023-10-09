@@ -252,6 +252,7 @@ CopyRobot_StopSliding:
 ; ---------------------------------------------------------------------------
 		include	"Objects/Player Characters/Copy Robot/Weapons/Mega Buster.asm"
 		include	"Objects/Player Characters/Copy Robot/Weapons/Carry.asm"
+		include	"Objects/Player Characters/Copy Robot/Weapons/Super Arrow.asm"
 
 ; ---------------------------------------------------------------------------
 ; Object Data

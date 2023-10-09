@@ -16,6 +16,7 @@ Weapon_ScorchBarrier:	; Rotating shield.
 		bge.w	.ret
 	.fireLemon:
 		addq.b	#4,(v_bulletsonscreen).w
+		subq.b	#4,(v_weapon1energy).w
 		sfx		sfx_BusterShot
 	.create:	; for the love of god simplify this later
 		jsr		FindFreeProjectile

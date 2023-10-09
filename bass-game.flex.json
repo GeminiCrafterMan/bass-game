@@ -1,125 +1,40 @@
 {
     "Flex": 2,
     "name": "",
-    "node": "d3baef86-16fc-4a03-bdf8-82e7ea2be6d9",
+    "node": "f84f415b-2482-4150-b10e-809f34fe030c",
     "objects": [
-        {
-            "format": "Sonic 3&K Object.js",
-            "name": "HUD",
-            "palettes": [],
-            "art": {
-                "path": "Objects/HUD/KosinskiM Art/HUD.bin",
-                "compression": "Kosinski-M",
-                "offset": 0
-            },
-            "mappings": {
-                "path": "Objects/HUD/Object Data/Map - HUD.asm",
-                "label": "Map_HUD"
-            },
-            "dplcs": {
-                "enabled": false,
-                "path": "",
-                "label": ""
-            },
-            "uuid": "d3baef86-16fc-4a03-bdf8-82e7ea2be6d9"
-        },
-        {
-            "format": "Sonic 3&K Object.js",
-            "name": "Scorch Barrier C",
-            "palettes": [
-                {
-                    "path": "Objects/Player Characters/Copy Robot/Palettes/Scorch Barrier.bin",
-                    "length": 1
-                }
-            ],
-            "art": {
-                "path": "Objects/Player Projectiles/KosinskiM Art/Scorch Barrier C.bin",
-                "compression": "Kosinski-M",
-                "offset": 0
-            },
-            "mappings": {
-                "path": "Objects/Player Projectiles/Object Data/Map - Scorch Barrier C.bin",
-                "label": ""
-            },
-            "dplcs": {
-                "enabled": false,
-                "path": "",
-                "label": ""
-            },
-            "uuid": "0b212717-51b4-4ae9-85ee-7953ce4809f1"
-        },
-        {
-            "format": "Sonic 3&K Player.js",
-            "name": "Character Select",
-            "palettes": [
-                {
-                    "path": "Objects/Player Characters/Bass/Palettes/Bass.bin",
-                    "length": 1
-                },
-                {
-                    "path": "Objects/Player Characters/Copy Robot/Palettes/Copy Robot.bin",
-                    "length": 1
-                }
-            ],
-            "art": {
-                "path": "Objects/Character Select/Uncompressed Art/Character Select.bin",
-                "compression": "Uncompressed",
-                "offset": 0
-            },
-            "mappings": {
-                "path": "Objects/Character Select/Object Data/Map - Character Select.bin",
-                "label": ""
-            },
-            "dplcs": {
-                "enabled": true,
-                "path": "Objects/Character Select/Object Data/PLC - Character Select.bin",
-                "label": ""
-            },
-            "uuid": "ee6599ae-1b4a-4e97-87c5-8d521c0791ca"
-        },
-        {
-            "format": "Sonic 3&K Object.js",
-            "name": "Explosions",
-            "palettes": [],
-            "art": {
-                "path": "Objects/Explosion/KosinskiM Art/Explosion.bin",
-                "compression": "Kosinski-M",
-                "offset": 0
-            },
-            "mappings": {
-                "path": "Objects/Explosion/Object Data/Map - Explosion.bin",
-                "label": ""
-            },
-            "dplcs": {
-                "enabled": false,
-                "path": "",
-                "label": ""
-            },
-            "uuid": "501bd6b9-4b3c-4fd9-97db-e4c7c6906fb9"
-        },
-        {
-            "format": "Sonic 3&K Object.js",
-            "name": "Boss Explosions",
-            "palettes": [],
-            "art": {
-                "path": "Objects/Explosion/KosinskiM Art/Explosion.bin",
-                "compression": "Kosinski-M",
-                "offset": 0
-            },
-            "mappings": {
-                "path": "Objects/Explosion/Object Data/Map - Boss Explosion.bin",
-                "label": ""
-            },
-            "dplcs": {
-                "enabled": false,
-                "path": "",
-                "label": ""
-            },
-            "uuid": "1b501bd6-b94b-4c8f-99d7-dbe4c7c6906f"
-        },
         {
             "name": "Player",
             "children": [
+                {
+                    "format": "Sonic 3&K Player.js",
+                    "name": "Character Select",
+                    "palettes": [
+                        {
+                            "path": "Objects/Player Characters/Bass/Palettes/Bass.bin",
+                            "length": 1
+                        },
+                        {
+                            "path": "Objects/Player Characters/Copy Robot/Palettes/Copy Robot.bin",
+                            "length": 1
+                        }
+                    ],
+                    "art": {
+                        "path": "Objects/Character Select/Uncompressed Art/Character Select.bin",
+                        "compression": "Uncompressed",
+                        "offset": 0
+                    },
+                    "mappings": {
+                        "path": "Objects/Character Select/Object Data/Map - Character Select.bin",
+                        "label": ""
+                    },
+                    "dplcs": {
+                        "enabled": true,
+                        "path": "Objects/Character Select/Object Data/PLC - Character Select.bin",
+                        "label": ""
+                    },
+                    "uuid": "ee6599ae-1b4a-4e97-87c5-8d521c0791ca"
+                },
                 {
                     "format": "Sonic 3&K Player.js",
                     "name": "Bass",
@@ -143,7 +58,8 @@
                         "path": "Objects/Player Characters/Bass/Object Data/PLC - Bass.bin",
                         "label": ""
                     },
-                    "uuid": "0c7872ed-187e-4c57-9b1c-7531db1bfa0d"
+                    "uuid": "0c7872ed-187e-4c57-9b1c-7531db1bfa0d",
+                    "expanded": true
                 },
                 {
                     "format": "Sonic 3&K Object.js",
@@ -168,7 +84,8 @@
                         "path": "",
                         "label": ""
                     },
-                    "uuid": "f771f3da-93f9-42ab-ac92-6598e9e1e2e7"
+                    "uuid": "f771f3da-93f9-42ab-ac92-6598e9e1e2e7",
+                    "expanded": true
                 },
                 {
                     "format": "Sonic 3&K Player.js",
@@ -193,7 +110,8 @@
                         "path": "Objects/Player Characters/Copy Robot/Object Data/PLC - Copy Robot.bin",
                         "label": ""
                     },
-                    "uuid": "6ed0f213-b203-4ea2-a0ab-c5cdf2406ea0"
+                    "uuid": "6ed0f213-b203-4ea2-a0ab-c5cdf2406ea0",
+                    "expanded": true
                 },
                 {
                     "name": "Weapons",
@@ -250,6 +168,31 @@
                         },
                         {
                             "format": "Sonic 3&K Object.js",
+                            "name": "Scorch Barrier C",
+                            "palettes": [
+                                {
+                                    "path": "Objects/Player Characters/Copy Robot/Palettes/Scorch Barrier.bin",
+                                    "length": 1
+                                }
+                            ],
+                            "art": {
+                                "path": "Objects/Player Projectiles/KosinskiM Art/Scorch Barrier C.bin",
+                                "compression": "Kosinski-M",
+                                "offset": 0
+                            },
+                            "mappings": {
+                                "path": "Objects/Player Projectiles/Object Data/Map - Scorch Barrier C.bin",
+                                "label": ""
+                            },
+                            "dplcs": {
+                                "enabled": false,
+                                "path": "",
+                                "label": ""
+                            },
+                            "uuid": "0b212717-51b4-4ae9-85ee-7953ce4809f1"
+                        },
+                        {
+                            "format": "Sonic 3&K Object.js",
                             "name": "Fin Shredder",
                             "palettes": [
                                 {
@@ -280,7 +223,16 @@
                         {
                             "format": "Sonic 3&K Object.js",
                             "name": "Origami Star",
-                            "palettes": [],
+                            "palettes": [
+                                {
+                                    "path": "Objects/Player Characters/Bass/Palettes/Origami Star.bin",
+                                    "length": 1
+                                },
+                                {
+                                    "path": "Objects/Player Characters/Copy Robot/Palettes/Origami Star.bin",
+                                    "length": 1
+                                }
+                            ],
                             "art": {
                                 "path": "Objects/Player Projectiles/KosinskiM Art/Origami Star.bin",
                                 "compression": "Kosinski-M",
@@ -319,59 +271,92 @@
                         }
                     ],
                     "isDirectory": true,
-                    "expanded": true,
+                    "expanded": false,
                     "uuid": "e2910ae7-3887-45b4-a302-3c7d0a71c2fb"
                 },
                 {
-                    "format": "Sonic 1.js",
-                    "name": "Treble",
-                    "palettes": [
+                    "name": "Utility items",
+                    "children": [
                         {
-                            "path": "Objects/Player Characters/Bass/Palettes/Treble Boost.bin",
-                            "length": 1
+                            "format": "Sonic 1.js",
+                            "name": "Treble",
+                            "palettes": [
+                                {
+                                    "path": "Objects/Player Characters/Bass/Palettes/Treble Boost.bin",
+                                    "length": 1
+                                }
+                            ],
+                            "art": {
+                                "path": "",
+                                "compression": "Uncompressed",
+                                "offset": 0
+                            },
+                            "mappings": {
+                                "path": "",
+                                "label": ""
+                            },
+                            "dplcs": {
+                                "enabled": false,
+                                "path": "",
+                                "label": ""
+                            },
+                            "uuid": "d0f213b2-03de-42a0-abc5-cdf2406ea05a",
+                            "expanded": true
+                        },
+                        {
+                            "format": "Sonic 3&K Object.js",
+                            "name": "Carry platform",
+                            "palettes": [
+                                {
+                                    "path": "Objects/Player Characters/Copy Robot/Palettes/Carry.bin",
+                                    "length": 1
+                                }
+                            ],
+                            "art": {
+                                "path": "Objects/Player Projectiles/KosinskiM Art/Carry Platform.bin",
+                                "compression": "Kosinski-M",
+                                "offset": 0
+                            },
+                            "mappings": {
+                                "path": "Objects/Player Projectiles/Object Data/Map - Carry Platform.bin",
+                                "label": ""
+                            },
+                            "dplcs": {
+                                "enabled": false,
+                                "path": "",
+                                "label": ""
+                            },
+                            "uuid": "bacfc22e-db82-4ca3-abd8-068b24279edf"
+                        },
+                        {
+                            "format": "Sonic 3&K Object.js",
+                            "name": "Super Arrow",
+                            "palettes": [
+                                {
+                                    "path": "Objects/Player Characters/Copy Robot/Palettes/Super Arrow.bin",
+                                    "length": 1
+                                }
+                            ],
+                            "art": {
+                                "path": "Objects/Player Projectiles/KosinskiM Art/Super Arrow.bin",
+                                "compression": "Kosinski-M",
+                                "offset": 0
+                            },
+                            "mappings": {
+                                "path": "Objects/Player Projectiles/Object Data/Map - Super Arrow.bin",
+                                "label": ""
+                            },
+                            "dplcs": {
+                                "enabled": false,
+                                "path": "",
+                                "label": ""
+                            },
+                            "uuid": "f84f415b-2482-4150-b10e-809f34fe030c"
                         }
                     ],
-                    "art": {
-                        "path": "",
-                        "compression": "Uncompressed",
-                        "offset": 0
-                    },
-                    "mappings": {
-                        "path": "",
-                        "label": ""
-                    },
-                    "dplcs": {
-                        "enabled": false,
-                        "path": "",
-                        "label": ""
-                    },
-                    "uuid": "d0f213b2-03de-42a0-abc5-cdf2406ea05a",
-                    "expanded": true
-                },
-                {
-                    "format": "Sonic 3&K Object.js",
-                    "name": "Carry platform",
-                    "palettes": [
-                        {
-                            "path": "Objects/Player Characters/Copy Robot/Palettes/Carry.bin",
-                            "length": 1
-                        }
-                    ],
-                    "art": {
-                        "path": "Objects/Player Projectiles/KosinskiM Art/Carry Platform.bin",
-                        "compression": "Kosinski-M",
-                        "offset": 0
-                    },
-                    "mappings": {
-                        "path": "Objects/Player Projectiles/Object Data/Map - Carry Platform.bin",
-                        "label": ""
-                    },
-                    "dplcs": {
-                        "enabled": false,
-                        "path": "",
-                        "label": ""
-                    },
-                    "uuid": "f84f415b-2482-4150-b10e-809f34fe030c"
+                    "isDirectory": true,
+                    "expanded": true,
+                    "uuid": "f002076f-3c0b-4438-9cb6-fb5b7bbbde84"
                 }
             ],
             "isDirectory": true,
@@ -380,29 +365,23 @@
         },
         {
             "format": "Sonic 3&K Object.js",
-            "name": "Mega Man",
-            "palettes": [
-                {
-                    "path": "Objects/Mega Man/Palettes/Mega Man.bin",
-                    "length": 1
-                }
-            ],
+            "name": "HUD",
+            "palettes": [],
             "art": {
-                "path": "Objects/Mega Man/Uncompressed Art/Mega Man.bin",
-                "compression": "Uncompressed",
+                "path": "Objects/HUD/KosinskiM Art/HUD.bin",
+                "compression": "Kosinski-M",
                 "offset": 0
             },
             "mappings": {
-                "path": "Objects/Mega Man/Object Data/Map - Mega Man.bin",
-                "label": ""
+                "path": "Objects/HUD/Object Data/Map - HUD.asm",
+                "label": "Map_HUD"
             },
             "dplcs": {
-                "enabled": true,
-                "path": "Objects/Mega Man/Object Data/PLC - Mega Man.bin",
+                "enabled": false,
+                "path": "",
                 "label": ""
             },
-            "uuid": "a2a8113a-f2bd-47ff-8e2d-05fd3e240425",
-            "expanded": true
+            "uuid": "d3baef86-16fc-4a03-bdf8-82e7ea2be6d9"
         },
         {
             "format": "Sonic 3&K Object.js",
@@ -554,6 +533,110 @@
                         "label": ""
                     },
                     "uuid": "4abdeb7c-a4d3-4c49-8076-1fd719303266"
+                },
+                {
+                    "format": "Sonic 3&K Object.js",
+                    "name": "Jumbro",
+                    "palettes": [],
+                    "art": {
+                        "path": "",
+                        "compression": "Uncompressed",
+                        "offset": 0
+                    },
+                    "mappings": {
+                        "path": "",
+                        "label": ""
+                    },
+                    "dplcs": {
+                        "enabled": false,
+                        "path": "",
+                        "label": ""
+                    },
+                    "uuid": "9d7a29ef-0b2e-4830-a800-f33a0df6db0b"
+                },
+                {
+                    "format": "Sonic 3&K Object.js",
+                    "name": "Explosions",
+                    "palettes": [
+                        {
+                            "path": "Objects/Player Characters/Bass/Palettes/Bass.bin",
+                            "length": 1
+                        },
+                        {
+                            "path": "Levels/Guaranteed Colors.bin",
+                            "length": 1
+                        }
+                    ],
+                    "art": {
+                        "path": "Objects/Explosion/KosinskiM Art/Explosion.bin",
+                        "compression": "Kosinski-M",
+                        "offset": 0
+                    },
+                    "mappings": {
+                        "path": "Objects/Explosion/Object Data/Map - Explosion.bin",
+                        "label": ""
+                    },
+                    "dplcs": {
+                        "enabled": false,
+                        "path": "",
+                        "label": ""
+                    },
+                    "uuid": "501bd6b9-4b3c-4fd9-97db-e4c7c6906fb9"
+                },
+                {
+                    "format": "Sonic 3&K Object.js",
+                    "name": "Boss Explosions",
+                    "palettes": [
+                        {
+                            "path": "Objects/Player Characters/Bass/Palettes/Bass.bin",
+                            "length": 1
+                        },
+                        {
+                            "path": "Levels/Guaranteed Colors.bin",
+                            "length": 1
+                        }
+                    ],
+                    "art": {
+                        "path": "Objects/Explosion/KosinskiM Art/Explosion.bin",
+                        "compression": "Kosinski-M",
+                        "offset": 0
+                    },
+                    "mappings": {
+                        "path": "Objects/Explosion/Object Data/Map - Boss Explosion.bin",
+                        "label": ""
+                    },
+                    "dplcs": {
+                        "enabled": false,
+                        "path": "",
+                        "label": ""
+                    },
+                    "uuid": "1b501bd6-b94b-4c8f-99d7-dbe4c7c6906f"
+                },
+                {
+                    "format": "Sonic 3&K Object.js",
+                    "name": "Mega Man",
+                    "palettes": [
+                        {
+                            "path": "Objects/Mega Man/Palettes/Mega Man.bin",
+                            "length": 1
+                        }
+                    ],
+                    "art": {
+                        "path": "Objects/Mega Man/Uncompressed Art/Mega Man.bin",
+                        "compression": "Uncompressed",
+                        "offset": 0
+                    },
+                    "mappings": {
+                        "path": "Objects/Mega Man/Object Data/Map - Mega Man.bin",
+                        "label": ""
+                    },
+                    "dplcs": {
+                        "enabled": true,
+                        "path": "Objects/Mega Man/Object Data/PLC - Mega Man.bin",
+                        "label": ""
+                    },
+                    "uuid": "a2a8113a-f2bd-47ff-8e2d-05fd3e240425",
+                    "expanded": true
                 }
             ],
             "isDirectory": true,

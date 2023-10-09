@@ -138,7 +138,7 @@ Player_Shoot:
 		dc.l	Weapon_NoAmmo		; Master Wep 7
 		dc.l	Weapon_MetalBlade	; Master Wep 8
 		dc.l	Utility_Carry		; Utility 1
-		dc.l	Weapon_NoAmmo		; Utility 2
+		dc.l	Utility_SuperArrow	; Utility 2
 
 FireWeapon:
 		moveq	#0,d0

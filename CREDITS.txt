@@ -1,0 +1,8 @@
+SPRITES:
+- CAPCOM (Wily Wars & Mega Man 10)
+- Jay Pavlina (Super Mario Bros. Crossover [Bass {16-bit}], the initial inspiration for the Bass sprites and where Gemini copied some shading from)
+- Gemini0 (Initial Bass sprite sheet, Copy Robot sprite sheet, Sniper Joe C2 Custom)
+- Mengo329 (Added more poses, refined the sprites quite a bit, made weapon sprites, enemy and level art)
+- Rockman 7 FC team (Traffic cone enemy used for "Construction" icon on stage select)
+- Rabbid4240 (Logo)
+- kindlypatrick (WW-styled MM5 weapons)
