@@ -200,7 +200,7 @@ Game_Program:
 		bsr.s	Init_VDP
 		bsr.w	SoundDriverLoad
 		bsr.w	Init_Controllers
-		move.b	#id_TitleScreen,(Game_mode).w		; set Game Mode
+		move.b	#id_ControllerSplash,(Game_mode).w		; set Game Mode
 
 .loop
 		move.b	(Game_mode).w,d0						; load Game Mode
@@ -213,7 +213,8 @@ Game_Program:
 ; ---------------------------------------------------------------------------
 
 Game_Modes:
-ptr_Title:		dc.l Title_Screen			; Title ($00)
-ptr_StageSelect:	dc.l StageSelect_Screen		; Stage Select (MM-style) ($04)
-ptr_LevelSelect:	dc.l LevelSelect_Screen		; Level Select ($08)
-ptr_Level:		dc.l Level_Screen			; Level ($0A)
+ptr_ControllerSplash:	dc.l ControllerSplash_Screen; Controller splash ($00)
+ptr_Title:				dc.l Title_Screen			; Title ($04)
+ptr_StageSelect:		dc.l StageSelect_Screen		; Stage Select (MM-style) ($08)
+ptr_LevelSelect:		dc.l LevelSelect_Screen		; Level Select ($0C)
+ptr_Level:				dc.l Level_Screen			; Level ($10)

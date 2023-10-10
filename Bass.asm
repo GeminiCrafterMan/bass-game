@@ -315,6 +315,12 @@ EndOfHeader:
 		include "Data/Misc/AfterBoss Cleanup.asm"
 
 ; ---------------------------------------------------------------------------
+; Controller splash screen subroutines
+; ---------------------------------------------------------------------------
+
+		include "Data/Screens/Controller Splash/Controller Splash.asm"
+
+; ---------------------------------------------------------------------------
 ; Title screen subroutines
 ; ---------------------------------------------------------------------------
 

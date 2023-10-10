@@ -145,8 +145,10 @@ CollectValidPickup:
 	.addHP:
 		subq.b	#1,d2	; subtract 1 because you run into the loop first before looping
 		st		(Game_paused).w
+		move.b	(v_health).w,d3
+		move.b	(v_healthmax).w,d4
 	.addHPLoop:
-		cmpi.b	#28,(v_health).w
+		cmp.b	d3,d4
 		beq.s	.stopLoop
 		sfx		sfx_EnergyFill
 		addi.b	#1,(v_health).w

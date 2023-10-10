@@ -437,7 +437,9 @@ v_weapon:							ds.b 1					; currently-selected weapon
 v_charge:							ds.b 1					; weapon charge -- not used for bass (yet)
 v_chargecyctimer:					ds.b 1					; charge cycle timer -- not used for bass (yet)
 v_chargecycnum:						ds.b 1					; charge cycle number -- not used for bass (yet)
+									ds.b 1					; even
 v_health:							ds.b 1					; player health, usually 28
+v_healthmax:						ds.b 1					; player max health
 
 v_weapon1energy:					ds.b 1					; weapon 1 energy
 v_weapon1max:						ds.b 1					; weapon 1 max

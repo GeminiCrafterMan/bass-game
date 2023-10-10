@@ -75,6 +75,8 @@ ArtKosM_FireTelly:				binclude "Objects/Enemies/Fire Telly/KosinskiM Art/Fire Te
 ; Kosinski Module compressed menu graphics
 ; ===========================================================================
 
+ArtKosM_Controller:				binclude "Data/Screens/Controller Splash/KosinskiM Art/Controller Splash.bin"
+	even
 ArtKosM_TitleTiles:				binclude "Data/Screens/Title/KosinskiM Art/Title Tiles.bin"
 	even
 ArtKosM_StageSelObjects:		binclude "Data/Screens/Stage Select/KosinskiM Art/Stage Select Objects.bin"

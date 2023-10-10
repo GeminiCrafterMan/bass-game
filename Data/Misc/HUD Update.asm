@@ -82,7 +82,7 @@ loc_DD9E:
 		move.b	(v_weapon).w,d1	; move weapon into d1
 		beq.s	.noWep
 		lsl.b	d1				; weapon id * 2
-		lea		(v_chargecycnum).w,a4 	; load energy address into a4
+		lea		(v_health).w,a4 	; load energy address into a4
 		add.l	d1,a4			; (weapon_id*2)+addr(a4)
 		move.b	(a4)+,d1			; move contents of a4 to d1
 		move.b	(a4)+,d5		; move contents of a4+ to d2

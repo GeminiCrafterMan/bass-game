@@ -45,6 +45,7 @@ ptr_Pal_Origami:		palp	Pal_Origami, Normal_palette_line_2, 48		; Origami Man
 ; Misc
 ptr_Pal_Bass_LS:		palp	Pal_Bass, Normal_palette_line_3, 16			; Bass
 ptr_Pal_CopyRobot_LS:	palp	Pal_CopyRobot, Normal_palette_line_3, 16	; CopyRobot
+ptr_Pal_Controller:		palp	Pal_Controller, Normal_palette_line_1, 64	; Controller splash screen
 ptr_Pal_Title:			palp	Pal_Title, Normal_palette_line_1, 64		; Title screen
 ptr_Pal_StageSelect:	palp	Pal_StageSelect, Normal_palette_line_2, 48	; Stage select screen
 ptr_Pal_SSelectBass:	palp	Pal_SSelectBass, Normal_palette_line_1, 16	; Bass
@@ -92,6 +93,7 @@ palid_Origami:			equ (ptr_Pal_Origami-PalPointers)/8				; Origami Man
 ; Misc
 palid_Bass_LS:			equ (ptr_Pal_Bass_LS-PalPointers)/8				; Bass
 palid_CopyRobot_LS:		equ (ptr_Pal_CopyRobot_LS-PalPointers)/8		; CopyRobot
+palid_Controller:		equ	(ptr_Pal_Controller-PalPointers)/8
 palid_Title:			equ	(ptr_Pal_Title-PalPointers)/8				; Title screen
 palid_StageSelect:		equ	(ptr_Pal_StageSelect-PalPointers)/8			; Stage select screen
 palid_SSelectBass:		equ (ptr_Pal_SSelectBass-PalPointers)/8			; Bass
