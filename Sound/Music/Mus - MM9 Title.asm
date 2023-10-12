@@ -6,7 +6,7 @@ Title_RM9_Header:
 	smpsHeaderChan      $06, $03
 	smpsHeaderTempo     $01, $00
 
-	smpsHeaderDAC       Title_RM9_DAC,	$00, $F2
+	smpsHeaderDAC       Title_RM9_DAC
 	smpsHeaderFM        Title_RM9_FM1,	$00, $00
 	smpsHeaderFM        Title_RM9_FM2,	$00, $00
 	smpsHeaderFM        Title_RM9_FM3,	$00, $00

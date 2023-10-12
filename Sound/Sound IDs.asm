@@ -14,7 +14,7 @@ mus_Air =			SMPS_id(ptr_mus_air)
 mus_MSLabyrinth =	SMPS_id(ptr_mus_mslabyrinth)
 mus_Shadow =		SMPS_id(ptr_mus_shadow)
 mus_Snake =			SMPS_id(ptr_mus_snake)
-mus_MWater =		SMPS_id(ptr_mus_mwater)
+mus_Dive =			SMPS_id(ptr_mus_dive)
 mus_BRodG =			SMPS_id(ptr_mus_brodg)
 
 ; Bosses

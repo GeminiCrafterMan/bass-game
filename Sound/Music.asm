@@ -9,7 +9,7 @@ ptr_mus_mslabyrinth:SMPS_MUSIC_METADATA Music_MSLabyrinth, s3TempotoS1($FF), 0	;
 
 ptr_mus_shadow:		SMPS_MUSIC_METADATA Music_ShadowMan, s3TempotoS1($FF), 0	; Shadow Man
 ptr_mus_snake:		SMPS_MUSIC_METADATA Music_SnakeMan, s3TempotoS1($FF), 0		; Snake Man
-ptr_mus_mwater:		SMPS_MUSIC_METADATA Music_MWater, s3TempotoS1($FF), 0		; Mega Water S
+ptr_mus_dive:		SMPS_MUSIC_METADATA Music_DiveMan, s3TempotoS1($FF), 0		; Dive Man
 ptr_mus_brodg:		SMPS_MUSIC_METADATA Music_BRodG, s3TempotoS1($FF), 0		; Buster Rod G
 
 ; Boss
@@ -39,7 +39,7 @@ Music_ShadowMan:	include "Sound/Music/Mus - Shadow Man.asm"
 	even
 Music_SnakeMan:		include "Sound/Music/Mus - Snake Man.asm"
 	even
-Music_MWater:		include "Sound/Music/Mus - Mega Water S.asm"
+Music_DiveMan:		include "Sound/Music/Mus - Dive Man.asm"
 	even
 Music_BRodG:		include "Sound/Music/Mus - Buster Rod G.asm"
 	even

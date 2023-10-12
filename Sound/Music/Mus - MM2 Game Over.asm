@@ -1,3 +1,5 @@
+; Game Over - Mega Man 2 (CAPCOM, 1988)
+; Transposition: KC
 Game_Over_RM2_Header:
 	smpsHeaderStartSong 1
 	smpsHeaderVoice     Game_Over_RM2_Voices
@@ -5,13 +7,13 @@ Game_Over_RM2_Header:
 	smpsHeaderTempo     $01, $06
 
 	smpsHeaderDAC       Game_Over_RM2_DAC
-	smpsHeaderFM        Game_Over_RM2_FM1,	$00, $14
-	smpsHeaderFM        Game_Over_RM2_FM2,	$00, $0A
-	smpsHeaderFM        Game_Over_RM2_FM3,	$00, $14
-	smpsHeaderFM        Game_Over_RM2_FM4,	$00, $14
-	smpsHeaderFM        Game_Over_RM2_FM5,	$00, $17
-	smpsHeaderPSG       Game_Over_RM2_PSG1,	$E8, $03, $00, fTone_09
-	smpsHeaderPSG       Game_Over_RM2_PSG2,	$F4, $00, $00, fTone_09
+	smpsHeaderFM        Game_Over_RM2_FM1,	$00-1, $14
+	smpsHeaderFM        Game_Over_RM2_FM2,	$00-1, $0A
+	smpsHeaderFM        Game_Over_RM2_FM3,	$00-1, $14
+	smpsHeaderFM        Game_Over_RM2_FM4,	$00-1, $14
+	smpsHeaderFM        Game_Over_RM2_FM5,	$00-1, $17
+	smpsHeaderPSG       Game_Over_RM2_PSG1,	$E8-1, $03, $00, fTone_09
+	smpsHeaderPSG       Game_Over_RM2_PSG2,	$F4-1, $00, $00, fTone_09
 	smpsHeaderPSG       Game_Over_RM2_PSG3,	$F4, $01, $00, fTone_09
 
 ; FM1 Data

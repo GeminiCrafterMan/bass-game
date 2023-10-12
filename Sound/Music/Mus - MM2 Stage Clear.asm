@@ -1,31 +1,35 @@
+; Stage Clear - Mega Man 2 (CAPCOM, 1988)
+; Transposition: KC
 Stage_Clear_RM2_Header:
 	smpsHeaderStartSong 1
 	smpsHeaderVoice     Stage_Clear_RM2_Voices
 	smpsHeaderChan      $06, $03
-	smpsHeaderTempo     $01, $07
+	smpsHeaderTempo     $01, $07+3
 
 	smpsHeaderDAC       Stage_Clear_RM2_DAC
-	smpsHeaderFM        Stage_Clear_RM2_FM1,	$00, $14
-	smpsHeaderFM        Stage_Clear_RM2_FM2,	$00, $0A
-	smpsHeaderFM        Stage_Clear_RM2_FM3,	$00, $14
-	smpsHeaderFM        Stage_Clear_RM2_FM4,	$00, $14
-	smpsHeaderFM        Stage_Clear_RM2_FM5,	$00, $18
-	smpsHeaderPSG       Stage_Clear_RM2_PSG1,	$F4, $04, $00, fTone_09
-	smpsHeaderPSG       Stage_Clear_RM2_PSG2,	$F4, $04, $00, fTone_09
+	smpsHeaderFM        Stage_Clear_RM2_FM1,	$00+2, $14
+	smpsHeaderFM        Stage_Clear_RM2_FM2,	$00+2, $0A
+	smpsHeaderFM        Stage_Clear_RM2_FM3,	$00+2, $14
+	smpsHeaderFM        Stage_Clear_RM2_FM4,	$00+2, $14
+	smpsHeaderFM        Stage_Clear_RM2_FM5,	$00+2, $18
+	smpsHeaderPSG       Stage_Clear_RM2_PSG1,	$F4+2, $04, $00, fTone_09
+	smpsHeaderPSG       Stage_Clear_RM2_PSG2,	$F4+2, $04, $00, fTone_09
 	smpsHeaderPSG       Stage_Clear_RM2_PSG3,	$F4, $01, $00, fTone_09
 
 ; FM1 Data
 Stage_Clear_RM2_FM1:
 	smpsSetvoice        $04
 	smpsModSet          $0C, $01, $05, $04
-	dc.b	nRst, $60, nCs5, $06, $12, nEb5, $06, $12, nE5, $06, $12, nFs5
+;	dc.b	nRst, $60
+	dc.b	nCs5, $06, $12, nEb5, $06, $12, nE5, $06, $12, nFs5
 	dc.b	$06, nE5, nFs5, nAb5, $06, smpsNoAttack, $60
 	smpsStop
 
 ; FM2 Data
 Stage_Clear_RM2_FM2:
 	smpsSetvoice        $08
-	dc.b	nRst, $60, nFs3, $06, $12, nAb3, $06, $12, nA3, $06, $12, nB3
+;	dc.b	nRst, $60
+	dc.b	nFs3, $06, $12, nAb3, $06, $12, nA3, $06, $12, nB3
 	dc.b	$06, nA3, nB3, nB3, $06, smpsNoAttack, $60
 	smpsStop
 
@@ -33,7 +37,8 @@ Stage_Clear_RM2_FM2:
 Stage_Clear_RM2_FM3:
 	smpsSetvoice        $04
 	smpsModSet          $0C, $01, $05, $04
-	dc.b	nRst, $60, nA4, $06, $12, nB4, $06, $12, nCs5, $06, $12, nEb5
+;	dc.b	nRst, $60
+	dc.b	nA4, $06, $12, nB4, $06, $12, nCs5, $06, $12, nEb5
 	dc.b	$06, nCs5, nEb5, nE5, $06, smpsNoAttack, $60
 	smpsStop
 
@@ -41,7 +46,8 @@ Stage_Clear_RM2_FM3:
 Stage_Clear_RM2_FM4:
 	smpsModSet          $0C, $01, $05, $04
 	smpsSetvoice        $04
-	dc.b	nRst, $60, nFs4, $06, $12, nAb4, $06, $12, nA4, $06, $12, nB4
+;	dc.b	nRst, $60
+	dc.b	nFs4, $06, $12, nAb4, $06, $12, nA4, $06, $12, nB4
 	dc.b	$06, nA4, nB4, nB4, $06, smpsNoAttack, $60
 	smpsStop
 
@@ -50,23 +56,26 @@ Stage_Clear_RM2_FM5:
 	smpsSetvoice        $04
 	smpsModSet          $0C, $01, $05, $04
 	smpsAlterNote       $02
-	dc.b	nRst, $0C, nRst, $60, nCs5, $06, $12, nEb5, $06, $12, nE5, $06
+	dc.b	nRst, $0C
+;	dc.b	nRst, $60
+	dc.b	nCs5, $06, $12, nEb5, $06, $12, nE5, $06
 	dc.b	$0C, nFs5, $06, nE5, nFs5, nAb5, smpsNoAttack, $60
 	smpsStop
 
 ; DAC Data
 Stage_Clear_RM2_DAC:
-	dc.b	dKick, $0C, $0C, $06, $0C, $0C, $0C, $06, $0C, $0C, dSnare, $06
+;	dc.b	dKick, $0C, $0C, $06, $0C, $0C, $0C, $06, $0C, $0C
+	dc.b	dSnare, $06
 	dc.b	$12, $06, $12, $06, $12, $06, $06, $06, $06
 	smpsStop
 
 ; PSG1 Data
 Stage_Clear_RM2_PSG1:
-	smpsPSGAlterVol     $FE
-	smpsPSGvoice        fTone_07
-	smpsModSet          $00, $01, $1B, $31
-	dc.b	nC4, $0C, $0C, $06, $0C, nA3, $0C, $0C, $06, $0C, nC3
-	smpsModOff
+;	smpsPSGAlterVol     $FE
+;	smpsPSGvoice        fTone_07
+;	smpsModSet          $00, $01, $1B, $31
+;	dc.b	nC4, $0C, $0C, $06, $0C, nA3, $0C, $0C, $06, $0C, nC3
+;	smpsModOff
 	smpsPSGAlterVol     $02
 	smpsPSGvoice        fTone_07
 	dc.b	nRst, $0C, nA3, $06, $12, nB3, $06, $12, nCs4, $06, $0C, nEb4
@@ -76,7 +85,8 @@ Stage_Clear_RM2_PSG1:
 ; PSG2 Data
 Stage_Clear_RM2_PSG2:
 	smpsPSGvoice        fTone_07
-	dc.b	nRst, $60, nRst, $0C, nFs3, $06, $12, nAb3, $06, $12, nA3, $06
+;	dc.b	nRst, $60
+	dc.b	nRst, $0C, nFs3, $06, $12, nAb3, $06, $12, nA3, $06
 	dc.b	$0C, nB3, $06, nA3, nB3, nB3, smpsNoAttack, $60
 	smpsStop
 
@@ -84,7 +94,8 @@ Stage_Clear_RM2_PSG2:
 Stage_Clear_RM2_PSG3:
 	smpsPSGform         $E7
 	smpsPSGvoice        fTone_09
-	dc.b	nRst, $60, (nMaxPSG-$F4)&$FF, $06, $12, $06, $12, $06, $12, $06, $06, $06
+;	dc.b	nRst, $60
+	dc.b	(nMaxPSG-$F4)&$FF, $06, $12, $06, $12, $06, $12, $06, $06, $06
 	smpsPSGvoice        fTone_02
 	dc.b	$06, $06, $06, $06, $06
 	smpsPSGAlterVol     $01
