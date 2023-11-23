@@ -1,6 +1,4 @@
 Weapon_ScorchBarrier:	; Rotating shield.
-		cmpi.b	#4,(v_weapon1energy).w
-		jeq		Weapon_NoAmmo.fireLemon
 		tst.b	(Weapon_art_loaded_flag).w
 		bne.s	.skipLoad
 		lea		(ArtKosM_ScorchBarrierC).l,a1	; change based on character selected but not yet
@@ -14,7 +12,9 @@ Weapon_ScorchBarrier:	; Rotating shield.
 		beq.w	.ret
 		cmpi.b	#1,(v_bulletsonscreen).w
 		bge.w	.ret
-	.fireLemon:
+	.fireFlame:
+		cmpi.b	#4,(v_weapon1energy).w
+		jeq		Weapon_NoAmmo.fireLemon
 		addq.b	#4,(v_bulletsonscreen).w
 		subq.b	#4,(v_weapon1energy).w
 		sfx		sfx_BusterShot
@@ -24,24 +24,32 @@ Weapon_ScorchBarrier:	; Rotating shield.
 		move.w	x_pos(a0),x_pos(a1)
 		move.w	y_pos(a0),y_pos(a1)
 		move.l	#Obj_ScorchBarrier,address(a1)
+		clr.b	objoff_3C(a1)	; angle
+		move.w	#$1818,objoff_3A(a1)	; funky way of storing radius
 
 		jsr		FindFreeProjectile
 		move.w	a0,parent3(a1)
 		move.w	x_pos(a0),x_pos(a1)
 		move.w	y_pos(a0),y_pos(a1)
 		move.l	#Obj_ScorchBarrier,address(a1)
+		move.b	#64,objoff_3C(a1)	; angle
+		move.w	#$1818,objoff_3A(a1)	; funky way of storing radius
 
 		jsr		FindFreeProjectile
 		move.w	a0,parent3(a1)
 		move.w	x_pos(a0),x_pos(a1)
 		move.w	y_pos(a0),y_pos(a1)
 		move.l	#Obj_ScorchBarrier,address(a1)
+		move.b	#128,objoff_3C(a1)	; angle
+		move.w	#$1818,objoff_3A(a1)	; funky way of storing radius
 
 		jsr		FindFreeProjectile
 		move.w	a0,parent3(a1)
 		move.w	x_pos(a0),x_pos(a1)
 		move.w	y_pos(a0),y_pos(a1)
 		move.l	#Obj_ScorchBarrier,address(a1)
+		move.b	#192,objoff_3C(a1)	; angle
+		move.w	#$1818,objoff_3A(a1)	; funky way of storing radius
 	.done:
 		move.b	#3,(v_shottype).w	; Shield
 		move.b	#13,shoottimer(a0)
@@ -57,7 +65,7 @@ Obj_ScorchBarrier:
 		move.w	#make_art_tile(ArtTile_WeaponStuff,0,0),art_tile(a0)
 		move.w	#$200,priority(a0)
 		ori.b	#4,render_flags(a0)
-		move.b	#4,damage(a0)	; deals 2 damage to anything but bosses
+		move.b	#4,damage(a0)	; deals 4 damage to anything but bosses
 		move.w	#bytes_to_word(20/2,20/2),height_pixels(a0)
 		move.w	#bytes_to_word(20/2,20/2),y_radius(a0)
 		btst	#7,status(a0)
@@ -70,9 +78,8 @@ Obj_ScorchBarrier:
 		move.b	#2,anim_frame_timer(a0)
 		bchg	#rbXFlip,render_flags(a0)
 	.stay:
-		addq.b	#2,$3C(a0)	; speed
-		moveq	#3,d2		; distance
-		jsr		MoveSprite_CircularSimple
+		jsr		MoveSprite_Circular
+		addq.b	#1,objoff_3C(a0)
 		jsr		(TouchResponse).l
 		jmp		(Draw_Sprite).w
 	.delete:
