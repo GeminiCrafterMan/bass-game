@@ -477,9 +477,6 @@ Player_CheckLadder:
 		bne.s	.end
 		btst	#2,object_control(a0)		; Already on a ladder?
 		bne.s	.end
-		move.b	(Ctrl_1_held_logical).w,d0	; are we attempting to climb at all?
-		andi.b	#button_up_or_down_mask,d0
-		beq.s	.end						; if not, fail
 		cmpi.b	#id_Victory,anim(a0)		; if in any animation earlier than victory, continue
 		blt.s	.cont
 		cmpi.b	#id_LadderUp,anim(a0)	; if in any animation later than ladder climb, continue
@@ -499,6 +496,9 @@ Player_CheckLadder:
 		blt.s	.chkDown
 		cmpi.w	#3,d0
 		bgt.s	.chkDown
+		move.b	(Ctrl_1_held_logical).w,d0	; are we attempting to climb up?
+		andi.b	#button_up_mask,d0
+		beq.s	.end						; if not, fail
 		bra.s	.ladder
 	.chkDown:
 		move.w	y_pos(a0),d2
@@ -510,6 +510,9 @@ Player_CheckLadder:
 		blt.s	.end
 		cmpi.w	#3,d0
 		bgt.s	.end
+		move.b	(Ctrl_1_held_logical).w,d0	; are we attempting to climb up?
+		andi.b	#button_down_mask,d0
+		beq.s	.end						; if not, fail
 	
 	.ladder:
 		bclr	#Status_Dash,status(a0)		; Force out of dash
@@ -539,7 +542,7 @@ Player_Ladder:
 		beq.s	.fallOff
 		move.w	x_pos(a0),d3			; Get block we are in
 		move.w	y_pos(a0),d2
-		subi.w	#12,d2	; originally #24 but i wanna try to get the block above the ladder for the climb-up animation
+		subi.w	#6,d2	; originally #24 but i wanna try to get the block above the ladder for the climb-up animation
 		jsr		GetFloorPosition
 		move.w	(a1),d0
 		andi.w	#$3FF,d0
@@ -547,12 +550,13 @@ Player_Ladder:
 		blt.s	.climbUp
 		cmpi.w	#3,d0
 		bgt.s	.climbUp
-	.cont: ; supposed to make you fall off if you go below the bottom of the ladder, ends up making you fall off constantly...
+	.cont:
 		move.w	y_pos(a0),d2
 		jsr		GetFloorPosition
-		addi.w	#12,d2	; originally #24 but i wanna try to get the block above the ladder for the climb-up animation
+;		addi.w	#24,d2	; originally #24 but i wanna try to get the block above the ladder for the climb-up animation
 		move.w	(a1),d0
 		andi.w	#$3FF,d0
+; supposed to make you fall off if you go below the bottom of the ladder, ends up making you fall off constantly...
 ;		cmpi.w	#1,d0
 ;		blt.s	.cont2
 ;		cmpi.w	#3,d0
@@ -564,13 +568,15 @@ Player_Ladder:
 		beq.s	.moveY
 
 	.fallOff:
+;		illegal
 		bclr	#2,object_control(a0)		; Stop climbing
+		clr.b	anim(a0)
 		rts
 	
 	.climbUp:	; climb-up animation
 		move.w	x_pos(a0),d3			; Get block we are in
 		move.w	y_pos(a0),d2
-		addi.w	#24,d2	; originally #24 but i wanna try to get the block above the ladder for the climb-up animation
+		subi.w	#12,d2	; originally #24 but i wanna try to get the block above the ladder for the climb-up animation
 		jsr		GetFloorPosition
 		move.w	(a1),d0
 		andi.w	#$3FF,d0

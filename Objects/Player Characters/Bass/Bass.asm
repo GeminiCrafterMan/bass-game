@@ -138,6 +138,7 @@ Bass_Modes: offsetTable
 ; =============== S U B R O U T I N E =======================================
 
 Bass_MdNormal:
+		bclr	#2,object_control(a0)		; Stop climbing!!
 		bsr.w	Player_WeaponSwitch
 		bsr.w	Player_Shoot
 		bsr.w	Bass_Dash

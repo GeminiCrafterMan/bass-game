@@ -138,6 +138,7 @@ CopyRobot_Modes: offsetTable
 ; =============== S U B R O U T I N E =======================================
 
 CopyRobot_MdNormal:
+		bclr	#2,object_control(a0)		; Stop climbing!!
 		bsr.w	Player_WeaponSwitch
 		bsr.w	Player_Shoot
 		bsr.w	CopyRobot_Slide
