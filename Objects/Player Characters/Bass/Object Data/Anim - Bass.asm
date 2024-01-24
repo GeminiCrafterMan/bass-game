@@ -38,6 +38,8 @@ Ani_Bass: offsetTable
 		offsetTableEntry.w BassAni_FireAqua
 		offsetTableEntry.w BassAni_ThrowAqua
 		offsetTableEntry.w BassAni_ShieldAqua
+		offsetTableEntry.w BassAni_LadderClimb
+		offsetTableEntry.w BassAni_LadderUp
 
 BassAni_Step:
 		dc.b	8, frB_Step,  afChange,  id_Run
@@ -120,6 +122,10 @@ BassAni_ThrowAqua:
 		dc.b	2, frB_ThrowA1, frB_ThrowA2, frB_ThrowA3, afBack, 1
 BassAni_ShieldAqua:
 		dc.b	2, frB_ShieldA1, frB_ShieldA2, frB_ShieldA3, afBack, 1
+BassAni_LadderClimb:
+		dc.b  $FC, frB_Ladder1, frB_Ladder2, frB_Ladder3, frB_Ladder4, afEnd
+BassAni_LadderUp:
+		dc.b  $FC, frB_LadderUp, frB_LadderUp, frB_LadderUp, frB_LadderUp, afEnd
 	even
 
 ; Animation IDs
@@ -159,6 +165,8 @@ id_AquaDown:			ds.b 1
 id_FireAqua:			ds.b 1
 id_ThrowAqua:			ds.b 1
 id_ShieldAqua:			ds.b 1
+id_LadderClimb:			ds.b 1
+id_LadderUp:			ds.b 1
 	even
 	dephase
 
@@ -240,6 +248,11 @@ frB_ThrowA3:		ds.b 1
 frB_ShieldA1:		ds.b 1
 frB_ShieldA2:		ds.b 1
 frB_ShieldA3:		ds.b 1
+frB_Ladder1:		ds.b 1
+frB_Ladder2:		ds.b 1
+frB_Ladder3:		ds.b 1
+frB_Ladder4:		ds.b 1
+frB_LadderUp:		ds.b 1
 frB_Last:			ds.b 0
 	even
 	dephase

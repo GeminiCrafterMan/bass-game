@@ -88,9 +88,6 @@ Camera_Y_pos_coarse_back:			ds.w 1					; Camera_Y_pos_coarse - $80
 Plane_double_update_flag:			ds.w 1					; Set when two block are to be updated instead of one (i.e. the camera's scrolled by more than $10 pixels)
 HScroll_Shift:						= *
 Camera_Hscroll_shift:				ds.w 3
-	if ExtendedCamera
-Camera_X_center:					ds.w 1
-	endif
 Screen_X_wrap_value:				ds.w 1					; Set to $FFFF
 Screen_Y_wrap_value:				ds.w 1					; Either $7FF or $FFF
 Camera_Y_pos_mask:					ds.w 1					; Either $7F0 or $FF0

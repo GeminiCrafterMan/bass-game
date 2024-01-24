@@ -121,11 +121,15 @@ Obj_FireTellyFlame_Fall:
 		move.b	#2,anim(a0)	; ember
 		move.l	#.addRoutine,jump(a0)
 		jsr		ObjectFall
+		out_of_xrange	.del
+		out_of_yrange	.del
 		jsr		ObjHitFloor_DoRoutine
 		bra.w	Obj_FireTelly_AnimateAndTouch
 	.addRoutine:
 		addq.b	#2,routine(a0)
 		rts
+	.del:
+		jmp		DeleteObject
 ; ---------------------------------------------------------------------------
 
 Obj_FireTellyFlame_Explode:

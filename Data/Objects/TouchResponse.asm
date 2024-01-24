@@ -522,7 +522,7 @@ GenericEnemy_Hurt:
 		btst	#0,boss_invulnerable_time(a0)
 		bne.s	.ret
 	.nopain:
-		jmp		RememberState_Collision
+		jmp		RememberState_CollisionXY
 	.restore:
 		bclr	#5,status(a0)
 	.ret:

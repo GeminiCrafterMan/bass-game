@@ -97,6 +97,8 @@ loc_10C0C:
 		jsr	Bass_Modes(pc,d1.w)	; run Bass's movement control code
 		movem.l	(sp)+,a4-a6
 
+		jsr		Player_CheckLadder
+
 loc_10C26:
 		cmpi.w	#-$100,(Camera_min_Y_pos).w		; is vertical wrapping enabled?
 		bne.s	+								; if not, branch
@@ -112,7 +114,7 @@ loc_10C26:
 		tst.b	anim(a0)
 		bne.s	+
 		move.b	prev_anim(a0),anim(a0)
-+		btst	#1,object_control(a0)
++		btst	#2,object_control(a0)
 		bne.s	++
 		bsr.w	Animate_Player
 		tst.b	(Reverse_gravity_flag).w
@@ -163,6 +165,11 @@ Bass_MdAir:
 	.cont:
 		bsr.w	Player_WeaponSwitch
 		bsr.w	Player_Shoot
+		btst	#2,object_control(a0)
+		beq.s	.noLadder
+		jsr		Player_Ladder
+		bra.s	loc_10FD6
+	.noLadder:
 		bsr.w	Player_HandleAirAnimations
 		clr.b	dashtimer(a0)
 		bclr	#Status_Dash,status(a0)

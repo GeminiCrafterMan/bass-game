@@ -97,6 +97,8 @@ locC_10C0C:
 		jsr	CopyRobot_Modes(pc,d1.w)	; run CopyRobot's movement control code
 		movem.l	(sp)+,a4-a6
 
+		jsr		Player_CheckLadder
+
 locC_10C26:
 		cmpi.w	#-$100,(Camera_min_Y_pos).w		; is vertical wrapping enabled?
 		bne.s	+								; if not, branch
@@ -155,6 +157,11 @@ CopyRobot_MdNormal:
 CopyRobot_MdAir:
 		bsr.w	Player_WeaponSwitch
 		bsr.w	Player_Shoot
+		btst	#2,object_control(a0)
+		beq.s	.noLadder
+		jsr		Player_Ladder
+		bra.s	locC_10FD6
+	.noLadder:
 		bsr.w	Player_HandleAirAnimations
 		clr.b	dashtimer(a0)
 		bclr	#Status_Dash,status(a0)

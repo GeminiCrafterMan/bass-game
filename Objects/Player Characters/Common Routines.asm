@@ -472,6 +472,129 @@ loc_10F22:
 
 ; =============== S U B R O U T I N E =======================================
 
+Player_CheckLadder:
+		btst	#0,object_control(a0)		; Being controlled by another object?
+		bne.s	.end
+		btst	#2,object_control(a0)		; Already on a ladder?
+		bne.s	.end
+		move.b	(Ctrl_1_held_logical).w,d0	; are we attempting to climb at all?
+		andi.b	#button_up_or_down_mask,d0
+		beq.s	.end						; if not, fail
+		cmpi.b	#id_Victory,anim(a0)		; if in any animation earlier than victory, continue
+		blt.s	.cont
+		cmpi.b	#id_LadderUp,anim(a0)	; if in any animation later than ladder climb, continue
+		bgt.s	.cont
+	.end:
+		rts
+	
+	.cont:
+		move.w	x_pos(a0),d3				; Get current block
+		move.w	y_pos(a0),d2
+		subi.w	#12,d2						; ...???
+		jsr		GetFloorPosition			; possible equivalent to CD's GetLevelBlock
+		move.w	(a1),d0
+		andi.w	#$3FF,d0
+		cmpi.w	#7,d0						; Are we on a ladder?
+		beq.s	.ladder
+
+		move.w	y_pos(a0),d2
+		addi.w	#12,d2	; originally #24 but i wanna try to get the block above the ladder for the climb-up animation
+		jsr		GetFloorPosition
+		move.w	(a1),d0
+		andi.w	#$3FF,d0
+		cmpi.w	#7,d0			; Are we on the ladder?
+		bne.s	.end
+	
+	.ladder:
+		bclr	#Status_Dash,status(a0)		; Force out of dash
+		clr.b	dashtimer(a0)
+		move.w	#0,x_vel(a0)				; Stop movement
+		move.w	#0,y_vel(a0)
+		move.w	#0,ground_vel(a0)
+		clr.b	angle(a0)
+		move.b	#1,anim_frame(a0)
+		move.b	#7,dashtimer(a0)		; Set animation timer
+		move.b	#id_LadderClimb,anim(a0)	; Set ladder animation
+		sfx		sfx_StarPost
+		bset	#2,object_control(a0)		; Mark as climbing a ladder
+
+		move.w	y_pos(a0),d0				; Clip onto ladder
+		subi.w	#12,d0
+		andi.w	#$FFF0,d0
+		addi.w	#12,d0
+		move.w	d0,y_pos(a0)
+		rts
+
+; =============== S U B R O U T I N E =======================================
+
+Player_Ladder:
+		move.w	x_pos(a0),d3			; Get block we are in
+		move.w	y_pos(a0),d2
+		subi.w	#12,d2	; originally #24 but i wanna try to get the block above the ladder for the climb-up animation
+		jsr		GetFloorPosition
+		move.w	(a1),d0
+		andi.w	#$3FF,d0
+		cmpi.w	#7,d0			; Are we on the ladder?
+		beq.s	.cont			; If not, branch
+		bsr.s	.climbUp
+	.cont:
+		move.w	y_pos(a0),d2
+		addi.w	#12,d2	; originally #24 but i wanna try to get the block above the ladder for the climb-up animation
+		jsr		GetFloorPosition
+		move.w	(a1),d0
+		andi.w	#$3FF,d0
+		cmpi.w	#7,d0			; Are we on the ladder?
+
+		move.b	(Ctrl_1_pressed_logical).w,d0	; are we jumping?
+		andi.b	#button_C_mask,d0
+		beq.s	.moveY
+
+	.fallOff:
+		bclr	#2,object_control(a0)		; Stop climbing
+		rts
+	
+	.climbUp:
+		move.w	x_pos(a0),d3			; Get block we are in
+		move.w	y_pos(a0),d2
+		subi.w	#12,d2	; originally #24 but i wanna try to get the block above the ladder for the climb-up animation
+		jsr		GetFloorPosition
+		move.w	(a1),d0
+		andi.w	#$3FF,d0
+		cmpi.w	#7,d0			; Are we on the ladder from the bottom?
+		bne.s	.fallOff		; for now, just fall off if we aren't
+		move.b	#id_LadderUp,anim(a0)
+	.wait:
+		rts
+		
+	.moveY:
+		tst.b	shoottimer(a0)
+		bne.s	.end
+		moveq	#2,d0				; Y speed
+		btst	#button_up,(Ctrl_1_held_logical).w		; Are we going up?
+		beq.s	.chkDown			; If not, branch
+		neg.w	d0				; Go the other way
+		bra.s	.doMove
+
+	.chkDown:
+		btst	#button_down,(Ctrl_1_held_logical).w		; Are we going left?
+		beq.s	.end				; If not, branch
+
+	.doMove:
+		add.w	d0,y_pos(a0)			; Update X position
+		subq.b	#1,dashtimer(a0)		; Decrement animation timer
+		bpl.s	.end				; If it hasn't run out, branch
+		move.b	#7,dashtimer(a0)		; Reset timer
+		addq.b	#1,anim_frame(a0)		; Increment animation frame
+		cmpi.b	#3,anim_frame(a0)		; Have we reached the last one?
+		bcs.s	.end				; If not, branch
+		move.b	#0,anim_frame(a0)		; Reset animation frame
+
+	.end:
+		rts
+
+
+; =============== S U B R O U T I N E =======================================
+
 Call_Player_AnglePos:
 		tst.b	(Reverse_gravity_flag).w
 		beq.w	Player_AnglePos

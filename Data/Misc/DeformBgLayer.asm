@@ -32,9 +32,6 @@ DeformBgLayer:
 ; =============== S U B R O U T I N E =======================================
 
 MoveCameraX:
-	if	ExtendedCamera
-		bsr.s	Camera_Extended
-	endif
 		move.w	(a1),d4
 		move.w	(a5),d1
 		beq.s	loc_1C0D2
@@ -56,16 +53,10 @@ loc_1C0D2:
 
 loc_1C0D6:
 		sub.w	(a1),d0
-	if	ExtendedCamera
-		sub.w	(Camera_X_center).w,d0
-		blt.s		loc_1C0E8
-		bge.s	loc_1C0FC
-	else
 		subi.w	#144,d0
-		blt.s		loc_1C0E8
+		blt.s	loc_1C0E8
 		subi.w	#16,d0
 		bge.s	loc_1C0FC
-	endif
 		clr.w	(a4)
 
 locret_1C0E6:
@@ -103,57 +94,6 @@ loc_1C112:
 		move.w	d0,(a1)
 		move.w	d1,(a4)
 		rts
-
-	if	ExtendedCamera
-
-; ---------------------------------------------------------------------------
-; Subroutine of the Extended camera
-; From Sonic CD R11A Disassembly
-; Check out the github:
-; https://github.com/Ralakimus/sonic-cd-r11a-disassembly
-; ---------------------------------------------------------------------------
-
-Camera_Extended:
-		move.w	Camera_X_center-Camera_X_pos(a1),d1		; Get camera X center position
-		move.w	ground_vel(a0),d0						; Get how fast we are moving
-		bpl.s	.PosInertia
-		neg.w	d0
-
-.PosInertia:
-		cmpi.w	#$600,d0								; Are we going at max regular speed?
-		bcs.s	.ResetPan								; If not, branch
-		tst.w	ground_vel(a0)							; Are we moving right?
-		bpl.s	.MovingRight								; If so, branch
-
-.MovingLeft:
-		addq.w	#2,d1									; Pan the camera to the right
-		cmpi.w	#(320/2)+64,d1							; Has it panned far enough?
-		bcs.s	.SetPanVal								; If not, branch
-		move.w	#(320/2)+64,d1							; Cap the camera's position
-		bra.s	.SetPanVal
-
-.MovingRight:
-		subq.w	#2,d1									; Pan the camera to the left
-		cmpi.w	#(320/2)-64,d1							; Has it panned far enough
-		bcc.s	.SetPanVal								; If not, branch
-		move.w	#(320/2)-64,d1							; Cap the camera's position
-		bra.s	.SetPanVal
-
-.ResetPan:
-		cmpi.w	#320/2,d1								; Has the camera panned back to the middle?
-		beq.s	.SetPanVal								; If so, branch
-		bcc.s	.ResetLeft								; If it's panning back left
-		addq.w	#2,d1									; Pan back to the right
-		bra.s	.SetPanVal
-
-.ResetLeft:
-		subq.w	#2,d1									; Pan back to the left
-
-.SetPanVal:
-		move.w	d1,Camera_X_center-Camera_X_pos(a1)		; Update camera X center position
-		rts
-
-	endif
 
 ; ---------------------------------------------------------------------------
 ; Subroutine to scroll the level vertically as Sonic moves

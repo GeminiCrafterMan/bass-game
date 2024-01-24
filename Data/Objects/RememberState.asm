@@ -44,6 +44,30 @@ Sprite_OnScreen_Test_Collision:
 .delete
 		jmp	(Delete_Current_Sprite).w
 
+MarkObjGone_CollisionXY:
+RememberState_CollisionXY:
+Sprite_CheckDeleteTouch4:
+Sprite_OnScreen_Test_CollisionXY:
+		move.w	x_pos(a0),d0
+
+.skipxpos
+		out_of_xrange2.s	.offscreen
+		move.w	y_pos(a0),d0
+.skipypos
+		out_of_yrange2.s	.offscreen
+		jsr	(Add_SpriteToCollisionResponseList).w
+		jmp	(Draw_Sprite).w
+; ---------------------------------------------------------------------------
+
+.offscreen
+		move.w	respawn_addr(a0),d0
+		beq.s	.delete
+		movea.w	d0,a2
+		bclr	#7,(a2)
+
+.delete
+		jmp	(Delete_Current_Sprite).w
+
 ; =============== S U B R O U T I N E =======================================
 
 Delete_Sprite_If_Not_In_Range:
