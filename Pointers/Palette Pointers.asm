@@ -41,6 +41,9 @@ ptr_Pal_Smog:			palp	Pal_Smog, Normal_palette_line_2, 48			; Smog Man
 ptr_Pal_Shark:			palp	Pal_Shark, Normal_palette_line_2, 48		; Shark Man
 ptr_Pal_SharkUW:		palp	Pal_SharkUW, Water_palette_line_2, 48		; Shark Man (underwater)
 ptr_Pal_Origami:		palp	Pal_Origami, Normal_palette_line_2, 48		; Origami Man
+ptr_Pal_Unknown1:		palp	Pal_Unknown1, Normal_palette_line_2, 48		; Unknown 1
+ptr_Pal_Unknown2:		palp	Pal_Unknown2, Normal_palette_line_2, 48		; Unknown 2
+ptr_Pal_Unknown3:		palp	Pal_Unknown3, Normal_palette_line_2, 48		; Unknown 3
 
 ; Misc
 ptr_Pal_Bass_LS:		palp	Pal_Bass, Normal_palette_line_3, 16			; Bass
@@ -89,6 +92,9 @@ palid_Smog:				equ (ptr_Pal_Smog-PalPointers)/8				; Smog Man
 palid_Shark:			equ (ptr_Pal_Shark-PalPointers)/8				; Shark Man
 palid_SharkUW:			equ (ptr_Pal_SharkUW-PalPointers)/8				; Shark Man (underwater)
 palid_Origami:			equ (ptr_Pal_Origami-PalPointers)/8				; Origami Man
+palid_Unknown1:			equ (ptr_Pal_Unknown1-PalPointers)/8			; Unknown 1
+palid_Unknown2:			equ (ptr_Pal_Unknown2-PalPointers)/8			; Unknown 2
+palid_Unknown3:			equ (ptr_Pal_Unknown3-PalPointers)/8			; Unknown 3
 
 ; Misc
 palid_Bass_LS:			equ (ptr_Pal_Bass_LS-PalPointers)/8				; Bass

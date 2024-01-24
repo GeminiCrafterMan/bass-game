@@ -13,8 +13,9 @@ StartLocArray:
 		binclude "Levels/Robot Master stages/Start Location/Smog Man.bin"	; Smog Man
 		binclude "Levels/Robot Master stages/Start Location/Shark Man.bin"	; Shark Man
 
-	rept 4
-		binclude "Levels/Test/Start Location/1.bin"	; Test 1
-	endr
+		binclude "Levels/Robot Master stages/Start Location/Origami Man.bin"
+		binclude "Levels/Robot Master stages/Start Location/Unknown 1.bin"
+		binclude "Levels/Robot Master stages/Start Location/Unknown 2.bin"
+		binclude "Levels/Robot Master stages/Start Location/Unknown 3.bin"
 
 		zonewarning StartLocArray,(4*4)

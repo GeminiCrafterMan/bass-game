@@ -103,9 +103,9 @@ CopyAni_ShieldJumping:
 CopyAni_Reppuken:
 		dc.b	2, frC_Reppuken1, frC_Reppuken2, frC_Reppuken3, frC_Reppuken4, afBack, 1
 CopyAni_LadderClimb:
-		dc.b  $FC, frC_Ladder1, frC_Ladder2, frC_Ladder3, frC_Ladder4, afEnd
+		dc.b	7, frC_Ladder1, frC_Ladder2, frC_Ladder3, frC_Ladder4, frC_Ladder3, frC_Ladder2, afEnd
 CopyAni_LadderUp:
-		dc.b  $FC, frC_LadderUp, frC_LadderUp, frC_LadderUp, frC_LadderUp, afEnd
+		dc.b	7, frC_LadderUp, frC_LadderUp, frC_LadderUp, frC_LadderUp, frC_LadderUp, frC_LadderUp, afEnd
 	even
 
 ; Frame IDs

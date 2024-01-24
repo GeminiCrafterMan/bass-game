@@ -494,16 +494,22 @@ Player_CheckLadder:
 		jsr		GetFloorPosition			; possible equivalent to CD's GetLevelBlock
 		move.w	(a1),d0
 		andi.w	#$3FF,d0
-		cmpi.w	#7,d0						; Are we on a ladder?
-		beq.s	.ladder
-
+	; check range
+		cmpi.w	#1,d0
+		blt.s	.chkDown
+		cmpi.w	#3,d0
+		bgt.s	.chkDown
+		bra.s	.ladder
+	.chkDown:
 		move.w	y_pos(a0),d2
-		addi.w	#12,d2	; originally #24 but i wanna try to get the block above the ladder for the climb-up animation
+		addi.w	#18,d2	; originally #24 but i wanna try to get the block above the ladder for the climb-up animation
 		jsr		GetFloorPosition
 		move.w	(a1),d0
 		andi.w	#$3FF,d0
-		cmpi.w	#7,d0			; Are we on the ladder?
-		bne.s	.end
+		cmpi.w	#1,d0
+		blt.s	.end
+		cmpi.w	#3,d0
+		bgt.s	.end
 	
 	.ladder:
 		bclr	#Status_Dash,status(a0)		; Force out of dash
@@ -518,33 +524,41 @@ Player_CheckLadder:
 		sfx		sfx_StarPost
 		bset	#2,object_control(a0)		; Mark as climbing a ladder
 
-		move.w	y_pos(a0),d0				; Clip onto ladder
-		subi.w	#12,d0
+		move.w	x_pos(a0),d0				; Clip onto ladder
 		andi.w	#$FFF0,d0
-		addi.w	#12,d0
-		move.w	d0,y_pos(a0)
+		addi.w	#8,d0
+		move.w	d0,x_pos(a0)
 		rts
 
 ; =============== S U B R O U T I N E =======================================
 
 Player_Ladder:
+		btst	#Status_OnObj,status(a0)
+		bne.s	.fallOff
+		btst	#Status_InAir,status(a0)
+		beq.s	.fallOff
 		move.w	x_pos(a0),d3			; Get block we are in
 		move.w	y_pos(a0),d2
 		subi.w	#12,d2	; originally #24 but i wanna try to get the block above the ladder for the climb-up animation
 		jsr		GetFloorPosition
 		move.w	(a1),d0
 		andi.w	#$3FF,d0
-		cmpi.w	#7,d0			; Are we on the ladder?
-		beq.s	.cont			; If not, branch
-		bsr.s	.climbUp
-	.cont:
+		cmpi.w	#1,d0
+		blt.s	.climbUp
+		cmpi.w	#3,d0
+		bgt.s	.climbUp
+	.cont: ; supposed to make you fall off if you go below the bottom of the ladder, ends up making you fall off constantly...
 		move.w	y_pos(a0),d2
-		addi.w	#12,d2	; originally #24 but i wanna try to get the block above the ladder for the climb-up animation
 		jsr		GetFloorPosition
+		addi.w	#12,d2	; originally #24 but i wanna try to get the block above the ladder for the climb-up animation
 		move.w	(a1),d0
 		andi.w	#$3FF,d0
-		cmpi.w	#7,d0			; Are we on the ladder?
-
+;		cmpi.w	#1,d0
+;		blt.s	.cont2
+;		cmpi.w	#3,d0
+;		bgt.s	.cont2
+;		bra.s	.fallOff
+	.cont2:
 		move.b	(Ctrl_1_pressed_logical).w,d0	; are we jumping?
 		andi.b	#button_C_mask,d0
 		beq.s	.moveY
@@ -553,18 +567,20 @@ Player_Ladder:
 		bclr	#2,object_control(a0)		; Stop climbing
 		rts
 	
-	.climbUp:
+	.climbUp:	; climb-up animation
 		move.w	x_pos(a0),d3			; Get block we are in
 		move.w	y_pos(a0),d2
-		subi.w	#12,d2	; originally #24 but i wanna try to get the block above the ladder for the climb-up animation
+		addi.w	#24,d2	; originally #24 but i wanna try to get the block above the ladder for the climb-up animation
 		jsr		GetFloorPosition
 		move.w	(a1),d0
 		andi.w	#$3FF,d0
-		cmpi.w	#7,d0			; Are we on the ladder from the bottom?
-		bne.s	.fallOff		; for now, just fall off if we aren't
+		blt.s	.cont3
+		cmpi.w	#3,d0
+		bgt.s	.cont3
+		bra.s	.fallOff
+	.cont3:
 		move.b	#id_LadderUp,anim(a0)
-	.wait:
-		rts
+		bra.s	.cont
 		
 	.moveY:
 		tst.b	shoottimer(a0)
@@ -581,13 +597,8 @@ Player_Ladder:
 
 	.doMove:
 		add.w	d0,y_pos(a0)			; Update X position
-		subq.b	#1,dashtimer(a0)		; Decrement animation timer
-		bpl.s	.end				; If it hasn't run out, branch
-		move.b	#7,dashtimer(a0)		; Reset timer
-		addq.b	#1,anim_frame(a0)		; Increment animation frame
-		cmpi.b	#3,anim_frame(a0)		; Have we reached the last one?
-		bcs.s	.end				; If not, branch
-		move.b	#0,anim_frame(a0)		; Reset animation frame
+		jsr		Animate_Player
+		jmp		Player_Load_PLC
 
 	.end:
 		rts

@@ -123,9 +123,9 @@ BassAni_ThrowAqua:
 BassAni_ShieldAqua:
 		dc.b	2, frB_ShieldA1, frB_ShieldA2, frB_ShieldA3, afBack, 1
 BassAni_LadderClimb:
-		dc.b  $FC, frB_Ladder1, frB_Ladder2, frB_Ladder3, frB_Ladder4, afEnd
+		dc.b	7, frB_Ladder1, frB_Ladder2, frB_Ladder3, frB_Ladder4, frB_Ladder3, frB_Ladder2, afEnd
 BassAni_LadderUp:
-		dc.b  $FC, frB_LadderUp, frB_LadderUp, frB_LadderUp, frB_LadderUp, afEnd
+		dc.b	7, frB_LadderUp, frB_LadderUp, frB_LadderUp, frB_LadderUp, frB_LadderUp, frB_LadderUp, afEnd
 	even
 
 ; Animation IDs

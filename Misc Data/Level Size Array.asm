@@ -15,8 +15,8 @@ LevelSizes:
 		dc.w 0, $640, 0, $2E0				; Shark Man
 
 		dc.w 0, $640, 0, $2E0				; Origami Man
-		dc.w 0, $640, 0, $2E0				; Test 1
-		dc.w 0, $640, 0, $2E0				; Test 1
-		dc.w 0, $640, 0, $2E0				; Test 1
+		dc.w 0, $1100-$140, 0, $780-$E0		; Unknown 1
+		dc.w 0, $640, 0, $2E0				; Unknown 2
+		dc.w 0, $640, 0, $2E0				; Unknown 3
 
 		zonewarning LevelSizes,(8*4)

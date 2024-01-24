@@ -84,3 +84,9 @@ Pal_SharkUW:		binclude "Levels/Robot Master stages/Palettes/Shark Man stage wate
 	even
 Pal_Origami:		binclude "Levels/Robot Master stages/Palettes/Origami Man stage.bin"
 	even
+Pal_Unknown1:		binclude "Levels/Robot Master stages/Palettes/Unknown 1 stage.bin"
+	even
+Pal_Unknown2:		binclude "Levels/Robot Master stages/Palettes/Unknown 2 stage.bin"
+	even
+Pal_Unknown3:		binclude "Levels/Robot Master stages/Palettes/Unknown 3 stage.bin"
+	even

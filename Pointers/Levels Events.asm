@@ -11,3 +11,6 @@
 		include	"Levels/Robot Master stages/Events/Events - Smog Man.asm"
 		include	"Levels/Robot Master stages/Events/Events - Shark Man.asm"
 		include	"Levels/Robot Master stages/Events/Events - Origami Man.asm"
+		include	"Levels/Robot Master stages/Events/Events - Unknown 1.asm"
+		include	"Levels/Robot Master stages/Events/Events - Unknown 2.asm"
+		include	"Levels/Robot Master stages/Events/Events - Unknown 3.asm"
