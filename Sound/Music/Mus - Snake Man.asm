@@ -363,30 +363,30 @@ Snake_Man_Call0D:
 Snake_Man_DAC:
 	smpsCall            Snake_Man_Call00
 	smpsCall            Snake_Man_Call00
-	dc.b	dSnare, nRst, dSnare, nRst
+	dc.b	dSnareS3, nRst, dSnareS3, nRst
 	smpsLoop            $00, $02, Snake_Man_DAC
 
 Snake_Man_Jump00:
-	dc.b	dKick, $06
+	dc.b	dKickS3, $06
 	smpsAlterVol        $0A
-	dc.b	dKick, dKick, $0C
+	dc.b	dKickS3, dKickS3, $0C
 	smpsAlterVol        $F6
-	dc.b	dSnare, $06
+	dc.b	dSnareS3, $06
 	smpsAlterVol        $0A
-	dc.b	dKick, dKick, $0C
+	dc.b	dKickS3, dKickS3, $0C
 	smpsAlterVol        $F6
-	dc.b	dKick, $06
+	dc.b	dKickS3, $06
 	smpsAlterVol        $0A
-	dc.b	dKick, dKick, $0C
+	dc.b	dKickS3, dKickS3, $0C
 	smpsAlterVol        $F6
-	dc.b	dSnare, $06
+	dc.b	dSnareS3, $06
 	smpsAlterVol        $0A
-	dc.b	dKick, dKick, $0C
+	dc.b	dKickS3, dKickS3, $0C
 	smpsAlterVol        $F6
 	smpsJump            Snake_Man_Jump00
 
 Snake_Man_Call00:
-	dc.b	dSnare, $06, dSnare, nRst, dSnare, $06, dSnare, nRst
+	dc.b	dSnareS3, $06, dSnareS3, nRst, dSnareS3, $06, dSnareS3, nRst
 	smpsReturn
 
 ; PSG1 Data

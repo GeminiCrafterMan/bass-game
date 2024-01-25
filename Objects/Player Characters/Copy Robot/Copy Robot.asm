@@ -138,7 +138,7 @@ CopyRobot_Modes: offsetTable
 ; =============== S U B R O U T I N E =======================================
 
 CopyRobot_MdNormal:
-		bclr	#2,object_control(a0)		; Stop climbing!!
+		bclr	#1,object_control(a0)		; Stop climbing!!
 		bsr.w	Player_WeaponSwitch
 		bsr.w	Player_Shoot
 		bsr.w	CopyRobot_Slide
@@ -158,7 +158,7 @@ CopyRobot_MdNormal:
 CopyRobot_MdAir:
 		bsr.w	Player_WeaponSwitch
 		bsr.w	Player_Shoot
-		btst	#2,object_control(a0)
+		btst	#1,object_control(a0)
 		beq.s	.noLadder
 		jsr		Player_Ladder
 		bra.s	locC_10FD6

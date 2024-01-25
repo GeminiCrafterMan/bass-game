@@ -156,34 +156,34 @@ Wily3_MW_FM5:
 ; DAC Data
 Wily3_MW_DAC:
 	smpsCall            Wily3_MW_Call00
-	dc.b	dKick, $0C, $06, $06, dSnare, $06, dKick, $0C, $06, $0C, $0C, dSnare
-	dc.b	$06, dKick, $12, dKick, $0C, $06, $06, dSnare, $06, dKick, $0C, $06
-	dc.b	$06, dSnare, $06, dKick, $0C, dSnare, $06, dKick, $06, dSnare, $06, $06
+	dc.b	dKickS3, $0C, $06, $06, dSnareS3, $06, dKickS3, $0C, $06, $0C, $0C, dSnareS3
+	dc.b	$06, dKickS3, $12, dKickS3, $0C, $06, $06, dSnareS3, $06, dKickS3, $0C, $06
+	dc.b	$06, dSnareS3, $06, dKickS3, $0C, dSnareS3, $06, dKickS3, $06, dSnareS3, $06, $06
 
 Wily3_MW_Loop00:
 	smpsCall            Wily3_MW_Call00
 	smpsLoop            $00, $04, Wily3_MW_Loop00
-	dc.b	dKick, $0C, $06, $06, dSnare, $06, dKick, $0C, $06, $0C, $0C, dSnare
-	dc.b	$06, dKick, $12, dSnare, $0C, dKick, $06, dSnare, $06, dKick, $0C, dSnare
-	dc.b	$0C, dKick, $18, $18, dKick, $0C, $06, $06, dSnare, $06, dKick, $0C
-	dc.b	$06, $0C, $0C, dSnare, $06, dKick, $12, dKick, $0C, $06, $06, dSnare
-	dc.b	$06, dKick, $0C, $06, $0C, $0C, dSnare, $06, $06, $06, $06
+	dc.b	dKickS3, $0C, $06, $06, dSnareS3, $06, dKickS3, $0C, $06, $0C, $0C, dSnareS3
+	dc.b	$06, dKickS3, $12, dSnareS3, $0C, dKickS3, $06, dSnareS3, $06, dKickS3, $0C, dSnareS3
+	dc.b	$0C, dKickS3, $18, $18, dKickS3, $0C, $06, $06, dSnareS3, $06, dKickS3, $0C
+	dc.b	$06, $0C, $0C, dSnareS3, $06, dKickS3, $12, dKickS3, $0C, $06, $06, dSnareS3
+	dc.b	$06, dKickS3, $0C, $06, $0C, $0C, dSnareS3, $06, $06, $06, $06
 	smpsLoop            $01, $02, Wily3_MW_Loop00
 
 Wily3_MW_Loop01:
-	dc.b	dKick, $0C, $06, $06, dSnare, $06, dKick, $0C, $06, $0C, $0C, dSnare
-	dc.b	$0C, dKick, $0C
+	dc.b	dKickS3, $0C, $06, $06, dSnareS3, $06, dKickS3, $0C, $06, $0C, $0C, dSnareS3
+	dc.b	$0C, dKickS3, $0C
 	smpsLoop            $00, $06, Wily3_MW_Loop01
-	dc.b	dKick, $0C, $06, $06, dSnare, $06, dKick, $0C, $06, $06, dSnare, $06
-	dc.b	dKick, $0C, dSnare, $06, dKick, $06, dSnare, $06, $06, dKick, $0C, $06
-	dc.b	$06, dSnare, $06, dKick, $0C, $06, dSnare, $06, dKick, $06, dSnare, $0C
-	dc.b	$06, $06, dKick, $06, dSnare, $06
+	dc.b	dKickS3, $0C, $06, $06, dSnareS3, $06, dKickS3, $0C, $06, $06, dSnareS3, $06
+	dc.b	dKickS3, $0C, dSnareS3, $06, dKickS3, $06, dSnareS3, $06, $06, dKickS3, $0C, $06
+	dc.b	$06, dSnareS3, $06, dKickS3, $0C, $06, dSnareS3, $06, dKickS3, $06, dSnareS3, $0C
+	dc.b	$06, $06, dKickS3, $06, dSnareS3, $06
 	smpsJump            Wily3_MW_DAC
 
 Wily3_MW_Call00:
-	dc.b	dKick, $0C, $06, $06, dSnare, $06, dKick, $0C, $06, $0C, $0C, dSnare
-	dc.b	$06, dKick, $12, dKick, $0C, $06, $06, dSnare, $06, dKick, $0C, $06
-	dc.b	$0C, $0C, dSnare, $12, dKick, $06
+	dc.b	dKickS3, $0C, $06, $06, dSnareS3, $06, dKickS3, $0C, $06, $0C, $0C, dSnareS3
+	dc.b	$06, dKickS3, $12, dKickS3, $0C, $06, $06, dSnareS3, $06, dKickS3, $0C, $06
+	dc.b	$0C, $0C, dSnareS3, $12, dKickS3, $06
 	smpsReturn
 
 ; PSG1 Data

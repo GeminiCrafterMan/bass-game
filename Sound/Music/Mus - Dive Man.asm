@@ -2691,138 +2691,138 @@ Dive_Man_DAC:
 ;	smpsPan             panCenter, $00
 
 Dive_Man_Loop00:
-	dc.b	dSnare, $0A
+	dc.b	dSnareS3, $0A
 ;	smpsSetvoice        $03
 ;	smpsAlterVol        $FE
-	dc.b	dKick
+	dc.b	dKickS3
 ;	smpsSetvoice        $02
 ;	smpsAlterVol        $02
 	smpsLoop            $00, $10, Dive_Man_Loop00
-	dc.b	dSnare, $3C, $0A
+	dc.b	dSnareS3, $3C, $0A
 
 Dive_Man_Loop01:
 ;	smpsSetvoice        $03
 ;	smpsAlterVol        $FE
-	dc.b	dKick, nRst, $14
+	dc.b	dKickS3, nRst, $14
 ;	smpsSetvoice        $02
 ;	smpsAlterVol        $02
-	dc.b	dSnare, $0A
+	dc.b	dSnareS3, $0A
 	smpsLoop            $00, $02, Dive_Man_Loop01
 	dc.b	$14
 ;	smpsSetvoice        $03
 ;	smpsAlterVol        $FE
-	dc.b	dKick, $0A
+	dc.b	dKickS3, $0A
 
 Dive_Man_Loop02:
-	dc.b	dKick, nRst
+	dc.b	dKickS3, nRst
 	smpsLoop            $00, $05, Dive_Man_Loop02
-	dc.b	dKick, dKick
+	dc.b	dKickS3, dKickS3
 
 Dive_Man_Loop03:
 ;	smpsSetvoice        $02
 ;	smpsAlterVol        $02
-	dc.b	dSnare, nRst
+	dc.b	dSnareS3, nRst
 ;	smpsSetvoice        $03
 ;	smpsAlterVol        $FE
-	dc.b	dKick, nRst
+	dc.b	dKickS3, nRst
 ;	smpsSetvoice        $02
 ;	smpsAlterVol        $02
-	dc.b	dSnare, $14
+	dc.b	dSnareS3, $14
 ;	smpsSetvoice        $03
 ;	smpsAlterVol        $FE
-	dc.b	dKick, $0A, nRst
+	dc.b	dKickS3, $0A, nRst
 ;	smpsSetvoice        $02
 ;	smpsAlterVol        $02
-	dc.b	dSnare, $1E
+	dc.b	dSnareS3, $1E
 ;	smpsSetvoice        $03
 ;	smpsAlterVol        $FE
-	dc.b	dKick, $0A
+	dc.b	dKickS3, $0A
 ;	smpsSetvoice        $02
 ;	smpsAlterVol        $02
-	dc.b	dSnare, $14
+	dc.b	dSnareS3, $14
 ;	smpsSetvoice        $03
 ;	smpsAlterVol        $FE
-	dc.b	dKick, $0A, nRst
+	dc.b	dKickS3, $0A, nRst
 	smpsLoop            $00, $07, Dive_Man_Loop03
 ;	smpsSetvoice        $02
 ;	smpsAlterVol        $02
-	dc.b	dSnare, nRst
+	dc.b	dSnareS3, nRst
 ;	smpsSetvoice        $03
 ;	smpsAlterVol        $FE
-	dc.b	dKick, nRst
+	dc.b	dKickS3, nRst
 ;	smpsSetvoice        $02
 ;	smpsAlterVol        $02
-	dc.b	dSnare, $14
+	dc.b	dSnareS3, $14
 ;	smpsSetvoice        $03
 ;	smpsAlterVol        $FE
-	dc.b	dKick, $0A, nRst
+	dc.b	dKickS3, $0A, nRst
 ;	smpsSetvoice        $02
 ;	smpsAlterVol        $02
-	dc.b	dSnare, $1E
+	dc.b	dSnareS3, $1E
 ;	smpsSetvoice        $03
 ;	smpsAlterVol        $FE
-	dc.b	dKick, $0A
+	dc.b	dKickS3, $0A
 ;	smpsSetvoice        $02
 ;	smpsAlterVol        $02
-	dc.b	dSnare, $14, $0A
+	dc.b	dSnareS3, $14, $0A
 ;	smpsSetvoice        $03
 ;	smpsAlterVol        $FE
-	dc.b	dKick
+	dc.b	dKickS3
 ;	smpsSetvoice        $02
 ;	smpsAlterVol        $02
-	dc.b	dSnare
+	dc.b	dSnareS3
 ;	smpsSetvoice        $03
 ;	smpsAlterVol        $FE
-	dc.b	dKick, nRst, dKick
+	dc.b	dKickS3, nRst, dKickS3
 
 Dive_Man_Loop04:
-	dc.b	dKick, nRst
+	dc.b	dKickS3, nRst
 	smpsLoop            $00, $10, Dive_Man_Loop04
 ;	smpsSetvoice        $02
 ;	smpsAlterVol        $02
-	dc.b	dSnare, $14
+	dc.b	dSnareS3, $14
 ;	smpsSetvoice        $03
 ;	smpsAlterVol        $FE
-	dc.b	dKick, $0A, nRst
+	dc.b	dKickS3, $0A, nRst
 ;	smpsSetvoice        $02
 ;	smpsAlterVol        $02
-	dc.b	dSnare, $1E
+	dc.b	dSnareS3, $1E
 ;	smpsSetvoice        $03
 ;	smpsAlterVol        $FE
-	dc.b	dKick, $0A
+	dc.b	dKickS3, $0A
 ;	smpsSetvoice        $02
 ;	smpsAlterVol        $02
-	dc.b	dSnare, $14
+	dc.b	dSnareS3, $14
 ;	smpsSetvoice        $03
 ;	smpsAlterVol        $FE
-	dc.b	dKick, $0A, nRst
+	dc.b	dKickS3, $0A, nRst
 ;	smpsSetvoice        $02
 ;	smpsAlterVol        $02
-	dc.b	dSnare, nRst
+	dc.b	dSnareS3, nRst
 ;	smpsSetvoice        $03
 ;	smpsAlterVol        $FE
-	dc.b	dKick, nRst
+	dc.b	dKickS3, nRst
 ;	smpsSetvoice        $02
 ;	smpsAlterVol        $02
-	dc.b	dSnare, $14
+	dc.b	dSnareS3, $14
 ;	smpsSetvoice        $03
 ;	smpsAlterVol        $FE
-	dc.b	dKick, $0A, nRst
+	dc.b	dKickS3, $0A, nRst
 ;	smpsSetvoice        $02
 ;	smpsAlterVol        $02
-	dc.b	dSnare, $1E
+	dc.b	dSnareS3, $1E
 ;	smpsSetvoice        $03
 ;	smpsAlterVol        $FE
-	dc.b	dKick, $0A
+	dc.b	dKickS3, $0A
 ;	smpsSetvoice        $02
 ;	smpsAlterVol        $02
-	dc.b	dSnare, $14
+	dc.b	dSnareS3, $14
 ;	smpsSetvoice        $03
 ;	smpsAlterVol        $FE
-	dc.b	dKick, $0A, nRst
+	dc.b	dKickS3, $0A, nRst
 ;	smpsSetvoice        $02
 ;	smpsAlterVol        $02
-	dc.b	dSnare, nRst
+	dc.b	dSnareS3, nRst
 ;	smpsSetvoice        $00
 ;	smpsAlterVol        $F3
 ;	smpsPan             panCenter, $00

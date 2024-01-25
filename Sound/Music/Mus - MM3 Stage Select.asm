@@ -109,33 +109,33 @@ Stage_Select_RM3_DAC:
 	;smpsAlterVol        $FE
 
 ;Stage_Select_RM3_Jump00:
-	dc.b	dKick, $06
+	dc.b	dKickS3, $06
 	;smpsAlterVol        $03
-	dc.b	dKick
+	dc.b	dKickS3
 	;smpsAlterVol        $FD
-	dc.b	dSnare
+	dc.b	dSnareS3
 	;smpsAlterVol        $03
-	dc.b	dKick, dKick, dKick
+	dc.b	dKickS3, dKickS3, dKickS3
 	;smpsAlterVol        $FD
-	dc.b	dSnare
+	dc.b	dSnareS3
 	;smpsAlterVol        $03
-	dc.b	dKick
+	dc.b	dKickS3
 	;smpsAlterVol        $FD
-	dc.b	dKick
+	dc.b	dKickS3
 	;smpsAlterVol        $03
-	dc.b	dKick
+	dc.b	dKickS3
 	;smpsAlterVol        $FD
-	dc.b	dSnare
+	dc.b	dSnareS3
 	;smpsAlterVol        $03
-	dc.b	dKick
+	dc.b	dKickS3
 	;smpsAlterVol        $FD
-	dc.b	dKick
+	dc.b	dKickS3
 	;smpsAlterVol        $03
-	dc.b	dKick
+	dc.b	dKickS3
 	;smpsAlterVol        $FD
-	dc.b	dSnare
+	dc.b	dSnareS3
 	;smpsAlterVol        $03
-	dc.b	dKick
+	dc.b	dKickS3
 	;smpsAlterVol        $FD
 	smpsJump            Stage_Select_RM3_DAC
 

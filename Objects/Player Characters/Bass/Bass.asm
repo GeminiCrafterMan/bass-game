@@ -114,7 +114,7 @@ loc_10C26:
 		tst.b	anim(a0)
 		bne.s	+
 		move.b	prev_anim(a0),anim(a0)
-+		btst	#2,object_control(a0)
++		btst	#1,object_control(a0)
 		bne.s	++
 		bsr.w	Animate_Player
 		tst.b	(Reverse_gravity_flag).w
@@ -138,7 +138,7 @@ Bass_Modes: offsetTable
 ; =============== S U B R O U T I N E =======================================
 
 Bass_MdNormal:
-		bclr	#2,object_control(a0)		; Stop climbing!!
+		bclr	#1,object_control(a0)		; Stop climbing!!
 		bsr.w	Player_WeaponSwitch
 		bsr.w	Player_Shoot
 		bsr.w	Bass_Dash
@@ -166,7 +166,7 @@ Bass_MdAir:
 	.cont:
 		bsr.w	Player_WeaponSwitch
 		bsr.w	Player_Shoot
-		btst	#2,object_control(a0)
+		btst	#1,object_control(a0)
 		beq.s	.noLadder
 		jsr		Player_Ladder
 		bra.s	loc_10FD6

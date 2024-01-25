@@ -284,7 +284,7 @@ Shadow_Man_FM5:
 
 ; DAC Data
 Shadow_Man_DAC:
-	dc.b	dKick, $0C, dKick, $0C
+	dc.b	dKickS3, $0C, dKickS3, $0C
 	smpsLoop            $00, $04, Shadow_Man_DAC
 
 Shadow_Man_Loop00:
@@ -303,7 +303,7 @@ Shadow_Man_Loop02:
 	smpsLoop            $00, $04, Shadow_Man_Loop02
 
 Shadow_Man_Loop03:
-	dc.b	dKick, $0C, dKick
+	dc.b	dKickS3, $0C, dKickS3
 	smpsLoop            $00, $04, Shadow_Man_Loop03
 
 Shadow_Man_Loop04:
@@ -313,19 +313,19 @@ Shadow_Man_Loop04:
 	smpsJump            Shadow_Man_DAC
 
 Shadow_Man_Call00:
-	dc.b	dKick, $06
+	dc.b	dKickS3, $06
 	;smpsFMAlterVol      $05
-	dc.b	dKick
+	dc.b	dKickS3
 	;smpsFMAlterVol      $FB
-	dc.b	dSnare, $03, dKick
+	dc.b	dSnareS3, $03, dKickS3
 	;smpsFMAlterVol      $0A
-	dc.b	dKick
+	dc.b	dKickS3
 	;smpsFMAlterVol      $FB
-	dc.b	dKick, dKick, $06, dKick
+	dc.b	dKickS3, dKickS3, $06, dKickS3
 	;smpsFMAlterVol      $FB
-	dc.b	dSnare
+	dc.b	dSnareS3
 	;smpsFMAlterVol      $05
-	dc.b	dKick
+	dc.b	dKickS3
 	;smpsFMAlterVol      $FB
 	smpsReturn
 

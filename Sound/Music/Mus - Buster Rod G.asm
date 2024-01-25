@@ -151,40 +151,40 @@ BRodG_FM5:
 
 ; DAC Data
 BRodG_DAC:
-	dc.b	dKick, $06, $0C, $06, dSnare, $12, dKick, $0C, $06, $0C, dSnare, $18
-	dc.b	dKick, $06, $0C, $06, dSnare, $12, dKick, $0C, dSnare, $06, dKick, $0C
-	dc.b	dSnare, $12, dKick, $06, dKick, $06, $0C, $06, dSnare, $12, dKick, $06
-	dc.b	dSnare, $06, dKick, $06, dSnare, $06, dKick, $0C, dSnare, $06, $0C
+	dc.b	dKickS3, $06, $0C, $06, dSnareS3, $12, dKickS3, $0C, $06, $0C, dSnareS3, $18
+	dc.b	dKickS3, $06, $0C, $06, dSnareS3, $12, dKickS3, $0C, dSnareS3, $06, dKickS3, $0C
+	dc.b	dSnareS3, $12, dKickS3, $06, dKickS3, $06, $0C, $06, dSnareS3, $12, dKickS3, $06
+	dc.b	dSnareS3, $06, dKickS3, $06, dSnareS3, $06, dKickS3, $0C, dSnareS3, $06, $0C
 
 BRodG_Loop00:
-	dc.b	dKick, $06, $0C, $06, dSnare, $12, dKick, $0C, $06, $0C, dSnare, $18
+	dc.b	dKickS3, $06, $0C, $06, dSnareS3, $12, dKickS3, $0C, $06, $0C, dSnareS3, $18
 	smpsLoop            $00, $07, BRodG_Loop00
-	dc.b	dKick, $06, $0C, $06, dSnare, $12, dKick, $06, $06, dSnare, $06, dKick
-	dc.b	$06, $06, dSnare, $0C, $06, $06
+	dc.b	dKickS3, $06, $0C, $06, dSnareS3, $12, dKickS3, $06, $06, dSnareS3, $06, dKickS3
+	dc.b	$06, $06, dSnareS3, $0C, $06, $06
 	smpsLoop            $01, $02, BRodG_Loop00
 
 BRodG_Loop01:
-	dc.b	dKick, $06, $0C, $06, dSnare, $12, dKick, $0C, dSnare, $06, dKick, $0C
-	dc.b	dSnare, $0C, dKick, $0C
+	dc.b	dKickS3, $06, $0C, $06, dSnareS3, $12, dKickS3, $0C, dSnareS3, $06, dKickS3, $0C
+	dc.b	dSnareS3, $0C, dKickS3, $0C
 	smpsLoop            $00, $03, BRodG_Loop01
-	dc.b	dKick, $06, $0C, $06, dSnare, $12, dKick, $0C, dSnare, $06, dKick, $0C
-	dc.b	dSnare, $0C, dKick, $06, dSnare, $06
+	dc.b	dKickS3, $06, $0C, $06, dSnareS3, $12, dKickS3, $0C, dSnareS3, $06, dKickS3, $0C
+	dc.b	dSnareS3, $0C, dKickS3, $06, dSnareS3, $06
 
 BRodG_Loop02:
-	dc.b	dKick, $06, $0C, $06, dSnare, $12, dKick, $0C, dSnare, $06, dKick, $0C
-	dc.b	dSnare, $0C, dKick, $0C
+	dc.b	dKickS3, $06, $0C, $06, dSnareS3, $12, dKickS3, $0C, dSnareS3, $06, dKickS3, $0C
+	dc.b	dSnareS3, $0C, dKickS3, $0C
 	smpsLoop            $00, $02, BRodG_Loop02
-	dc.b	dKick, $06, dSnare, $0C, dKick, $06, dSnare, $0C, dKick, $06, dSnare, $0C
-	dc.b	dKick, $06, dSnare, $0C, $0C, dKick, $06, dSnare, $06, dKick, $06, $0C
-	dc.b	$06, dSnare, $12, dKick, $0C, dSnare, $06, $06, dKick, $06, dSnare, $06
-	dc.b	$06, dKick, $06, dSnare, $06
+	dc.b	dKickS3, $06, dSnareS3, $0C, dKickS3, $06, dSnareS3, $0C, dKickS3, $06, dSnareS3, $0C
+	dc.b	dKickS3, $06, dSnareS3, $0C, $0C, dKickS3, $06, dSnareS3, $06, dKickS3, $06, $0C
+	dc.b	$06, dSnareS3, $12, dKickS3, $0C, dSnareS3, $06, $06, dKickS3, $06, dSnareS3, $06
+	dc.b	$06, dKickS3, $06, dSnareS3, $06
 
 BRodG_Loop03:
-	dc.b	dKick, $06, $0C, $06, dSnare, $12, dKick, $0C, $06, $0C, dSnare, $18
+	dc.b	dKickS3, $06, $0C, $06, dSnareS3, $12, dKickS3, $0C, $06, $0C, dSnareS3, $18
 	smpsLoop            $00, $03, BRodG_Loop03
-	dc.b	dKick, $06, $0C, $06, dSnare, $12, dKick, $0C, dSnare, $06, dKick, $0C
-	dc.b	dSnare, $18, dKick, $06, $0C, $06, dSnare, $12, dKick, $0C, dSnare, $06
-	dc.b	$06, dKick, $06, dSnare, $06, $06, dKick, $06, dSnare, $06
+	dc.b	dKickS3, $06, $0C, $06, dSnareS3, $12, dKickS3, $0C, dSnareS3, $06, dKickS3, $0C
+	dc.b	dSnareS3, $18, dKickS3, $06, $0C, $06, dSnareS3, $12, dKickS3, $0C, dSnareS3, $06
+	dc.b	$06, dKickS3, $06, dSnareS3, $06, $06, dKickS3, $06, dSnareS3, $06
 	smpsJump            BRodG_Loop00
 
 ; PSG1 Data

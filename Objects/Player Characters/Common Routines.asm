@@ -475,11 +475,11 @@ loc_10F22:
 Player_CheckLadder:
 		btst	#0,object_control(a0)		; Being controlled by another object?
 		bne.s	.end
-		btst	#2,object_control(a0)		; Already on a ladder?
+		btst	#1,object_control(a0)		; Already on a ladder?
 		bne.s	.end
 		cmpi.b	#id_Victory,anim(a0)		; if in any animation earlier than victory, continue
 		blt.s	.cont
-		cmpi.b	#id_LadderUp,anim(a0)	; if in any animation later than ladder climb, continue
+		cmpi.b	#id_LadderUp,anim(a0)	; if in any animation later than latest ladder anim, continue
 		bgt.s	.cont
 	.end:
 		rts
@@ -499,6 +499,8 @@ Player_CheckLadder:
 		move.b	(Ctrl_1_held_logical).w,d0	; are we attempting to climb up?
 		andi.b	#button_up_mask,d0
 		beq.s	.end						; if not, fail
+		subq.w	#1,y_pos(a0)
+		bset	#Status_InAir,status(a0)
 		bra.s	.ladder
 	.chkDown:
 		move.w	y_pos(a0),d2
@@ -513,6 +515,8 @@ Player_CheckLadder:
 		move.b	(Ctrl_1_held_logical).w,d0	; are we attempting to climb up?
 		andi.b	#button_down_mask,d0
 		beq.s	.end						; if not, fail
+		addi.w	#12,y_pos(a0)
+		bset	#Status_InAir,status(a0)
 	
 	.ladder:
 		bclr	#Status_Dash,status(a0)		; Force out of dash
@@ -525,7 +529,7 @@ Player_CheckLadder:
 		move.b	#7,dashtimer(a0)		; Set animation timer
 		move.b	#id_LadderClimb,anim(a0)	; Set ladder animation
 		sfx		sfx_StarPost
-		bset	#2,object_control(a0)		; Mark as climbing a ladder
+		bset	#1,object_control(a0)		; Mark as climbing a ladder
 
 		move.w	x_pos(a0),d0				; Clip onto ladder
 		andi.w	#$FFF0,d0
@@ -542,7 +546,7 @@ Player_Ladder:
 		beq.s	.fallOff
 		move.w	x_pos(a0),d3			; Get block we are in
 		move.w	y_pos(a0),d2
-		subi.w	#6,d2	; originally #24 but i wanna try to get the block above the ladder for the climb-up animation
+		addi.w	#6,d2	; originally #24 but i wanna try to get the block above the ladder for the climb-up animation
 		jsr		GetFloorPosition
 		move.w	(a1),d0
 		andi.w	#$3FF,d0
@@ -553,7 +557,7 @@ Player_Ladder:
 	.cont:
 		move.w	y_pos(a0),d2
 		jsr		GetFloorPosition
-;		addi.w	#24,d2	; originally #24 but i wanna try to get the block above the ladder for the climb-up animation
+;		addi.w	#1,d2	; originally #24 but i wanna try to get the block above the ladder for the climb-up animation
 		move.w	(a1),d0
 		andi.w	#$3FF,d0
 ; supposed to make you fall off if you go below the bottom of the ladder, ends up making you fall off constantly...
@@ -569,7 +573,7 @@ Player_Ladder:
 
 	.fallOff:
 ;		illegal
-		bclr	#2,object_control(a0)		; Stop climbing
+		bclr	#1,object_control(a0)		; Stop climbing
 		clr.b	anim(a0)
 		rts
 	
@@ -590,7 +594,7 @@ Player_Ladder:
 		
 	.moveY:
 		tst.b	shoottimer(a0)
-		bne.s	.end
+		bne.s	.shooting
 		moveq	#2,d0				; Y speed
 		btst	#button_up,(Ctrl_1_held_logical).w		; Are we going up?
 		beq.s	.chkDown			; If not, branch
@@ -603,6 +607,7 @@ Player_Ladder:
 
 	.doMove:
 		add.w	d0,y_pos(a0)			; Update X position
+	.shooting:
 		jsr		Animate_Player
 		jmp		Player_Load_PLC
 
@@ -797,6 +802,8 @@ PlayerArtToD6:
 	.artLUT:
 		dc.l	ArtUnc_Bass>>1, ArtUnc_CopyRobot>>1
 
+; =============== S U B R O U T I N E =======================================
+
 Player_HandleGroundAnimations:
 		tst.b	shoottimer(a0)
 		beq.s	.notShooting
@@ -869,6 +876,8 @@ AnimType_GroundShield:
 AnimType_GroundReppuken:
 		move.b	#id_Reppuken,anim(a0)
 		rts
+
+; =============== S U B R O U T I N E =======================================
 
 Player_HandleAirAnimations:
 		tst.b	shoottimer(a0)

@@ -200,34 +200,34 @@ Air_Man_FM5:
 ; DAC Data
 Air_Man_DAC:
 	smpsCall            Air_Man_Call00
-	dc.b	$0C, dSnare, $06, dKick, $06, $06, $06, dSnare, $06, dKick, $0C, $06
-	dc.b	dSnare, $06, dKick, $0C, dSnare, $06, $06, $06
+	dc.b	$0C, dSnareS3, $06, dKickS3, $06, $06, $06, dSnareS3, $06, dKickS3, $0C, $06
+	dc.b	dSnareS3, $06, dKickS3, $0C, dSnareS3, $06, $06, $06
 	smpsLoop            $00, $02, Air_Man_DAC
-	dc.b	nRst, $06, dKick, $06, dSnare, $06, dKick, $06, $06, $06, dSnare, $06
-	dc.b	dKick, $0C, dSnare, $06, $06, dKick, $0C, dSnare, $0C, $06
+	dc.b	nRst, $06, dKickS3, $06, dSnareS3, $06, dKickS3, $06, $06, $06, dSnareS3, $06
+	dc.b	dKickS3, $0C, dSnareS3, $06, $06, dKickS3, $0C, dSnareS3, $0C, $06
 
 Air_Man_Loop00:
 	smpsCall            Air_Man_Call00
 	smpsLoop            $00, $03, Air_Man_Loop00
-	dc.b	dKick, $0C, dSnare, $06, dKick, $06, $06, $06, dSnare, $06, dKick, $0C
-	dc.b	dSnare, $06, $06, $06, dKick, $06, dSnare, $0C, $06
+	dc.b	dKickS3, $0C, dSnareS3, $06, dKickS3, $06, $06, $06, dSnareS3, $06, dKickS3, $0C
+	dc.b	dSnareS3, $06, $06, $06, dKickS3, $06, dSnareS3, $0C, $06
 
 Air_Man_Loop01:
 	smpsCall            Air_Man_Call00
 	smpsLoop            $00, $03, Air_Man_Loop01
-	dc.b	dKick, $0C, dSnare, $06, dKick, $06, $06, dSnare, $06, $06, dKick, $0C
-	dc.b	dSnare, $06, $06, dKick, $0C, dSnare, $06, $06, $06
+	dc.b	dKickS3, $0C, dSnareS3, $06, dKickS3, $06, $06, dSnareS3, $06, $06, dKickS3, $0C
+	dc.b	dSnareS3, $06, $06, dKickS3, $0C, dSnareS3, $06, $06, $06
 
 Air_Man_Loop02:
 	smpsCall            Air_Man_Call00
 	smpsLoop            $00, $03, Air_Man_Loop02
-	dc.b	dKick, $0C, dSnare, $06, dKick, $06, $06, $06, dSnare, $06, dKick, $0C
-	dc.b	dSnare, $06, $06, dKick, $0C, dSnare, $06, $06, $06
+	dc.b	dKickS3, $0C, dSnareS3, $06, dKickS3, $06, $06, $06, dSnareS3, $06, dKickS3, $0C
+	dc.b	dSnareS3, $06, $06, dKickS3, $0C, dSnareS3, $06, $06, $06
 	smpsJump            Air_Man_DAC
 
 Air_Man_Call00:
-	dc.b	dKick, $0C, dSnare, $06, dKick, $06, $06, $06, dSnare, $06, dKick, $0C
-	dc.b	$06, dSnare, $06, dKick, $0C, $06, dSnare, $06, dKick, $06
+	dc.b	dKickS3, $0C, dSnareS3, $06, dKickS3, $06, $06, $06, dSnareS3, $06, dKickS3, $0C
+	dc.b	$06, dSnareS3, $06, dKickS3, $0C, $06, dSnareS3, $06, dKickS3, $06
 	smpsReturn
 
 ; PSG1 Data

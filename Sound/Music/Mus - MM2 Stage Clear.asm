@@ -65,7 +65,7 @@ Stage_Clear_RM2_FM5:
 ; DAC Data
 Stage_Clear_RM2_DAC:
 ;	dc.b	dKick, $0C, $0C, $06, $0C, $0C, $0C, $06, $0C, $0C
-	dc.b	dSnare, $06
+	dc.b	dSnareS3, $06
 	dc.b	$12, $06, $12, $06, $12, $06, $06, $06, $06
 	smpsStop
 

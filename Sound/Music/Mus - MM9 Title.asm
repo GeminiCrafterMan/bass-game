@@ -3058,61 +3058,61 @@ Title_RM9_DAC:
 ;	smpsSetvoice        $01
 ;	smpsAlterVol        $06
 	smpsPan             panCenter, $00
-	dc.b	dSnare, $05, $0F
+	dc.b	dSnareS3, $05, $0F
 
 Title_RM9_Loop00:
 ;	smpsSetvoice        $04
 ;	smpsAlterVol        $FE
-	dc.b	dKick, $05, nRst, $0F
+	dc.b	dKickS3, $05, nRst, $0F
 ;	smpsSetvoice        $01
 ;	smpsAlterVol        $02
-	dc.b	dSnare, $1E
+	dc.b	dSnareS3, $1E
 ;	smpsSetvoice        $04
 ;	smpsAlterVol        $FE
-	dc.b	dKick, $05, nRst
+	dc.b	dKickS3, $05, nRst
 ;	smpsSetvoice        $01
 ;	smpsAlterVol        $02
-	dc.b	dSnare, $14
+	dc.b	dSnareS3, $14
 	smpsLoop            $00, $07, Title_RM9_Loop00
 ;	smpsSetvoice        $04
 ;	smpsAlterVol        $FE
-	dc.b	dKick, $05, nRst, $0F
+	dc.b	dKickS3, $05, nRst, $0F
 ;	smpsSetvoice        $01
 ;	smpsAlterVol        $02
-	dc.b	dSnare, $1E
+	dc.b	dSnareS3, $1E
 ;	smpsSetvoice        $04
 ;	smpsAlterVol        $FE
-	dc.b	dKick, $05, nRst
+	dc.b	dKickS3, $05, nRst
 ;	smpsSetvoice        $01
 ;	smpsAlterVol        $02
-	dc.b	dSnare, $0A, dSnare
+	dc.b	dSnareS3, $0A, dSnareS3
 
 Title_RM9_Loop01:
 ;	smpsSetvoice        $04
 ;	smpsAlterVol        $FE
-	dc.b	dKick, $05, nRst, $0F
+	dc.b	dKickS3, $05, nRst, $0F
 ;	smpsSetvoice        $01
 ;	smpsAlterVol        $02
-	dc.b	dSnare, $1E
+	dc.b	dSnareS3, $1E
 ;	smpsSetvoice        $04
 ;	smpsAlterVol        $FE
-	dc.b	dKick, $05, nRst
+	dc.b	dKickS3, $05, nRst
 ;	smpsSetvoice        $01
 ;	smpsAlterVol        $02
-	dc.b	dSnare, $14
+	dc.b	dSnareS3, $14
 	smpsLoop            $00, $06, Title_RM9_Loop01
 ;	smpsSetvoice        $04
 ;	smpsAlterVol        $FE
-	dc.b	dKick, $05, nRst, $0F
+	dc.b	dKickS3, $05, nRst, $0F
 ;	smpsSetvoice        $01
 ;	smpsAlterVol        $02
-	dc.b	dSnare, $1E
+	dc.b	dSnareS3, $1E
 ;	smpsSetvoice        $04
 ;	smpsAlterVol        $FE
-	dc.b	dKick, $05, nRst
+	dc.b	dKickS3, $05, nRst
 ;	smpsSetvoice        $01
 ;	smpsAlterVol        $02
-	dc.b	dSnare, dSnare, dSnare, dSnare, dSnare, $0F, dSnare, dSnare, $19, nRst
+	dc.b	dSnareS3, dSnareS3, dSnareS3, dSnareS3, dSnareS3, $0F, dSnareS3, dSnareS3, $19, nRst
 	smpsStop
 
 ; PSG1 Data
