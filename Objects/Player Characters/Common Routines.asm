@@ -485,7 +485,7 @@ Player_CheckLadder:
 		bne.s	.end						; if so, fail
 		cmpi.b	#id_Victory,anim(a0)		; if in any animation earlier than victory, continue
 		blt.s	.cont
-		cmpi.b	#id_LadderUp,anim(a0)	; if in any animation later than latest ladder anim, continue
+		cmpi.b	#id_ThrowShieldLadder,anim(a0)	; if in any animation later than latest ladder anim, continue
 		bgt.s	.cont
 	.end:
 		rts
@@ -563,7 +563,7 @@ Player_Ladder:
 	.notRight:
 		move.w	x_pos(a0),d3			; Get block we are in
 		move.w	y_pos(a0),d2
-		subi.w	#4,d2	; check below
+		subi.w	#4,d2	; check middle
 		jsr		GetFloorPosition
 		move.w	(a1),d0
 		andi.w	#$3FF,d0
@@ -615,6 +615,13 @@ Player_Ladder:
 		jmp		Player_HandleLadderAnimations
 
 	.end:
+		cmpi.b	#id_LadderUp,anim(a0)
+		ble.s	.finished
+		move.b	#id_LadderClimb,anim(a0)
+		clr.b	anim_frame(a0)			; clear frame
+		clr.b	anim_frame_timer(a0)	; also clear timer
+		jmp		Player_HandleLadderAnimations.animate
+	.finished:
 		rts
 
 
@@ -959,12 +966,53 @@ Player_HandleLadderAnimations:
 		jsr		Animate_Player
 		jmp		Player_Load_PLC
 	.typesLUT:
-		dc.l	AnimType_JumpNormalFire
-		dc.l	AnimType_JumpSemiCardinalFire
-		dc.l	AnimType_JumpThrow
-		dc.l	AnimType_JumpShield
+		dc.l	AnimType_LadderNormalFire
+		dc.l	AnimType_LadderSemiCardinalFire
+		dc.l	AnimType_LadderThrowShield
+		dc.l	AnimType_LadderThrowShield
 		dc.l	.notShooting
 	.notShooting:
-	; TODO: add code to change to id_LadderUp when near the top of a ladder
+		move.w	x_pos(a0),d3	; Get block we are in
+		move.w	y_pos(a0),d2
+		subi.w	#6,d2	; check middle
+		jsr		GetFloorPosition
+		move.w	(a1),d0
+		andi.w	#$3FF,d0
+		cmpi.w	#1,d0
+		blt.s	.up
+		cmpi.w	#3,d0
+		bgt.s	.up
 		move.b	#id_LadderClimb,anim(a0)
 		bra.s	.animate
+	.up:
+		move.b	#id_LadderUp,anim(a0)
+		bra.s	.animate
+
+AnimType_LadderNormalFire:
+		move.b	#id_FireLadderStraight,anim(a0)
+		rts
+
+AnimType_LadderSemiCardinalFire:
+		btst	#bitUp,(Ctrl_1_held_logical).w
+		bne.s	.up
+		btst	#bitDn,(Ctrl_1_held_logical).w
+		bne.s	.diagdown
+		move.b	#id_FireLadderStraight,anim(a0)
+		rts
+	.up:
+		btst	#bitR,(Ctrl_1_held_logical).w
+		bne.s	.diagup
+		btst	#bitL,(Ctrl_1_held_logical).w
+		bne.s	.diagup
+		move.b	#id_FireLadderUp,anim(a0)
+		rts
+	.diagup:
+		move.b	#id_FireLadderDiagUp,anim(a0)
+		rts
+	.diagdown:
+		move.b	#id_FireLadderDiagDown,anim(a0)
+		rts
+
+AnimType_LadderThrowShield:
+		move.b	#id_ThrowShieldLadder,anim(a0)
+		rts

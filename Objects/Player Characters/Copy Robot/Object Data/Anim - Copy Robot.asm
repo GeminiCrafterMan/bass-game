@@ -16,14 +16,14 @@ Ani_CopyRobot: offsetTable
 		offsetTableEntry.w CopyAni_Blank
 		offsetTableEntry.w CopyAni_FireStanding
 		offsetTableEntry.w CopyAni_FireWalking
-		offsetTableEntry.w CopyAni_FireJumpingUp
-		offsetTableEntry.w CopyAni_FireJumpingDiagUp
-		offsetTableEntry.w CopyAni_FireJumpingStraight
-		offsetTableEntry.w CopyAni_FireJumpingDiagDown
-		offsetTableEntry.w CopyAni_FireSteadyUp
-		offsetTableEntry.w CopyAni_FireSteadyDiagUp
-		offsetTableEntry.w CopyAni_FireSteadyStraight
-		offsetTableEntry.w CopyAni_FireSteadyDiagDown
+		offsetTableEntry.w CopyAni_Blank
+		offsetTableEntry.w CopyAni_Blank
+		offsetTableEntry.w CopyAni_FireJumping
+		offsetTableEntry.w CopyAni_Blank
+		offsetTableEntry.w CopyAni_Blank
+		offsetTableEntry.w CopyAni_Blank
+		offsetTableEntry.w CopyAni_Blank
+		offsetTableEntry.w CopyAni_Blank
 		offsetTableEntry.w CopyAni_ThrowStanding
 		offsetTableEntry.w CopyAni_ThrowJumping
 		offsetTableEntry.w CopyAni_ShieldStanding
@@ -40,6 +40,11 @@ Ani_CopyRobot: offsetTable
 		offsetTableEntry.w CopyAni_Blank
 		offsetTableEntry.w CopyAni_LadderClimb
 		offsetTableEntry.w CopyAni_LadderUp
+		offsetTableEntry.w CopyAni_Blank
+		offsetTableEntry.w CopyAni_Blank
+		offsetTableEntry.w CopyAni_FireLadder
+		offsetTableEntry.w CopyAni_Blank
+		offsetTableEntry.w CopyAni_ThrowShieldLadder
 
 CopyAni_Step:
 		dc.b	4, frC_Step1, frC_Step2, afChange,  id_Run
@@ -76,22 +81,8 @@ CopyAni_FireStanding:
 		dc.b	4, frC_Fire1, frC_Fire2, afEnd
 CopyAni_FireWalking:
 		dc.b	6, frC_Walk1F, frC_Walk2F, frC_Walk3F, frC_Walk4F, frC_Walk5F, frC_Walk6F, afEnd
-CopyAni_FireJumpingUp:
-		dc.b	1, frC_FireJUp, afEnd
-CopyAni_FireJumpingDiagUp:
-		dc.b	1, frC_FireJDiagUp, afEnd
-CopyAni_FireJumpingStraight:
-		dc.b	4, frC_FireJStraight1, frC_FireJStraight2, afEnd
-CopyAni_FireJumpingDiagDown:
-		dc.b	1, frC_FireJDiagDown, afEnd
-CopyAni_FireSteadyUp:
-		dc.b	1, frC_FireSUp, afEnd
-CopyAni_FireSteadyDiagUp:
-		dc.b	1, frC_FireSDiagUp, afEnd
-CopyAni_FireSteadyStraight:
-		dc.b	1, frC_FireSStraight, afEnd
-CopyAni_FireSteadyDiagDown:
-		dc.b	1, frC_FireSDiagDown, afEnd
+CopyAni_FireJumping:
+		dc.b	4, frC_FireJ1, frC_FireJ2, afEnd
 CopyAni_ThrowStanding:
 		dc.b	2, frC_ThrowS1, frC_ThrowS2, frC_ThrowS3, afBack, 1
 CopyAni_ThrowJumping:
@@ -106,65 +97,62 @@ CopyAni_LadderClimb:
 		dc.b	7, frC_Ladder1, frC_Ladder2, frC_Ladder3, frC_Ladder4, frC_Ladder3, frC_Ladder2, afEnd
 CopyAni_LadderUp:
 		dc.b	7, frC_LadderUp, frC_LadderUp, frC_LadderUp, frC_LadderUp, frC_LadderUp, frC_LadderUp, afEnd
+CopyAni_FireLadder:
+		dc.b	5, frC_FireL, afChange, id_LadderClimb
+CopyAni_ThrowShieldLadder:
+		dc.b	1, frC_ThrowL1, frC_ThrowL2, frC_ThrowL3, afChange, id_LadderClimb
 	even
 
 ; Frame IDs
 	phase 0 ; Reset ds.b value to 0
-frC_Null:	ds.b 1
-frC_Idle1:	ds.b 1
-frC_Idle2:	ds.b 1
-frC_Idle3:	ds.b 1
-frC_Idle4:	ds.b 1
-frC_Step1:	ds.b 1
-frC_Step2:	ds.b 1
-frC_Walk1:	ds.b 1
-frC_Walk2:	ds.b 1
-frC_Walk3:	ds.b 1
-frC_Walk4:	ds.b 1
-frC_Walk5:	ds.b 1
-frC_Walk6:	ds.b 1
-frC_Fire1:	ds.b 1
-frC_Fire2:	ds.b 1
-frC_Walk1F:	ds.b 1
-frC_Walk2F:	ds.b 1
-frC_Walk3F:	ds.b 1
-frC_Walk4F:	ds.b 1
-frC_Walk5F:	ds.b 1
-frC_Walk6F:	ds.b 1
-frC_Tele1:	ds.b 1
-frC_Tele2:	ds.b 1
-frC_Tele3:	ds.b 1
-frC_Tele4:	ds.b 1
-frC_Tele5:	ds.b 1
-frC_Tele6:	ds.b 1
-frC_Tele7:	ds.b 1
-frC_Tele8:	ds.b 1
-frC_Tele9:	ds.b 1
-frC_Hurt:	ds.b 1
-frC_Stun:	ds.b 1
-frC_Victory1:	ds.b 1
-frC_Victory2:	ds.b 1
-frC_Death1:	ds.b 1
-frC_Death2:	ds.b 1
-frC_Death3:	ds.b 1
-frC_Death4:	ds.b 1
-frC_Death5:	ds.b 1
-frC_Slide1:	ds.b 1
-frC_Slide2:	ds.b 1
-frC_Jump1:	ds.b 1
-frC_Jump2:	ds.b 1
-frC_JumpT:	ds.b 1
-frC_Fall1:	ds.b 1
-frC_Fall2:	ds.b 1
-frC_FireSUp:		ds.b 1
-frC_FireSDiagUp:	ds.b 1
-frC_FireSStraight:	ds.b 1
-frC_FireSDiagDown:	ds.b 1
-frC_FireJUp:		ds.b 1
-frC_FireJDiagUp:	ds.b 1
-frC_FireJStraight1:	ds.b 1
-frC_FireJStraight2:	ds.b 1
-frC_FireJDiagDown:	ds.b 1
+frC_Null:			ds.b 1
+frC_Idle1:			ds.b 1
+frC_Idle2:			ds.b 1
+frC_Idle3:			ds.b 1
+frC_Idle4:			ds.b 1
+frC_Step1:			ds.b 1
+frC_Step2:			ds.b 1
+frC_Walk1:			ds.b 1
+frC_Walk2:			ds.b 1
+frC_Walk3:			ds.b 1
+frC_Walk4:			ds.b 1
+frC_Walk5:			ds.b 1
+frC_Walk6:			ds.b 1
+frC_Fire1:			ds.b 1
+frC_Fire2:			ds.b 1
+frC_Walk1F:			ds.b 1
+frC_Walk2F:			ds.b 1
+frC_Walk3F:			ds.b 1
+frC_Walk4F:			ds.b 1
+frC_Walk5F:			ds.b 1
+frC_Walk6F:			ds.b 1
+frC_Tele1:			ds.b 1
+frC_Tele2:			ds.b 1
+frC_Tele3:			ds.b 1
+frC_Tele4:			ds.b 1
+frC_Tele5:			ds.b 1
+frC_Tele6:			ds.b 1
+frC_Tele7:			ds.b 1
+frC_Tele8:			ds.b 1
+frC_Tele9:			ds.b 1
+frC_Hurt:			ds.b 1
+frC_Stun:			ds.b 1
+frC_Victory1:		ds.b 1
+frC_Victory2:		ds.b 1
+frC_Death1:			ds.b 1
+frC_Death2:			ds.b 1
+frC_Death3:			ds.b 1
+frC_Death4:			ds.b 1
+frC_Death5:			ds.b 1
+frC_Slide1:			ds.b 1
+frC_Slide2:			ds.b 1
+frC_Jump1:			ds.b 1
+frC_Jump2:			ds.b 1
+frC_JumpT:			ds.b 1
+frC_Fall1:			ds.b 1
+frC_Fall2:			ds.b 1
+frC_FireJ1:			ds.b 1
+frC_FireJ2:			ds.b 1
 frC_ThrowS1:		ds.b 1
 frC_ThrowS2:		ds.b 1
 frC_ThrowS3:		ds.b 1
@@ -186,6 +174,10 @@ frC_Ladder2:		ds.b 1
 frC_Ladder3:		ds.b 1
 frC_Ladder4:		ds.b 1
 frC_LadderUp:		ds.b 1
-frC_Last:	ds.b 0
+frC_FireL:			ds.b 1
+frC_ThrowL1:		ds.b 1
+frC_ThrowL2:		ds.b 1
+frC_ThrowL3:		ds.b 1
+frC_Last:			ds.b 0
 	even
 	dephase

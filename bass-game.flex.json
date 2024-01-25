@@ -1,7 +1,7 @@
 {
     "Flex": 2,
     "name": "",
-    "node": "0c7872ed-187e-4c57-9b1c-7531db1bfa0d",
+    "node": "d3baef86-16fc-4a03-bdf8-82e7ea2be6d9",
     "objects": [
         {
             "name": "Player",
@@ -34,6 +34,35 @@
                         "label": ""
                     },
                     "uuid": "ee6599ae-1b4a-4e97-87c5-8d521c0791ca"
+                },
+                {
+                    "format": "Sonic 3&K Object.js",
+                    "name": "Stage Select",
+                    "palettes": [
+                        {
+                            "length": 1,
+                            "blank": true
+                        },
+                        {
+                            "path": "Data/Screens/Stage Select/Palettes/Stage Select.bin",
+                            "length": 3
+                        }
+                    ],
+                    "art": {
+                        "path": "Data/Screens/Stage Select/KosinskiM Art/Stage Select Objects.bin",
+                        "compression": "Kosinski-M",
+                        "offset": 0
+                    },
+                    "mappings": {
+                        "path": "Data/Screens/Stage Select/Object Data/Map - Stage Select Objects.bin",
+                        "label": ""
+                    },
+                    "dplcs": {
+                        "enabled": false,
+                        "path": "",
+                        "label": ""
+                    },
+                    "uuid": "b62183c5-66b8-4ed0-8a6a-a3baa8ade460"
                 },
                 {
                     "format": "Sonic 3&K Player.js",
