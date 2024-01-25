@@ -152,11 +152,13 @@ FireWeapon:
 		dc.l	WepType_SemiCardinal	; 7 of 8 cardinal directions, Bass Buster
 		dc.l	WepType_Cardinal		; 8 of 8 cardinal directions, Metal Blade
 		dc.l	WepType_None			; Shield, since there's only one it's set up in the weapon itself...
-		dc.l	WepType_Normal			; Reppuken
+		dc.l	WepType_StopNormal		; Reppuken
 
 WepType_None:
 		rts
 
+WepType_StopNormal:
+		clr.w	ground_vel(a0)	; stop user in place, then continue to WepType_Normal
 WepType_Normal:
 		move.w	x_pos(a0),x_pos(a1)
 		move.w	y_pos(a0),y_pos(a1)
@@ -477,6 +479,10 @@ Player_CheckLadder:
 		bne.s	.end
 		btst	#1,object_control(a0)		; Already on a ladder?
 		bne.s	.end
+	; Mengo @ 12:20 AM EST, 1/25/24:
+	; "Game feel thing I think will help. Disable ladder grabbing while Button C is held"
+		btst.b	#button_C,(Ctrl_1_held_logical).w	; pressing C?
+		bne.s	.end						; if so, fail
 		cmpi.b	#id_Victory,anim(a0)		; if in any animation earlier than victory, continue
 		blt.s	.cont
 		cmpi.b	#id_LadderUp,anim(a0)	; if in any animation later than latest ladder anim, continue
@@ -487,7 +493,7 @@ Player_CheckLadder:
 	.cont:
 		move.w	x_pos(a0),d3				; Get current block
 		move.w	y_pos(a0),d2
-		subi.w	#12,d2						; ...???
+		subi.w	#6,d2						; Check 6px up
 		jsr		GetFloorPosition			; possible equivalent to CD's GetLevelBlock
 		move.w	(a1),d0
 		andi.w	#$3FF,d0
@@ -498,13 +504,13 @@ Player_CheckLadder:
 		bgt.s	.chkDown
 		move.b	(Ctrl_1_held_logical).w,d0	; are we attempting to climb up?
 		andi.b	#button_up_mask,d0
-		beq.s	.end						; if not, fail
+		beq.s	.chkDown						; if not, fail
 		subq.w	#1,y_pos(a0)
 		bset	#Status_InAir,status(a0)
 		bra.s	.ladder
 	.chkDown:
 		move.w	y_pos(a0),d2
-		addi.w	#18,d2	; originally #24 but i wanna try to get the block above the ladder for the climb-up animation
+		addi.w	#18,d2	; Check 18px down
 		jsr		GetFloorPosition
 		move.w	(a1),d0
 		andi.w	#$3FF,d0
@@ -515,7 +521,7 @@ Player_CheckLadder:
 		move.b	(Ctrl_1_held_logical).w,d0	; are we attempting to climb up?
 		andi.b	#button_down_mask,d0
 		beq.s	.end						; if not, fail
-		addi.w	#12,y_pos(a0)
+		addi.w	#9,y_pos(a0)				; Clip onto the ladder (move down 12px to bypass collision detection)
 		bset	#Status_InAir,status(a0)
 	
 	.ladder:
@@ -526,9 +532,8 @@ Player_CheckLadder:
 		move.w	#0,ground_vel(a0)
 		clr.b	angle(a0)
 		move.b	#1,anim_frame(a0)
-		move.b	#7,dashtimer(a0)		; Set animation timer
 		move.b	#id_LadderClimb,anim(a0)	; Set ladder animation
-		sfx		sfx_StarPost
+;		sfx		sfx_StarPost
 		bset	#1,object_control(a0)		; Mark as climbing a ladder
 
 		move.w	x_pos(a0),d0				; Clip onto ladder
@@ -541,31 +546,45 @@ Player_CheckLadder:
 
 Player_Ladder:
 		btst	#Status_OnObj,status(a0)
-		bne.s	.fallOff
+		bne.w	.fallOff
 		btst	#Status_InAir,status(a0)
-		beq.s	.fallOff
+		beq.w	.fallOff
+
+		btst	#button_left,(Ctrl_1_logical).w		; is left being pressed?
+		beq.s	.notLeft				; if not, branch
+		bset	#Status_Facing,status(a0)
+		bset	#rbXFlip,render_flags(a0)
+		bra.s	.notRight
+	.notLeft:
+		btst	#button_right,(Ctrl_1_logical).w	; is right being pressed?
+		beq.s	.notRight				; if not, branch
+		bclr	#Status_Facing,status(a0)
+		bclr	#rbXFlip,render_flags(a0)
+	.notRight:
 		move.w	x_pos(a0),d3			; Get block we are in
 		move.w	y_pos(a0),d2
-		addi.w	#6,d2	; originally #24 but i wanna try to get the block above the ladder for the climb-up animation
+		subi.w	#4,d2	; check below
 		jsr		GetFloorPosition
 		move.w	(a1),d0
 		andi.w	#$3FF,d0
 		cmpi.w	#1,d0
-		blt.s	.climbUp
+		blt.s	.cont
 		cmpi.w	#3,d0
-		bgt.s	.climbUp
-	.cont:
+		bgt.s	.cont
+		bra.s	.cont2
+	.cont:	; Why. Why. Why. Why. WHY is another fucking check TWO UNITS from the first one required to make this work???????
+		move.w	x_pos(a0),d3			; Get block we are in
 		move.w	y_pos(a0),d2
+		subi.w	#6,d2	; check above
 		jsr		GetFloorPosition
-;		addi.w	#1,d2	; originally #24 but i wanna try to get the block above the ladder for the climb-up animation
 		move.w	(a1),d0
 		andi.w	#$3FF,d0
 ; supposed to make you fall off if you go below the bottom of the ladder, ends up making you fall off constantly...
-;		cmpi.w	#1,d0
-;		blt.s	.cont2
-;		cmpi.w	#3,d0
-;		bgt.s	.cont2
-;		bra.s	.fallOff
+		cmpi.w	#1,d0
+		blt.s	.cont2
+		cmpi.w	#3,d0
+		bgt.s	.cont2
+		bra.s	.fallOff
 	.cont2:
 		move.b	(Ctrl_1_pressed_logical).w,d0	; are we jumping?
 		andi.b	#button_C_mask,d0
@@ -576,21 +595,6 @@ Player_Ladder:
 		bclr	#1,object_control(a0)		; Stop climbing
 		clr.b	anim(a0)
 		rts
-	
-	.climbUp:	; climb-up animation
-		move.w	x_pos(a0),d3			; Get block we are in
-		move.w	y_pos(a0),d2
-		subi.w	#12,d2	; originally #24 but i wanna try to get the block above the ladder for the climb-up animation
-		jsr		GetFloorPosition
-		move.w	(a1),d0
-		andi.w	#$3FF,d0
-		blt.s	.cont3
-		cmpi.w	#3,d0
-		bgt.s	.cont3
-		bra.s	.fallOff
-	.cont3:
-		move.b	#id_LadderUp,anim(a0)
-		bra.s	.cont
 		
 	.moveY:
 		tst.b	shoottimer(a0)
@@ -608,8 +612,7 @@ Player_Ladder:
 	.doMove:
 		add.w	d0,y_pos(a0)			; Update X position
 	.shooting:
-		jsr		Animate_Player
-		jmp		Player_Load_PLC
+		jmp		Player_HandleLadderAnimations
 
 	.end:
 		rts
@@ -941,3 +944,27 @@ AnimType_JumpThrow:
 AnimType_JumpShield:
 		move.b	#id_ShieldJumping,anim(a0)
 		rts
+
+
+Player_HandleLadderAnimations:
+		tst.b	shoottimer(a0)
+		beq.s	.notShooting
+		moveq	#0,d0
+		move.b	(v_shottype).w,d0
+		add.w	d0,d0
+		add.w	d0,d0
+		movea.l	.typesLUT(pc,d0.w),a2
+		jsr		(a2)
+	.animate:
+		jsr		Animate_Player
+		jmp		Player_Load_PLC
+	.typesLUT:
+		dc.l	AnimType_JumpNormalFire
+		dc.l	AnimType_JumpSemiCardinalFire
+		dc.l	AnimType_JumpThrow
+		dc.l	AnimType_JumpShield
+		dc.l	.notShooting
+	.notShooting:
+	; TODO: add code to change to id_LadderUp when near the top of a ladder
+		move.b	#id_LadderClimb,anim(a0)
+		bra.s	.animate
