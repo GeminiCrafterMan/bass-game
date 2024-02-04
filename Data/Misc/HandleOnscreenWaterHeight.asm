@@ -104,23 +104,36 @@ LoadWaterPalette:
 StartingWaterHeights:
 		dc.w $FFFF
 		dc.w $FFFF
-		dc.w $220
+		dc.w $220	; Test 3 - Labyrinth MS
 		dc.w $FFFF
-
+; Robot Master stages
 		dc.w $FFFF	; Blaze Man
 		dc.w $FFFF	; Video Man
 		dc.w $FFFF	; Smog Man
 		dc.w $200	; Shark Man
-	rept 4
+		dc.w $FFFF
+		dc.w $FFFF
+		dc.w $FFFF
+		dc.w $FFFF
+; Fortresses
+	rept 8
 		dc.w $FFFF
 	endr
+; Bonus
+		dc.w $FFFF
+		dc.w $FFFF
+		dc.w $FFFF
+		dc.w $FFFF
 
 		zonewarning StartingWaterHeights,(2*4)
 ; ---------------------------------------------------------------------------
 
 WaterPalette_Index:
-		dc.b	palid_GenericLevel,	palid_Air,	palid_MSLabyrinthUW,	palid_GenericLevel		; DEZ 1,2,3,4
-		dc.b	palid_Blaze,	palid_Video,	palid_Smog,		palid_SharkUW
-		dc.b	palid_Origami,	palid_GenericLevel,	palid_GenericLevel,	palid_GenericLevel		; DEZ 1,2,3,4
+		dc.b	palid_GenericLevel,	palid_GenericLevel,	palid_GenericLevel,	palid_GenericLevel		; DEZ 1,2,3,4
+		dc.b	palid_GenericLevel,	palid_GenericLevel,	palid_GenericLevel,	palid_SharkUW			; First four RMs
+		dc.b	palid_GenericLevel,	palid_GenericLevel,	palid_GenericLevel,	palid_GenericLevel		; Last four RMs
+		dc.b	palid_GenericLevel,	palid_GenericLevel,	palid_GenericLevel,	palid_GenericLevel		; First four fortress stages
+		dc.b	palid_GenericLevel,	palid_GenericLevel,	palid_GenericLevel,	palid_GenericLevel		; Last four fortress stages
+		dc.b	palid_GenericLevel,	palid_GenericLevel,	palid_GenericLevel,	palid_GenericLevel		; Bonus levels
 
 		zonewarning WaterPalette_Index,(1*4)

@@ -4,7 +4,7 @@
 ; ===========================================================================
 
 ; Assembly options
-ZoneCount:				= 3	; discrete zones are: DEZ
+ZoneCount:				= 6	; discrete zones are: DEZ
 GameDebug:				= 1	; if 1, enable debug mode
 Lagometer:				= 0	; if 1, enable debug lagometer
 OptimiseSound:	  		= 1	; change to 1 to optimise sound queuing

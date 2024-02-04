@@ -27,7 +27,10 @@ waterValTable:	; Entry format: blue<<3, zero, red<<3, green<<3
 	rept 4
 		dc.b	0, 0, -$2<<3, -$2<<3
 	endr
-	rept 4
+	rept 8
+		dc.b	0, 0, -$2<<3, -$2<<3
+	endr
+	rept 8
 		dc.b	0, 0, -$2<<3, -$2<<3
 	endr
 	rept 4

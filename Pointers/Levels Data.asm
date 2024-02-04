@@ -13,11 +13,24 @@ LevelLoadBlock:
 		levartptrs Video_8x8_KosM,	Video_16x16_Unc,Video_128x128_Kos,	palid_Video		; Video Man
 		levartptrs Smog_8x8_KosM,	Smog_16x16_Unc,	Smog_128x128_Kos,	palid_Smog		; Smog Man
 		levartptrs Shark_8x8_KosM,	Shark_16x16_Unc,Shark_128x128_Kos,	palid_Shark		; Shark Man
-
 		levartptrs Origami_8x8_KosM,Origami_16x16_Unc,Origami_128x128_Kos,palid_Origami	; Origami Man
 		levartptrs Unknown1_8x8_KosM,	Unknown1_16x16_Unc,Unknown1_128x128_Kos,palid_Unknown1		; Unknown 1
 		levartptrs Unknown2_8x8_KosM,	Unknown2_16x16_Unc,Unknown2_128x128_Kos,palid_Unknown2		; Unknown 2
 		levartptrs Unknown3_8x8_KosM,	Unknown3_16x16_Unc,Unknown3_128x128_Kos,palid_Unknown3		; Unknown 3
+
+		levartptrs GenericLevel_8x8_KosM,	GenericLevel_16x16_Unc,GenericLevel_128x128_Kos,palid_GenericLevel		; GenericLevel
+		levartptrs GenericLevel_8x8_KosM,	GenericLevel_16x16_Unc,GenericLevel_128x128_Kos,palid_GenericLevel		; GenericLevel
+		levartptrs GenericLevel_8x8_KosM,	GenericLevel_16x16_Unc,GenericLevel_128x128_Kos,palid_GenericLevel		; GenericLevel
+		levartptrs GenericLevel_8x8_KosM,	GenericLevel_16x16_Unc,GenericLevel_128x128_Kos,palid_GenericLevel		; GenericLevel
+		levartptrs GenericLevel_8x8_KosM,	GenericLevel_16x16_Unc,GenericLevel_128x128_Kos,palid_GenericLevel		; GenericLevel
+		levartptrs GenericLevel_8x8_KosM,	GenericLevel_16x16_Unc,GenericLevel_128x128_Kos,palid_GenericLevel		; GenericLevel
+		levartptrs GenericLevel_8x8_KosM,	GenericLevel_16x16_Unc,GenericLevel_128x128_Kos,palid_GenericLevel		; GenericLevel
+		levartptrs GenericLevel_8x8_KosM,	GenericLevel_16x16_Unc,GenericLevel_128x128_Kos,palid_GenericLevel		; GenericLevel
+
+		levartptrs GenericLevel_8x8_KosM,	GenericLevel_16x16_Unc,GenericLevel_128x128_Kos,palid_GenericLevel		; GenericLevel
+		levartptrs GenericLevel_8x8_KosM,	GenericLevel_16x16_Unc,GenericLevel_128x128_Kos,palid_GenericLevel		; GenericLevel
+		levartptrs GenericLevel_8x8_KosM,	GenericLevel_16x16_Unc,GenericLevel_128x128_Kos,palid_GenericLevel		; GenericLevel
+		levartptrs GenericLevel_8x8_KosM,	GenericLevel_16x16_Unc,GenericLevel_128x128_Kos,palid_GenericLevel		; GenericLevel
 
 		zonewarning LevelLoadBlock,(12*4)
 
@@ -68,6 +81,20 @@ LevelLoadPointer:
 		dc.l Unknown3_ScreenInit, Unknown3_BackgroundInit, Unknown3_ScreenEvent, Unknown3_BackgroundEvent	; ScreenInit, BackgroundInit, ScreenEvent, BackgroundEvent
 		dc.l LevelPointer_Null, LevelPointer_Null											; Animate tiles main code, Animate tiles PLC scripts
 
+	rept 8
+; GenericLevel
+		dc.l LevelPointer_Null, LevelPointer_Null, LevelPointer_Null, LevelPointer_Null					; Animate Palette, Resize, WaterResize, AfterBoss
+		dc.l GenericLevel_ScreenInit, GenericLevel_BackgroundInit, GenericLevel_ScreenEvent, GenericLevel_BackgroundEvent	; ScreenInit, BackgroundInit, ScreenEvent, BackgroundEvent
+		dc.l LevelPointer_Null, LevelPointer_Null											; Animate tiles main code, Animate tiles PLC scripts
+	endr
+
+	rept 4
+; GenericLevel
+		dc.l LevelPointer_Null, LevelPointer_Null, LevelPointer_Null, LevelPointer_Null					; Animate Palette, Resize, WaterResize, AfterBoss
+		dc.l GenericLevel_ScreenInit, GenericLevel_BackgroundInit, GenericLevel_ScreenEvent, GenericLevel_BackgroundEvent	; ScreenInit, BackgroundInit, ScreenEvent, BackgroundEvent
+		dc.l LevelPointer_Null, LevelPointer_Null											; Animate tiles main code, Animate tiles PLC scripts
+	endr
+
 		zonewarning LevelLoadPointer,(40*4)
 
 ; ===========================================================================
@@ -84,11 +111,24 @@ SolidIndexes:
 		dc.l Video_Solid	; Video Man
 		dc.l Smog_Solid		; Smog Man
 		dc.l Shark_Solid	; Shark Man
-
 		dc.l Origami_Solid	; Origami Man
 		dc.l Unknown1_Solid	; Unknown 1
 		dc.l Unknown2_Solid	; Unknown 2
 		dc.l Unknown3_Solid	; Unknown 3
+
+		dc.l GenericLevel_Solid	; GenericLevel
+		dc.l GenericLevel_Solid	; GenericLevel
+		dc.l GenericLevel_Solid	; GenericLevel
+		dc.l GenericLevel_Solid	; GenericLevel
+		dc.l GenericLevel_Solid	; GenericLevel
+		dc.l GenericLevel_Solid	; GenericLevel
+		dc.l GenericLevel_Solid	; GenericLevel
+		dc.l GenericLevel_Solid	; GenericLevel
+
+		dc.l GenericLevel_Solid	; GenericLevel
+		dc.l GenericLevel_Solid	; GenericLevel
+		dc.l GenericLevel_Solid	; GenericLevel
+		dc.l GenericLevel_Solid	; GenericLevel
 
 		zonewarning SolidIndexes,(4*4)
 
@@ -106,11 +146,24 @@ LevelPtrs:
 		dc.l Video_Layout	; Video Man
 		dc.l Smog_Layout	; Smog Man
 		dc.l Shark_Layout	; Shark Man
-
 		dc.l Origami_Layout	; Origami Man
 		dc.l Unknown1_Layout	; Unknown 1
 		dc.l Unknown2_Layout	; Unknown 2
 		dc.l Unknown3_Layout	; Unknown 3
+
+		dc.l GenericLevel_Layout	; GenericLevel
+		dc.l GenericLevel_Layout	; GenericLevel
+		dc.l GenericLevel_Layout	; GenericLevel
+		dc.l GenericLevel_Layout	; GenericLevel
+		dc.l GenericLevel_Layout	; GenericLevel
+		dc.l GenericLevel_Layout	; GenericLevel
+		dc.l GenericLevel_Layout	; GenericLevel
+		dc.l GenericLevel_Layout	; GenericLevel
+
+		dc.l GenericLevel_Layout	; GenericLevel
+		dc.l GenericLevel_Layout	; GenericLevel
+		dc.l GenericLevel_Layout	; GenericLevel
+		dc.l GenericLevel_Layout	; GenericLevel
 
 		zonewarning LevelPtrs,(4*4)
 
@@ -128,12 +181,24 @@ SpriteLocPtrs:
 		dc.l Video_Sprites	; Video Man
 		dc.l Smog_Sprites	; Smog Man
 		dc.l Shark_Sprites	; Shark Man
-
 		dc.l Origami_Sprites; Origami Man
 		dc.l Unknown1_Sprites	; Unknown 1
 		dc.l Unknown2_Sprites	; Unknown 2
 		dc.l Unknown3_Sprites	; Unknown 3
 
+		dc.l GenericLevel_Sprites	; GenericLevel
+		dc.l GenericLevel_Sprites	; GenericLevel
+		dc.l GenericLevel_Sprites	; GenericLevel
+		dc.l GenericLevel_Sprites	; GenericLevel
+		dc.l GenericLevel_Sprites	; GenericLevel
+		dc.l GenericLevel_Sprites	; GenericLevel
+		dc.l GenericLevel_Sprites	; GenericLevel
+		dc.l GenericLevel_Sprites	; GenericLevel
+
+		dc.l GenericLevel_Sprites	; GenericLevel
+		dc.l GenericLevel_Sprites	; GenericLevel
+		dc.l GenericLevel_Sprites	; GenericLevel
+		dc.l GenericLevel_Sprites	; GenericLevel
 		zonewarning SpriteLocPtrs,(4*4)
 
 ; ===========================================================================

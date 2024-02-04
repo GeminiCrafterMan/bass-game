@@ -14,16 +14,6 @@ ArtKosM_GrayButton:				binclude "Objects/Button/KosinskiM Art/Gray Button.bin"
 	even
 ArtKosM_WaterWave:				binclude "Objects/Water Wave/KosinskiM Art/Water Wave.bin"
 	even
-ArtKosM_TitleCardNum1:			binclude "Objects/Title Card/KosinskiM Art/Title Card Number 1.bin"
-	even
-ArtKosM_TitleCardNum2:			binclude "Objects/Title Card/KosinskiM Art/Title Card Number 2.bin"
-	even
-ArtKosM_TitleCardNum3:			binclude "Objects/Title Card/KosinskiM Art/Title Card Number 3.bin"
-	even
-ArtKosM_TitleCardNum4:			binclude "Objects/Title Card/KosinskiM Art/Title Card Number 4.bin"
-	even
-ArtKosM_TitleCardRedAct:		binclude "Objects/Title Card/KosinskiM Art/Title Card Red ACT.bin"
-	even
 ArtKosM_LevelSelectText:		binclude "Data/Screens/Level Select/KosinskiM Art/Text.bin"
 	even
 
@@ -42,13 +32,6 @@ ArtKosM_MetalBlade:				binclude "Objects/Player Projectiles/KosinskiM Art/Metal 
 ArtKosM_CarryPlatform:			binclude "Objects/Player Projectiles/KosinskiM Art/Carry Platform.bin"
 	even
 ArtKosM_SuperArrow:				binclude "Objects/Player Projectiles/KosinskiM Art/Super Arrow.bin"
-	even
-
-; ===========================================================================
-; Kosinski Module compressed title card graphics
-; ===========================================================================
-
-ArtKosM_DEZTitleCard:			binclude "Objects/Title Card/KosinskiM Art/Levels/DEZ - Title Card.bin"
 	even
 
 ; ===========================================================================

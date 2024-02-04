@@ -12,6 +12,9 @@ ptr_mus_snake:		SMPS_MUSIC_METADATA Music_SnakeMan, s3TempotoS1($FF), 0		; Snake
 ptr_mus_dive:		SMPS_MUSIC_METADATA Music_DiveMan, s3TempotoS1($FF), 0		; Dive Man
 ptr_mus_brodg:		SMPS_MUSIC_METADATA Music_BRodG, s3TempotoS1($FF), 0		; Buster Rod G
 
+; Bonus levels
+ptr_mus_bgz:		SMPS_MUSIC_METADATA Music_BGZ, s3TempotoS1($FF), 0			; Blossom Gardens (Bonus level)
+
 ; Boss
 ptr_mus_protowhistle:	SMPS_MUSIC_METADATA Music_ProtoWhistle, s3TempotoS1($FF), 0	; Proto Man's entrance whistle
 
@@ -42,6 +45,9 @@ Music_SnakeMan:		include "Sound/Music/Mus - Snake Man.asm"
 Music_DiveMan:		include "Sound/Music/Mus - Dive Man.asm"
 	even
 Music_BRodG:		include "Sound/Music/Mus - Buster Rod G.asm"
+	even
+
+Music_BGZ:			include "Sound/Music/Mus - BGZ.asm"
 	even
 
 Music_ProtoWhistle:	include	"Sound/Music/Mus - Proto Man Whistle.asm"

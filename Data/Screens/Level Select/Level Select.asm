@@ -8,10 +8,10 @@ LevelSelect_VRAM:				= 0
 
 ; Variables
 LevelSelect_ZoneCount:			= ZoneCount
-LevelSelect_ActDEZCount:			= 4	; DEZ
+LevelSelect_ActDEZCount:		= 4	; DEZ
 LevelSelect_MusicTestCount:		= 8
 LevelSelect_SoundTestCount:		= LevelSelect_MusicTestCount+1
-LevelSelect_SampleTestCount:		= LevelSelect_SoundTestCount+1
+LevelSelect_SampleTestCount:	= LevelSelect_SoundTestCount+1
 LevelSelect_MaxCount:			= 11
 LevelSelect_MaxMusicNumber:		= (mus__Last-mus__First)
 LevelSelect_MaxSoundNumber:		= (sfx__Last-sfx__First)
@@ -23,7 +23,7 @@ LevelSelect_MaxSampleNumber:	= (dac__Last-dac__First)
 vLevelSelect_MusicCount:			ds.w 1
 vLevelSelect_SoundCount:			ds.w 1
 vLevelSelect_SampleCount:			ds.w 1
-vLevelSelect_CtrlTimer:			ds.w 1
+vLevelSelect_CtrlTimer:				ds.w 1
 vLevelSelect_VCount:				ds.w 1
 vLevelSelect_HCount:				ds.w $10
 
@@ -150,9 +150,12 @@ LevelSelect_LoadLevel_Return:
 ; ---------------------------------------------------------------------------
 
 LevelSelect_LoadMaxActs:
-		dc.w LevelSelect_ActDEZCount-1	; DEZ
-		dc.w LevelSelect_ActDEZCount-1	; DEZ
-		dc.w LevelSelect_ActDEZCount-1	; DEZ
+		dc.w LevelSelect_ActDEZCount-1	; Test levels
+		dc.w LevelSelect_ActDEZCount-1	; RMs 1-4
+		dc.w LevelSelect_ActDEZCount-1	; RMs 5-8
+		dc.w LevelSelect_ActDEZCount-1	; Fortresses 1-4
+		dc.w LevelSelect_ActDEZCount-1	; Fortresses 5-8
+		dc.w LevelSelect_ActDEZCount-1	; Bonus levels
 
 		zonewarning LevelSelect_LoadMaxActs,2
 
@@ -394,17 +397,31 @@ LevelSelect_LoadMainText:
 ; --------------------------------------------------------------------------
 
 LevelSelect_ActTextIndex: offsetTable
+; Test levels
 		offsetTableEntry.w LevelSelect_LoadAct1		; DEZ1
 		offsetTableEntry.w LevelSelect_LoadAct2		; DEZ2
 		offsetTableEntry.w LevelSelect_LoadAct3		; DEZ3
 		offsetTableEntry.w LevelSelect_LoadAct4		; DEZ4
-
+; Robot Masters
 		offsetTableEntry.w LevelSelect_BlazeMan		; DEZ1
 		offsetTableEntry.w LevelSelect_VideoMan		; DEZ2
 		offsetTableEntry.w LevelSelect_SmogMan		; DEZ3
 		offsetTableEntry.w LevelSelect_SharkMan		; DEZ4
-
 		offsetTableEntry.w LevelSelect_OrigamiMan	; DEZ1
+		offsetTableEntry.w LevelSelect_LoadAct2		; DEZ2
+		offsetTableEntry.w LevelSelect_LoadAct3		; DEZ3
+		offsetTableEntry.w LevelSelect_LoadAct4		; DEZ4
+; Fortresses
+		offsetTableEntry.w LevelSelect_LoadAct1		; DEZ1
+		offsetTableEntry.w LevelSelect_LoadAct2		; DEZ2
+		offsetTableEntry.w LevelSelect_LoadAct3		; DEZ3
+		offsetTableEntry.w LevelSelect_LoadAct4		; DEZ4
+		offsetTableEntry.w LevelSelect_LoadAct5		; DEZ1
+		offsetTableEntry.w LevelSelect_LoadAct6		; DEZ2
+		offsetTableEntry.w LevelSelect_LoadAct7		; DEZ3
+		offsetTableEntry.w LevelSelect_LoadAct8		; DEZ4
+; Bonus levels
+		offsetTableEntry.w LevelSelect_LoadAct1		; DEZ1
 		offsetTableEntry.w LevelSelect_LoadAct2		; DEZ2
 		offsetTableEntry.w LevelSelect_LoadAct3		; DEZ3
 		offsetTableEntry.w LevelSelect_LoadAct4		; DEZ4
@@ -420,6 +437,14 @@ LevelSelect_LoadAct3:
 		levselstr "ACT 3      "
 LevelSelect_LoadAct4:
 		levselstr "ACT 4      "
+LevelSelect_LoadAct5:
+		levselstr "ACT 5      "
+LevelSelect_LoadAct6:
+		levselstr "ACT 6      "
+LevelSelect_LoadAct7:
+		levselstr "ACT 7      "
+LevelSelect_LoadAct8:
+		levselstr "ACT 8      "
 LevelSelect_BlazeMan:
 		levselstr "BLAZE MAN  "
 LevelSelect_VideoMan:
@@ -599,15 +624,15 @@ LevelSelect_MappingOffsets:
 		dc.w planeLocH28(0,24)
 		dc.w planeLocH28(0,26)
 LevelSelect_Text:
-		levselstr "   DEATH EGG          - ACT 1           "
-		levselstr "   RM STAGES - PART 1 - BLAZE MAN       "
-		levselstr "   RM STAGES - PART 2 - ORIGAMI MAN     "
-		levselstr "   UNKNOWN LEVEL      - UNKNOWN         "
-		levselstr "   UNKNOWN LEVEL      - UNKNOWN         "
-		levselstr "   UNKNOWN LEVEL      - UNKNOWN         "
-		levselstr "   UNKNOWN LEVEL      - UNKNOWN         "
-		levselstr "   UNKNOWN LEVEL      - UNKNOWN         "
-		levselstr "   MUSIC TEST:        - 000             "
-		levselstr "   SOUND TEST:        - 000             "
-		levselstr "   SAMPLE TEST:       - 000             "
+		levselstr " DEATH EGG            - ACT 1           "
+		levselstr " RM STAGES - PART 1   - BLAZE MAN       "
+		levselstr " RM STAGES - PART 2   - ORIGAMI MAN     "
+		levselstr " WILY STAGES - PART 1 - ACT 1           "
+		levselstr " WILY STAGES - PART 2 - ACT 5           "
+		levselstr " BONUS LEVELS         - ACT 1           "
+		levselstr " UNKNOWN LEVEL        - UNKNOWN         "
+		levselstr " UNKNOWN LEVEL        - UNKNOWN         "
+		levselstr " MUSIC TEST:          - 000             "
+		levselstr " SOUND TEST:          - 000             "
+		levselstr " SAMPLE TEST:         - 000             "
 	even

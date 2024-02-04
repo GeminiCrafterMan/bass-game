@@ -17,6 +17,9 @@ mus_Snake =			SMPS_id(ptr_mus_snake)
 mus_Dive =			SMPS_id(ptr_mus_dive)
 mus_BRodG =			SMPS_id(ptr_mus_brodg)
 
+; Bonus levels
+mus_BGZ =			SMPS_id(ptr_mus_bgz)
+
 ; Bosses
 mus_ProtoWhistle =	SMPS_id(ptr_mus_protowhistle)
 

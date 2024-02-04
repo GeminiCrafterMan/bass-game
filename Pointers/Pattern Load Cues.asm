@@ -8,7 +8,11 @@ Offs_PLC: offsetTable
 		offsetTableEntry.w PLC1_Test1_Misc
 		offsetTableEntry.w PLC2_Test1_Enemy
 	endr
-	rept 4
+	rept 8
+		offsetTableEntry.w PLC1_Test1_Misc
+		offsetTableEntry.w PLC2_Test1_Enemy
+	endr
+	rept 8
 		offsetTableEntry.w PLC1_Test1_Misc
 		offsetTableEntry.w PLC2_Test1_Enemy
 	endr

@@ -6,7 +6,10 @@ DebugList: offsetTable
 	rept 4
 		offsetTableEntry.w .DEZ1
 	endr
-	rept 4
+	rept 8
+		offsetTableEntry.w .DEZ1
+	endr
+	rept 8
 		offsetTableEntry.w .DEZ1
 	endr
 	rept 4

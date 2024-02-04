@@ -13,10 +13,23 @@ LevelSizes:
 		dc.w 0, $640, 0, $2E0				; Video Man
 		dc.w 0, $1400-$140, 0, $C00-$E0		; Smog Man
 		dc.w 0, $640, 0, $2E0				; Shark Man
-
 		dc.w 0, $1C00-$140, 0, $200-$E0		; Origami Man
 		dc.w 0, $1100-$140, 0, $780-$E0		; Unknown 1
 		dc.w 0, $640, 0, $2E0				; Unknown 2
 		dc.w 0, $640, 0, $2E0				; Unknown 3
+
+		dc.w 0, $780-$140, 0, $3A0-$E0		; Test 1
+		dc.w 0, $780-$140, 0, $3A0-$E0		; Test 1
+		dc.w 0, $780-$140, 0, $3A0-$E0		; Test 1
+		dc.w 0, $780-$140, 0, $3A0-$E0		; Test 1
+		dc.w 0, $780-$140, 0, $3A0-$E0		; Test 1
+		dc.w 0, $780-$140, 0, $3A0-$E0		; Test 1
+		dc.w 0, $780-$140, 0, $3A0-$E0		; Test 1
+		dc.w 0, $780-$140, 0, $3A0-$E0		; Test 1
+
+		dc.w 0, $780-$140, 0, $3A0-$E0		; Test 1
+		dc.w 0, $780-$140, 0, $3A0-$E0		; Test 1
+		dc.w 0, $780-$140, 0, $3A0-$E0		; Test 1
+		dc.w 0, $780-$140, 0, $3A0-$E0		; Test 1
 
 		zonewarning LevelSizes,(8*4)
