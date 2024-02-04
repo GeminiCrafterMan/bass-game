@@ -624,7 +624,7 @@ LevelSelect_MappingOffsets:
 		dc.w planeLocH28(0,24)
 		dc.w planeLocH28(0,26)
 LevelSelect_Text:
-		levselstr " DEATH EGG            - ACT 1           "
+		levselstr " TEST STAGES          - ACT 1           "
 		levselstr " RM STAGES - PART 1   - BLAZE MAN       "
 		levselstr " RM STAGES - PART 2   - ORIGAMI MAN     "
 		levselstr " WILY STAGES - PART 1 - ACT 1           "

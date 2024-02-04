@@ -129,7 +129,7 @@ StartingWaterHeights:
 ; ---------------------------------------------------------------------------
 
 WaterPalette_Index:
-		dc.b	palid_GenericLevel,	palid_GenericLevel,	palid_GenericLevel,	palid_GenericLevel		; DEZ 1,2,3,4
+		dc.b	palid_GenericLevel,	palid_GenericLevel,	palid_MSLabyrinthUW,	palid_GenericLevel		; DEZ 1,2,3,4
 		dc.b	palid_GenericLevel,	palid_GenericLevel,	palid_GenericLevel,	palid_SharkUW			; First four RMs
 		dc.b	palid_GenericLevel,	palid_GenericLevel,	palid_GenericLevel,	palid_GenericLevel		; Last four RMs
 		dc.b	palid_GenericLevel,	palid_GenericLevel,	palid_GenericLevel,	palid_GenericLevel		; First four fortress stages

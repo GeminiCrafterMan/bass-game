@@ -4,33 +4,33 @@
 
 		;		1st 8x8 data		1st 16x16 data		1st 128x128 data	palette
 LevelLoadBlock:
-		levartptrs GenericLevel_8x8_KosM,	GenericLevel_16x16_Unc,GenericLevel_128x128_Kos,palid_GenericLevel		; GenericLevel
-		levartptrs Air_8x8_KosM,	Air_16x16_Unc,Air_128x128_Kos,palid_Air		; Air Man
-		levartptrs MSLabyrinth_8x8_KosM,	MSLabyrinth_16x16_Unc,MSLabyrinth_128x128_Kos,palid_MSLabyrinth			; Test3
-		levartptrs GenericLevel_8x8_KosM,	GenericLevel_16x16_Unc,GenericLevel_128x128_Kos,palid_GenericLevel		; Test4
+		levartptrs GenericLevel_8x8_KosM,	GenericLevel_16x16_Unc,	GenericLevel_128x128_Kos,	palid_GenericLevel		; GenericLevel
+		levartptrs Air_8x8_KosM,			Air_16x16_Unc,			Air_128x128_Kos,			palid_Air				; Air Man
+		levartptrs MSLabyrinth_8x8_KosM,	MSLabyrinth_16x16_Unc,	MSLabyrinth_128x128_Kos,	palid_MSLabyrinth		; Test3
+		levartptrs GenericLevel_8x8_KosM,	GenericLevel_16x16_Unc,	GenericLevel_128x128_Kos,	palid_GenericLevel		; Test4
 
-		levartptrs Blaze_8x8_KosM,	Blaze_16x16_Unc,Blaze_128x128_Kos,	palid_Blaze		; Blaze Man
-		levartptrs Video_8x8_KosM,	Video_16x16_Unc,Video_128x128_Kos,	palid_Video		; Video Man
-		levartptrs Smog_8x8_KosM,	Smog_16x16_Unc,	Smog_128x128_Kos,	palid_Smog		; Smog Man
-		levartptrs Shark_8x8_KosM,	Shark_16x16_Unc,Shark_128x128_Kos,	palid_Shark		; Shark Man
-		levartptrs Origami_8x8_KosM,Origami_16x16_Unc,Origami_128x128_Kos,palid_Origami	; Origami Man
-		levartptrs Unknown1_8x8_KosM,	Unknown1_16x16_Unc,Unknown1_128x128_Kos,palid_Unknown1		; Unknown 1
-		levartptrs Unknown2_8x8_KosM,	Unknown2_16x16_Unc,Unknown2_128x128_Kos,palid_Unknown2		; Unknown 2
-		levartptrs Unknown3_8x8_KosM,	Unknown3_16x16_Unc,Unknown3_128x128_Kos,palid_Unknown3		; Unknown 3
+		levartptrs Blaze_8x8_KosM,			Blaze_16x16_Unc,		Blaze_128x128_Kos,			palid_Blaze				; Blaze Man
+		levartptrs Video_8x8_KosM,			Video_16x16_Unc,		Video_128x128_Kos,			palid_Video				; Video Man
+		levartptrs Smog_8x8_KosM,			Smog_16x16_Unc,			Smog_128x128_Kos,			palid_Smog				; Smog Man
+		levartptrs Shark_8x8_KosM,			Shark_16x16_Unc,		Shark_128x128_Kos,			palid_Shark				; Shark Man
+		levartptrs Origami_8x8_KosM,		Origami_16x16_Unc,		Origami_128x128_Kos,		palid_Origami			; Origami Man
+		levartptrs Unknown1_8x8_KosM,		Unknown1_16x16_Unc,		Unknown1_128x128_Kos,		palid_Unknown1			; Unknown 1
+		levartptrs Unknown2_8x8_KosM,		Unknown2_16x16_Unc,		Unknown2_128x128_Kos,		palid_Unknown2			; Unknown 2
+		levartptrs Unknown3_8x8_KosM,		Unknown3_16x16_Unc,		Unknown3_128x128_Kos,		palid_Unknown3			; Unknown 3
 
-		levartptrs GenericLevel_8x8_KosM,	GenericLevel_16x16_Unc,GenericLevel_128x128_Kos,palid_GenericLevel		; GenericLevel
-		levartptrs GenericLevel_8x8_KosM,	GenericLevel_16x16_Unc,GenericLevel_128x128_Kos,palid_GenericLevel		; GenericLevel
-		levartptrs GenericLevel_8x8_KosM,	GenericLevel_16x16_Unc,GenericLevel_128x128_Kos,palid_GenericLevel		; GenericLevel
-		levartptrs GenericLevel_8x8_KosM,	GenericLevel_16x16_Unc,GenericLevel_128x128_Kos,palid_GenericLevel		; GenericLevel
-		levartptrs GenericLevel_8x8_KosM,	GenericLevel_16x16_Unc,GenericLevel_128x128_Kos,palid_GenericLevel		; GenericLevel
-		levartptrs GenericLevel_8x8_KosM,	GenericLevel_16x16_Unc,GenericLevel_128x128_Kos,palid_GenericLevel		; GenericLevel
-		levartptrs GenericLevel_8x8_KosM,	GenericLevel_16x16_Unc,GenericLevel_128x128_Kos,palid_GenericLevel		; GenericLevel
-		levartptrs GenericLevel_8x8_KosM,	GenericLevel_16x16_Unc,GenericLevel_128x128_Kos,palid_GenericLevel		; GenericLevel
+		levartptrs GenericLevel_8x8_KosM,	GenericLevel_16x16_Unc,	GenericLevel_128x128_Kos,	palid_GenericLevel		; GenericLevel
+		levartptrs GenericLevel_8x8_KosM,	GenericLevel_16x16_Unc,	GenericLevel_128x128_Kos,	palid_GenericLevel		; GenericLevel
+		levartptrs GenericLevel_8x8_KosM,	GenericLevel_16x16_Unc,	GenericLevel_128x128_Kos,	palid_GenericLevel		; GenericLevel
+		levartptrs GenericLevel_8x8_KosM,	GenericLevel_16x16_Unc,	GenericLevel_128x128_Kos,	palid_GenericLevel		; GenericLevel
+		levartptrs GenericLevel_8x8_KosM,	GenericLevel_16x16_Unc,	GenericLevel_128x128_Kos,	palid_GenericLevel		; GenericLevel
+		levartptrs GenericLevel_8x8_KosM,	GenericLevel_16x16_Unc,	GenericLevel_128x128_Kos,	palid_GenericLevel		; GenericLevel
+		levartptrs GenericLevel_8x8_KosM,	GenericLevel_16x16_Unc,	GenericLevel_128x128_Kos,	palid_GenericLevel		; GenericLevel
+		levartptrs GenericLevel_8x8_KosM,	GenericLevel_16x16_Unc,	GenericLevel_128x128_Kos,	palid_GenericLevel		; GenericLevel
 
-		levartptrs GenericLevel_8x8_KosM,	GenericLevel_16x16_Unc,GenericLevel_128x128_Kos,palid_GenericLevel		; GenericLevel
-		levartptrs GenericLevel_8x8_KosM,	GenericLevel_16x16_Unc,GenericLevel_128x128_Kos,palid_GenericLevel		; GenericLevel
-		levartptrs GenericLevel_8x8_KosM,	GenericLevel_16x16_Unc,GenericLevel_128x128_Kos,palid_GenericLevel		; GenericLevel
-		levartptrs GenericLevel_8x8_KosM,	GenericLevel_16x16_Unc,GenericLevel_128x128_Kos,palid_GenericLevel		; GenericLevel
+		levartptrs BonusLevel1_8x8_KosM,	BonusLevel1_16x16_Unc,	BonusLevel1_128x128_Kos,	palid_BonusLevel1		; GenericLevel
+		levartptrs GenericLevel_8x8_KosM,	GenericLevel_16x16_Unc,	GenericLevel_128x128_Kos,	palid_GenericLevel		; GenericLevel
+		levartptrs GenericLevel_8x8_KosM,	GenericLevel_16x16_Unc,	GenericLevel_128x128_Kos,	palid_GenericLevel		; GenericLevel
+		levartptrs GenericLevel_8x8_KosM,	GenericLevel_16x16_Unc,	GenericLevel_128x128_Kos,	palid_GenericLevel		; GenericLevel
 
 		zonewarning LevelLoadBlock,(12*4)
 
@@ -125,7 +125,7 @@ SolidIndexes:
 		dc.l GenericLevel_Solid	; GenericLevel
 		dc.l GenericLevel_Solid	; GenericLevel
 
-		dc.l GenericLevel_Solid	; GenericLevel
+		dc.l BonusLevel1_Solid	; GenericLevel
 		dc.l GenericLevel_Solid	; GenericLevel
 		dc.l GenericLevel_Solid	; GenericLevel
 		dc.l GenericLevel_Solid	; GenericLevel
@@ -160,7 +160,7 @@ LevelPtrs:
 		dc.l GenericLevel_Layout	; GenericLevel
 		dc.l GenericLevel_Layout	; GenericLevel
 
-		dc.l GenericLevel_Layout	; GenericLevel
+		dc.l BonusLevel1_Layout	; GenericLevel
 		dc.l GenericLevel_Layout	; GenericLevel
 		dc.l GenericLevel_Layout	; GenericLevel
 		dc.l GenericLevel_Layout	; GenericLevel
@@ -195,7 +195,7 @@ SpriteLocPtrs:
 		dc.l GenericLevel_Sprites	; GenericLevel
 		dc.l GenericLevel_Sprites	; GenericLevel
 
-		dc.l GenericLevel_Sprites	; GenericLevel
+		dc.l BonusLevel1_Sprites	; GenericLevel
 		dc.l GenericLevel_Sprites	; GenericLevel
 		dc.l GenericLevel_Sprites	; GenericLevel
 		dc.l GenericLevel_Sprites	; GenericLevel
@@ -230,54 +230,54 @@ Blaze_16x16_Unc:			binclude "Levels/Robot Master stages/Blocks/Blaze Man.bin"
 	even
 Blaze_128x128_Kos:			binclude "Levels/Robot Master stages/Chunks/Blaze Man.bin"
 	even
-
 Video_8x8_KosM:				binclude "Levels/Robot Master stages/Tiles/Video Man.bin"
 	even
 Video_16x16_Unc:			binclude "Levels/Robot Master stages/Blocks/Video Man.bin"
 	even
 Video_128x128_Kos:			binclude "Levels/Robot Master stages/Chunks/Video Man.bin"
 	even
-
 Smog_8x8_KosM:				binclude "Levels/Robot Master stages/Tiles/Smog Man.bin"
 	even
 Smog_16x16_Unc:				binclude "Levels/Robot Master stages/Blocks/Smog Man.bin"
 	even
 Smog_128x128_Kos:			binclude "Levels/Robot Master stages/Chunks/Smog Man.bin"
 	even
-
 Shark_8x8_KosM:				binclude "Levels/Robot Master stages/Tiles/Shark Man.bin"
 	even
 Shark_16x16_Unc:			binclude "Levels/Robot Master stages/Blocks/Shark Man.bin"
 	even
 Shark_128x128_Kos:			binclude "Levels/Robot Master stages/Chunks/Shark Man.bin"
 	even
-
 Origami_8x8_KosM:			binclude "Levels/Robot Master stages/Tiles/Origami Man.bin"
 	even
 Origami_16x16_Unc:			binclude "Levels/Robot Master stages/Blocks/Origami Man.bin"
 	even
 Origami_128x128_Kos:		binclude "Levels/Robot Master stages/Chunks/Origami Man.bin"
 	even
-
 Unknown1_8x8_KosM:			binclude "Levels/Robot Master stages/Tiles/Unknown 1.bin"
 	even
 Unknown1_16x16_Unc:			binclude "Levels/Robot Master stages/Blocks/Unknown 1.bin"
 	even
 Unknown1_128x128_Kos:		binclude "Levels/Robot Master stages/Chunks/Unknown 1.bin"
 	even
-
 Unknown2_8x8_KosM:			binclude "Levels/Robot Master stages/Tiles/Unknown 2.bin"
 	even
 Unknown2_16x16_Unc:			binclude "Levels/Robot Master stages/Blocks/Unknown 2.bin"
 	even
 Unknown2_128x128_Kos:		binclude "Levels/Robot Master stages/Chunks/Unknown 2.bin"
 	even
-
 Unknown3_8x8_KosM:			binclude "Levels/Robot Master stages/Tiles/Unknown 3.bin"
 	even
 Unknown3_16x16_Unc:			binclude "Levels/Robot Master stages/Blocks/Unknown 3.bin"
 	even
 Unknown3_128x128_Kos:		binclude "Levels/Robot Master stages/Chunks/Unknown 3.bin"
+	even
+
+BonusLevel1_8x8_KosM:			binclude "Levels/Bonus levels/Tiles/Bonus level 1.bin"
+	even
+BonusLevel1_16x16_Unc:			binclude "Levels/Bonus levels/Blocks/Bonus level 1.bin"
+	even
+BonusLevel1_128x128_Kos:		binclude "Levels/Bonus levels/Chunks/Bonus level 1.bin"
 	even
 
 ; ===========================================================================
@@ -319,6 +319,9 @@ Unknown2_Solid:				binclude "Levels/Robot Master stages/Collision/Unknown 2.bin"
 Unknown3_Solid:				binclude "Levels/Robot Master stages/Collision/Unknown 3.bin"
 	even
 
+BonusLevel1_Solid:			binclude "Levels/Bonus levels/Collision/1.bin"
+	even
+
 ; ===========================================================================
 ; Level layout data
 ; ===========================================================================
@@ -349,6 +352,9 @@ Unknown2_Layout:			binclude "Levels/Robot Master stages/Layout/Unknown 2.bin"
 Unknown3_Layout:			binclude "Levels/Robot Master stages/Layout/Unknown 3.bin"
 	even
 
+BonusLevel1_Layout:			binclude "Levels/Bonus levels/Layout/1.bin"
+	even
+
 ; ===========================================================================
 ; Level object data
 ; ===========================================================================
@@ -375,5 +381,7 @@ Unknown1_Sprites:			binclude "Levels/Robot Master stages/Object Pos/Unknown 1.bi
 Unknown2_Sprites:			binclude "Levels/Robot Master stages/Object Pos/Unknown 2.bin"
 	ObjectLayoutBoundary
 Unknown3_Sprites:			binclude "Levels/Robot Master stages/Object Pos/Unknown 3.bin"
+	ObjectLayoutBoundary
+BonusLevel1_Sprites:		binclude "Levels/Bonus levels/Object Pos/1.bin"
 	ObjectLayoutBoundary
 	even

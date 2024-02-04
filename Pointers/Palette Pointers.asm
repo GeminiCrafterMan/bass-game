@@ -45,6 +45,8 @@ ptr_Pal_Unknown1:		palp	Pal_Unknown1, Normal_palette_line_2, 48		; Unknown 1
 ptr_Pal_Unknown2:		palp	Pal_Unknown2, Normal_palette_line_2, 48		; Unknown 2
 ptr_Pal_Unknown3:		palp	Pal_Unknown3, Normal_palette_line_2, 48		; Unknown 3
 
+ptr_Pal_BonusLevel1:	palp	Pal_BonusLevel1, Normal_palette_line_2, 48	; Bonus level 1
+
 ; Misc
 ptr_Pal_Bass_LS:		palp	Pal_Bass, Normal_palette_line_3, 16			; Bass
 ptr_Pal_CopyRobot_LS:	palp	Pal_CopyRobot, Normal_palette_line_3, 16	; CopyRobot
@@ -95,6 +97,8 @@ palid_Origami:			equ (ptr_Pal_Origami-PalPointers)/8				; Origami Man
 palid_Unknown1:			equ (ptr_Pal_Unknown1-PalPointers)/8			; Unknown 1
 palid_Unknown2:			equ (ptr_Pal_Unknown2-PalPointers)/8			; Unknown 2
 palid_Unknown3:			equ (ptr_Pal_Unknown3-PalPointers)/8			; Unknown 3
+
+palid_BonusLevel1:		equ (ptr_Pal_BonusLevel1-PalPointers)/8			; Bonus Level 1
 
 ; Misc
 palid_Bass_LS:			equ (ptr_Pal_Bass_LS-PalPointers)/8				; Bass

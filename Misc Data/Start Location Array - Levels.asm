@@ -26,7 +26,7 @@ StartLocArray:
 		binclude "Levels/Test/Start Location/1.bin"	; Test 1
 		binclude "Levels/Test/Start Location/1.bin"	; Test 1
 
-		binclude "Levels/Test/Start Location/1.bin"	; Test 1
+		binclude "Levels/Bonus levels/Start Location/1.bin"	; Test 1
 		binclude "Levels/Test/Start Location/1.bin"	; Test 1
 		binclude "Levels/Test/Start Location/1.bin"	; Test 1
 		binclude "Levels/Test/Start Location/1.bin"	; Test 1

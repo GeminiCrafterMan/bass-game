@@ -90,3 +90,6 @@ Pal_Unknown2:		binclude "Levels/Robot Master stages/Palettes/Unknown 2 stage.bin
 	even
 Pal_Unknown3:		binclude "Levels/Robot Master stages/Palettes/Unknown 3 stage.bin"
 	even
+
+Pal_BonusLevel1:	binclude "Levels/Bonus levels/Palettes/Bonus level 1.bin"
+	even
