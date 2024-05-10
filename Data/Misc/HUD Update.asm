@@ -24,6 +24,8 @@ HUD_AddToScore:
 ; =============== S U B R O U T I N E =======================================
 
 UpdateHUD:
+                jsr     HUD_UpdateHealthBar
+        
 		lea	(VDP_data_port).l,a6
 		tst.w	(Debug_placement_mode).w					; is debug mode on?
 		bne.w	HudDebug									; if yes, branch
@@ -32,7 +34,7 @@ UpdateHUD:
 		clr.b	(Update_HUD_score).w
 		locVRAM	tiles_to_bytes(ArtTile_HUD+$1A),d0		; set VRAM address
 		move.l	(Score).w,d1									; load score
-		bsr.w	DrawSixDigitNumber
+	        bsr.w	DrawSixDigitNumber
 
 .chkrings
 		tst.b	(Update_HUD_ring_count).w						; does the ring counter	need updating?
@@ -400,3 +402,87 @@ loc_1C9D6:
 		addi.l	#$400000,d0
 		dbf	d6,Hud_TimeLoop
 		rts
+
+; =============== S U B R O U T I N E =======================================
+
+HUD_UpdateHealthBar:                            
+                                ; movem.l    d0-d4,-(sp)    ; push to stack
+                
+                move.w   (v_health).w,d5
+                lsr.w    #2,d5             ; divide health by 4 (number of 4/4 health tiles) &
+                move.w   (v_health).w,d6
+                and.w    #3,d6           ; get remainder
+
+                btst    #bitA,(Ctrl_1_pressed_logical).w    ; A button dash
+                beq.s    .dontCrash
+                illegal
+                .dontCrash:
+
+                ;; move.w   #19,d5
+                ;; lsr.w    #2,d5             ; divide health by 4 (number of 4/4 health tiles) &
+                ;; move.w   #19,d6
+                ;; and.w    #3,d6           ; get remainder
+                
+        
+                move.l   #0,d1       ; clean these registers
+                move.l   #0,d2       ; here so no
+                move.l   #0,d3       ; unwanted data gets in
+                move.l    #7-1,d4    ; loop count
+                
+                move.l  #(ArtUnc_HealthBar)>>1 + 32,-(sp)     ; (sp + 4) = dma source address
+                move.l  #tiles_to_bytes($6CB),-(sp)           ; (sp) = dma destination address
+
+                tst.w   d5
+                bne     .updateBarBase
+
+                tst.w   d6
+                beq     .initialSetBarsToEmpty
+        
+                move.w  d6,d7
+                lsl.w   #4,d7
+                add.l   d7,4(sp)
+
+                bra     .updateBarBase
+
+.initialSetBarsToEmpty:
+                move.l  #(ArtUnc_HealthBar)>>1 + 96,4(sp)
+        
+.updateBarBase:
+; leaving this here for context on what this originally did.
+; current_emotion was a number from 0 to 7 representing the
+; character's emotional state, here it'll basically be what
+; tile you're using of the health bar chunk you're on
+;        move.b    (Current_emotion).w,d0
+                ;; mulu.w    d3,d0 ;source, destination ; more like length, tile number
+                ;; add.l     d0,d1    ; add offset to file location
+
+                move.l    #16,d3
+                move.l    4(sp),d1                
+                move.l    (sp),d2                
+                move.l    #7,d7
+                sub.l     d4,d7 
+                cmp.w     d7,d5                
+                bgt       .skipChangeOffset
+                blt       .setBarsToEmpty
+
+.changeOffset:        
+                move.w    d6,d7
+                lsl.w     #4,d7
+                add.l     d7,4(sp)
+                bra       .skipChangeOffset
+
+.setBarsToEmpty:
+                move.l    #(ArtUnc_HealthBar)>>1 + 96,4(sp)
+        
+.skipChangeOffset:        
+                ;; lsl.l     #5,d2
+                jsr        (QueueDMATransfer).l    ; do that dma transfer shit
+                ;; subi.w    #tiles_to_bytes($1),d2 ; subtract from vram location for the next loop
+                addi.l     #tiles_to_bytes($1),(sp)
+                dbf        d4,.updateBarBase
+
+                addi.l    #8, sp
+
+                ;; movem.l    (sp)+,d0-d4    ; pop from stack to avoid corruption
+
+                rts
