@@ -1,10 +1,10 @@
 ; ===========================================================================
-; SWN-001 On The Fucking Sega Mega Drive
+; SWN-001 On The Sega Mega Drive
 ; TODO: better name
 ; ===========================================================================
 
 ; Assembly options
-ZoneCount:				= 6	; discrete zones are: DEZ
+ZoneCount:				= 6	; honestly just level count / 4
 GameDebug:				= 1	; if 1, enable debug mode
 Lagometer:				= 0	; if 1, enable debug lagometer
 OptimiseSound:	  		= 1	; change to 1 to optimise sound queuing
@@ -49,8 +49,8 @@ Vectors:
 		dc.l ErrorTrap, ErrorTrap, ErrorTrap, ErrorTrap			; 60
 Header:			dc.b "SEGA GENESIS    "
 Copyright:		dc.b "(C)SEGA XXXX.XXX"
-Domestic_Name:	dc.b "SWN-001 ON THE FUCKING SEGA MEGA DRIVE          "
-Overseas_Name:	dc.b "SWN-001 ON THE FUCKING SEGA MEGA DRIVE          "
+Domestic_Name:	dc.b "SWN-001 ON THE SEGA MEGA DRIVE                  "
+Overseas_Name:	dc.b "SWN-001 ON THE SEGA MEGA DRIVE                  "
 Serial_Number:	dc.b "GM MK-0000 -00"
 Checksum:		dc.w 0
 Input:			dc.b "J               "

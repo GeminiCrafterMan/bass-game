@@ -1,15 +1,10 @@
 Map_Button:
-		dc.w word_2C724-Map_Button
-		dc.w word_2C732-Map_Button
-		dc.w word_2C73A-Map_Button
-word_2C724:
-		dc.w 2
-		dc.b  $F4,  $C,	  0,   0, $FF, $F0
-		dc.b  $FC,   4,	  0,   4, $FF, $F8
-word_2C732:
-		dc.w 1
-		dc.b  $FC,  $C,	  0,   0, $FF, $F0
-word_2C73A:
-		dc.w 2
-		dc.b  $F8,  $C,	  0,   0, $FF, $F0
-		dc.b	0,   4,	  0,   4, $FF, $F8
+Map_Button_0: 	dc.w Map_Button_4-Map_Button
+Map_Button_2: 	dc.w Map_Button_12-Map_Button
+Map_Button_4: 	dc.b $0, $2
+	dc.b $F4, $1, $20, $0, $FF, $F8
+	dc.b $F4, $1, $28, $0, $0, $0
+Map_Button_12: 	dc.b $0, $2
+	dc.b $FC, $0, $20, $2, $FF, $F8
+	dc.b $FC, $0, $28, $2, $0, $0
+	even
