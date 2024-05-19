@@ -21,7 +21,7 @@ DebugList: offsetTable
 
 				; Object Mappings Subtype Frame VRAM
 .DEZ1: dbglistheader
-	dbglistobj Obj_Button,	Map_Button, 0, 2, make_art_tile($47E,0,0)
+	dbglistobj Obj_Button,	Map_Button, 0, 0, make_art_tile($47E,0,0)
 	dbglistobj Obj_StarPost, Map_StarPost, 1, 0, make_art_tile(ArtTile_StarPost,0,0)
 	dbglistobj Obj_Pickups,	Map_Pickups, 0, 1, make_art_tile(ArtTile_Pickups,0,0)	; 1-up
 	dbglistobj Obj_Pickups,	Map_Pickups, 1, 3, make_art_tile(ArtTile_Pickups,0,0)	; E-tank
